@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <Button
+        android:id="@+id/minus_button"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:text="-"
+        android:textSize="30dp"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/quantity"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        tools:text="0"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textSize="30dp"/>
+
+    <Button
+        android:id="@+id/plus_button"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:text="+"
+        android:textSize="30dp"
+        android:layout_gravity="center"/>
+
+</LinearLayout>

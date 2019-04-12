@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_marginTop="34dp"
+        android:id="@+id/logo"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/logo2"/>
+
+    <RelativeLayout
+        android:id="@+id/relative_name"
+        android:layout_marginTop="70dp"
+        android:layout_below="@+id/logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/text_name"
+            android:layout_width="109dp"
+            android:layout_height="24dp"
+            android:text="імя прізвище"
+            android:textSize="12sp"
+            android:textColor="#fff"
+            android:background="@color/redBasic"
+            android:gravity="center"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/text_name"
+            android:background="@color/redBasic">
+        </TextView>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="24dp"
+            android:layout_marginLeft="0dp"
+            android:layout_toRightOf="@+id/text_name"
+            android:backgroundTint="#fff"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relative_telephone"
+        android:layout_alignTop="@+id/relative_name"
+        android:layout_marginTop="70dp"
+        android:layout_below="@+id/logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/text_telephone"
+            android:layout_width="109dp"
+            android:layout_height="24dp"
+            android:text="номер телефону"
+            android:textSize="12sp"
+            android:textColor="#fff"
+            android:background="@color/redBasic"
+            android:gravity="center"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/text_telephone"
+            android:background="@color/redBasic">
+        </TextView>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="24dp"
+            android:layout_marginLeft="0dp"
+            android:layout_toRightOf="@+id/text_telephone"
+            android:backgroundTint="#fff" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relative_mail"
+        android:layout_alignTop="@+id/relative_telephone"
+        android:layout_marginTop="70dp"
+        android:layout_below="@+id/logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/text_mail"
+            android:layout_width="109dp"
+            android:layout_height="24dp"
+            android:text="пошта"
+            android:textSize="12sp"
+            android:textColor="#fff"
+            android:background="@color/redBasic"
+            android:gravity="center"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/text_mail"
+            android:background="@color/redBasic">
+        </TextView>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="24dp"
+            android:layout_marginLeft="0dp"
+            android:layout_toRightOf="@+id/text_mail"
+            android:backgroundTint="#fff"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relative_data"
+        android:layout_alignTop="@+id/relative_mail"
+        android:layout_marginTop="70dp"
+        android:layout_below="@+id/logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/text_data"
+            android:layout_width="109dp"
+            android:layout_height="24dp"
+            android:text="дата народження"
+            android:textSize="12sp"
+            android:textColor="#fff"
+            android:background="@color/redBasic"
+            android:gravity="center"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/text_data"
+            android:background="@color/redBasic">
+        </TextView>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="24dp"
+            android:layout_marginLeft="0dp"
+            android:layout_toRightOf="@+id/text_data"
+            android:backgroundTint="#fff"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relative_password"
+        android:layout_alignTop="@+id/relative_data"
+        android:layout_marginTop="70dp"
+        android:layout_below="@+id/logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/text_password"
+            android:layout_width="109dp"
+            android:layout_height="24dp"
+            android:text="пароль"
+            android:textSize="12sp"
+            android:textColor="#fff"
+            android:background="@color/redBasic"
+            android:gravity="center"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/text_password"
+            android:background="@color/redBasic">
+        </TextView>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="24dp"
+            android:layout_marginLeft="0dp"
+            android:layout_toRightOf="@+id/text_password"
+            android:backgroundTint="#fff"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relative_repassword"
+        android:layout_alignTop="@+id/relative_password"
+        android:layout_marginTop="70dp"
+        android:layout_below="@+id/logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/text_repassword"
+            android:layout_width="109dp"
+            android:layout_height="24dp"
+            android:text="повторіть пароль"
+            android:textSize="12sp"
+            android:textColor="#fff"
+            android:background="@color/redBasic"
+            android:gravity="center"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/text_repassword"
+            android:background="@color/redBasic">
+        </TextView>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="24dp"
+            android:layout_marginLeft="0dp"
+            android:layout_toRightOf="@+id/text_repassword"
+            android:backgroundTint="#fff"/>
+    </RelativeLayout>
+
+
+
+    <Button
+        android:id="@+id/login"
+        android:layout_below="@+id/relative_repassword"
+        android:layout_marginTop="50dp"
+        android:layout_width="145dp"
+        android:layout_height="34dp"
+        android:text="Зареєструватися"
+        android:textSize="12sp"
+        android:layout_centerHorizontal="true"/>
+
+</RelativeLayout>

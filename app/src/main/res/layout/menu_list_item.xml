@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
+    android:layout_marginTop="16dp">
+
+
+
+    <TextView
+        android:id="@+id/name_of_cafe"
+        android:layout_width="wrap_content"
+        android:layout_height="14dp"
+        tools:text="Pizza"
+        android:textColor="#000"
+        android:textSize="16sp"
+        android:gravity="top"/>
+
+    <TextView
+        android:id="@+id/location_of_cafe"
+        android:layout_width="wrap_content"
+        android:layout_height="28dp"
+        android:layout_below="@+id/name_of_cafe"
+        android:layout_centerVertical="true"
+        android:textColor="#45000000"
+        android:textSize="7sp"
+        android:gravity="center"
+        tools:text="вул умлумав"/>
+    
+    <TextView
+        android:id="@+id/price"
+        android:layout_width="wrap_content"
+        android:layout_height="14dp"
+        android:layout_below="@+id/location_of_cafe"
+        android:textSize="7sp"
+        tools:text="234r"
+        android:gravity="bottom"/>
+
+    <TextView
+        android:id="@+id/waiting_time"
+        android:layout_width="wrap_content"
+        android:layout_height="14dp"
+        tools:text="час очікування"
+        android:layout_below="@+id/location_of_cafe"
+        android:textSize="7sp"
+        android:gravity="bottom"
+        android:paddingLeft="54dp"/>
+
+    <ImageView
+        android:id="@+id/photo_of_cafe"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        tools:src="@drawable/photo"
+        android:layout_alignParentRight="true"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="16dp"
+        android:background="#12000000"
+        android:layout_below="@+id/photo_of_cafe"
+        android:textSize="7sp"/>
+
+
+</RelativeLayout>
