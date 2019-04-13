@@ -32,7 +32,7 @@
         android:id="@+id/photo_of_cafe"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        tools:src="@drawable/photo"
+        tools:src="@drawable/google"
         android:layout_alignParentRight="true"/>
 
     <TextView
