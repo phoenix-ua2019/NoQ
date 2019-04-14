@@ -37,6 +37,7 @@
         </TextView>
 
         <EditText
+            android:id="@+id/enter_name"
             android:layout_width="match_parent"
             android:layout_height="24dp"
             android:layout_marginLeft="0dp"
@@ -70,6 +71,7 @@
         </TextView>
 
         <EditText
+            android:id="@+id/enter_telephone"
             android:layout_width="match_parent"
             android:layout_height="24dp"
             android:layout_marginLeft="0dp"
@@ -104,6 +106,7 @@
         </TextView>
 
         <EditText
+            android:id="@+id/enter_email"
             android:layout_width="match_parent"
             android:layout_height="24dp"
             android:layout_marginLeft="0dp"
@@ -137,6 +140,7 @@
         </TextView>
 
         <EditText
+            android:id="@+id/enter_data"
             android:layout_width="match_parent"
             android:layout_height="24dp"
             android:layout_marginLeft="0dp"
@@ -170,11 +174,13 @@
         </TextView>
 
         <EditText
+            android:id="@+id/enter_password"
             android:layout_width="match_parent"
             android:layout_height="24dp"
             android:layout_marginLeft="0dp"
             android:layout_toRightOf="@+id/text_password"
-            android:backgroundTint="#fff"/>
+            android:backgroundTint="#fff"
+            android:password="true"/>
     </RelativeLayout>
 
     <RelativeLayout
@@ -203,11 +209,13 @@
         </TextView>
 
         <EditText
+            android:id="@+id/enter_repassword"
             android:layout_width="match_parent"
             android:layout_height="24dp"
             android:layout_marginLeft="0dp"
             android:layout_toRightOf="@+id/text_repassword"
-            android:backgroundTint="#fff"/>
+            android:backgroundTint="#fff"
+            android:password="true"/>
     </RelativeLayout>
 
 

@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
 
@@ -37,11 +39,15 @@
         </TextView>
 
         <EditText
+            android:id="@+id/login_email"
+            android:autofillHints="login@example.com"
             android:layout_width="match_parent"
-            android:layout_height="24dp"
-            android:layout_marginLeft="0dp"
-            android:layout_toRightOf="@+id/temp1"
-            android:backgroundTint="#fff"/>
+            android:layout_height="32dp"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:layout_marginStart="0dp"
+            android:layout_toEndOf="@+id/temp1"
+            android:backgroundTint="#000"/>
     </RelativeLayout>
 
     <RelativeLayout
@@ -56,7 +62,7 @@
             android:id="@+id/temp3"
             android:layout_width="109dp"
             android:layout_height="24dp"
-            android:text="Введіть логін"
+            android:text="Введіть пароль"
             android:textSize="12sp"
             android:textColor="#fff"
             android:background="@color/redBasic"
@@ -70,11 +76,16 @@
         </TextView>
 
         <EditText
+            android:id="@+id/login_password"
+            android:autofillHints="password"
             android:layout_width="match_parent"
-            android:layout_height="24dp"
-            android:layout_marginLeft="0dp"
-            android:layout_toRightOf="@+id/temp3"
-            android:backgroundTint="#fff" />
+            android:layout_height="48dp"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:layout_marginStart="0dp"
+            android:layout_toEndOf="@+id/temp3"
+            android:backgroundTint="#fff"
+            android:password="true"/>
 
     </RelativeLayout>
 
