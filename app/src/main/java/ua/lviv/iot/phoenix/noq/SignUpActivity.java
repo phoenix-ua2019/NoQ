@@ -1,16 +1,26 @@
 package ua.lviv.iot.phoenix.noq;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class SignUpActivity extends AppCompatActivity {
+    private static final String TAG = "SignUpActivity";
+
+    FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
     private EditText emailEdit;
     private EditText passwordEdit;
@@ -18,14 +28,19 @@ public class SignUpActivity extends AppCompatActivity {
     private EditText nameEdit;
     private EditText phoneEdit;
     private EditText passwordRepeatEdit;
+
+    FirebaseUser user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
 
+        String email="", password="";
         Bundle extras = getIntent().getExtras();
-        String email = extras.getString("email");
-        String password = extras.getString("password");
+        if (extras != null) {
+            email = extras.getString("email");
+            password = extras.getString("password");
+        }
 
         emailEdit = findViewById(R.id.enter_email);
         passwordEdit = findViewById(R.id.enter_password);
@@ -34,8 +49,22 @@ public class SignUpActivity extends AppCompatActivity {
         phoneEdit = findViewById(R.id.enter_telephone);
         passwordRepeatEdit = findViewById(R.id.enter_repassword);
 
-        emailEdit.setText(email);
-        passwordEdit.setText(password);
+        if (!email.equals("") && !password.equals("")) {
+            emailEdit.setText(email);
+            passwordEdit.setText(password);
+            Task<AuthResult> res = mAuth.createUserWithEmailAndPassword(email, password);
+            //System.out.println(res.getResult());
+            res.addOnCompleteListener(SignUpActivity.this, (@NonNull Task<AuthResult> task) -> {
+                Log.d(TAG, "createUser:onComplete:" + task.isSuccessful());
+                if (task.isSuccessful()) {
+                    System.out.println(res.getResult());
+                    user = task.getResult().getUser();
+                    return;
+                }
+                Toast.makeText(SignUpActivity.this, "Sign Up Failed",
+                        Toast.LENGTH_SHORT).show();
+            });
+        }
 
         Button button = findViewById(R.id.login);
 
@@ -43,11 +72,12 @@ public class SignUpActivity extends AppCompatActivity {
             if (!validateForm()) {
                 return;
             }
-            User user = new User(
+            User mUser = new User(
                     nameEdit.getText().toString(), emailEdit.getText().toString(),
                     dataEdit.getText().toString(), phoneEdit.getText().toString());
-            FirebaseAuth mAuth = FirebaseAuth.getInstance();
-            FirebaseDatabase.getInstance().getReference().child("users").child(mAuth.getCurrentUser().getUid()).setValue(user);
+            FirebaseDatabase.getInstance().getReference().child("authentication").child("users")
+                    .child(user.getUid()).setValue(mUser);
+            startActivity(new Intent(this, MainActivity.class));
         });
     }
 
@@ -59,13 +89,6 @@ public class SignUpActivity extends AppCompatActivity {
             result = false;
         } else {
             emailEdit.setError(null);
-        }
-
-        if (TextUtils.isEmpty(nameEdit.getText().toString())) {
-            nameEdit.setError("Required");
-            result = false;
-        } else {
-            nameEdit.setError(null);
         }
 
         if (TextUtils.isEmpty(passwordEdit.getText().toString())) {
@@ -82,7 +105,7 @@ public class SignUpActivity extends AppCompatActivity {
             passwordRepeatEdit.setError(null);
         }
 
-        if(passwordEdit.getText().toString() != passwordRepeatEdit.getText().toString()) {
+        if(!passwordEdit.getText().toString().equals(passwordRepeatEdit.getText().toString())) {
             passwordRepeatEdit.setError("Passwords do not match");
             result = false;
         } else {

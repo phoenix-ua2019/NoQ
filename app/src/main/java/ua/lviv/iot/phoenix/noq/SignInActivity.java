@@ -73,7 +73,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
 
                     if (task.isSuccessful()) {
                         onAuthSuccess(task.getResult().getUser());
-                    return;
+                        return;
                     }
                     Toast.makeText(SignInActivity.this, "Sign In Failed",
                             Toast.LENGTH_SHORT).show();
@@ -82,47 +82,37 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
 
     private void signUp() {
         Log.d(TAG, "signUp");
-        if (!validateForm()) {
-            return;
-        }
 
         String email = mEmailField.getText().toString();
         String password = mPasswordField.getText().toString();
 
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, (@NonNull Task<AuthResult> task) -> {
-                    Log.d(TAG, "createUser:onComplete:" + task.isSuccessful());
-
-                    if (task.isSuccessful()) {
-                        onAuthSuccess(task.getResult().getUser());
-                        return;
-                    }
-                    Toast.makeText(SignInActivity.this, "Sign Up Failed",
-                            Toast.LENGTH_SHORT).show();
-                });
         Intent OpenSignUpActivity = new Intent(this, SignUpActivity.class);
+        if (!email.equals("") && !password.equals("")) {
+            Task<AuthResult> res = mAuth.createUserWithEmailAndPassword(email, password);
+            //System.out.println(res.getResult());
+            res.addOnCompleteListener(SignInActivity.this, (@NonNull Task<AuthResult> task) -> {
+                Log.d(TAG, "createUser:onComplete:" + task.isSuccessful());
+                if (task.isSuccessful()) {
+                    System.out.println(res.getResult());
+                    onAuthSuccess(task.getResult().getUser());
+                    return;
+                }
+                Toast.makeText(SignInActivity.this, "Sign Up Failed",
+                        Toast.LENGTH_SHORT).show();
+            });
             OpenSignUpActivity.putExtra("email", email);
             OpenSignUpActivity.putExtra("password", password);
-            startActivity(OpenSignUpActivity);
+        }
+        startActivity(OpenSignUpActivity);
     }
 
-    private void onAuthSuccess(FirebaseUser user) {
-        String username = usernameFromEmail(user.getEmail());
-
+    void onAuthSuccess(FirebaseUser user) {
         // Write new user
-        writeNewUser(user.getUid(), username, user.getEmail());
+        writeNewUser(user.getUid(), user.getEmail());
 
         // Go to MainActivity
         startActivity(new Intent(SignInActivity.this, MainActivity.class));
         finish();
-    }
-
-    private String usernameFromEmail(String email) {
-        if (email.contains("@")) {
-            return email.split("@")[0];
-        } else {
-            return email;
-        }
     }
 
     private boolean validateForm() {
@@ -145,10 +135,10 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     // [START basic_write]
-    private void writeNewUser(String userId, String name, String email) {
-        User user = new User(name, email);
+    private void writeNewUser(String userId, String email) {
+        User user = new User(email);
 
-        mDatabase.child("users").child(userId).setValue(user);
+        mDatabase.child("authentication").child("users").child(userId).setValue(user);
     }
     // [END basic_write]
 

@@ -1,7 +1,9 @@
 package ua.lviv.iot.phoenix.noq;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.NavigationView.OnNavigationItemSelectedListener;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -9,11 +11,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements OnNavigationItemSelectedListener {
 
     DrawerLayout drawerLayout;
 
@@ -26,8 +25,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setSupportActionBar(toolbar);
 
         drawerLayout = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.drawer);
-        navigationView.setNavigationItemSelectedListener(this);
+        ((NavigationView) findViewById(R.id.drawer))
+                .setNavigationItemSelectedListener(this);
         ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this,
                 drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close);
         drawerLayout.addDrawerListener(drawerToggle);
@@ -35,22 +34,30 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
-    public boolean onNavigationItemSelected(MenuItem menuItem) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         String itemName = (String) menuItem.getTitle();
 
         closeDrawer();
 
         //тут зробити дію на кнопку
-        if (menuItem.getItemId() == R.id.user) {
-            Intent intent = new Intent(this, UserActivity.class);
-            startActivity(intent);
-            overridePendingTransition(R.anim.right_in,R.anim.rotate);
-        } else if (menuItem.getItemId() == R.id.star) {
-            System.out.println("star");
-        } else if (menuItem.getItemId() == R.id.setting) {
-            System.out.println("setting");
-        } else if (menuItem.getItemId() == R.id.exit) {
-            System.out.println("exit");
+        switch (menuItem.getItemId()) {
+            case R.id.user:
+                Intent intent = new Intent(this, UserActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.right_in,R.anim.rotate);
+            case R.id.star:
+                openDrawer();
+                System.out.println("star");
+                return false;
+            case R.id.setting:
+                closeDrawer();
+                System.out.println("setting");
+                return false;
+            case R.id.exit:
+                System.out.println("exit");
+                return false;
+            default:
+                System.out.println("default");
         }
 
         return true;
