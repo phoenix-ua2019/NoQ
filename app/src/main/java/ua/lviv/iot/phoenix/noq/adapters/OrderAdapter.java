@@ -1,13 +1,11 @@
-package ua.lviv.iot.phoenix.noq;
+package ua.lviv.iot.phoenix.noq.adapters;
 
 import android.app.Activity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.TextView;
 
 import java.util.ArrayList;
+
+import ua.lviv.iot.phoenix.noq.models.Order;
 
 public class OrderAdapter extends ArrayAdapter<Order> {
 

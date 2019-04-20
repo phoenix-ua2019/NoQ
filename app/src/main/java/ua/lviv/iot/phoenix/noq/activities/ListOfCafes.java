@@ -1,4 +1,4 @@
-package ua.lviv.iot.phoenix.noq;
+package ua.lviv.iot.phoenix.noq.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 
 public class ListOfCafes extends AppCompatActivity {
 
-    /*DatabaseReference cafeRef = Database.getRef();
+    /*DatabaseReference cafeRef = Useful.getRef();
     ArrayList<Cafe> cafes = new ArrayList<>();
 
     @Override

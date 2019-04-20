@@ -1,4 +1,4 @@
-package ua.lviv.iot.phoenix.noq;
+package ua.lviv.iot.phoenix.noq.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -76,7 +76,7 @@ public class MyOrdersActivity extends AppCompatActivity {
     }
 
     public void AddToDatabase(Order order) {
-        Database.getRef().child("order").setValue(order);
+        Useful.cafeRef.child("order").setValue(order);
     }
 
     @Override

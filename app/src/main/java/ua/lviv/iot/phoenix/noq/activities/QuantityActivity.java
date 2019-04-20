@@ -1,4 +1,4 @@
-package ua.lviv.iot.phoenix.noq;
+package ua.lviv.iot.phoenix.noq.activities;
 
 import android.content.Intent;
 import android.os.Bundle;

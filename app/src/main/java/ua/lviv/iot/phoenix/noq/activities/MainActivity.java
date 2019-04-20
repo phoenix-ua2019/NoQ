@@ -1,4 +1,4 @@
-package ua.lviv.iot.phoenix.noq;
+package ua.lviv.iot.phoenix.noq.activities;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -11,6 +11,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.support.v7.widget.Toolbar;
+import android.widget.Button;
+import android.widget.ImageButton;
+
+import ua.lviv.iot.phoenix.noq.R;
 
 public class MainActivity extends AppCompatActivity implements OnNavigationItemSelectedListener {
 
@@ -31,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
                 drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close);
         drawerLayout.addDrawerListener(drawerToggle);
         drawerToggle.syncState();
+
     }
 
     @Override

@@ -7,8 +7,8 @@
 
 
     <ImageView
-        android:layout_marginTop="34dp"
-        android:id="@+id/logo"
+        android:layout_marginTop="50dp"
+        android:id="@+id/logo_sign_in"
         android:layout_width="110dp"
         android:layout_height="110dp"
         android:layout_centerHorizontal="true"
@@ -16,8 +16,8 @@
 
     <RelativeLayout
         android:id="@+id/temp2"
-        android:layout_marginTop="70dp"
-        android:layout_below="@+id/logo"
+        android:layout_marginTop="100dp"
+        android:layout_below="@+id/logo_sign_in"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
@@ -54,7 +54,6 @@
         android:id="@+id/temp4"
         android:layout_alignTop="@+id/temp2"
         android:layout_marginTop="70dp"
-        android:layout_below="@+id/logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
@@ -90,23 +89,13 @@
     </RelativeLayout>
 
     <Button
-        android:id="@+id/enter"
+        android:id="@+id/sign_in"
         android:layout_below="@+id/temp4"
-        android:layout_marginTop="46dp"
-        android:layout_width="145dp"
-        android:layout_height="34dp"
+        android:layout_marginTop="50dp"
+        android:layout_width="160dp"
+        android:layout_height="40dp"
         android:text="Увійти"
-        android:textSize="12sp"
-        android:layout_centerHorizontal="true"/>
-
-    <Button
-        android:id="@+id/login"
-        android:layout_below="@+id/temp4"
-        android:layout_marginTop="150dp"
-        android:layout_width="145dp"
-        android:layout_height="34dp"
-        android:text="Зареєструватися"
-        android:textSize="12sp"
+        android:textSize="14sp"
         android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>
