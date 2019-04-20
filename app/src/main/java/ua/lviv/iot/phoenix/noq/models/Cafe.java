@@ -1,4 +1,4 @@
-package ua.lviv.iot.phoenix.noq;
+package ua.lviv.iot.phoenix.noq.models;
 
 import android.content.res.Resources;
 import android.os.Parcel;

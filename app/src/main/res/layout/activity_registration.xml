@@ -5,8 +5,8 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:layout_marginTop="34dp"
-        android:id="@+id/logo"
+        android:layout_marginTop="25dp"
+        android:id="@+id/logo_sign_up"
         android:layout_width="110dp"
         android:layout_height="110dp"
         android:layout_centerHorizontal="true"
@@ -14,8 +14,8 @@
 
     <RelativeLayout
         android:id="@+id/relative_name"
-        android:layout_marginTop="70dp"
-        android:layout_below="@+id/logo"
+        android:layout_marginTop="40dp"
+        android:layout_below="@+id/logo_sign_up"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
@@ -39,7 +39,8 @@
         <EditText
             android:id="@+id/enter_name"
             android:layout_width="match_parent"
-            android:layout_height="24dp"
+            android:layout_height="36dp"
+            android:textSize="18sp"
             android:layout_marginLeft="0dp"
             android:layout_toRightOf="@+id/text_name"
             android:backgroundTint="#fff"/>
@@ -49,7 +50,6 @@
         android:id="@+id/relative_telephone"
         android:layout_alignTop="@+id/relative_name"
         android:layout_marginTop="70dp"
-        android:layout_below="@+id/logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
@@ -73,7 +73,8 @@
         <EditText
             android:id="@+id/enter_telephone"
             android:layout_width="match_parent"
-            android:layout_height="24dp"
+            android:layout_height="36dp"
+            android:textSize="18sp"
             android:layout_marginLeft="0dp"
             android:layout_toRightOf="@+id/text_telephone"
             android:backgroundTint="#fff" />
@@ -84,7 +85,6 @@
         android:id="@+id/relative_mail"
         android:layout_alignTop="@+id/relative_telephone"
         android:layout_marginTop="70dp"
-        android:layout_below="@+id/logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
@@ -108,7 +108,8 @@
         <EditText
             android:id="@+id/enter_email"
             android:layout_width="match_parent"
-            android:layout_height="24dp"
+            android:layout_height="36dp"
+            android:textSize="18sp"
             android:layout_marginLeft="0dp"
             android:layout_toRightOf="@+id/text_mail"
             android:backgroundTint="#fff"/>
@@ -118,7 +119,6 @@
         android:id="@+id/relative_data"
         android:layout_alignTop="@+id/relative_mail"
         android:layout_marginTop="70dp"
-        android:layout_below="@+id/logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
@@ -142,7 +142,8 @@
         <EditText
             android:id="@+id/enter_data"
             android:layout_width="match_parent"
-            android:layout_height="24dp"
+            android:layout_height="36dp"
+            android:textSize="18sp"
             android:layout_marginLeft="0dp"
             android:layout_toRightOf="@+id/text_data"
             android:backgroundTint="#fff"/>
@@ -152,7 +153,6 @@
         android:id="@+id/relative_password"
         android:layout_alignTop="@+id/relative_data"
         android:layout_marginTop="70dp"
-        android:layout_below="@+id/logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
@@ -176,7 +176,8 @@
         <EditText
             android:id="@+id/enter_password"
             android:layout_width="match_parent"
-            android:layout_height="24dp"
+            android:layout_height="36dp"
+            android:textSize="18sp"
             android:layout_marginLeft="0dp"
             android:layout_toRightOf="@+id/text_password"
             android:backgroundTint="#fff"
@@ -187,7 +188,6 @@
         android:id="@+id/relative_repassword"
         android:layout_alignTop="@+id/relative_password"
         android:layout_marginTop="70dp"
-        android:layout_below="@+id/logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
@@ -211,7 +211,8 @@
         <EditText
             android:id="@+id/enter_repassword"
             android:layout_width="match_parent"
-            android:layout_height="24dp"
+            android:layout_height="36dp"
+            android:textSize="18sp"
             android:layout_marginLeft="0dp"
             android:layout_toRightOf="@+id/text_repassword"
             android:backgroundTint="#fff"
@@ -219,15 +220,24 @@
     </RelativeLayout>
 
 
+    <Button
+        android:id="@+id/sign_up"
+        android:layout_width="160dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/relative_repassword"
+        android:layout_marginTop="25dp"
+        android:layout_centerHorizontal="true"
+        android:text="Зареєструватися"
+        android:textSize="14sp" />
 
     <Button
-        android:id="@+id/login"
-        android:layout_below="@+id/relative_repassword"
-        android:layout_marginTop="50dp"
-        android:layout_width="145dp"
-        android:layout_height="34dp"
-        android:text="Зареєструватися"
-        android:textSize="12sp"
-        android:layout_centerHorizontal="true"/>
+        android:id="@+id/sign_in"
+        android:layout_width="160dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/sign_up"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:text="Увійти"
+        android:textSize="14sp" />
 
 </RelativeLayout>

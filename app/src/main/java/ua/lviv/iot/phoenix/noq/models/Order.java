@@ -1,4 +1,4 @@
-package ua.lviv.iot.phoenix.noq;
+package ua.lviv.iot.phoenix.noq.models;
 
 import android.os.Parcel;
 import android.os.Parcelable;
