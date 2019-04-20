@@ -21,7 +21,7 @@ import ua.lviv.iot.phoenix.noq.models.User;
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG = "SignUpActivity";
 
-    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
     private EditText emailEdit;
     private EditText passwordEdit;
@@ -38,6 +38,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         // Check auth on Activity start
         if (mAuth.getCurrentUser() != null) {
             Useful.onAuthSuccess(this, mAuth.getCurrentUser());
+            finish();
         }
     }
 

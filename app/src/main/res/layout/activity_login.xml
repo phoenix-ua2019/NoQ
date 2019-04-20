@@ -7,7 +7,7 @@
 
 
     <ImageView
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="25dp"
         android:id="@+id/logo_sign_in"
         android:layout_width="110dp"
         android:layout_height="110dp"
@@ -16,7 +16,7 @@
 
     <RelativeLayout
         android:id="@+id/temp2"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="70dp"
         android:layout_below="@+id/logo_sign_in"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
@@ -97,5 +97,17 @@
         android:text="Увійти"
         android:textSize="14sp"
         android:layout_centerHorizontal="true"/>
+
+    <Button
+        android:id="@+id/back"
+        android:layout_width="160dp"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="25dp"
+        android:background="@android:color/transparent"
+        android:text="Назад"
+        android:textAllCaps="false"
+        android:textSize="12sp" />
 
 </RelativeLayout>

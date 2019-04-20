@@ -5,7 +5,7 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="15dp"
         android:id="@+id/logo_sign_up"
         android:layout_width="110dp"
         android:layout_height="110dp"
@@ -14,7 +14,7 @@
 
     <RelativeLayout
         android:id="@+id/relative_name"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="25dp"
         android:layout_below="@+id/logo_sign_up"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
@@ -224,8 +224,8 @@
         android:id="@+id/sign_up"
         android:layout_width="160dp"
         android:layout_height="40dp"
-        android:layout_below="@+id/relative_repassword"
-        android:layout_marginTop="25dp"
+        android:layout_above="@+id/sign_in"
+        android:layout_marginBottom="25dp"
         android:layout_centerHorizontal="true"
         android:text="Зареєструватися"
         android:textSize="14sp" />
@@ -234,9 +234,9 @@
         android:id="@+id/sign_in"
         android:layout_width="160dp"
         android:layout_height="40dp"
-        android:layout_below="@+id/sign_up"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp"
+        android:layout_marginBottom="25dp"
         android:text="Увійти"
         android:textSize="14sp" />
 

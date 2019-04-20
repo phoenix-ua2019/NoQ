@@ -43,7 +43,7 @@ public class Cafe implements Parcelable {
     }
 
     Cafe (Parcel source) {
-        this(source.readString(), source.readString(), source.readString(), source.readInt(), new ArrayList());
+        this(source.readString(), source.readString(), source.readString(), source.readInt(), new ArrayList<Meal>());
         source.readList(mCafeMeals, Meal.class.getClassLoader());
     }
 

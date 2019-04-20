@@ -38,6 +38,7 @@
             android:layout_marginTop="32dp"/>
 
         <TextView
+            android:id="@+id/user_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Зеновий Верес"
@@ -60,6 +61,7 @@
             android:layout_marginTop="24dp"/>
 
         <TextView
+            android:id="@+id/user_phone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="+3806453325"
@@ -82,6 +84,7 @@
             android:layout_marginTop="24dp"/>
 
         <TextView
+            android:id="@+id/user_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="fksnnsf.fsvoie@gmail.com"
@@ -103,13 +106,16 @@
             android:layout_gravity="center"
             android:layout_marginTop="24dp"/>
 
-        <TextView
+        <Button
+            android:id="@+id/user_pass"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Змінити"
             android:textColor="@color/redBasic"
-            android:textSize="22sp"
-            android:layout_gravity="center" />
+            android:textSize="17sp"
+            android:layout_gravity="center"
+            android:background="@android:color/transparent"
+            android:textAllCaps="false"/>
 
         <TextView
             android:layout_width="320dp"
@@ -127,6 +133,7 @@
             android:layout_marginTop="24dp"/>
 
         <TextView
+            android:id="@+id/user_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="13.12.1976"
