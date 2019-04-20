@@ -91,7 +91,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private boolean validateForm() {
-        boolean result = true;
+        boolean result = false;
         emailEdit.setError(null);
         passwordEdit.setError(null);
         passwordRepeatEdit.setError(null);
@@ -101,19 +101,16 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
         if (TextUtils.isEmpty(email)) {
             emailEdit.setError("Required");
-            result = false;
         } else if (TextUtils.isEmpty(pass) ) {
             passwordEdit.setError("Required");
-            result = false;
         } else if (pass.length() <= 6) {
             passwordEdit.setError("Must be at least 7 chars long");
-            result = false;
         } else if (TextUtils.isEmpty(rePass)) {
             passwordRepeatEdit.setError("Required");
-            result = false;
         } else if(!passwordEdit.getText().toString().equals(rePass)) {
             passwordRepeatEdit.setError("Passwords do not match");
-            result = false;
+        } else {
+            result = true;
         }
 
         return result;

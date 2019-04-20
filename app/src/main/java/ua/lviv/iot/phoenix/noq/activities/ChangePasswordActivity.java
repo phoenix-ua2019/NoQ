@@ -54,16 +54,15 @@ public class ChangePasswordActivity extends AppCompatActivity implements OnClick
         mNewPassword = findViewById(R.id.repass_new_password);
         mReNewPassword = findViewById(R.id.repass_re_new_password);
 
-        old_pass = mOldPassword.getText().toString();
-        new_pass = mNewPassword.getText().toString();
-        re_new_pass = mReNewPassword.getText().toString();
-
         findViewById(R.id.repass_change).setOnClickListener(this);
         findViewById(R.id.back).setOnClickListener((View v) -> finish());
     }
 
     private void changePass() {
         Log.d(TAG, "signIn");
+        old_pass = mOldPassword.getText().toString();
+        new_pass = mNewPassword.getText().toString();
+        re_new_pass = mReNewPassword.getText().toString();
         if (!validateForm()) {
             return;
         }
@@ -81,7 +80,7 @@ public class ChangePasswordActivity extends AppCompatActivity implements OnClick
                 } else {
                     Log.d(TAG, "Error password not updated");
                     Toast.makeText(this,
-                            "Error: password not updated", Toast.LENGTH_SHORT);
+                            "Error: password not updated", Toast.LENGTH_SHORT).show();
                 }
             });
             startActivity(new Intent(this, MainActivity.class));
@@ -89,23 +88,26 @@ public class ChangePasswordActivity extends AppCompatActivity implements OnClick
     }
 
     private boolean validateForm() {
-        boolean result = true;
+        boolean result = false;
         mOldPassword.setError(null);
         mNewPassword.setError(null);
         mReNewPassword.setError(null);
 
         if (TextUtils.isEmpty(old_pass)) {
             mOldPassword.setError("Required");
-            result = false;
         } else if (TextUtils.isEmpty(new_pass)) {
             mNewPassword.setError("Required");
-            result = false;
         } else if (TextUtils.isEmpty(re_new_pass)) {
             mReNewPassword.setError("Required");
-            result = false;
-        } else if (re_new_pass.equals(new_pass)){
+        } else if (!re_new_pass.equals(new_pass)) {
             mNewPassword.setError("Passwords do not match");
+        } else if (new_pass.equals(old_pass)){
+            mNewPassword.setError("New password cannot be same as old password");
+        } else if (new_pass.length() <= 6) {
+            mNewPassword.setError("Must be at least 7 chars long");
             result = false;
+        } else {
+            result = true;
         }
 
         return result;

@@ -19,6 +19,7 @@
         <activity android:name=".activities.UserActivity" />
         <activity android:name=".activities.SignInActivity"/>
         <activity android:name=".activities.MainActivity"/>
+        <activity android:name=".activities.ChangePasswordActivity" />
     </application>
 
 </manifest>
