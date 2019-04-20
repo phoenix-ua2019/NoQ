@@ -57,7 +57,7 @@ public class User implements Parcelable {
     }
 
     public User(HashMap<String, String> map) {
-        this(map.get("uName"), map.get("name"), map.get("email"), map.get("date"), map.get("phone"));
+        this(map.get("uName"), map.get("email"), map.get("date"), map.get("phone"), map.get("name"));
     }
 
     public User(Parcel source) {

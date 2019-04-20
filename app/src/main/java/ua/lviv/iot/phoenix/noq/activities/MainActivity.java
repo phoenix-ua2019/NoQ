@@ -29,7 +29,11 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
     private DrawerLayout drawerLayout;
 
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    private DatabaseReference userRef = Useful.userRef.child(mAuth.getCurrentUser().getUid());
+    private DatabaseReference userRef;
+    {
+        if (mAuth.getCurrentUser() != null)
+        userRef = Useful.userRef.child(mAuth.getCurrentUser().getUid());
+    }
     private User mUser;
 
     @Override
@@ -65,10 +69,10 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         String itemName = (String) menuItem.getTitle();
-        TextView username = findViewById(R.id.header_username);
+        TextView name = findViewById(R.id.header_name);
         TextView email = findViewById(R.id.header_email);
 
-        username.setText(mUser.getUName());
+        name.setText(mUser.getUName());
         email.setText(mUser.getEmail());
 
         closeDrawer();
@@ -86,7 +90,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
                 System.out.println("setting");
                 return false;
             case R.id.exit:
-                mAuth.signOut();
+                if (mAuth != null) mAuth.signOut();
                 overridePendingTransition(R.anim.right_in,R.anim.rotate);
                 startActivity(new Intent(this, SignInActivity.class));
                 finish();
