@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 
 public class ListOfCafes extends AppCompatActivity {
 
-    /*DatabaseReference cafeRef = Useful.getRef();
+    /*DatabaseReference cafeRef = Useful.cafeRef;
     ArrayList<Cafe> cafes = new ArrayList<>();
 
     @Override

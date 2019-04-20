@@ -35,6 +35,7 @@ public class SignInActivity extends AppCompatActivity implements OnClickListener
         mEmailField = findViewById(R.id.login_email);
         mPasswordField = findViewById(R.id.login_password);
         findViewById(R.id.sign_in).setOnClickListener(this);
+        findViewById(R.id.back).setOnClickListener((View v) -> finish());
     }
 
     private void signIn() {
@@ -52,6 +53,7 @@ public class SignInActivity extends AppCompatActivity implements OnClickListener
 
                     if (task.isSuccessful()) {
                         Useful.onAuthSuccess(this, task.getResult().getUser());
+                        finish();
                         return;
                     }
                     Toast.makeText(SignInActivity.this, "Sign In Failed",

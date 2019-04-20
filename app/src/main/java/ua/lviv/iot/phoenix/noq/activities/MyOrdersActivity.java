@@ -76,7 +76,7 @@ public class MyOrdersActivity extends AppCompatActivity {
     }
 
     public void AddToDatabase(Order order) {
-        Useful.cafeRef.child("order").setValue(order);
+        Useful.ref.child("order").setValue(order);
     }
 
     @Override

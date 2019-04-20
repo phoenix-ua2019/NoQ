@@ -22,10 +22,12 @@ public class Useful {
 
     static void onAuthSuccess(AppCompatActivity that, FirebaseUser user) {
         // Write new user
-        writeNewUser(user.getUid(), user.getEmail());
-        // Go to MainActivity
-        that.startActivity(new Intent(that, MainActivity.class));
-        that.finish();
+        try {
+            writeNewUser(user.getUid(), user.getEmail());
+        } finally {
+            // Go to MainActivity
+            that.startActivity(new Intent(that, MainActivity.class));
+        }
     }
 
     static void onAuthSuccess(AppCompatActivity that, FirebaseUser user, User mUser) {
@@ -33,6 +35,5 @@ public class Useful {
         userRef.child(user.getUid()).setValue(mUser);
         // Go to MainActivity
         that.startActivity(new Intent(that, MainActivity.class));
-        that.finish();
     }
 }
