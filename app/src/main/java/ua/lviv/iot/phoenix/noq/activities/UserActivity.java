@@ -2,16 +2,23 @@ package ua.lviv.iot.phoenix.noq.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.support.v7.app.ActionBarDrawerToggle;
+
 
 import ua.lviv.iot.phoenix.noq.R;
 import ua.lviv.iot.phoenix.noq.models.User;
 
 
-public class UserActivity extends AppCompatActivity{
+public class UserActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     private User mUser;
     private TextView name;
@@ -19,6 +26,7 @@ public class UserActivity extends AppCompatActivity{
     private TextView phone;
     private TextView date;
     private Button pass;
+    private DrawerLayout drawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +47,24 @@ public class UserActivity extends AppCompatActivity{
         phone.setText(mUser.getPhone());
         date.setText(mUser.getDate());
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        drawerLayout = findViewById(R.id.drawer_layout_user);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.drawer);
+        navigationView.setNavigationItemSelectedListener(this);
+        ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this,
+                drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close);
+        drawerLayout.addDrawerListener(drawerToggle);
+        drawerToggle.syncState();
+
         pass.setOnClickListener((View v) ->
                 startActivity(new Intent(this,ChangePasswordActivity.class)));
+
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        return false;
     }
 }

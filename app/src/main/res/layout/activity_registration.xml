@@ -1,243 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <ImageView
         android:layout_marginTop="15dp"
         android:id="@+id/logo_sign_up"
         android:layout_width="110dp"
         android:layout_height="110dp"
-        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
         android:src="@drawable/google"/>
 
-    <RelativeLayout
-        android:id="@+id/relative_name"
-        android:layout_marginTop="25dp"
-        android:layout_below="@+id/logo_sign_up"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+    <EditText
+        android:id="@+id/enter_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginLeft="32dp"
+        android:textSize="18sp"
+        android:hint="Ім'я прізвище"
+        android:backgroundTint="@color/redBasic"/>
 
-        <TextView
-            android:id="@+id/text_name"
-            android:layout_width="109dp"
-            android:layout_height="24dp"
-            android:text="імя прізвище"
-            android:textSize="12sp"
-            android:textColor="#fff"
-            android:background="@color/redBasic"
-            android:gravity="center"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_below="@+id/text_name"
-            android:background="@color/redBasic">
-        </TextView>
+    <EditText
+        android:id="@+id/enter_telephone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginLeft="32dp"
+        android:textSize="18sp"
+        android:hint="Телефон"
+        android:backgroundTint="@color/redBasic"/>
 
-        <EditText
-            android:id="@+id/enter_name"
-            android:layout_width="match_parent"
-            android:layout_height="36dp"
-            android:textSize="18sp"
-            android:layout_marginLeft="0dp"
-            android:layout_toRightOf="@+id/text_name"
-            android:backgroundTint="#fff"/>
-    </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/relative_telephone"
-        android:layout_alignTop="@+id/relative_name"
-        android:layout_marginTop="70dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+    <EditText
+        android:id="@+id/enter_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginLeft="32dp"
+        android:textSize="18sp"
+        android:hint="Email"
+        android:backgroundTint="@color/redBasic"/>
 
-        <TextView
-            android:id="@+id/text_telephone"
-            android:layout_width="109dp"
-            android:layout_height="24dp"
-            android:text="номер телефону"
-            android:textSize="12sp"
-            android:textColor="#fff"
-            android:background="@color/redBasic"
-            android:gravity="center"/>
+    <EditText
+        android:id="@+id/enter_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginLeft="32dp"
+        android:textSize="18sp"
+        android:hint="День народження"
+        android:backgroundTint="@color/redBasic"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_below="@+id/text_telephone"
-            android:background="@color/redBasic">
-        </TextView>
+    <EditText
+        android:id="@+id/enter_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginLeft="32dp"
+        android:textSize="18sp"
+        android:hint="Введіть пароль"
+        android:backgroundTint="@color/redBasic"
+        android:password="true"/>
 
-        <EditText
-            android:id="@+id/enter_telephone"
-            android:layout_width="match_parent"
-            android:layout_height="36dp"
-            android:textSize="18sp"
-            android:layout_marginLeft="0dp"
-            android:layout_toRightOf="@+id/text_telephone"
-            android:backgroundTint="#fff" />
 
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/relative_mail"
-        android:layout_alignTop="@+id/relative_telephone"
-        android:layout_marginTop="70dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/text_mail"
-            android:layout_width="109dp"
-            android:layout_height="24dp"
-            android:text="пошта"
-            android:textSize="12sp"
-            android:textColor="#fff"
-            android:background="@color/redBasic"
-            android:gravity="center"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_below="@+id/text_mail"
-            android:background="@color/redBasic">
-        </TextView>
-
-        <EditText
-            android:id="@+id/enter_email"
-            android:layout_width="match_parent"
-            android:layout_height="36dp"
-            android:textSize="18sp"
-            android:layout_marginLeft="0dp"
-            android:layout_toRightOf="@+id/text_mail"
-            android:backgroundTint="#fff"/>
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/relative_data"
-        android:layout_alignTop="@+id/relative_mail"
-        android:layout_marginTop="70dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/text_data"
-            android:layout_width="109dp"
-            android:layout_height="24dp"
-            android:text="дата народження"
-            android:textSize="12sp"
-            android:textColor="#fff"
-            android:background="@color/redBasic"
-            android:gravity="center"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_below="@+id/text_data"
-            android:background="@color/redBasic">
-        </TextView>
-
-        <EditText
-            android:id="@+id/enter_data"
-            android:layout_width="match_parent"
-            android:layout_height="36dp"
-            android:textSize="18sp"
-            android:layout_marginLeft="0dp"
-            android:layout_toRightOf="@+id/text_data"
-            android:backgroundTint="#fff"/>
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/relative_password"
-        android:layout_alignTop="@+id/relative_data"
-        android:layout_marginTop="70dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/text_password"
-            android:layout_width="109dp"
-            android:layout_height="24dp"
-            android:text="пароль"
-            android:textSize="12sp"
-            android:textColor="#fff"
-            android:background="@color/redBasic"
-            android:gravity="center"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_below="@+id/text_password"
-            android:background="@color/redBasic">
-        </TextView>
-
-        <EditText
-            android:id="@+id/enter_password"
-            android:layout_width="match_parent"
-            android:layout_height="36dp"
-            android:textSize="18sp"
-            android:layout_marginLeft="0dp"
-            android:layout_toRightOf="@+id/text_password"
-            android:backgroundTint="#fff"
-            android:password="true"/>
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/relative_repassword"
-        android:layout_alignTop="@+id/relative_password"
-        android:layout_marginTop="70dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/text_repassword"
-            android:layout_width="109dp"
-            android:layout_height="24dp"
-            android:text="повторіть пароль"
-            android:textSize="12sp"
-            android:textColor="#fff"
-            android:background="@color/redBasic"
-            android:gravity="center"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_below="@+id/text_repassword"
-            android:background="@color/redBasic">
-        </TextView>
-
-        <EditText
-            android:id="@+id/enter_repassword"
-            android:layout_width="match_parent"
-            android:layout_height="36dp"
-            android:textSize="18sp"
-            android:layout_marginLeft="0dp"
-            android:layout_toRightOf="@+id/text_repassword"
-            android:backgroundTint="#fff"
-            android:password="true"/>
-    </RelativeLayout>
-
+    <EditText
+        android:id="@+id/enter_repassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginLeft="32dp"
+        android:textSize="18sp"
+        android:hint="Повторіть пароль"
+        android:backgroundTint="@color/redBasic"
+        android:password="true"/>
 
     <Button
         android:id="@+id/sign_up"
         android:layout_width="160dp"
         android:layout_height="40dp"
-        android:layout_above="@+id/sign_in"
-        android:layout_marginBottom="25dp"
-        android:layout_centerHorizontal="true"
+        android:layout_marginTop="42dp"
+        android:layout_gravity="center"
         android:text="Зареєструватися"
-        android:textSize="14sp" />
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:gravity="center"
+        android:background="@drawable/button_style"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textSize="12dp"
+        android:text="або"
+        android:layout_gravity="center"/>
 
     <Button
         android:id="@+id/sign_in"
         android:layout_width="160dp"
         android:layout_height="40dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
         android:layout_marginBottom="25dp"
+        android:layout_gravity="center"
         android:text="Увійти"
-        android:textSize="14sp" />
+        android:textSize="14sp"
+        android:textColor="@color/white"
+        android:background="@drawable/button_style"/>
 
-</RelativeLayout>
+</LinearLayout>
+</FrameLayout>

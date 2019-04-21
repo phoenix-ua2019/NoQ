@@ -1,5 +1,6 @@
 package ua.lviv.iot.phoenix.noq.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -35,7 +36,7 @@ public class SignInActivity extends AppCompatActivity implements OnClickListener
         mEmailField = findViewById(R.id.login_email);
         mPasswordField = findViewById(R.id.login_password);
         findViewById(R.id.sign_in).setOnClickListener(this);
-        findViewById(R.id.back).setOnClickListener((View v) -> finish());
+        findViewById(R.id.back).setOnClickListener((View v) -> startActivity(new Intent(this, SignUpActivity.class)));
     }
 
     private void signIn() {

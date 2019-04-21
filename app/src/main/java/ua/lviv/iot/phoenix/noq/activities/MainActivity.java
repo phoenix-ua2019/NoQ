@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        drawerLayout = findViewById(R.id.drawer_layout);
+        drawerLayout = findViewById(R.id.drawer_layout_main);
         ((NavigationView) findViewById(R.id.drawer))
                 .setNavigationItemSelectedListener(this);
         ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this,

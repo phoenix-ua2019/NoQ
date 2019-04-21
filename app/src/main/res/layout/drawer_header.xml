@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="190dp"
     android:background="@drawable/red_picture">
-    
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
