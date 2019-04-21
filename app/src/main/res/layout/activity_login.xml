@@ -17,62 +17,48 @@
     <RelativeLayout
         android:id="@+id/temp2"
         android:layout_marginTop="70dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
         android:layout_below="@+id/logo_sign_in"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-        <TextView
+        <ImageView
             android:id="@+id/temp1"
-            android:layout_width="109dp"
-            android:layout_height="24dp"
-            android:text="Введіть логін"
-            android:textSize="12sp"
-            android:textColor="#fff"
-            android:background="@color/redBasic"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/user"
             android:gravity="center"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_below="@+id/temp1"
-            android:background="@color/redBasic">
-        </TextView>
+
 
         <EditText
             android:id="@+id/login_email"
             android:autofillHints="login@example.com"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="wrap_content"
             android:textSize="18sp"
             android:textColor="@color/black"
-            android:layout_marginStart="0dp"
-            android:layout_toEndOf="@+id/temp1"
-            android:backgroundTint="#000"/>
+            android:backgroundTint="@color/redBasic"/>
+
     </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/temp4"
         android:layout_alignTop="@+id/temp2"
         android:layout_marginTop="70dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-        <TextView
+        <ImageView
             android:id="@+id/temp3"
-            android:layout_width="109dp"
-            android:layout_height="24dp"
-            android:text="Введіть пароль"
-            android:textSize="12sp"
-            android:textColor="#fff"
-            android:background="@color/redBasic"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/lock"
             android:gravity="center"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_below="@+id/temp3"
-            android:background="@color/redBasic">
-        </TextView>
 
         <EditText
             android:id="@+id/login_password"
@@ -81,9 +67,7 @@
             android:layout_height="48dp"
             android:textSize="18sp"
             android:textColor="@color/black"
-            android:layout_marginStart="0dp"
-            android:layout_toEndOf="@+id/temp3"
-            android:backgroundTint="#fff"
+            android:backgroundTint="@color/redBasic"
             android:password="true"/>
 
     </RelativeLayout>
