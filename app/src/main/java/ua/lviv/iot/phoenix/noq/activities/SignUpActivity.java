@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -25,7 +26,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
     private EditText emailEdit;
     private EditText passwordEdit;
-    private EditText dataEdit;
+    private EditText dateEdit;
     private EditText nameEdit;
     private EditText phoneEdit;
     private EditText passwordRepeatEdit;
@@ -49,10 +50,15 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
         emailEdit = findViewById(R.id.enter_email);
         passwordEdit = findViewById(R.id.enter_password);
-        dataEdit = findViewById(R.id.enter_data);
+        dateEdit = findViewById(R.id.enter_data);
         nameEdit = findViewById(R.id.enter_name);
         phoneEdit = findViewById(R.id.enter_telephone);
         passwordRepeatEdit = findViewById(R.id.enter_repassword);
+
+        emailEdit.setInputType(InputType.TYPE_CLASS_TEXT |
+                            InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+        dateEdit.setInputType(InputType.TYPE_CLASS_DATETIME |
+                            InputType.TYPE_DATETIME_VARIATION_NORMAL);
 
         findViewById(R.id.sign_up).setOnClickListener(this);
         findViewById(R.id.sign_in).setOnClickListener(this);
@@ -79,7 +85,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             user = (user != null) ? user : FirebaseAuth.getInstance().getCurrentUser();
             User mUser = new User(
                     nameEdit.getText().toString(), emailEdit.getText().toString(),
-                    dataEdit.getText().toString(), phoneEdit.getText().toString());
+                    dateEdit.getText().toString(), phoneEdit.getText().toString());
             Useful.onAuthSuccess(this, user, mUser);
             startActivity(new Intent(SignUpActivity.this, MainActivity.class));
             finish();
