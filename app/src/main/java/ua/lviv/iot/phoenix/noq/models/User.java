@@ -9,11 +9,10 @@ import java.util.HashMap;
 
 @IgnoreExtraProperties
 public class User implements Parcelable {
-    private String uName = "Петренко Петро Петрович";
-    private String name;
+    private String name = "Петренко Петро Петрович";
     private String email;
     private String date = "01.01.1970";
-    private String phone = "+380671234567";
+    private String phone = "+380670123456";
     public static final Parcelable.Creator<User> CREATOR =
             new Parcelable.Creator<User>() {
         @Override
@@ -27,42 +26,26 @@ public class User implements Parcelable {
         }
      };
 
-    public static String usernameFromEmail(String email) {
-        if (email.contains("@")) {
-            return email.split("@")[0];
-        } else {
-            return email;
-        }
-    }
-
     public User() {
     }
 
     public User(String email) {
-        this.name = User.usernameFromEmail(email);
         this.email = email;
     }
 
     public User(String name, String email, String date, String phone) {
-        this.uName = name;
+        this.name = name;
         this.email = email;
         this.date = date;
         this.phone = phone;
-        this.name = User.usernameFromEmail(email);
-    }
-
-    public User(String name, String email, String date, String phone, String username) {
-        this(name, email, date, phone);
-        this.name = username;
     }
 
     public User(HashMap<String, String> map) {
-        this(map.get("uName"), map.get("email"), map.get("date"), map.get("phone"), map.get("name"));
+        this(map.get("name"), map.get("email"), map.get("date"), map.get("phone"));
     }
 
     public User(Parcel source) {
-        this(source.readString(), source.readString(), source.readString(),
-                source.readString(), source.readString());
+        this(source.readString(), source.readString(), source.readString(), source.readString());
     }
 
     @Override
@@ -72,19 +55,10 @@ public class User implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel out, int flags) {
-        out.writeString(uName);
+        out.writeString(name);
         out.writeString(email);
         out.writeString(date);
         out.writeString(phone);
-        out.writeString(name);
-    }
-
-    public String getUName() {
-        return uName;
-    }
-
-    public void setUName(String uName) {
-        this.uName = uName;
     }
 
     public String getName() {

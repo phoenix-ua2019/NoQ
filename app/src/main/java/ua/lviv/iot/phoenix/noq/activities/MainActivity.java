@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        drawerLayout = findViewById(R.id.drawer_layout);
+        drawerLayout = findViewById(R.id.drawer_layout_main);
         ((NavigationView) findViewById(R.id.drawer))
                 .setNavigationItemSelectedListener(this);
         ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this,
@@ -68,11 +68,12 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        boolean result = false;
         String itemName = (String) menuItem.getTitle();
         TextView name = findViewById(R.id.header_name);
         TextView email = findViewById(R.id.header_email);
 
-        name.setText(mUser.getUName());
+        name.setText(mUser.getName());
         email.setText(mUser.getEmail());
 
         closeDrawer();
@@ -80,26 +81,33 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         switch (menuItem.getItemId()) {
             case R.id.user:
                 Intent openUserActivity = new Intent(this, UserActivity.class);
-                overridePendingTransition(R.anim.right_in,R.anim.rotate);
+                overridePendingTransition(R.anim.right_in, R.anim.left_out);
                 openUserActivity.putExtra("user", mUser);
                 startActivity(openUserActivity);
+                break;
+            case R.id.menu:
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                break;
             case R.id.star:
                 System.out.println("star");
-                return false;
+                break;
             case R.id.setting:
                 System.out.println("setting");
-                return false;
+                break;
             case R.id.exit:
                 if (mAuth != null) mAuth.signOut();
                 overridePendingTransition(R.anim.right_in,R.anim.rotate);
                 startActivity(new Intent(this, SignInActivity.class));
                 finish();
-                return false;
+                break;
             default:
+                result = true;
                 System.out.println("default");
         }
 
-        return true;
+        return result;
     }
 
     private void closeDrawer() {
