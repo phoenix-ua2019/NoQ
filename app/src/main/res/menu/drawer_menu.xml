@@ -3,31 +3,40 @@
 
 
     <group android:id="@+id/grp_Header">
-    <item
-        android:id="@+id/user"
-        android:checkable="true"
-        android:icon="@drawable/user"
-        android:title="Мій кабінет"/>
 
-    <item
-        android:id="@+id/star"
+        <item
+        android:id="@+id/menu"
         android:checkable="true"
-        android:icon="@drawable/star"
-        android:title="Улюблене"/>
+        android:icon="@drawable/menu_icon"
+        android:title="Зробити замовлення"/>
+
+        <item
+            android:id="@+id/user"
+            android:checkable="true"
+            android:icon="@drawable/user"
+            android:title="Мій кабінет"/>
+
+        <item
+            android:id="@+id/star"
+            android:checkable="true"
+            android:icon="@drawable/star"
+            android:title="Улюблене"/>
+
     </group>
 
     <group android:id="@+id/grp_Watch">
-    <item
-        android:id="@+id/setting"
-        android:checkable="true"
-        android:icon="@drawable/setting"
-        android:title="Налаштування"/>
-    </group>
 
-    <item
-        android:id="@+id/exit"
-        android:checkable="true"
-        android:icon="@drawable/exit"
-        android:title="Вихід"/>
+        <item
+            android:id="@+id/setting"
+            android:checkable="true"
+            android:icon="@drawable/setting"
+            android:title="Налаштування"/>
+        </group>
+
+        <item
+            android:id="@+id/exit"
+            android:checkable="true"
+            android:icon="@drawable/exit"
+            android:title="Вихід"/>
 
 </menu>

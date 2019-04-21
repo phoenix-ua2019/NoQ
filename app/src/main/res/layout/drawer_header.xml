@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="190dp"
     android:background="@drawable/red_picture">
-    
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -13,7 +13,6 @@
         android:layout_marginTop="16dp"
         android:paddingLeft="16dp"
         android:paddingBottom="16dp">
-
         <ImageView
             android:layout_width="60dp"
             android:layout_height="60dp"
@@ -21,21 +20,20 @@
             android:layout_marginBottom="16dp"/>
 
         <TextView
+            android:id="@+id/header_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="User Name"
             android:textColor="#fff"
             android:textSize="30sp"
             android:fontFamily="sans-serif-condensed"/>
-
         <TextView
+            android:id="@+id/header_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="dfknvf.rfprw@gmail.com"
+            android:text="example@domain.com"
             android:textColor="#fff"
             android:textSize="16sp"
             android:fontFamily="sans-serif-condensed"/>
-
     </LinearLayout>
-
 </RelativeLayout>

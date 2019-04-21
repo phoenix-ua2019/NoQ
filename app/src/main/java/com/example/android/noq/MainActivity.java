@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        drawerLayout = findViewById(R.id.drawer_layout);
+        drawerLayout = findViewById(R.id.drawer_layout_main);
         NavigationView navigationView = (NavigationView) findViewById(R.id.drawer);
         navigationView.setNavigationItemSelectedListener(this);
         ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this,
@@ -34,15 +34,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onNavigationItemSelected(MenuItem menuItem) {
-        String itemName = (String) menuItem.getTitle();
 
-        closeDrawer();
-
-        //тут зробити дію на кнопку
         if (menuItem.getItemId() == R.id.user) {
+
             Intent intent = new Intent(this, UserActivity.class);
             startActivity(intent);
-            overridePendingTransition(R.anim.right_in,R.anim.rotate);
+            overridePendingTransition(R.anim.right_in, R.anim.left_out);
+
+
+
+        } else if (menuItem.getItemId() == R.id.menu) {
+
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.right_in, R.anim.left_out);
+
+
         } else if (menuItem.getItemId() == R.id.star) {
 
         } else if (menuItem.getItemId() == R.id.setting) {
