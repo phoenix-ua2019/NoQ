@@ -15,15 +15,10 @@ public class Useful {
     public static final DatabaseReference cafeRef = ref.child("cafes");
     public static final DatabaseReference userRef = ref.child("authentication").child("users");
 
-    private static void writeNewUser(String userId, String email) {
-        User user = new User(email);
-        userRef.child(userId).setValue(user);
-    }
-
     static void onAuthSuccess(AppCompatActivity that, FirebaseUser user) {
         // Write new user
         try {
-            writeNewUser(user.getUid(), user.getEmail());
+            userRef.child(user.getUid()).setValue(new User(user.getEmail()));
         } finally {
             // Go to MainActivity
             that.startActivity(new Intent(that, MainActivity.class));

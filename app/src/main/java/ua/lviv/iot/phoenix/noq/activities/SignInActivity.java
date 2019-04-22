@@ -36,7 +36,8 @@ public class SignInActivity extends AppCompatActivity implements OnClickListener
         mEmailField = findViewById(R.id.login_email);
         mPasswordField = findViewById(R.id.login_password);
         findViewById(R.id.sign_in).setOnClickListener(this);
-        findViewById(R.id.back).setOnClickListener((View v) -> startActivity(new Intent(this, SignUpActivity.class)));
+        findViewById(R.id.back).setOnClickListener((View v) ->
+                startActivity(new Intent(this, SignUpActivity.class)));
     }
 
     private void signIn() {
