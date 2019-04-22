@@ -12,7 +12,9 @@ import android.telephony.TelephonyManager;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -63,13 +65,15 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         emailEdit.setInputType(InputType.TYPE_CLASS_TEXT |
                             InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
         dateEdit.setInputType(InputType.TYPE_CLASS_DATETIME |
-                            InputType.TYPE_DATETIME_VARIATION_NORMAL);
+                            InputType.TYPE_DATETIME_VARIATION_DATE);
         nameEdit.setInputType(InputType.TYPE_CLASS_TEXT);
         phoneEdit.setInputType(InputType.TYPE_CLASS_PHONE);
         passwordEdit.setInputType(InputType.TYPE_CLASS_TEXT);
         passwordRepeatEdit.setInputType(InputType.TYPE_CLASS_TEXT);
 
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE)
+        System.out.println(ContextCompat.checkSelfPermission(SignUpActivity.this, Manifest.permission.READ_PHONE_NUMBERS));
+        System.out.println(PackageManager.PERMISSION_GRANTED);
+        if (ContextCompat.checkSelfPermission(SignUpActivity.this, Manifest.permission.READ_PHONE_NUMBERS)
                 == PackageManager.PERMISSION_GRANTED) {
             phoneEdit.setText(((TelephonyManager)this.getApplicationContext()
                             .getSystemService(Context.TELEPHONY_SERVICE)).getLine1Number());
@@ -135,6 +139,15 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         }
 
         return result;
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (getCurrentFocus() != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        }
+        return super.dispatchTouchEvent(ev);
     }
 
     @Override
