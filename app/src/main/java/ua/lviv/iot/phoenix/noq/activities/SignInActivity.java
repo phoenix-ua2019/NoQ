@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -35,6 +36,12 @@ public class SignInActivity extends AppCompatActivity implements OnClickListener
 
         mEmailField = findViewById(R.id.login_email);
         mPasswordField = findViewById(R.id.login_password);
+
+
+        mEmailField.setInputType(InputType.TYPE_CLASS_TEXT |
+                            InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+        mPasswordField.setInputType(InputType.TYPE_CLASS_TEXT);
+        
         findViewById(R.id.sign_in).setOnClickListener(this);
         findViewById(R.id.back).setOnClickListener((View v) ->
                 startActivity(new Intent(this, SignUpActivity.class)));

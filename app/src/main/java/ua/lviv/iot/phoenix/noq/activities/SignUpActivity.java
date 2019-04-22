@@ -1,9 +1,14 @@
 package ua.lviv.iot.phoenix.noq.activities;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.telephony.TelephonyManager;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Log;
@@ -49,16 +54,26 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         setContentView(R.layout.activity_registration);
 
         emailEdit = findViewById(R.id.enter_email);
-        passwordEdit = findViewById(R.id.enter_password);
         dateEdit = findViewById(R.id.enter_data);
         nameEdit = findViewById(R.id.enter_name);
         phoneEdit = findViewById(R.id.enter_telephone);
+        passwordEdit = findViewById(R.id.enter_password);
         passwordRepeatEdit = findViewById(R.id.enter_repassword);
 
         emailEdit.setInputType(InputType.TYPE_CLASS_TEXT |
                             InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
         dateEdit.setInputType(InputType.TYPE_CLASS_DATETIME |
                             InputType.TYPE_DATETIME_VARIATION_NORMAL);
+        nameEdit.setInputType(InputType.TYPE_CLASS_TEXT);
+        phoneEdit.setInputType(InputType.TYPE_CLASS_PHONE);
+        passwordEdit.setInputType(InputType.TYPE_CLASS_TEXT);
+        passwordRepeatEdit.setInputType(InputType.TYPE_CLASS_TEXT);
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE)
+                == PackageManager.PERMISSION_GRANTED) {
+            phoneEdit.setText(((TelephonyManager)this.getApplicationContext()
+                            .getSystemService(Context.TELEPHONY_SERVICE)).getLine1Number());
+        }
 
         findViewById(R.id.sign_up).setOnClickListener(this);
         findViewById(R.id.sign_in).setOnClickListener(this);
