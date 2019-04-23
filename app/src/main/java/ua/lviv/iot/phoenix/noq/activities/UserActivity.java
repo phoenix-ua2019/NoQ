@@ -12,15 +12,20 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.support.v7.app.ActionBarDrawerToggle;
+
+
+import com.google.firebase.auth.FirebaseAuth;
 
 import ua.lviv.iot.phoenix.noq.R;
 import ua.lviv.iot.phoenix.noq.models.User;
 
 
-public class UserActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener{
+public class UserActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
-    DrawerLayout drawerLayout;
+    private DrawerLayout drawerLayout;
+    private User mUser;
+    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,33 +59,42 @@ public class UserActivity extends AppCompatActivity
 
         pass.setOnClickListener((View v) ->
                 startActivity(new Intent(this,ChangePasswordActivity.class)));
+
     }
 
     @Override
     public boolean onNavigationItemSelected(MenuItem menuItem) {
+        boolean result = false;
 
-
-        if (menuItem.getItemId() == R.id.user) {
-
-            Intent intent = new Intent(this, UserActivity.class);
-            startActivity(intent);
-            overridePendingTransition(R.anim.right_in, R.anim.left_out);
-
-        } else if (menuItem.getItemId() == R.id.menu) {
-
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
-            overridePendingTransition(R.anim.right_in, R.anim.left_out);
-
-        } else if (menuItem.getItemId() == R.id.star) {
-
-        } else if (menuItem.getItemId() == R.id.setting) {
-
-        } else if (menuItem.getItemId() == R.id.exit) {
-
+        switch (menuItem.getItemId()) {
+            case R.id.user:
+                Intent openUserActivity = new Intent(this, UserActivity.class);
+                overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                openUserActivity.putExtra("user", mUser);
+                startActivity(openUserActivity);
+                break;
+            case R.id.menu:
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                break;
+            case R.id.star:
+                System.out.println("star");
+                break;
+            case R.id.setting:
+                System.out.println("setting");
+                break;
+            case R.id.exit:
+                if (mAuth != null) mAuth.signOut();
+                overridePendingTransition(R.anim.right_in,R.anim.rotate);
+                startActivity(new Intent(this, SignInActivity.class));
+                finish();
+                break;
+            default:
+                result = true;
+                System.out.println("default");
         }
-
-        return true;
+        return result;
     }
 
     private void closeDrawer() {
