@@ -26,6 +26,7 @@
         android:layout_marginLeft="32dp"
         android:textSize="18sp"
         android:hint="Ім'я прізвище"
+        android:inputType="textPersonName"
         android:backgroundTint="@color/redBasic"/>
 
 
@@ -38,6 +39,7 @@
         android:layout_marginLeft="32dp"
         android:textSize="18sp"
         android:hint="Телефон"
+        android:inputType="phone"
         android:backgroundTint="@color/redBasic"/>
 
 
@@ -50,6 +52,7 @@
         android:layout_marginLeft="32dp"
         android:textSize="18sp"
         android:hint="Email"
+        android:inputType="textEmailAddress"
         android:backgroundTint="@color/redBasic"/>
 
     <EditText
@@ -61,6 +64,7 @@
         android:layout_marginLeft="32dp"
         android:textSize="18sp"
         android:hint="День народження"
+        android:inputType="date"
         android:backgroundTint="@color/redBasic"/>
 
     <EditText
@@ -72,6 +76,7 @@
         android:layout_marginLeft="32dp"
         android:textSize="18sp"
         android:hint="Введіть пароль"
+        android:inputType="text"
         android:backgroundTint="@color/redBasic"
         android:password="true"/>
 
@@ -85,6 +90,7 @@
         android:layout_marginLeft="32dp"
         android:textSize="18sp"
         android:hint="Повторіть пароль"
+        android:inputType="text"
         android:backgroundTint="@color/redBasic"
         android:password="true"/>
 

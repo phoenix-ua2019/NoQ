@@ -37,7 +37,8 @@
             android:layout_height="wrap_content"
             android:textSize="18sp"
             android:textColor="@color/black"
-            android:backgroundTint="@color/redBasic"/>
+            android:backgroundTint="@color/redBasic"
+            android:inputType="textEmailAddress"/>
 
     </RelativeLayout>
 
@@ -67,6 +68,7 @@
             android:textSize="18sp"
             android:textColor="@color/black"
             android:backgroundTint="@color/redBasic"
+            android:inputType="textAutoComplete"
             android:password="true"/>
 
     </RelativeLayout>
