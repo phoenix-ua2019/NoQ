@@ -1,124 +1,139 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
     <ImageView
-        android:layout_marginTop="15dp"
         android:id="@+id/logo_sign_up"
         android:layout_width="110dp"
         android:layout_height="110dp"
         android:layout_gravity="center"
-        android:src="@drawable/google"/>
+        android:layout_marginTop="46dp"
+        android:src="@drawable/google" />
 
     <EditText
         android:id="@+id/enter_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="32dp"
         android:layout_marginTop="32dp"
         android:layout_marginRight="32dp"
-        android:layout_marginLeft="32dp"
-        android:textSize="18sp"
+        android:backgroundTint="@color/redBasic"
         android:hint="Ім'я прізвище"
-        android:backgroundTint="@color/redBasic"/>
+        android:paddingLeft="16dp"
+        android:textSize="18sp" />
 
 
     <EditText
         android:id="@+id/enter_telephone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="32dp"
         android:layout_marginTop="16dp"
         android:layout_marginRight="32dp"
-        android:layout_marginLeft="32dp"
-        android:textSize="18sp"
+        android:backgroundTint="@color/redBasic"
         android:hint="Телефон"
-        android:backgroundTint="@color/redBasic"/>
+        android:paddingLeft="16dp"
+        android:textSize="18sp" />
 
 
     <EditText
         android:id="@+id/enter_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="32dp"
         android:layout_marginTop="16dp"
         android:layout_marginRight="32dp"
-        android:layout_marginLeft="32dp"
-        android:textSize="18sp"
+        android:backgroundTint="@color/redBasic"
         android:hint="Email"
-        android:backgroundTint="@color/redBasic"/>
+        android:paddingLeft="16dp"
+        android:textSize="18sp" />
 
     <EditText
         android:id="@+id/enter_data"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="32dp"
         android:layout_marginTop="16dp"
         android:layout_marginRight="32dp"
-        android:layout_marginLeft="32dp"
-        android:textSize="18sp"
+        android:backgroundTint="@color/redBasic"
         android:hint="День народження"
-        android:backgroundTint="@color/redBasic"/>
+        android:paddingLeft="16dp"
+        android:textSize="18sp" />
 
     <EditText
         android:id="@+id/enter_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="32dp"
         android:layout_marginTop="16dp"
         android:layout_marginRight="32dp"
-        android:layout_marginLeft="32dp"
-        android:textSize="18sp"
-        android:hint="Введіть пароль"
         android:backgroundTint="@color/redBasic"
-        android:password="true"/>
+        android:hint="Введіть пароль"
+        android:paddingLeft="16dp"
+        android:password="true"
+        android:textSize="18sp" />
 
 
     <EditText
         android:id="@+id/enter_repassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="32dp"
         android:layout_marginTop="16dp"
         android:layout_marginRight="32dp"
-        android:layout_marginLeft="32dp"
-        android:textSize="18sp"
-        android:hint="Повторіть пароль"
         android:backgroundTint="@color/redBasic"
-        android:password="true"/>
+        android:hint="Повторіть пароль"
+        android:paddingLeft="16dp"
+        android:password="true"
+        android:textSize="18sp" />
 
-    <Button
-        android:id="@+id/sign_up"
-        android:layout_width="160dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="42dp"
-        android:layout_gravity="center"
-        android:text="Зареєструватися"
-        android:textColor="@color/white"
-        android:textSize="14sp"
-        android:gravity="center"
-        android:background="@drawable/button_style"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:textSize="12dp"
-        android:text="або"
-        android:layout_gravity="center"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/sign_in"
-        android:layout_width="160dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="25dp"
-        android:layout_gravity="center"
-        android:text="Увійти"
-        android:textSize="14sp"
-        android:textColor="@color/white"
-        android:background="@drawable/button_style"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/sign_up"
+                android:layout_width="160dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="42dp"
+                android:background="@drawable/button_style"
+                android:text="Зареєструватися"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="16dp"
+                android:text="або"
+                android:textSize="12dp" />
+
+            <Button
+                android:id="@+id/sign_in"
+                android:layout_width="160dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="32dp"
+                android:background="@drawable/button_style"
+                android:text="Увійти"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+    </RelativeLayout>
 
 </LinearLayout>
-</FrameLayout>
