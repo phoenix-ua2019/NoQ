@@ -35,7 +35,6 @@
             android:autofillHints="login@example.com"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/temp1"
             android:textSize="18sp"
             android:textColor="@color/black"
             android:backgroundTint="@color/redBasic"/>

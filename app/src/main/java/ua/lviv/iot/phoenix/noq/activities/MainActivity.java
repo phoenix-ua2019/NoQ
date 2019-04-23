@@ -84,6 +84,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
                 overridePendingTransition(R.anim.right_in, R.anim.left_out);
                 openUserActivity.putExtra("user", mUser);
                 startActivity(openUserActivity);
+                finish();
                 break;
             case R.id.menu:
                 Intent intent = new Intent(this, MainActivity.class);
