@@ -1,89 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
 
     <ImageView
-        android:layout_marginTop="25dp"
         android:id="@+id/logo_sign_in"
         android:layout_width="110dp"
         android:layout_height="110dp"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/google"/>
+        android:layout_marginTop="112dp"
+        android:src="@drawable/google" />
 
     <RelativeLayout
         android:id="@+id/temp2"
-        android:layout_marginTop="70dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginRight="32dp"
-        android:layout_below="@+id/logo_sign_in"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/logo_sign_in"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="90dp"
+        android:layout_marginRight="32dp">
 
         <ImageView
             android:id="@+id/temp1"
             android:layout_width="32dp"
             android:layout_height="32dp"
-            android:src="@drawable/user"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:src="@drawable/user" />
 
         <EditText
             android:id="@+id/login_email"
-            android:autofillHints="login@example.com"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:textColor="@color/black"
+            android:layout_toRightOf="@+id/temp1"
+            android:autofillHints="login@example.com"
             android:backgroundTint="@color/redBasic"
-            android:inputType="textEmailAddress"/>
+            android:hint="Email"
+            android:paddingLeft="16dp"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
 
     </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/temp4"
-        android:layout_alignTop="@+id/temp2"
-        android:layout_marginTop="70dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginRight="32dp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/temp2"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginRight="32dp">
 
         <ImageView
             android:id="@+id/temp3"
             android:layout_width="32dp"
             android:layout_height="32dp"
-            android:src="@drawable/lock"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:src="@drawable/lock" />
 
 
         <EditText
             android:id="@+id/login_password"
-            android:autofillHints="password"
             android:layout_width="match_parent"
-            android:layout_toRightOf="@+id/temp3"
             android:layout_height="48dp"
-            android:textSize="18sp"
-            android:textColor="@color/black"
+            android:layout_toRightOf="@+id/temp3"
+            android:autofillHints="password"
             android:backgroundTint="@color/redBasic"
-            android:inputType="textAutoComplete"
-            android:password="true"/>
+            android:hint="Пароль"
+            android:paddingLeft="16dp"
+            android:password="true"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
 
     </RelativeLayout>
 
     <Button
         android:id="@+id/sign_in"
-        android:layout_below="@+id/temp4"
-        android:layout_marginTop="50dp"
         android:layout_width="160dp"
         android:layout_height="40dp"
-        android:text="Увійти"
-        android:textSize="18sp"
-        android:textColor="#fff"
+        android:layout_below="@+id/temp4"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/button_style"/>
+        android:layout_marginTop="120dp"
+        android:background="@drawable/button_style"
+        android:text="Увійти"
+        android:textAllCaps="false"
+
+        android:textColor="#fff"
+        android:textSize="18sp" />
 
     <Button
         android:id="@+id/back"
@@ -91,10 +95,11 @@
         android:layout_height="40dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="25dp"
-        android:background="@android:color/transparent"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/button_style"
         android:text="Назад"
         android:textAllCaps="false"
-        android:textSize="12sp" />
+        android:textColor="@color/white"
+        android:textSize="18sp" />
 
 </RelativeLayout>

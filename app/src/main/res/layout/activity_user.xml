@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.DrawerLayout
-    android:id="@+id/drawer_layout_user"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout_user"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -19,126 +18,200 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:background="#fff"
-            tools:background="#f00"
             android:minHeight="?attr/actionBarSize"
-            app:theme="@style/Theme.AppCompat.Light.DarkActionBar"/>
+            app:theme="@style/Theme.AppCompat.Light.DarkActionBar"
+            tools:background="#f00" />
 
         <ImageView
             android:layout_width="64dp"
             android:layout_height="64dp"
-            android:src="@drawable/user_picture"
             android:layout_gravity="center"
-            android:layout_marginTop="64dp"/>
+            android:layout_marginTop="64dp"
+            android:src="@drawable/user_picture" />
 
-        <TextView
-            android:layout_width="wrap_content"
+        <FrameLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="ім'я прізвище"
-            android:textColor="@color/gray"
-            android:layout_gravity="center"
-            android:layout_marginTop="32dp"/>
+            android:layout_weight="1">
 
-        <TextView
-            android:id="@+id/user_name"
-            android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="32dp"
+                    android:text="ім'я прізвище"
+                    android:textColor="@color/gray" />
+
+                <TextView
+                    android:id="@+id/user_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Зеновий Верес"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="46dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginRight="46dp"
+                    android:background="#12000000" />
+            </LinearLayout>
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Зеновий Верес"
-            android:textColor="@color/black"
-            android:layout_gravity="center" />
+            android:layout_weight="1">
 
-        <TextView
-            android:layout_width="320dp"
-            android:layout_height="1dp"
-            android:layout_marginTop="24dp"
-            android:background="#12000000"
-            android:layout_gravity="center"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="24dp"
+                    android:text="Телефон"
+                    android:textColor="@color/gray" />
+
+                <TextView
+                    android:id="@+id/user_phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="+3806453325"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="46dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginRight="46dp"
+                    android:background="#12000000" />
+            </LinearLayout>
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Телефон"
-            android:textColor="@color/gray"
-            android:layout_gravity="center"
-            android:layout_marginTop="24dp"/>
+            android:layout_weight="1">
 
-        <TextView
-            android:id="@+id/user_phone"
-            android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="24dp"
+                    android:text="Email"
+                    android:textColor="@color/gray" />
+
+                <TextView
+                    android:id="@+id/user_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="fksnnsf.fsvoie@gmail.com"
+                    android:textColor="@color/black" />
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="46dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginRight="46dp"
+                    android:background="#12000000" />
+
+            </LinearLayout>
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="+3806453325"
-            android:textColor="@color/black"
-            android:layout_gravity="center" />
+            android:layout_weight="1">
 
-        <TextView
-            android:layout_width="320dp"
-            android:layout_height="1dp"
-            android:layout_marginTop="24dp"
-            android:background="#12000000"
-            android:layout_gravity="center"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="24dp"
+                    android:text="Пароль"
+                    android:textColor="@color/gray" />
+
+                <Button
+                    android:id="@+id/user_pass"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@android:color/transparent"
+                    android:text="Змінити"
+                    android:textAllCaps="false"
+                    android:textColor="@color/redBasic"
+                    android:textSize="22sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="46dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginRight="46dp"
+                    android:background="#12000000" />
+            </LinearLayout>
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Email"
-            android:textColor="@color/gray"
-            android:layout_gravity="center"
-            android:layout_marginTop="24dp"/>
+            android:layout_marginBottom="32dp"
+            android:layout_weight="1">
 
-        <TextView
-            android:id="@+id/user_email"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="fksnnsf.fsvoie@gmail.com"
-            android:textColor="@color/black"
-            android:layout_gravity="center" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-        <TextView
-            android:layout_width="320dp"
-            android:layout_height="1dp"
-            android:layout_marginTop="24dp"
-            android:background="#12000000"
-            android:layout_gravity="center"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="24dp"
+                    android:text="день народження"
+                    android:textColor="@color/gray" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Пароль"
-            android:textColor="@color/gray"
-            android:layout_gravity="center"
-            android:layout_marginTop="24dp"/>
+                <TextView
+                    android:id="@+id/user_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="13.12.1976"
+                    android:textColor="@color/black" />
+            </LinearLayout>
 
-        <Button
-            android:id="@+id/user_pass"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Змінити"
-            android:textColor="@color/redBasic"
-            android:textSize="22sp"
-            android:layout_gravity="center"
-            android:background="@color/white"/>
+        </FrameLayout>
 
-        <TextView
-            android:layout_width="320dp"
-            android:layout_height="1dp"
-            android:layout_marginTop="24dp"
-            android:background="#12000000"
-            android:layout_gravity="center"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="день народження"
-            android:textColor="@color/gray"
-            android:layout_gravity="center"
-            android:layout_marginTop="24dp"/>
-
-        <TextView
-            android:id="@+id/user_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="13.12.1976"
-            android:textColor="@color/black"
-            android:layout_gravity="center" />
     </LinearLayout>
 
     <android.support.design.widget.NavigationView
@@ -147,10 +220,9 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         app:headerLayout="@layout/drawer_header"
-        app:menu="@menu/drawer_menu"
         app:itemIconTint="#8c000000"
-        app:itemTextColor="#E6000000"/>
-
+        app:itemTextColor="#E6000000"
+        app:menu="@menu/drawer_menu" />
 
 
 </android.support.v4.widget.DrawerLayout>
