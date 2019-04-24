@@ -2,7 +2,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
 
-    <group android:id="@+id/grp_Header">
+    <group android:checkableBehavior="single"
+        android:id="@+id/grp_Header">
 
         <item
             android:id="@+id/menu"
@@ -13,7 +14,7 @@
         <item
             android:id="@+id/user"
             android:checkable="true"
-            android:icon="@drawable/user"
+            android:icon="@drawable/user_icon"
             android:title="Мій кабінет"/>
 
         <item

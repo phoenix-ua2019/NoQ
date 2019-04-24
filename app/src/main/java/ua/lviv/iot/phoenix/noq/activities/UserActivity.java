@@ -2,8 +2,6 @@ package ua.lviv.iot.phoenix.noq.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -14,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.support.v7.app.ActionBarDrawerToggle;
 
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -37,27 +36,26 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
         setSupportActionBar(toolbar);
 
         drawerLayout = findViewById(R.id.drawer_layout_user);
-
         NavigationView navigationView = findViewById(R.id.drawer);
         navigationView.setNavigationItemSelectedListener(this);
-        navigationView.setCheckedItem(R.id.user);
-
         ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this,
                 drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close);
         drawerLayout.addDrawerListener(drawerToggle);
         drawerToggle.syncState();
 
-
-        mUser = getIntent().getExtras().getParcelable("user");
-
-        ((TextView) findViewById(R.id.user_name)).setText(mUser.getName());
-        ((TextView) findViewById(R.id.user_email)).setText(mUser.getEmail());
-        ((TextView) findViewById(R.id.user_phone)).setText(mUser.getPhone());
-        ((TextView) findViewById(R.id.user_date)).setText(mUser.getDate());
+        TextView name = findViewById(R.id.user_name);
+        TextView email = findViewById(R.id.user_email);
+        TextView phone = findViewById(R.id.user_phone);
+        TextView date = findViewById(R.id.user_date);
         Button pass = findViewById(R.id.user_pass);
 
-        //((TextView) findViewById(R.id.header_name)).setText(mUser.getName());
-        //((TextView) findViewById(R.id.header_email)).setText(mUser.getEmail());
+        Bundle extras = getIntent().getExtras();
+        User mUser = extras.getParcelable("user_icon");
+
+        name.setText(mUser.getName());
+        email.setText(mUser.getEmail());
+        phone.setText(mUser.getPhone());
+        date.setText(mUser.getDate());
 
         pass.setOnClickListener((View v) ->
                 startActivity(new Intent(this,ChangePasswordActivity.class)));
@@ -65,39 +63,28 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+    public boolean onNavigationItemSelected(MenuItem menuItem) {
         boolean result = false;
 
-        closeDrawer();
-        switch (menuItem.getItemId()) {
-            case R.id.user:
-                //Intent openUserActivity = new Intent(this, UserActivity.class);
-                overridePendingTransition(R.anim.right_in, R.anim.left_out);
-                //openUserActivity.putExtra("user", mUser);
-                //startActivity(openUserActivity);
-                //finish();
-                break;
-            case R.id.menu:
-                Intent openMainActivity = new Intent(this, MainActivity.class);
-                startActivity(openMainActivity);
-                finish();
-                overridePendingTransition(R.anim.right_in, R.anim.left_out);
-                break;
-            case R.id.star:
-                System.out.println("star");
-                break;
-            case R.id.setting:
-                System.out.println("setting");
-                break;
-            case R.id.exit:
-                if (mAuth != null) mAuth.signOut();
-                overridePendingTransition(R.anim.right_in,R.anim.rotate);
-                startActivity(new Intent(this, SignInActivity.class));
-                finish();
-                break;
-            default:
-                result = true;
-                System.out.println("default");
+        int id = menuItem.getItemId();
+        if(id == R.id.user) {
+            closeDrawer();
+        } else if(id == R.id.menu) {
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.right_in, R.anim.rotate);
+        } else if(id == R.id.star) {
+            System.out.println("star");
+        } else if(id == R.id.setting) {
+            System.out.println("setting");
+        } else if(id == R.id.exit) {
+            if (mAuth != null) mAuth.signOut();
+            overridePendingTransition(R.anim.right_in,R.anim.rotate);
+            startActivity(new Intent(this, SignInActivity.class));
+            finish();
+        } else {
+            result = true;
+            System.out.println("default");
         }
         return result;
     }

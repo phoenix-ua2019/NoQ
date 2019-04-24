@@ -23,27 +23,34 @@ import com.google.firebase.auth.GoogleAuthProvider;
 
 import ua.lviv.iot.phoenix.noq.R;
 
-public class GoogleSignInActivity extends AppCompatActivity implements OnClickListener {
+public class GoogleSignInActivity extends AppCompatActivity implements
+        View.OnClickListener {
 
     /*private static final String TAG = "GoogleActivity";
     private static final int RC_SIGN_IN = 9001;
 
-    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    private FirebaseAuth mAuth;
 
     private GoogleSignInClient mGoogleSignInClient;
+    private TextView mStatusTextView;
+    private TextView mDetailTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_google);
 
-        findViewById(R.id.logo_sign_in).setOnClickListener(this);
+        mStatusTextView = findViewById(R.id.status);
+        mDetailTextView = findViewById(R.id.detail);
 
-        GoogleSignInOptions gso = new GoogleSignInOptions
-                .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken("648378489334-138kgq7v5fiftdget7pp0vifahki0i2m" +
-                        ".apps.googleusercontent.com").requestEmail().build();
+        findViewById(R.id.signInButton).setOnClickListener(this);
 
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+        mAuth = FirebaseAuth.getInstance();
     }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -68,8 +75,8 @@ public class GoogleSignInActivity extends AppCompatActivity implements OnClickLi
                 (@NonNull Task<AuthResult> task) -> {
                     if (task.isSuccessful()) {
                         Log.d(TAG, "signInWithCredential:success");
-                        FirebaseUser user = mAuth.getCurrentUser();
-                        updateUI(user);
+                        FirebaseUser user_icon = mAuth.getCurrentUser();
+                        updateUI(user_icon);
                     } else {
                         Log.w(TAG, "signInWithCredential:failure", task.getException());
                         Snackbar.make(findViewById(R.id.main_layout),
@@ -78,11 +85,15 @@ public class GoogleSignInActivity extends AppCompatActivity implements OnClickLi
                     }
                 });
     }
+    private void signIn() {
+        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
 
-    *//*private void updateUI(FirebaseUser user) {
-        if (user != null) {
-            mStatusTextView.setText(getString(R.string.google_status_fmt, user.getEmail()));
-            mDetailTextView.setText(getString(R.string.firebase_status_fmt, user.getUid()));
+    private void updateUI(FirebaseUser user_icon) {
+        if (user_icon != null) {
+            mStatusTextView.setText(getString(R.string.google_status_fmt, user_icon.getEmail()));
+            mDetailTextView.setText(getString(R.string.firebase_status_fmt, user_icon.getUid()));
 
             findViewById(R.id.signInButton).setVisibility(View.GONE);
             findViewById(R.id.signOutAndDisconnect).setVisibility(View.VISIBLE);
@@ -93,10 +104,10 @@ public class GoogleSignInActivity extends AppCompatActivity implements OnClickLi
             findViewById(R.id.signInButton).setVisibility(View.VISIBLE);
             findViewById(R.id.signOutAndDisconnect).setVisibility(View.GONE);
         }
-    }
-*/
+    }*/
+
     @Override
     public void onClick(View v) {
-        /*startActivityForResult(mGoogleSignInClient.getSignInIntent(), RC_SIGN_IN);
-    */}
+        /*signIn();*/
+    }
 }
