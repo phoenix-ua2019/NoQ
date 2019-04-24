@@ -7,7 +7,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
+import android.view.View.OnClickListener;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -23,34 +23,27 @@ import com.google.firebase.auth.GoogleAuthProvider;
 
 import ua.lviv.iot.phoenix.noq.R;
 
-public class GoogleSignInActivity extends AppCompatActivity implements
-        View.OnClickListener {
+public class GoogleSignInActivity extends AppCompatActivity implements OnClickListener {
 
     /*private static final String TAG = "GoogleActivity";
     private static final int RC_SIGN_IN = 9001;
 
-    private FirebaseAuth mAuth;
+    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
     private GoogleSignInClient mGoogleSignInClient;
-    private TextView mStatusTextView;
-    private TextView mDetailTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_google);
 
-        mStatusTextView = findViewById(R.id.status);
-        mDetailTextView = findViewById(R.id.detail);
+        findViewById(R.id.logo_sign_in).setOnClickListener(this);
 
-        findViewById(R.id.signInButton).setOnClickListener(this);
+        GoogleSignInOptions gso = new GoogleSignInOptions
+                .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken("648378489334-138kgq7v5fiftdget7pp0vifahki0i2m" +
+                        ".apps.googleusercontent.com").requestEmail().build();
 
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-        mAuth = FirebaseAuth.getInstance();
     }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -85,12 +78,8 @@ public class GoogleSignInActivity extends AppCompatActivity implements
                     }
                 });
     }
-    private void signIn() {
-        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-        startActivityForResult(signInIntent, RC_SIGN_IN);
-    }
 
-    private void updateUI(FirebaseUser user) {
+    *//*private void updateUI(FirebaseUser user) {
         if (user != null) {
             mStatusTextView.setText(getString(R.string.google_status_fmt, user.getEmail()));
             mDetailTextView.setText(getString(R.string.firebase_status_fmt, user.getUid()));
@@ -104,10 +93,10 @@ public class GoogleSignInActivity extends AppCompatActivity implements
             findViewById(R.id.signInButton).setVisibility(View.VISIBLE);
             findViewById(R.id.signOutAndDisconnect).setVisibility(View.GONE);
         }
-    }*/
-
+    }
+*/
     @Override
     public void onClick(View v) {
-        /*signIn();*/
-    }
+        /*startActivityForResult(mGoogleSignInClient.getSignInIntent(), RC_SIGN_IN);
+    */}
 }

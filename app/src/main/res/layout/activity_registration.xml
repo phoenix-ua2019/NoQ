@@ -9,13 +9,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <ImageView
+    <!--<ImageView
         android:layout_marginTop="15dp"
         android:id="@+id/logo_sign_up"
         android:layout_width="110dp"
         android:layout_height="110dp"
         android:layout_gravity="center"
-        android:src="@drawable/google"/>
+        android:src="@drawable/google"/>-->
 
     <EditText
         android:id="@+id/enter_name"

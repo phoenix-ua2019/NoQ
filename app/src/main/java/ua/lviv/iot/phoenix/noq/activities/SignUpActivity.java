@@ -1,15 +1,10 @@
 package ua.lviv.iot.phoenix.noq.activities;
 
-import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.telephony.TelephonyManager;
-import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Patterns;
@@ -39,7 +34,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     private EditText phoneEdit;
     private EditText passwordRepeatEdit;
 
-    FirebaseUser user;
+    private FirebaseUser user;
 
     @Override
     public void onStart() {
@@ -65,7 +60,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
         findViewById(R.id.sign_up).setOnClickListener(this);
         findViewById(R.id.sign_in).setOnClickListener(this);
-        findViewById(R.id.logo_sign_up).setOnClickListener(this);
     }
     private void signUp() {
         Log.d(TAG, "signUp");
@@ -92,10 +86,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             startActivity(new Intent(SignUpActivity.this, MainActivity.class));
             finish();
         });
-    }
-
-    private void googleSignUp() {
-        Log.d(TAG, "googleSignUp");
     }
 
     private boolean validateForm() {
@@ -144,14 +134,11 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         int i = v.getId();
         System.out.println(i);
         System.out.println(R.id.sign_in);
-        System.out.println(R.id.logo_sign_up);
         if (i == R.id.sign_up) {
             signUp();
         } else if (i == R.id.sign_in) {
             startActivity(new Intent(SignUpActivity.this, SignInActivity.class));
             finish();
-        } else if (i == R.id.logo_sign_up) {
-            googleSignUp();
         }
     }
 }
