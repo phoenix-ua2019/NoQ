@@ -50,7 +50,7 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
         Button pass = findViewById(R.id.user_pass);
 
         Bundle extras = getIntent().getExtras();
-        User mUser = extras.getParcelable("user");
+        User mUser = extras.getParcelable("user_icon");
 
         name.setText(mUser.getName());
         email.setText(mUser.getEmail());
@@ -66,33 +66,25 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(MenuItem menuItem) {
         boolean result = false;
 
-        switch (menuItem.getItemId()) {
-            case R.id.user:
-                Intent openUserActivity = new Intent(this, UserActivity.class);
-                overridePendingTransition(R.anim.right_in, R.anim.left_out);
-                openUserActivity.putExtra("user", mUser);
-                startActivity(openUserActivity);
-                break;
-            case R.id.menu:
-                Intent intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.right_in, R.anim.left_out);
-                break;
-            case R.id.star:
-                System.out.println("star");
-                break;
-            case R.id.setting:
-                System.out.println("setting");
-                break;
-            case R.id.exit:
-                if (mAuth != null) mAuth.signOut();
-                overridePendingTransition(R.anim.right_in,R.anim.rotate);
-                startActivity(new Intent(this, SignInActivity.class));
-                finish();
-                break;
-            default:
-                result = true;
-                System.out.println("default");
+        int id = menuItem.getItemId();
+        if(id == R.id.user) {
+            closeDrawer();
+        } else if(id == R.id.menu) {
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.right_in, R.anim.rotate);
+        } else if(id == R.id.star) {
+            System.out.println("star");
+        } else if(id == R.id.setting) {
+            System.out.println("setting");
+        } else if(id == R.id.exit) {
+            if (mAuth != null) mAuth.signOut();
+            overridePendingTransition(R.anim.right_in,R.anim.rotate);
+            startActivity(new Intent(this, SignInActivity.class));
+            finish();
+        } else {
+            result = true;
+            System.out.println("default");
         }
         return result;
     }

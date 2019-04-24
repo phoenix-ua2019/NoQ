@@ -75,8 +75,8 @@ public class GoogleSignInActivity extends AppCompatActivity implements
                 (@NonNull Task<AuthResult> task) -> {
                     if (task.isSuccessful()) {
                         Log.d(TAG, "signInWithCredential:success");
-                        FirebaseUser user = mAuth.getCurrentUser();
-                        updateUI(user);
+                        FirebaseUser user_icon = mAuth.getCurrentUser();
+                        updateUI(user_icon);
                     } else {
                         Log.w(TAG, "signInWithCredential:failure", task.getException());
                         Snackbar.make(findViewById(R.id.main_layout),
@@ -90,10 +90,10 @@ public class GoogleSignInActivity extends AppCompatActivity implements
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
-    private void updateUI(FirebaseUser user) {
-        if (user != null) {
-            mStatusTextView.setText(getString(R.string.google_status_fmt, user.getEmail()));
-            mDetailTextView.setText(getString(R.string.firebase_status_fmt, user.getUid()));
+    private void updateUI(FirebaseUser user_icon) {
+        if (user_icon != null) {
+            mStatusTextView.setText(getString(R.string.google_status_fmt, user_icon.getEmail()));
+            mDetailTextView.setText(getString(R.string.firebase_status_fmt, user_icon.getUid()));
 
             findViewById(R.id.signInButton).setVisibility(View.GONE);
             findViewById(R.id.signOutAndDisconnect).setVisibility(View.VISIBLE);

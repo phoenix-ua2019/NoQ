@@ -16,7 +16,7 @@ public class Useful {
     public static final DatabaseReference userRef = ref.child("authentication").child("users");
 
     static void onAuthSuccess(AppCompatActivity that, FirebaseUser user) {
-        // Write new user
+        // Write new user_icon
         try {
             userRef.child(user.getUid()).setValue(new User(user.getEmail()));
         } finally {
@@ -26,7 +26,7 @@ public class Useful {
     }
 
     static void onAuthSuccess(AppCompatActivity that, FirebaseUser user, User mUser) {
-        // Write new user
+        // Write new user_icon
         userRef.child(user.getUid()).setValue(mUser);
         // Go to MainActivity
         that.startActivity(new Intent(that, MainActivity.class));

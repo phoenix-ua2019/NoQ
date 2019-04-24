@@ -27,7 +27,7 @@
             android:layout_height="64dp"
             android:layout_gravity="center"
             android:layout_marginTop="64dp"
-            android:src="@drawable/user_picture" />
+            android:src="@drawable/ic_user_picture" />
 
         <FrameLayout
             android:layout_width="match_parent"
