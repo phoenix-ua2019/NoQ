@@ -1,17 +1,13 @@
 package ua.lviv.iot.phoenix.noq.activities;
 
-import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.telephony.TelephonyManager;
-import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -38,7 +34,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     private EditText phoneEdit;
     private EditText passwordRepeatEdit;
 
-    FirebaseUser user;
+    private FirebaseUser user;
 
     @Override
     public void onStart() {
@@ -62,26 +58,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         passwordEdit = findViewById(R.id.enter_password);
         passwordRepeatEdit = findViewById(R.id.enter_repassword);
 
-        emailEdit.setInputType(InputType.TYPE_CLASS_TEXT |
-                            InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
-        dateEdit.setInputType(InputType.TYPE_CLASS_DATETIME |
-                            InputType.TYPE_DATETIME_VARIATION_DATE);
-        nameEdit.setInputType(InputType.TYPE_CLASS_TEXT);
-        phoneEdit.setInputType(InputType.TYPE_CLASS_PHONE);
-        passwordEdit.setInputType(InputType.TYPE_CLASS_TEXT);
-        passwordRepeatEdit.setInputType(InputType.TYPE_CLASS_TEXT);
-
-        System.out.println(ContextCompat.checkSelfPermission(SignUpActivity.this, Manifest.permission.READ_PHONE_NUMBERS));
-        System.out.println(PackageManager.PERMISSION_GRANTED);
-        if (ContextCompat.checkSelfPermission(SignUpActivity.this, Manifest.permission.READ_PHONE_NUMBERS)
-                == PackageManager.PERMISSION_GRANTED) {
-            phoneEdit.setText(((TelephonyManager)this.getApplicationContext()
-                            .getSystemService(Context.TELEPHONY_SERVICE)).getLine1Number());
-        }
-
         findViewById(R.id.sign_up).setOnClickListener(this);
         findViewById(R.id.sign_in).setOnClickListener(this);
-        findViewById(R.id.logo_sign_up).setOnClickListener(this);
     }
     private void signUp() {
         Log.d(TAG, "signUp");
@@ -99,7 +77,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                         Toast.LENGTH_SHORT).show();
                 return;
             }
-            System.out.println(res.getResult());
             user = task.getResult().getUser();
             user = (user != null) ? user : FirebaseAuth.getInstance().getCurrentUser();
             User mUser = new User(
@@ -111,16 +88,14 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         });
     }
 
-    private void googleSignUp() {
-        Log.d(TAG, "googleSignUp");
-    }
-
     private boolean validateForm() {
         boolean result = false;
         emailEdit.setError(null);
+        phoneEdit.setError(null);
         passwordEdit.setError(null);
         passwordRepeatEdit.setError(null);
-        String email = emailEdit.getText().toString(),
+        final String email = emailEdit.getText().toString(),
+                phone = phoneEdit.getText().toString(),
                 pass = passwordEdit.getText().toString(),
                 rePass = passwordRepeatEdit.getText().toString();
 
@@ -134,6 +109,10 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             passwordRepeatEdit.setError("Required");
         } else if(!passwordEdit.getText().toString().equals(rePass)) {
             passwordRepeatEdit.setError("Passwords do not match");
+        } else if (TextUtils.isEmpty(phone)) {
+            phoneEdit.setError("Required");
+        } else if (!Patterns.PHONE.matcher(phone).matches()) {
+            phoneEdit.setError("Must be a phone number");
         } else {
             result = true;
         }
@@ -155,14 +134,11 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         int i = v.getId();
         System.out.println(i);
         System.out.println(R.id.sign_in);
-        System.out.println(R.id.logo_sign_up);
         if (i == R.id.sign_up) {
             signUp();
         } else if (i == R.id.sign_in) {
             startActivity(new Intent(SignUpActivity.this, SignInActivity.class));
             finish();
-        } else if (i == R.id.logo_sign_up) {
-            googleSignUp();
         }
     }
 }
