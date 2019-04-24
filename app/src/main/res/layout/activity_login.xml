@@ -39,7 +39,8 @@
             android:hint="Email"
             android:paddingLeft="16dp"
             android:textColor="@color/black"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:inputType="textEmailAddress"/>
 
     </RelativeLayout>
 
@@ -71,7 +72,8 @@
             android:paddingLeft="16dp"
             android:password="true"
             android:textColor="@color/black"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:inputType="textAutoComplete" />
 
     </RelativeLayout>
 

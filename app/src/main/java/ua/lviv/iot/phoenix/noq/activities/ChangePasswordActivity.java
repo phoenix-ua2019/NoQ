@@ -84,6 +84,7 @@ public class ChangePasswordActivity extends AppCompatActivity implements OnClick
                 }
             });
             startActivity(new Intent(this, MainActivity.class));
+            finish();
         });
     }
 
@@ -105,7 +106,6 @@ public class ChangePasswordActivity extends AppCompatActivity implements OnClick
             mNewPassword.setError("New password cannot be same as old password");
         } else if (new_pass.length() <= 6) {
             mNewPassword.setError("Must be at least 7 chars long");
-            result = false;
         } else {
             result = true;
         }
