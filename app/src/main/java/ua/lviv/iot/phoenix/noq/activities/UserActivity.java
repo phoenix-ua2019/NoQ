@@ -12,7 +12,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.support.v7.app.ActionBarDrawerToggle;
 
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -37,25 +36,24 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
 
         drawerLayout = findViewById(R.id.drawer_layout_user);
         NavigationView navigationView = findViewById(R.id.drawer);
+        navigationView.setCheckedItem(R.id.user);
         navigationView.setNavigationItemSelectedListener(this);
         ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this,
                 drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close);
         drawerLayout.addDrawerListener(drawerToggle);
         drawerToggle.syncState();
 
-        TextView name = findViewById(R.id.user_name);
-        TextView email = findViewById(R.id.user_email);
-        TextView phone = findViewById(R.id.user_phone);
-        TextView date = findViewById(R.id.user_date);
+
+        mUser = getIntent().getExtras().getParcelable("user_icon");
+        ((TextView) findViewById(R.id.user_name)).setText(mUser.getName());
+        ((TextView) findViewById(R.id.user_email)).setText(mUser.getEmail());
+        ((TextView) findViewById(R.id.user_phone)).setText(mUser.getPhone());
+        ((TextView) findViewById(R.id.user_date)).setText(mUser.getDate());
+
+        ((TextView) findViewById(R.id.header_name)).setText(mUser.getName());
+ 	    ((TextView) findViewById(R.id.header_email)).setText(mUser.getEmail());
+
         Button pass = findViewById(R.id.user_pass);
-
-        Bundle extras = getIntent().getExtras();
-        User mUser = extras.getParcelable("user_icon");
-
-        name.setText(mUser.getName());
-        email.setText(mUser.getEmail());
-        phone.setText(mUser.getPhone());
-        date.setText(mUser.getDate());
 
         pass.setOnClickListener((View v) ->
                 startActivity(new Intent(this,ChangePasswordActivity.class)));
@@ -70,8 +68,7 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
         if(id == R.id.user) {
             closeDrawer();
         } else if(id == R.id.menu) {
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
+            finish();
             overridePendingTransition(R.anim.right_in, R.anim.rotate);
         } else if(id == R.id.star) {
             System.out.println("star");
