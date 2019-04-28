@@ -23,7 +23,7 @@
             android:layout_marginLeft="32dp"
             android:layout_marginTop="32dp"
             android:layout_marginRight="32dp"
-            android:backgroundTint="@color/redBasic"
+            android:backgroundTint="@color/colorPrimary"
             android:hint="Ім'я прізвище"
             android:paddingLeft="16dp"
             android:textSize="18sp" />
@@ -36,7 +36,7 @@
             android:layout_marginLeft="32dp"
             android:layout_marginTop="16dp"
             android:layout_marginRight="32dp"
-            android:backgroundTint="@color/redBasic"
+            android:backgroundTint="@color/colorPrimary"
             android:hint="Телефон"
             android:paddingLeft="16dp"
             android:textSize="18sp" />
@@ -49,7 +49,7 @@
             android:layout_marginLeft="32dp"
             android:layout_marginTop="16dp"
             android:layout_marginRight="32dp"
-            android:backgroundTint="@color/redBasic"
+            android:backgroundTint="@color/colorPrimary"
             android:hint="Email"
             android:paddingLeft="16dp"
             android:textSize="18sp" />
@@ -61,7 +61,7 @@
             android:layout_marginLeft="32dp"
             android:layout_marginTop="16dp"
             android:layout_marginRight="32dp"
-            android:backgroundTint="@color/redBasic"
+            android:backgroundTint="@color/colorPrimary"
             android:hint="День народження"
             android:paddingLeft="16dp"
             android:textSize="18sp" />
@@ -73,7 +73,7 @@
             android:layout_marginLeft="32dp"
             android:layout_marginTop="16dp"
             android:layout_marginRight="32dp"
-            android:backgroundTint="@color/redBasic"
+            android:backgroundTint="@color/colorPrimary"
             android:hint="Введіть пароль"
             android:paddingLeft="16dp"
             android:password="true"
@@ -87,7 +87,7 @@
             android:layout_marginLeft="32dp"
             android:layout_marginTop="16dp"
             android:layout_marginRight="32dp"
-            android:backgroundTint="@color/redBasic"
+            android:backgroundTint="@color/colorPrimary"
             android:hint="Повторіть пароль"
             android:paddingLeft="16dp"
             android:password="true"

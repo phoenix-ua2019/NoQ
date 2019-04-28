@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_menu"
+        android:icon="@drawable/baseline_restaurant_menu_black_18dp"
+        android:title="@string/nav_cafe" />
+    <item
+        android:id="@+id/nav_food"
+        android:icon="@drawable/baseline_fastfood_black_18dp"
+        android:title="@string/nav_menu" />
+    <item
+        android:id="@+id/nav_time"
+        android:icon="@drawable/baseline_access_time_black_18dp"
+        android:title="@string/nav_time" />
+    <item
+        android:id="@+id/nav_check"
+        android:icon="@drawable/baseline_check_circle_outline_black_18dp"
+        android:title="@string/nav_check" />
+</menu>

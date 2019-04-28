@@ -168,7 +168,7 @@
                     android:background="@android:color/transparent"
                     android:text="Змінити"
                     android:textAllCaps="false"
-                    android:textColor="@color/redBasic"
+                    android:textColor="@color/colorPrimary"
                     android:textSize="22sp" />
 
                 <TextView
