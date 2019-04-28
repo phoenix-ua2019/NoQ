@@ -14,6 +14,8 @@ public class Useful {
     public static final DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
     public static final DatabaseReference cafeRef = ref.child("cafes");
     public static final DatabaseReference userRef = ref.child("authentication").child("users");
+    public static final String google_api_key =
+            "648378489334-138kgq7v5fiftdget7pp0vifahki0i2m.apps.googleusercontent.com";
 
     static void onAuthSuccess(AppCompatActivity that, FirebaseUser user) {
         // Write new user_icon
