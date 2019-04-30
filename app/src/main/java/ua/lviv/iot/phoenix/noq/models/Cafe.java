@@ -22,16 +22,16 @@ public class Cafe implements Parcelable {
     private ArrayList<Meal> mCafeMeals;
     public static final Parcelable.Creator<Cafe> CREATOR =
             new Parcelable.Creator<Cafe>() {
-        @Override
-        public Cafe createFromParcel(Parcel source) {
-         return new Cafe(source);
-        }
+                @Override
+                public Cafe createFromParcel(Parcel source) {
+                    return new Cafe(source);
+                }
 
-        @Override
-        public Cafe[] newArray(int size) {
-         return new Cafe[size];
-        }
-     };
+                @Override
+                public Cafe[] newArray(int size) {
+                    return new Cafe[size];
+                }
+            };
 
     private static final int NO_IMAGE_PROVIDED = -1;
 
@@ -60,7 +60,7 @@ public class Cafe implements Parcelable {
         System.out.println(map.get("meals"));
         Object temp = map.get("meals");
         List<?> tempCafeMeals = (ArrayList<HashMap>) temp;
-        mCafeMeals = (ArrayList<Meal>) tempCafeMeals.stream().map(Meal::new).collect(Collectors.toList());
+        //mCafeMeals = (ArrayList<Meal>) tempCafeMeals.stream().map(Meal::new).collect(Collectors.toList());
     }
 
     Cafe (String name, String location, String email, int icon, ArrayList<Meal> meals) {
