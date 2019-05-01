@@ -51,11 +51,12 @@
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@+id/temp1"
                     android:autofillHints="login@example.com"
-                    android:backgroundTint="@color/redBasic"
+                    android:backgroundTint="@color/colorPrimary"
                     android:hint="Email"
                     android:paddingLeft="16dp"
                     android:textColor="@color/black"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    android:inputType="textEmailAddress" />
 
             </RelativeLayout>
 
@@ -82,12 +83,13 @@
                     android:layout_height="48dp"
                     android:layout_toRightOf="@+id/temp3"
                     android:autofillHints="password"
-                    android:backgroundTint="@color/redBasic"
+                    android:backgroundTint="@color/colorPrimary"
                     android:hint="Пароль"
                     android:paddingLeft="16dp"
                     android:password="true"
                     android:textColor="@color/black"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    android:inputType="textPassword" />
 
             </RelativeLayout>
 

@@ -2,8 +2,11 @@ package ua.lviv.iot.phoenix.noq.activities;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.NavigationView.OnNavigationItemSelectedListener;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -11,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.support.v7.widget.Toolbar;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,15 +30,9 @@ import ua.lviv.iot.phoenix.noq.models.User;
 
 public class MainActivity extends AppCompatActivity implements OnNavigationItemSelectedListener, ValueEventListener {
 
-    private NavigationView navigationView;
 
     private DrawerLayout drawerLayout;
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    private DatabaseReference userRef;
-    {
-        if (mAuth.getCurrentUser() != null)
-        userRef = Useful.userRef.child(mAuth.getCurrentUser().getUid());
-    }
     private User mUser;
 
     @Override
@@ -42,24 +40,33 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        if (mAuth.getCurrentUser() != null)
+        Useful.userRef.child(mAuth.getCurrentUser().getUid()).addValueEventListener(this);
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         drawerLayout = findViewById(R.id.drawer_layout_main);
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.drawer);
+        navigationView.setNavigationItemSelectedListener(this);
+
         ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this,
                 drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close);
         drawerLayout.addDrawerListener(drawerToggle);
         drawerToggle.syncState();
 
-        navigationView = (NavigationView) findViewById(R.id.drawer);
-        navigationView.setNavigationItemSelectedListener(this);
 
         userRef.addValueEventListener(this);
     }
 
+
     @Override
     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
         mUser = new User((HashMap<String, String>) dataSnapshot.getValue());
+        System.out.println(findViewById(R.id.header_name));
+        ((TextView) findViewById(R.id.header_name)).setText(mUser.getName());
+ 	    ((TextView) findViewById(R.id.header_email)).setText(mUser.getEmail());
         System.out.println(mUser);
     }
 
@@ -71,29 +78,25 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         boolean result = false;
-        TextView name = findViewById(R.id.header_name);
-        TextView email = findViewById(R.id.header_email);
-
         navigationView.setCheckedItem(menuItem);
 
-        name.setText(mUser.getName());
-        email.setText(mUser.getEmail());
-
         int id = menuItem.getItemId();
-        if(id == R.id.user) {
-            Intent openUserActivity = new Intent(this, UserActivity.class);
-            openUserActivity.putExtra("user_icon", mUser);
-            startActivity(openUserActivity);
-            overridePendingTransition(R.anim.right_in, R.anim.rotate);
-        } else if(id == R.id.menu) {
+        if(id == R.id.menu) {
             closeDrawer();
+        } else if(id == R.id.user) {
+            Intent intent = new Intent(this, UserActivity.class);
+            intent.putExtra("user_icon", mUser);
+            startActivity(intent);
+            overridePendingTransition(R.anim.right_in, R.anim.rotate);
         } else if(id == R.id.star) {
             System.out.println("star");
         } else if(id == R.id.setting) {
             System.out.println("setting");
         } else if(id == R.id.exit) {
-            if (mAuth != null) mAuth.signOut();
-            overridePendingTransition(R.anim.slide_in_right,R.anim.slide_in_right);
+            if (mAuth == null)
+                return false;
+            mAuth.signOut();
+            overridePendingTransition(R.anim.right_in,R.anim.rotate);
             startActivity(new Intent(this, SignInActivity.class));
             finish();
         } else {
@@ -104,7 +107,6 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
     }
 
     private void closeDrawer() {
-
         drawerLayout.closeDrawer(GravityCompat.START);
     }
 
@@ -114,7 +116,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
 
     @Override
     public void onBackPressed() {
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout_main);
+        drawerLayout = findViewById(R.id.drawer_layout_main);
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
         } else {
