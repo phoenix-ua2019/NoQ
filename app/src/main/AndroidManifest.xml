@@ -13,10 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.ListOfMeals">
+        <activity android:name=".activities.SignUpActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -24,6 +23,7 @@
         <activity android:name=".activities.SignInActivity"/>
         <activity android:name=".activities.MainActivity"/>
         <activity android:name=".activities.ChangePasswordActivity" />
+        <activity android:name=".activities.ListOfMeals"/>
     </application>
 
 </manifest>

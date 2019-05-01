@@ -56,7 +56,8 @@
                     android:paddingLeft="16dp"
                     android:textColor="@color/black"
                     android:textSize="18sp"
-                    android:inputType="textEmailAddress" />
+                    android:inputType="textEmailAddress"
+                    android:singleLine="true" />
 
             </RelativeLayout>
 
@@ -89,7 +90,9 @@
                     android:password="true"
                     android:textColor="@color/black"
                     android:textSize="18sp"
-                    android:inputType="textPassword" />
+                    android:inputType="textPassword"
+                    android:singleLine="true"
+                    android:imeOptions="actionDone" />
 
             </RelativeLayout>
 

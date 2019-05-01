@@ -19,7 +19,8 @@
             android:hint="Ім'я прізвище"
             android:paddingLeft="16dp"
             android:textSize="18sp"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:singleLine="true" />
 
 
         <EditText
@@ -33,7 +34,8 @@
             android:hint="Телефон"
             android:paddingLeft="16dp"
             android:textSize="18sp"
-            android:inputType="phone" />
+            android:inputType="phone"
+            android:singleLine="true" />
 
 
         <EditText
@@ -47,7 +49,8 @@
             android:hint="Email"
             android:paddingLeft="16dp"
             android:textSize="18sp"
-            android:inputType="textEmailAddress" />
+            android:inputType="textEmailAddress"
+            android:singleLine="true" />
 
         <EditText
             android:id="@+id/enter_data"
@@ -60,7 +63,8 @@
             android:hint="День народження"
             android:paddingLeft="16dp"
             android:textSize="18sp"
-            android:inputType="date" />
+            android:inputType="date"
+            android:singleLine="true" />
 
         <EditText
             android:id="@+id/enter_password"
@@ -74,7 +78,8 @@
             android:paddingLeft="16dp"
             android:password="true"
             android:textSize="18sp"
-            android:inputType="textAutoComplete"/>
+            android:inputType="textAutoComplete"
+            android:singleLine="true" />
 
 
         <EditText
@@ -89,7 +94,9 @@
             android:paddingLeft="16dp"
             android:password="true"
             android:textSize="18sp"
-            android:inputType="textAutoComplete" />
+            android:inputType="textAutoComplete"
+            android:singleLine="true"
+            android:imeOptions="actionDone" />
 
         <RelativeLayout
             android:layout_width="match_parent"

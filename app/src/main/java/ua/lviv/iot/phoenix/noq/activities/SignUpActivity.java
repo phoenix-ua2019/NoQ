@@ -8,10 +8,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Patterns;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.Task;
@@ -59,7 +63,16 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         passwordRepeatEdit = findViewById(R.id.enter_repassword);
 
         findViewById(R.id.sign_up).setOnClickListener(this);
-        findViewById(R.id.sign_in).setOnClickListener(this);
+        Button signInButton = findViewById(R.id.sign_in);
+        signInButton.setOnClickListener(this);
+
+        passwordRepeatEdit.setOnEditorActionListener((TextView v, int actionId, KeyEvent event) -> {
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                signInButton.performClick();
+                return true;
+            }
+            return false;
+        });
     }
     private void signUp() {
         Log.d(TAG, "signUp");

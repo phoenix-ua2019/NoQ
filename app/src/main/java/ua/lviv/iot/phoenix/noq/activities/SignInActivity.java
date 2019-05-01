@@ -8,9 +8,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.EditorInfo;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -46,10 +50,21 @@ public class SignInActivity extends AppCompatActivity implements OnClickListener
         FirebaseApp.initializeApp(this);
         setContentView(R.layout.activity_login);
 
+
+        Button mSignInButton = findViewById(R.id.sign_in);
+        mSignInButton.setOnClickListener(this);
+
         mEmailField = findViewById(R.id.login_email);
         mPasswordField = findViewById(R.id.login_password);
-        
-        findViewById(R.id.sign_in).setOnClickListener(this);
+
+        mPasswordField.setOnEditorActionListener((TextView v, int actionId, KeyEvent event) -> {
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                mSignInButton.performClick();
+                return true;
+            }
+            return false;
+        });
+
         findViewById(R.id.back).setOnClickListener((View v) -> {
                 startActivity(new Intent(this, SignUpActivity.class));
                 finish();

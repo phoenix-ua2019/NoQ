@@ -18,6 +18,7 @@ import java.util.List;
 import ua.lviv.iot.phoenix.noq.R;
 import ua.lviv.iot.phoenix.noq.adapters.MealAdapter;
 import ua.lviv.iot.phoenix.noq.listeners.MealRecyclerTouchListener;
+import ua.lviv.iot.phoenix.noq.models.Cafe;
 import ua.lviv.iot.phoenix.noq.models.Meal;
 
 public class ListOfMeals extends AppCompatActivity {
@@ -35,10 +36,10 @@ public class ListOfMeals extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_of_menu);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         mealAdapter = new MealAdapter(mealList);
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        recyclerView = findViewById(R.id.recycler_view);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
@@ -57,41 +58,37 @@ public class ListOfMeals extends AppCompatActivity {
             public void onLongClick(View v, int position) {
             }
         }));
-        prepareMealData();
+        mealList = ((Cafe) getIntent().getExtras().getParcelable("cafe")).getCafeMeals();
+        mealAdapter.notifyDataSetChanged();
     }
 
     public void quantityDialogCaller(Meal meal) {
         quantityDialog = new Dialog(ListOfMeals.this);
         quantityDialog.setContentView(R.layout.quantity_item);
 
-        plus = (Button) quantityDialog.findViewById(R.id.plus_button);
-        minus = (Button) quantityDialog.findViewById(R.id.minus_button);
-        TextView selectedQuantity = (TextView) findViewById(R.id.selected_quantity);
-        TextView dialogQuantity = (TextView) quantityDialog.findViewById(R.id.dialog_quantity);
+        plus = quantityDialog.findViewById(R.id.plus_button);
+        minus = quantityDialog.findViewById(R.id.minus_button);
+        TextView selectedQuantity = findViewById(R.id.selected_quantity);
+        TextView dialogQuantity = quantityDialog.findViewById(R.id.dialog_quantity);
 
         dialogQuantity.setText(meal.selectedQuantityToString());
 
         plus.setEnabled(true);
         minus.setEnabled(true);
 
-        plus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                meal.setSelectedQuantity(meal.getSelectedQuantity() + 1);
-                dialogQuantity.setText(meal.selectedQuantityToString());
-                recyclerView.setAdapter(mealAdapter);
-            }
+        plus.setOnClickListener((View v) -> {
+            meal.setSelectedQuantity(meal.getSelectedQuantity() + 1);
+            dialogQuantity.setText(meal.selectedQuantityToString());
+            recyclerView.setAdapter(mealAdapter);
         });
 
-        minus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if  (meal.getSelectedQuantity() > 0) {
-                    meal.setSelectedQuantity(meal.getSelectedQuantity() - 1);
-                    dialogQuantity.setText(meal.selectedQuantityToString());
-                    recyclerView.setAdapter(mealAdapter);
-                }
+        minus.setOnClickListener((View v) -> {
+            if  (meal.getSelectedQuantity() <= 0) {
+                return;
             }
+            meal.setSelectedQuantity(meal.getSelectedQuantity() - 1);
+            dialogQuantity.setText(meal.selectedQuantityToString());
+            recyclerView.setAdapter(mealAdapter);
         });
         quantityDialog.show();
     }

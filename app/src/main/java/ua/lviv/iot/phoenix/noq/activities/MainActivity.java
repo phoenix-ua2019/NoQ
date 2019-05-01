@@ -40,24 +40,23 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        System.out.println(savedInstanceState);
         if (mAuth.getCurrentUser() != null)
-        Useful.userRef.child(mAuth.getCurrentUser().getUid()).addValueEventListener(this);
+            Useful.userRef.child(mAuth.getCurrentUser().getUid()).addValueEventListener(this);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         drawerLayout = findViewById(R.id.drawer_layout_main);
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.drawer);
+        NavigationView navigationView = findViewById(R.id.drawer);
+        navigationView.setCheckedItem(R.id.menu);
         navigationView.setNavigationItemSelectedListener(this);
 
         ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this,
                 drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close);
         drawerLayout.addDrawerListener(drawerToggle);
         drawerToggle.syncState();
-
-
-        userRef.addValueEventListener(this);
     }
 
 
@@ -65,8 +64,8 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
         mUser = new User((HashMap<String, String>) dataSnapshot.getValue());
         System.out.println(findViewById(R.id.header_name));
-        ((TextView) findViewById(R.id.header_name)).setText(mUser.getName());
- 	    ((TextView) findViewById(R.id.header_email)).setText(mUser.getEmail());
+        //((TextView) findViewById(R.id.header_name)).setText(mUser.getName());
+ 	    //((TextView) findViewById(R.id.header_email)).setText(mUser.getEmail());
         System.out.println(mUser);
     }
 
@@ -78,7 +77,6 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         boolean result = false;
-        navigationView.setCheckedItem(menuItem);
 
         int id = menuItem.getItemId();
         if(id == R.id.menu) {
@@ -97,8 +95,8 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
                 return false;
             mAuth.signOut();
             overridePendingTransition(R.anim.right_in,R.anim.rotate);
-            startActivity(new Intent(this, SignInActivity.class));
             finish();
+            startActivity(new Intent(this, SignInActivity.class));
         } else {
             result = true;
             System.out.println("default");
