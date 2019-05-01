@@ -9,16 +9,7 @@ import android.view.ViewGroup;
 
 import ua.lviv.iot.phoenix.noq.R;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class OrderFragment extends Fragment {
-
-
-    public OrderFragment() {
-        // Required empty public constructor
-    }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
