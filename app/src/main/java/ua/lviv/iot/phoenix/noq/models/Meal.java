@@ -1,18 +1,104 @@
 package ua.lviv.iot.phoenix.noq.models;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
-import com.google.common.base.Splitter;
 import com.google.firebase.database.IgnoreExtraProperties;
 
-import java.util.HashMap;
-
 @IgnoreExtraProperties
-public class Meal implements Parcelable {
-    private String mMealName;
-    private int mMealPrice;
-    private boolean mIsChecked;
+public class Meal {
+    private String preparationTime;
+    private String mealPicture;
+    private String description;
+    private String mealName;
+    private double price;
+    private double weight;
+    private int selectedQuantity;
+
+
+    public Meal() {
+    }
+
+    public Meal(String mealName, double price, String preparationTime, String mealPicture, double weight, String description) {
+        this.mealName = mealName;
+        this.price = price;
+        this.preparationTime = preparationTime;
+        this.mealPicture = mealPicture;
+        this.weight = weight;
+        this.description = description;
+    }
+
+    public String getMealName() {
+        return mealName;
+    }
+
+    public void setMealName(String mealName) {
+        this.mealName = mealName;
+    }
+
+    public String getPreparationTime() {
+        return preparationTime;
+    }
+
+    public void setPreparationTime(String preparationTime) {
+        this.preparationTime = preparationTime;
+    }
+
+    public String getMealPicture() {
+        return mealPicture;
+    }
+
+    public void setMealPicture(String mealPicture) {
+        this.mealPicture = mealPicture;
+    }
+
+    public double getWeight() {
+        return weight;
+    }
+
+    public String weightToString() {
+        return ((Double.toString(weight)) + "г");
+    }
+
+    public void setWeight(double weight) {
+        this.weight = weight;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public String priceToString() {
+        return Double.toString(price);
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public int getSelectedQuantity() {
+        return selectedQuantity;
+    }
+
+    public void setSelectedQuantity(int selectedQuantity) {
+        this.selectedQuantity = selectedQuantity;
+    }
+
+    public String selectedQuantityToString() {
+        return Integer.toString(selectedQuantity);
+    }
+}
+
+    /*
+    private String mealName;
+    private int mealPrice;
+    private String mealPicture;
+    private boolean IsChecked;
     private int mQuantity;
     public static int numberOfCheckedItems;
     public static final Parcelable.Creator<Meal> CREATOR =
@@ -29,7 +115,7 @@ public class Meal implements Parcelable {
      };
 
     Meal () {
-        mIsChecked = false;
+        IsChecked = false;
     }
 
     Meal (Object o) {
@@ -48,10 +134,11 @@ public class Meal implements Parcelable {
     Meal (Parcel source) {
         this(source.readString(), source.readInt(), source.readInt());
     }
+
     Meal (String mealName, Object mealPrice, Object mealQuantity) {
         this();
-        mMealName = mealName;
-        mMealPrice = Integer.parseInt(mealPrice.toString());
+        mealName = mealName;
+        mealPrice = Integer.parseInt(mealPrice.toString());
         mQuantity = Integer.parseInt(mealQuantity.toString());
     }
 
@@ -60,8 +147,8 @@ public class Meal implements Parcelable {
     }
 
     public String toString() {
-        return "{name=" + mMealName +
-                ", price=" + mMealPrice +
+        return "{name=" + mealName +
+                ", price=" + mealPrice +
                 ", quantity=" + mQuantity + "}";
     }
 
@@ -72,8 +159,8 @@ public class Meal implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel out, int flags) {
-        out.writeString(mMealName);
-        out.writeInt(mMealPrice);
+        out.writeString(mealName);
+        out.writeInt(mealPrice);
         out.writeInt(mQuantity);
     }
 
@@ -93,14 +180,23 @@ public class Meal implements Parcelable {
 
     public void setChecked(boolean isChecked){
         numberOfCheckedItems += isChecked ? 1 : -1;
-        mIsChecked = isChecked;
+        IsChecked = isChecked;
     }
 
     public String getMealName(){
-        return mMealName;
+        return mealName;
     }
 
     public int getMealPrice(){
-        return mMealPrice;
+        return mealPrice;
     }
-}
+
+    public String getMealPicture() {
+        return mealPicture;
+    }
+
+    public void setMealPicture(String mealPicture) {
+        this.mealPicture = mealPicture;
+    }
+    */
+

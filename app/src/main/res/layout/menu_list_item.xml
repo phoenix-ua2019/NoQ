@@ -2,15 +2,20 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginLeft="16dp"
-    android:layout_marginTop="16dp"
-    android:layout_marginRight="16dp">
+    android:layout_height="wrap_content"
+    android:background="?android:attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/row_padding_vertical"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/row_padding_vertical">
 
     <TextView
-        android:id="@+id/name_of_cafe"
+        android:id="@+id/name_of_meal"
         android:layout_width="wrap_content"
-        android:layout_height="14dp"
+        android:layout_height="wrap_content"
         android:gravity="top"
         android:textColor="#000"
         android:textSize="16sp"
@@ -19,21 +24,22 @@
     <TextView
         android:id="@+id/location_of_cafe"
         android:layout_width="wrap_content"
-        android:layout_height="28dp"
-        android:layout_below="@+id/name_of_cafe"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/name_of_meal"
         android:layout_centerVertical="true"
+        android:layout_marginTop="18dp"
         android:gravity="center"
         android:textColor="#45000000"
         android:textSize="7sp"
         tools:text="вул умлумав" />
 
     <TextView
-        android:id="@+id/price"
+        android:id="@+id/selected_quantity"
         android:layout_width="wrap_content"
         android:layout_height="14dp"
         android:layout_below="@+id/location_of_cafe"
         android:gravity="bottom"
-        android:textSize="7sp"
+        android:textSize="12sp"
         tools:text="234r" />
 
     <TextView
@@ -47,7 +53,7 @@
         tools:text="час очікування" />
 
     <ImageView
-        android:id="@+id/photo_of_cafe"
+        android:id="@+id/photo_of_meal"
         android:layout_width="56dp"
         android:layout_height="56dp"
         android:layout_alignParentRight="true"
@@ -56,7 +62,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_below="@+id/photo_of_cafe"
+        android:layout_below="@+id/photo_of_meal"
         android:layout_marginTop="16dp"
         android:background="#12000000"
         android:textSize="7sp" />
