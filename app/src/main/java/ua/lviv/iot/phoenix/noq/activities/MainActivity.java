@@ -33,18 +33,15 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
 
     private DrawerLayout drawerLayout;
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    private DatabaseReference userRef;
-    {
-        if (mAuth.getCurrentUser() != null)
-            userRef = Useful.userRef.child(mAuth.getCurrentUser().getUid());
-    }
-
     private User mUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if (mAuth.getCurrentUser() != null)
+        Useful.userRef.child(mAuth.getCurrentUser().getUid()).addValueEventListener(this);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -60,7 +57,6 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         drawerToggle.syncState();
 
 
-
         userRef.addValueEventListener(this);
     }
 
@@ -68,6 +64,9 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
     @Override
     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
         mUser = new User((HashMap<String, String>) dataSnapshot.getValue());
+        System.out.println(findViewById(R.id.header_name));
+        ((TextView) findViewById(R.id.header_name)).setText(mUser.getName());
+ 	    ((TextView) findViewById(R.id.header_email)).setText(mUser.getEmail());
         System.out.println(mUser);
     }
 
@@ -78,13 +77,8 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        TextView name = findViewById(R.id.header_name);
-        TextView email = findViewById(R.id.header_email);
-
-        name.setText(mUser.getName());
-        email.setText(mUser.getEmail());
-
         boolean result = false;
+        navigationView.setCheckedItem(menuItem);
 
         int id = menuItem.getItemId();
         if(id == R.id.menu) {
@@ -99,7 +93,9 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         } else if(id == R.id.setting) {
             System.out.println("setting");
         } else if(id == R.id.exit) {
-            if (mAuth != null) mAuth.signOut();
+            if (mAuth == null)
+                return false;
+            mAuth.signOut();
             overridePendingTransition(R.anim.right_in,R.anim.rotate);
             startActivity(new Intent(this, SignInActivity.class));
             finish();
@@ -111,7 +107,6 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
     }
 
     private void closeDrawer() {
-
         drawerLayout.closeDrawer(GravityCompat.START);
     }
 
@@ -121,7 +116,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
 
     @Override
     public void onBackPressed() {
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout_main);
+        drawerLayout = findViewById(R.id.drawer_layout_main);
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
         } else {
