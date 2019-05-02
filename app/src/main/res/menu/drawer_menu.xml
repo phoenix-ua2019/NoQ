@@ -31,12 +31,12 @@
             android:checkable="true"
             android:icon="@drawable/setting"
             android:title="Налаштування"/>
-        </group>
+
 
         <item
             android:id="@+id/exit"
             android:checkable="true"
             android:icon="@drawable/exit"
             android:title="Вихід"/>
-
+    </group>
 </menu>

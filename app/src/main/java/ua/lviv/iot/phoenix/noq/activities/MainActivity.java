@@ -1,11 +1,8 @@
 package ua.lviv.iot.phoenix.noq.activities;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.NavigationView.OnNavigationItemSelectedListener;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -16,35 +13,24 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.ValueEventListener;
 
-import java.util.HashMap;
 
 import ua.lviv.iot.phoenix.noq.R;
 import ua.lviv.iot.phoenix.noq.fragments.ListOfMealsFragment;
 import ua.lviv.iot.phoenix.noq.fragments.MainFragment;
-import ua.lviv.iot.phoenix.noq.fragments.OrderFragment;
-import ua.lviv.iot.phoenix.noq.models.User;
 
-public class MainActivity extends AppCompatActivity implements OnNavigationItemSelectedListener, ValueEventListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private String email;
     private String name;
+    private Useful useful;
     private NavigationView navigationView;
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
-    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    private User mUser;
+    private FirebaseAuth mAuth = Useful.mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,12 +38,9 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         setContentView(R.layout.activity_base);
 
         Fragment fragment = new MainFragment();
+        System.out.println(fragment);
+
         getSupportFragmentManager().beginTransaction().replace(R.id.base_for_nv, fragment).commit();
-/*
-        System.out.println(savedInstanceState);
-        if (mAuth.getCurrentUser() != null)
-            Useful.userRef.child(mAuth.getCurrentUser().getUid()).addValueEventListener(this);
-*/
 
         try {
              email = mAuth.getCurrentUser().getEmail();
@@ -72,52 +55,34 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         drawerLayout = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this,
                 drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close);
+        drawerLayout.post(() -> drawerToggle.syncState());
         drawerLayout.addDrawerListener(drawerToggle);
         drawerToggle.syncState();
 
         navigationView = findViewById(R.id.nav_view);
+        System.out.println(navigationView.getMenu());
         navigationView.setNavigationItemSelectedListener(this);
+        System.out.println(navigationView);
 
-        setUserInfoIntoNavDrawer(name, email);
-    }
-
-    public void setUserInfoIntoNavDrawer(String name, String email) {
-        View header = navigationView.getHeaderView(0);
-
-        TextView emailField = header.findViewById(R.id.header_email);
-        emailField.setText(email);
-
-        TextView nameField = header.findViewById(R.id.header_name);
-        nameField.setText(name);
-
-    }
-
-
-    @Override
-    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-        mUser = new User((HashMap<String, String>) dataSnapshot.getValue());
-        System.out.println(findViewById(R.id.header_name));
-        //((TextView) findViewById(R.id.header_name)).setText(mUser.getName());
-        //((TextView) findViewById(R.id.header_email)).setText(mUser.getEmail());
-        System.out.println(mUser);
-    }
-
-    @Override
-    public void onCancelled(@NonNull DatabaseError databaseError) {
-        System.out.println("The read failed: " + databaseError.getCode());
+        useful = new Useful(navigationView, this);
+        useful.setUser();
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         boolean result = false;
+        System.out.println(result);
 
         Fragment fragment = null;
+        System.out.println(fragment);
 
         int id = menuItem.getItemId();
+        System.out.println(id);
         if (id == R.id.menu) {
             fragment = new MainFragment();
             Toast.makeText(getApplicationContext(), "Вы выбрали камеру", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.user) {
+            startActivity(new Intent(this, UserActivity.class));
 
         } else if (id == R.id.star) {
             fragment = new ListOfMealsFragment();

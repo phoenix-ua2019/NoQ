@@ -139,6 +139,7 @@ public class SignInActivity extends AppCompatActivity implements OnClickListener
                     if (task.isSuccessful()) {
                         Log.d(TAG, "signInWithCredential:success");
                         FirebaseUser user = mAuth.getCurrentUser();
+                        Useful.onAuthSuccess(this, user);
                         //updateUI(user);
                     } else {
                         Log.w(TAG, "signInWithCredential:failure", task.getException());
