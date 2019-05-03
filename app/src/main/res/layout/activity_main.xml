@@ -13,21 +13,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:background="@color/white"
-            android:minHeight="?attr/actionBarSize"
-            app:theme="@style/Theme.AppCompat.Light.DarkActionBar"
-            tools:background="#f00" />
-
         <android.support.design.widget.BottomNavigationView
             android:id="@+id/nav_panel"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:layout_below="@+id/toolbar"
             android:layout_alignParentStart="true"
             app:menu="@menu/nav_items" />
 
@@ -78,16 +67,5 @@
         </ListView>
 
     </RelativeLayout>
-
-    <android.support.design.widget.NavigationView
-        android:id="@+id/drawer"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        app:headerLayout="@layout/drawer_header"
-        app:itemIconTint="#8c000000"
-        app:itemTextColor="#E6000000"
-        app:menu="@menu/drawer_menu" />
-
 
 </android.support.v4.widget.DrawerLayout>
