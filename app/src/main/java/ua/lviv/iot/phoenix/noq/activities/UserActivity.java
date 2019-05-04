@@ -36,23 +36,11 @@ public class UserActivity extends AppCompatActivity implements OnNavigationItemS
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user);
+        setContentView(R.layout.fragment_user);
 
 
         if (mAuth.getCurrentUser() != null)
             Useful.userRef.child(mAuth.getCurrentUser().getUid()).addValueEventListener(this);
-
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        drawerLayout = findViewById(R.id.drawer_layout_user);
-        NavigationView navigationView = findViewById(R.id.drawer);
-        navigationView.setCheckedItem(R.id.user);
-        navigationView.setNavigationItemSelectedListener(this);
-        ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this,
-                drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close);
-        drawerLayout.addDrawerListener(drawerToggle);
-        drawerToggle.syncState();
 
 
         mUser = getIntent().getExtras().getParcelable("user_icon");
@@ -61,11 +49,6 @@ public class UserActivity extends AppCompatActivity implements OnNavigationItemS
         ((TextView) findViewById(R.id.user_phone)).setText(mUser.getPhone());
         ((TextView) findViewById(R.id.user_date)).setText(mUser.getDate());
 
-        /*TextView header_name = findViewById(R.id.header_name);
-        header_name.setText(mUser.getName());
-        TextView header_email = findViewById(R.id.header_email);
-        header_email.setText(mUser.getEmail());
-        */
         Button pass = findViewById(R.id.user_pass);
 
         pass.setOnClickListener((View v) ->
