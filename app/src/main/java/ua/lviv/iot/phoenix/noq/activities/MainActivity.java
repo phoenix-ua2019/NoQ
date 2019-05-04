@@ -2,7 +2,9 @@ package ua.lviv.iot.phoenix.noq.activities;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.NavigationView.OnNavigationItemSelectedListener;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -13,24 +15,28 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.support.v7.widget.Toolbar;
-import android.widget.Toast;
+import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
 
 import ua.lviv.iot.phoenix.noq.R;
-import ua.lviv.iot.phoenix.noq.fragments.ListOfMealsFragment;
 import ua.lviv.iot.phoenix.noq.fragments.MainFragment;
+import ua.lviv.iot.phoenix.noq.fragments.UserFragment;
+import ua.lviv.iot.phoenix.noq.models.User;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements OnNavigationItemSelectedListener, ValueEventListener {
 
-    private String email;
-    private String name;
-    private Useful useful;
-    private NavigationView navigationView;
-    private Toolbar toolbar;
+
     private DrawerLayout drawerLayout;
-    private FirebaseAuth mAuth = Useful.mAuth;
+    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    private User mUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,66 +44,69 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_base);
 
         Fragment fragment = new MainFragment();
-        System.out.println(fragment);
-
         getSupportFragmentManager().beginTransaction().replace(R.id.base_for_nv, fragment).commit();
 
-        try {
-             email = mAuth.getCurrentUser().getEmail();
-             name = mAuth.getCurrentUser().getDisplayName();
-        } catch (NullPointerException e) {
-            Toast.makeText(this, "Please, log in again", Toast.LENGTH_LONG).show();
-        }
-
-        toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        drawerLayout = findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this,
-                drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close);
-        drawerLayout.post(() -> drawerToggle.syncState());
-        drawerLayout.addDrawerListener(drawerToggle);
-        drawerToggle.syncState();
-
-        navigationView = findViewById(R.id.nav_view);
-        System.out.println(navigationView.getMenu());
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.drawer_open, R.string.drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
-        System.out.println(navigationView);
+    }
 
-        useful = new Useful(navigationView, this);
-        useful.setUser();
+
+    @Override
+    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+        mUser = new User((HashMap<String, String>) dataSnapshot.getValue());
+        System.out.println(findViewById(R.id.header_name));
+        //((TextView) findViewById(R.id.header_name)).setText(mUser.getName());
+ 	    //((TextView) findViewById(R.id.header_email)).setText(mUser.getEmail());
+        System.out.println(mUser);
+    }
+
+    @Override
+    public void onCancelled(@NonNull DatabaseError databaseError) {
+        System.out.println("The read failed: " + databaseError.getCode());
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        boolean result = false;
-        System.out.println(result);
-
-        Fragment fragment = null;
-        System.out.println(fragment);
 
         int id = menuItem.getItemId();
-        System.out.println(id);
-        if (id == R.id.menu) {
+
+        Fragment fragment = null;
+
+        if(id == R.id.menu) {
+
             fragment = new MainFragment();
-            Toast.makeText(getApplicationContext(), "Вы выбрали камеру", Toast.LENGTH_SHORT).show();
-        } else if (id == R.id.user) {
-            startActivity(new Intent(this, UserActivity.class));
 
-        } else if (id == R.id.star) {
-            fragment = new ListOfMealsFragment();
-        } else if (id == R.id.setting) {
-            startActivity(new Intent(this, ListOfMeals.class));
+        } else if(id == R.id.user) {
 
-        } else if (id == R.id.exit) {
+            fragment = new UserFragment();
+
+        } else if(id == R.id.star) {
+
+            System.out.println("star");
+
+        } else if(id == R.id.setting) {
+
+            System.out.println("setting");
+
+        } else if(id == R.id.exit) {
+
             if (mAuth == null)
                 return false;
             mAuth.signOut();
-            overridePendingTransition(R.anim.right_in, R.anim.rotate);
+            overridePendingTransition(R.anim.right_in,R.anim.rotate);
             finish();
             startActivity(new Intent(this, SignInActivity.class));
+
         } else {
-            result = true;
+
             System.out.println("default");
         }
 
@@ -109,11 +118,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             fragmentTransaction.commit();
         }
-        menuItem.setChecked(true);
-        setTitle(menuItem.getTitle());
 
-        closeDrawer();
-        return result;
+
+
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
     }
 
     private void closeDrawer() {
@@ -126,7 +136,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void onBackPressed() {
-        drawerLayout = findViewById(R.id.drawer_layout);
+        drawerLayout = findViewById(R.id.drawer_layout_main);
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
         } else {

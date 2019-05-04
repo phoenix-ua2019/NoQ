@@ -12,7 +12,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-
         <ImageView
             android:layout_width="64dp"
             android:layout_height="64dp"
@@ -204,16 +203,5 @@
         </FrameLayout>
 
     </LinearLayout>
-
-    <android.support.design.widget.NavigationView
-        android:id="@+id/drawer"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        app:headerLayout="@layout/drawer_header"
-        app:itemIconTint="#8c000000"
-        app:itemTextColor="#E6000000"
-        app:menu="@menu/drawer_menu" />
-
 
 </android.support.v4.widget.DrawerLayout>
