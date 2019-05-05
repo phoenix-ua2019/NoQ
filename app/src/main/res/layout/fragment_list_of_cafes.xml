@@ -6,8 +6,7 @@
     <LinearLayout
         android:id="@+id/search"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/nav_panel">
+        android:layout_height="wrap_content">
 
         <RelativeLayout
             android:layout_width="match_parent"

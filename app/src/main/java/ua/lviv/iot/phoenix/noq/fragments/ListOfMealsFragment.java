@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -36,7 +37,7 @@ public class ListOfMealsFragment extends Fragment {
     private MealAdapter mealAdapter;
     private View view;
 
-    Button plus, minus;
+    ImageView plus, minus;
     Dialog quantityDialog;
     FragmentActivity currentActivity;
 
@@ -112,6 +113,7 @@ public class ListOfMealsFragment extends Fragment {
     }
 
     private void prepareMealData() {
+
         Meal meal_1 = new Meal("Meal_1", 100.0, "1 min", "Picture", 100.0, "fast making");
         mealList.add(meal_1);
 
@@ -126,6 +128,24 @@ public class ListOfMealsFragment extends Fragment {
 
         Meal meal_5 = new Meal("Meal_5", 500.0, "5 min", "Picture", 500.0, "fast making");
         mealList.add(meal_5);
+
+        Meal meal_6 = new Meal("Meal_1", 100.0, "1 min", "Picture", 100.0, "fast making");
+        mealList.add(meal_6);
+
+        Meal meal_7 = new Meal("Meal_1", 100.0, "1 min", "Picture", 100.0, "fast making");
+        mealList.add(meal_7);
+
+        Meal meal_8 = new Meal("Meal_1", 100.0, "1 min", "Picture", 100.0, "fast making");
+        mealList.add(meal_8);
+
+        Meal meal_9 = new Meal("Meal_1", 100.0, "1 min", "Picture", 100.0, "fast making");
+        mealList.add(meal_9);
+
+        Meal meal_10 = new Meal("Meal_1", 100.0, "1 min", "Picture", 100.0, "fast making");
+        mealList.add(meal_10);
+
+        Meal meal_11 = new Meal("Meal_1", 100.0, "1 min", "Picture", 100.0, "fast making");
+        mealList.add(meal_11);
 
         mealAdapter.notifyDataSetChanged();
     }
