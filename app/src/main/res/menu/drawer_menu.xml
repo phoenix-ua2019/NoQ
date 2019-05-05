@@ -2,8 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
 
-    <group android:checkableBehavior="single"
-        android:id="@+id/grp_Header">
+    <group>
 
         <item
             android:id="@+id/menu"
@@ -25,14 +24,13 @@
 
     </group>
 
-    <group android:id="@+id/grp_Watch">
 
         <item
             android:id="@+id/setting"
             android:checkable="true"
             android:icon="@drawable/setting"
             android:title="Налаштування"/>
-        </group>
+
 
         <item
             android:id="@+id/exit"

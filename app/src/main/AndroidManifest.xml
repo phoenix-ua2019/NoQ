@@ -2,9 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="ua.lviv.iot.phoenix.noq">
 
-    <uses-permission android:name="android.permission.READ_SMS"/>
-    <uses-permission android:name="android.permission.READ_PHONE_NUMBERS"/>
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.READ_PHONE_NUMBERS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
         android:allowBackup="true"
@@ -16,14 +16,15 @@
         <activity android:name=".activities.SignUpActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".activities.UserActivity" />
-        <activity android:name=".activities.SignInActivity"/>
-        <activity android:name=".activities.MainActivity"/>
+        <activity android:name=".activities.SignInActivity" />
+        <activity android:name=".activities.MainActivity" />
         <activity android:name=".activities.ChangePasswordActivity" />
-        <activity android:name=".activities.ListOfMeals"/>
+        <activity android:name=".activities.ListOfMeals" />
     </application>
 
 </manifest>
