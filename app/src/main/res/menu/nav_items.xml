@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/nav_menu"
+        android:id="@+id/nav_cafe"
         android:icon="@drawable/baseline_restaurant_menu_black_18dp"
         android:title="@string/nav_cafe" />
     <item
-        android:id="@+id/nav_food"
+        android:id="@+id/nav_menu"
         android:icon="@drawable/baseline_fastfood_black_18dp"
         android:title="@string/nav_menu" />
     <item
