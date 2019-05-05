@@ -62,13 +62,13 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         passwordEdit = findViewById(R.id.enter_password);
         passwordRepeatEdit = findViewById(R.id.enter_repassword);
 
-        findViewById(R.id.sign_up).setOnClickListener(this);
-        Button signInButton = findViewById(R.id.sign_in);
-        signInButton.setOnClickListener(this);
+        Button signUpButton = findViewById(R.id.sign_up);
+        signUpButton.setOnClickListener(this);
+        findViewById(R.id.sign_in).setOnClickListener(this);
 
         passwordRepeatEdit.setOnEditorActionListener((TextView v, int actionId, KeyEvent event) -> {
             if (actionId == EditorInfo.IME_ACTION_DONE) {
-                signInButton.performClick();
+                signUpButton.performClick();
                 return true;
             }
             return false;
@@ -95,7 +95,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             User mUser = new User(
                     nameEdit.getText().toString(), emailEdit.getText().toString(),
                     dateEdit.getText().toString(), phoneEdit.getText().toString());
-            Useful.onAuthSuccess(this, user, mUser);
+            new Useful(this).onAuthSuccess( user, mUser);
             startActivity(new Intent(SignUpActivity.this, MainActivity.class));
             finish();
         });

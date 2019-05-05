@@ -56,8 +56,6 @@ public class Cafe implements Parcelable {
         mCafeLocation = (String) map.get("location");
         mCafeEmail = (String) map.get("email");
         temp_mDrawableId = (String) map.get("icon");
-        System.out.println(map);
-        System.out.println(map.get("meals"));
         Object temp = map.get("meals");
         List<?> tempCafeMeals = (ArrayList<HashMap>) temp;
         //mCafeMeals = (ArrayList<Meal>) tempCafeMeals.stream().map(Meal::new).collect(Collectors.toList());
