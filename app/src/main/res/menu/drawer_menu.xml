@@ -23,6 +23,7 @@
 
     </group>
 
+    <group>
 
         <item
             android:id="@+id/setting"
