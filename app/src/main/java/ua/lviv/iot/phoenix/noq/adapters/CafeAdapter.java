@@ -30,8 +30,8 @@ public class CafeAdapter extends RecyclerView.Adapter<CafeAdapter.MyViewHolder> 
 
         public MyViewHolder(View view) {
             super(view);
-            cafeName = (TextView) view.findViewById(R.id.name_of_cafe);
-            cafeLocation = (TextView) view.findViewById(R.id.location_of_cafe);
+            cafeName = view.findViewById(R.id.name_of_cafe);
+            cafeLocation = view.findViewById(R.id.location_of_cafe);
         }
     }
 

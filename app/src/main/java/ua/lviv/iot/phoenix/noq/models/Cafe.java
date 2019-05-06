@@ -18,7 +18,7 @@ public class Cafe implements Parcelable {
     private String cafeLocation;
 
     private String temp_mDrawableId;
-    private int mDrawableId;
+    private int mDrawableId;// = -700119;
     private ArrayList<Meal> mCafeMeals;
 
     private static final int NO_IMAGE_PROVIDED = -1;
@@ -26,10 +26,10 @@ public class Cafe implements Parcelable {
 
     public Cafe() { }
 
-    public Cafe(String cafeName, String cafeLocation) {
+    /*public Cafe(String cafeName, String cafeLocation) {
         this.cafeName = cafeName;
         this.cafeLocation = cafeLocation;
-    }
+    }*/
 
     public static final Parcelable.Creator<Cafe> CREATOR =
             new Parcelable.Creator<Cafe>() {
@@ -44,20 +44,20 @@ public class Cafe implements Parcelable {
                 }
             };
 
-    Cafe (Object o) {
+    public Cafe (Object o) {
         this((HashMap<String, ?>) o);
     }
 
-    Cafe (Parcel source) {
+    public Cafe (Parcel source) {
         this(source.readString(), source.readString(), source.readString(), source.readInt(), new ArrayList<Meal>());
         source.readList(mCafeMeals, Meal.class.getClassLoader());
     }
 
-    Cafe (String str) {
+    public Cafe (String str) {
         this((new HashMap<>(Splitter.on("], ").withKeyValueSeparator("=[").split(str))));
     }
 
-    Cafe (HashMap<String, ?> map) {
+    public Cafe (HashMap<String, ?> map) {
         cafeName = (String) map.get("name");
         cafeLocation = (String) map.get("location");
         temp_mDrawableId = (String) map.get("icon");
@@ -66,7 +66,7 @@ public class Cafe implements Parcelable {
         //mCafeMeals = (ArrayList<Meal>) tempCafeMeals.stream().map(Meal::new).collect(Collectors.toList());
     }
 
-    Cafe (String name, String location, String email, int icon, ArrayList<Meal> meals) {
+    public Cafe (String name, String location, String email, int icon, ArrayList<Meal> meals) {
         cafeName = name;
         cafeLocation = location;
         mDrawableId = icon;
@@ -74,10 +74,7 @@ public class Cafe implements Parcelable {
     }
 
     public Cafe setDrawable(Resources r, String name) {
-        this.setDrawableId(
-                r.getIdentifier(
-                        this.getTempDrawableId(), "drawable", name
-                ));
+        setDrawableId(r.getIdentifier(getTempDrawableId(), "drawable", name));
         return this;
     }
 
@@ -86,7 +83,7 @@ public class Cafe implements Parcelable {
         return "name=[" + cafeName +
                 "], location=[" + cafeLocation +
                 "], icon=[" + mDrawableId +
-                "], meals=[" + mCafeMeals;
+                "], meals=[" + mCafeMeals + "] ";
     }
 
     @Override

@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,7 +46,6 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
     private DrawerLayout drawerLayout;
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private Useful useful;
-    private User mUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,9 +53,6 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
 
         Fragment fragment1 = new MainFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.base_for_nv, fragment1).commit();
-
-        //Fragment fragment2 = new ListOfCafesFragment();
-        //getSupportFragmentManager().beginTransaction().replace(R.id.base_for_bnv, fragment2).commit();
 
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -70,9 +67,13 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
-      
+
         useful = new Useful(navigationView, this);
         useful.setUser();
+
+
+        Fragment fragment2 = new ListOfCafesFragment();
+        getSupportFragmentManager().beginTransaction().replace(fragment1.getId(), fragment2).commit();
     }
 
     @Override
@@ -83,7 +84,8 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         Fragment fragment = null;
 
         if (id == R.id.menu) {
-            fragment = new MainFragment();
+            //fragment = new MainFragment();
+            fragment = new ListOfCafesFragment();
 
         } else if(id == R.id.user) {
             fragment = new UserFragment();
@@ -151,7 +153,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
 
     public void b1(View view)
     {
-        getSupportFragmentManager().beginTransaction().replace(R.id.base_for_nv, new ListOfCafesFragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.base_for_nv, new ListOfMealsFragment()).commit();
     }
 
     public void b2(View view)

@@ -6,24 +6,65 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    android:orientation="vertical"
     tools:context=".activities.MainActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <RelativeLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity=""
-            android:text="vewvwerv" />
+	        <android.support.design.widget.BottomNavigationView
+	            android:id="@+id/nav_panel"
+	            android:layout_width="match_parent"
+	            android:layout_height="56dp"
+	            android:layout_alignParentStart="true"
+	            app:menu="@menu/nav_items" />
 
-        <Button
-            android:id="@+id/b1"
-            android:layout_width="56dp"
-            android:layout_height="56dp"
-            android:onClick="b1" />
-    </LinearLayout>
+	        <LinearLayout
+	            android:id="@+id/search"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_below="@+id/nav_panel">
+
+	            <RelativeLayout
+	                android:layout_width="match_parent"
+	                android:layout_height="match_parent">
+
+	                <ImageButton
+	                    android:layout_width="24dp"
+	                    android:layout_height="24dp"
+	                    android:layout_marginLeft="16dp"
+	                    android:layout_marginTop="16dp"
+	                    android:layout_marginBottom="16dp"
+	                    android:src="@drawable/google" />
+
+	                <TextView
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:layout_centerHorizontal="true"
+	                    android:layout_centerVertical="true"
+	                    android:text="Сортувати заклади"
+	                    android:textColor="#30000000"
+	                    android:textSize="14sp" />
+
+	            </RelativeLayout>
+
+	        </LinearLayout>
+
+	        <TextView
+	            android:id="@+id/line"
+	            android:layout_width="match_parent"
+	            android:layout_height="1dp"
+	            android:layout_below="@+id/search"
+	            android:background="#12000000" />
+
+	        <ListView
+	            android:id="@+id/list_of_cafe"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_below="@+id/line">
+
+	        </ListView>
+
+	    </RelativeLayout>
 
 </android.support.v4.widget.DrawerLayout>
