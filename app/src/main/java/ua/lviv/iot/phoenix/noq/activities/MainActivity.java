@@ -223,7 +223,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
 
     public void b1(View view)
     {
-        getSupportFragmentManager().beginTransaction().replace(R.id.base_for_nv, new ListOfMealsFragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.base_for_nv, new ListOfCafesFragment()).commit();
     }
 
     public void b2(View view)
