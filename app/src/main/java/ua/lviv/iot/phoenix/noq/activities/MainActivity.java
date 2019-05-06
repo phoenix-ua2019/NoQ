@@ -1,6 +1,8 @@
 package ua.lviv.iot.phoenix.noq.activities;
 
 import android.content.Intent;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
@@ -31,12 +33,13 @@ import ua.lviv.iot.phoenix.noq.fragments.MainFragment;
 import ua.lviv.iot.phoenix.noq.fragments.UserFragment;
 import ua.lviv.iot.phoenix.noq.models.User;
 
-public class MainActivity extends AppCompatActivity implements OnNavigationItemSelectedListener, ValueEventListener {
+public class MainActivity extends AppCompatActivity implements OnNavigationItemSelectedListener {
 
 
     private DrawerLayout drawerLayout;
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    private User mUser;
+    //private User mUser;
+    private Useful useful;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,10 +59,13 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+
+        useful = new Useful(navigationView, this);
+        useful.setUser();
     }
 
 
-    @Override
+/*    @Override
     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
         mUser = new User((HashMap<String, String>) dataSnapshot.getValue());
         System.out.println(findViewById(R.id.header_name));
@@ -71,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
     @Override
     public void onCancelled(@NonNull DatabaseError databaseError) {
         System.out.println("The read failed: " + databaseError.getCode());
-    }
+    }*/
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -85,9 +91,10 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
             fragment = new MainFragment();
 
         } else if(id == R.id.user) {
-
             fragment = new UserFragment();
-
+            Bundle b = new Bundle();
+            b.putParcelable("user_icon", useful.getUser());
+            fragment.setArguments(b);
         } else if(id == R.id.star) {
 
             System.out.println("star");
@@ -137,10 +144,14 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
     @Override
     public void onBackPressed() {
         drawerLayout = findViewById(R.id.drawer_layout_main);
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            drawerLayout.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
+        try {
+            if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                drawerLayout.closeDrawer(GravityCompat.START);
+            } else {
+                super.onBackPressed();
+            }
+        } catch (NullPointerException e) {
+            e.printStackTrace();
         }
     }
 }
