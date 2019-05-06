@@ -17,8 +17,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -29,7 +31,11 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.HashMap;
 
 import ua.lviv.iot.phoenix.noq.R;
+import ua.lviv.iot.phoenix.noq.fragments.ListOfCafesFragment;
+import ua.lviv.iot.phoenix.noq.fragments.ListOfMealsFragment;
 import ua.lviv.iot.phoenix.noq.fragments.MainFragment;
+import ua.lviv.iot.phoenix.noq.fragments.OrderFragment;
+import ua.lviv.iot.phoenix.noq.fragments.TimeFragment;
 import ua.lviv.iot.phoenix.noq.fragments.UserFragment;
 import ua.lviv.iot.phoenix.noq.models.User;
 
@@ -38,46 +44,36 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
 
     private DrawerLayout drawerLayout;
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    //private User mUser;
     private Useful useful;
-
+    private User mUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
 
-        Fragment fragment = new MainFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.base_for_nv, fragment).commit();
+        Fragment fragment1 = new MainFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.base_for_nv, fragment1).commit();
+
+        //Fragment fragment2 = new ListOfCafesFragment();
+        //getSupportFragmentManager().beginTransaction().replace(R.id.base_for_bnv, fragment2).commit();
+
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
+        //BottomNavigationView navView = findViewById(R.id.nav_panel);
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.drawer_open, R.string.drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
-
+      
         useful = new Useful(navigationView, this);
         useful.setUser();
     }
-
-
-/*    @Override
-    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-        mUser = new User((HashMap<String, String>) dataSnapshot.getValue());
-        System.out.println(findViewById(R.id.header_name));
-        //((TextView) findViewById(R.id.header_name)).setText(mUser.getName());
- 	    //((TextView) findViewById(R.id.header_email)).setText(mUser.getEmail());
-        System.out.println(mUser);
-    }
-
-    @Override
-    public void onCancelled(@NonNull DatabaseError databaseError) {
-        System.out.println("The read failed: " + databaseError.getCode());
-    }*/
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -86,8 +82,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
 
         Fragment fragment = null;
 
-        if(id == R.id.menu) {
-
+        if (id == R.id.menu) {
             fragment = new MainFragment();
 
         } else if(id == R.id.user) {
@@ -99,16 +94,16 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
 
             System.out.println("star");
 
-        } else if(id == R.id.setting) {
+        } else if (id == R.id.setting) {
 
             System.out.println("setting");
 
-        } else if(id == R.id.exit) {
+        } else if (id == R.id.exit) {
 
             if (mAuth == null)
                 return false;
             mAuth.signOut();
-            overridePendingTransition(R.anim.right_in,R.anim.rotate);
+            overridePendingTransition(R.anim.right_in, R.anim.rotate);
             finish();
             startActivity(new Intent(this, SignInActivity.class));
 
@@ -125,7 +120,6 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
 
             fragmentTransaction.commit();
         }
-
 
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -153,5 +147,20 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         } catch (NullPointerException e) {
             e.printStackTrace();
         }
+    }
+
+    public void b1(View view)
+    {
+        getSupportFragmentManager().beginTransaction().replace(R.id.base_for_nv, new ListOfCafesFragment()).commit();
+    }
+
+    public void b2(View view)
+    {
+        getSupportFragmentManager().beginTransaction().replace(R.id.base_for_nv, new TimeFragment()).commit();
+    }
+
+    public void b3(View view)
+    {
+        getSupportFragmentManager().beginTransaction().replace(R.id.base_for_nv, new OrderFragment()).commit();
     }
 }
