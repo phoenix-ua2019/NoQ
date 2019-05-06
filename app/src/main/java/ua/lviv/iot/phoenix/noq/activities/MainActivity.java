@@ -1,6 +1,8 @@
 package ua.lviv.iot.phoenix.noq.activities;
 
 import android.content.Intent;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
@@ -37,47 +39,13 @@ import ua.lviv.iot.phoenix.noq.fragments.TimeFragment;
 import ua.lviv.iot.phoenix.noq.fragments.UserFragment;
 import ua.lviv.iot.phoenix.noq.models.User;
 
-public class MainActivity extends AppCompatActivity implements OnNavigationItemSelectedListener, ValueEventListener {
+public class MainActivity extends AppCompatActivity implements OnNavigationItemSelectedListener {
 
 
     private DrawerLayout drawerLayout;
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    private Useful useful;
     private User mUser;
-/*
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            Fragment fragment = null;
-
-            switch (item.getItemId()) {
-                case R.id.nav_cafe:
-                    fragment = new ListOfCafesFragment();
-                    break;
-                case R.id.nav_menu:
-                    fragment = new ListOfMealsFragment();
-                    break;
-                case R.id.nav_time:
-                    fragment = new TimeFragment();
-                    break;
-                case R.id.nav_check:
-                    fragment = new OrderFragment();
-                    break;
-            }
-
-            if (fragment != null) {
-                FragmentManager fragmentManager = getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-                fragmentTransaction.replace(R.id.base_for_bnv, fragment);
-
-                fragmentTransaction.commit();
-            }
-            return false;
-        }
-    };
-*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -102,53 +70,9 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
-/*
-        navView.setOnNavigationItemSelectedListener(MenuItem ->
-        {
-            Fragment fragment = null;
-
-            switch (MenuItem.getItemId()) {
-                case R.id.nav_cafe:
-                    fragment = new ListOfCafesFragment();
-                    break;
-                case R.id.nav_menu:
-                    fragment = new ListOfMealsFragment();
-                    break;
-                case R.id.nav_time:
-                    fragment = new TimeFragment();
-                    break;
-                case R.id.nav_check:
-                    fragment = new OrderFragment();
-                    break;
-            }
-
-            if (fragment != null) {
-                FragmentManager fragmentManager = getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-                fragmentTransaction.replace(R.id.base_for_bnv, fragment);
-
-                fragmentTransaction.commit();
-            }
-            return false;
-
-        });
-        */
-    }
-
-
-    @Override
-    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-        mUser = new User((HashMap<String, String>) dataSnapshot.getValue());
-        System.out.println(findViewById(R.id.header_name));
-        //((TextView) findViewById(R.id.header_name)).setText(mUser.getName());
-        //((TextView) findViewById(R.id.header_email)).setText(mUser.getEmail());
-        System.out.println(mUser);
-    }
-
-    @Override
-    public void onCancelled(@NonNull DatabaseError databaseError) {
-        System.out.println("The read failed: " + databaseError.getCode());
+      
+        useful = new Useful(navigationView, this);
+        useful.setUser();
     }
 
     @Override
@@ -159,14 +83,14 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         Fragment fragment = null;
 
         if (id == R.id.menu) {
-
             fragment = new MainFragment();
 
-        } else if (id == R.id.user) {
-
+        } else if(id == R.id.user) {
             fragment = new UserFragment();
-
-        } else if (id == R.id.star) {
+            Bundle b = new Bundle();
+            b.putParcelable("user_icon", useful.getUser());
+            fragment.setArguments(b);
+        } else if(id == R.id.star) {
 
             System.out.println("star");
 
@@ -214,10 +138,14 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
     @Override
     public void onBackPressed() {
         drawerLayout = findViewById(R.id.drawer_layout_main);
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            drawerLayout.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
+        try {
+            if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                drawerLayout.closeDrawer(GravityCompat.START);
+            } else {
+                super.onBackPressed();
+            }
+        } catch (NullPointerException e) {
+            e.printStackTrace();
         }
     }
 

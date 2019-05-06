@@ -72,12 +72,21 @@ public class Useful implements ValueEventListener {
         }
     }
 
+    public User getUser() {
+        return mUser;
+    }
+
     @Override
     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
         System.out.println((HashMap<String, String>) dataSnapshot.getValue());
         mUser = new User((HashMap<String, String>) dataSnapshot.getValue());
-        //((TextView) findViewById(R.id.header_name)).setText(mUser.getName());
-        //((TextView) findViewById(R.id.header_email)).setText(mUser.getEmail());
+        //that.mUser = mUser;
+        try {
+            ((TextView) that.findViewById(R.id.header_name)).setText(mUser.getName());
+            ((TextView) that.findViewById(R.id.header_email)).setText(mUser.getEmail());
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
         System.out.println("M_USER");
         System.out.println(mUser);
         setUserInfoIntoNavDrawer();
