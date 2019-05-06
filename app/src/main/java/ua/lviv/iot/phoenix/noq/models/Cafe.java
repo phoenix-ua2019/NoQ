@@ -10,6 +10,7 @@ import com.google.firebase.database.IgnoreExtraProperties;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @IgnoreExtraProperties
@@ -63,7 +64,7 @@ public class Cafe implements Parcelable {
         temp_mDrawableId = (String) map.get("icon");
         Object temp = map.get("meals");
         List<?> tempCafeMeals = (ArrayList<HashMap>) temp;
-        //mCafeMeals = (ArrayList<Meal>) tempCafeMeals.stream().map(Meal::new).collect(Collectors.toList());
+        mCafeMeals = (ArrayList<Meal>) tempCafeMeals.stream().map(Meal::new).collect(Collectors.toList());
     }
 
     public Cafe (String name, String location, String email, int icon, ArrayList<Meal> meals) {

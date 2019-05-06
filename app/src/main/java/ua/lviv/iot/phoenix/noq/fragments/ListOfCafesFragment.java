@@ -58,6 +58,8 @@ public class ListOfCafesFragment extends Fragment implements ValueEventListener 
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_list_of_cafes, container, false);
 
+        Useful.cafeRef.addValueEventListener(this);
+
         cafesRecyclerView = view.findViewById(R.id.cafe_recycler_view);
         cafesAdapter = new CafeAdapter(cafesList);
         cafesRecyclerView.setAdapter(cafesAdapter);
@@ -83,6 +85,7 @@ public class ListOfCafesFragment extends Fragment implements ValueEventListener 
                             Bundle b = new Bundle();
                             b.putParcelable("cafe", cafesList.get(position));
                             setArguments(b);
+                            System.out.println("I put extra cafe there!!!!!!!!!!!!!!!");
                         });
                 //Toast.makeText(getApplicationContext(), meal.getMealName() + " is selected!", Toast.LENGTH_SHORT).show();
             }
@@ -90,7 +93,6 @@ public class ListOfCafesFragment extends Fragment implements ValueEventListener 
             public void onLongClick(View v, int position) {
             }
         }));
-        Useful.cafeRef.addValueEventListener(this);
         return view;
     }
     @Override
@@ -106,11 +108,22 @@ public class ListOfCafesFragment extends Fragment implements ValueEventListener 
                 e.printStackTrace();
             }
         }*/
-        cafesList = cafesList.stream()
-                .map(c -> c.setDrawable(getContext().getResources(), getActivity().getPackageName())
-                ).collect(Collectors.toList());
+        prepareCafeData();
+
         System.out.println(cafesList);
         cafesAdapter.notifyDataSetChanged();
+        /*ListView listView = view.findViewById(R.id.list_of_cafe);
+        ArrayAdapter<Cafe> arrayAdapter =new ArrayAdapter<>(currentActivity,
+                R.layout.fragment_list_of_cafes, cafesList);
+        listView.setAdapter(arrayAdapter);
+
+        listView.setOnItemClickListener(
+                (AdapterView<?> adapterView, View view, int index, long l) -> {
+                    //Object c = adapterView.getAdapter().getItem(index);
+                    Bundle b = new Bundle();
+                    b.putParcelable("cafe", cafesList.get(index));
+                    setArguments(b);
+        });*/
         /*((ListView) view.findViewById(R.id.list_of_cafe)).setAdapter(new ArrayAdapter(getActivity(),
             R.layout.fragment_list_of_cafes,
             cafesList));*/
@@ -122,21 +135,15 @@ public class ListOfCafesFragment extends Fragment implements ValueEventListener 
     }
 
 
-    /*private void prepareCafeData() {
-
-        Cafe cafe_1 = new Cafe("Cafe_1","Location_1");
-        cafesList.add(cafe_1);
-
-        Cafe cafe_2 = new Cafe("Cafe_2","Location_2");
-        cafesList.add(cafe_2);
-
-        Cafe cafe_3 = new Cafe("Cafe_3","Location_3");
-        cafesList.add(cafe_3);
-
-        Cafe cafe_4 = new Cafe("Cafe_4","Location4");
-        cafesList.add(cafe_4);
-
+    private void prepareCafeData() {
+        cafesList = cafesList.stream()
+                .map((Cafe c) -> c.setDrawable(getResources(), currentActivity.getPackageName())
+                ).collect(Collectors.toList());
+        Bundle b = new Bundle();
+        b.putParcelable("cafe", cafesList.get(0));
+        setArguments(b);
+        System.out.println(getArguments());
         cafesAdapter.notifyDataSetChanged();
-    }*/
+    }
 
 }

@@ -46,14 +46,17 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
     private DrawerLayout drawerLayout;
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private Useful useful;
+    private Fragment fragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
 
-        Fragment fragment1 = new MainFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.base_for_nv, fragment1).commit();
+        //Fragment fragment1 = new MainFragment();
+        //getSupportFragmentManager().beginTransaction().replace(R.id.base_for_nv, fragment1).commit();
 
+        fragment = new ListOfCafesFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.base_for_nv, fragment).commit();
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -70,10 +73,6 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
 
         useful = new Useful(navigationView, this);
         useful.setUser();
-
-
-        Fragment fragment2 = new ListOfCafesFragment();
-        getSupportFragmentManager().beginTransaction().replace(fragment1.getId(), fragment2).commit();
     }
 
     @Override
@@ -153,16 +152,29 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
 
     public void b1(View view)
     {
-        getSupportFragmentManager().beginTransaction().replace(R.id.base_for_nv, new ListOfMealsFragment()).commit();
+        Bundle args = fragment.getArguments();
+        fragment = new ListOfMealsFragment();
+        fragment.setArguments(args);
+        setFragment();
     }
 
     public void b2(View view)
     {
-        getSupportFragmentManager().beginTransaction().replace(R.id.base_for_nv, new TimeFragment()).commit();
+        Bundle args = fragment.getArguments();
+        fragment = new TimeFragment();
+        fragment.setArguments(args);
+        setFragment();
     }
 
     public void b3(View view)
     {
-        getSupportFragmentManager().beginTransaction().replace(R.id.base_for_nv, new OrderFragment()).commit();
+        Bundle args = fragment.getArguments();
+        fragment = new OrderFragment();
+        fragment.setArguments(args);
+        setFragment();
+    }
+
+    private void setFragment() {
+        getSupportFragmentManager().beginTransaction().replace(R.id.base_for_nv, fragment).commit();
     }
 }

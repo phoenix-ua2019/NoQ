@@ -75,6 +75,7 @@ public class ListOfMealsFragment extends Fragment {
             }
         }));
         //mealList = ((Cafe) getIntent().getExtras().getParcelable("cafe")).getCafeMeals();
+        System.out.println(getArguments());
         mealList = ((Cafe) getArguments().getParcelable("cafe")).getCafeMeals();
         mealAdapter.notifyDataSetChanged();
 
