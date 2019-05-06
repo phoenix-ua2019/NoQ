@@ -10,16 +10,27 @@ import com.google.firebase.database.IgnoreExtraProperties;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collectors;
+
 
 @IgnoreExtraProperties
 public class Cafe implements Parcelable {
-    private String mCafeName;
-    private String mCafeLocation;
-    private String mCafeEmail;
+    private String cafeName;
+    private String cafeLocation;
+
     private String temp_mDrawableId;
     private int mDrawableId;
     private ArrayList<Meal> mCafeMeals;
+
+    private static final int NO_IMAGE_PROVIDED = -1;
+
+
+    public Cafe() { }
+
+    public Cafe(String cafeName, String cafeLocation) {
+        this.cafeName = cafeName;
+        this.cafeLocation = cafeLocation;
+    }
+
     public static final Parcelable.Creator<Cafe> CREATOR =
             new Parcelable.Creator<Cafe>() {
                 @Override
@@ -32,11 +43,6 @@ public class Cafe implements Parcelable {
                     return new Cafe[size];
                 }
             };
-
-    private static final int NO_IMAGE_PROVIDED = -1;
-
-    Cafe () {
-    }
 
     Cafe (Object o) {
         this((HashMap<String, ?>) o);
@@ -52,9 +58,8 @@ public class Cafe implements Parcelable {
     }
 
     Cafe (HashMap<String, ?> map) {
-        mCafeName = (String) map.get("name");
-        mCafeLocation = (String) map.get("location");
-        mCafeEmail = (String) map.get("email");
+        cafeName = (String) map.get("name");
+        cafeLocation = (String) map.get("location");
         temp_mDrawableId = (String) map.get("icon");
         Object temp = map.get("meals");
         List<?> tempCafeMeals = (ArrayList<HashMap>) temp;
@@ -62,9 +67,8 @@ public class Cafe implements Parcelable {
     }
 
     Cafe (String name, String location, String email, int icon, ArrayList<Meal> meals) {
-        mCafeName = name;
-        mCafeLocation = location;
-        mCafeEmail = email;
+        cafeName = name;
+        cafeLocation = location;
         mDrawableId = icon;
         mCafeMeals = meals;
     }
@@ -79,9 +83,8 @@ public class Cafe implements Parcelable {
 
     @Override
     public String toString() {
-        return "name=[" + mCafeName +
-                "], location=[" + mCafeLocation +
-                "], email=[" + mCafeEmail +
+        return "name=[" + cafeName +
+                "], location=[" + cafeLocation +
                 "], icon=[" + mDrawableId +
                 "], meals=[" + mCafeMeals;
     }
@@ -93,23 +96,27 @@ public class Cafe implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel out, int flags) {
-        out.writeString(mCafeName);
-        out.writeString(mCafeEmail);
-        out.writeString(mCafeLocation);
+        out.writeString(cafeName);
+        out.writeString(cafeLocation);
         out.writeInt(mDrawableId);
         out.writeList(mCafeMeals);
     }
 
+
     public String getCafeName() {
-        return mCafeName;
+        return cafeName;
+    }
+
+    public void setCafeName(String cafeName) {
+        this.cafeName = cafeName;
     }
 
     public String getCafeLocation() {
-        return mCafeLocation;
+        return cafeLocation;
     }
 
-    public String getCafeEmail() {
-        return mCafeEmail;
+    public void setCafeLocation(String cafeLocation) {
+        this.cafeLocation = cafeLocation;
     }
 
     public int getDrawableId() {
@@ -135,4 +142,14 @@ public class Cafe implements Parcelable {
     public void setCafeMeals(ArrayList<Meal> meals) {
         mCafeMeals = meals;
     }
+
 }
+
+
+
+
+
+
+
+
+

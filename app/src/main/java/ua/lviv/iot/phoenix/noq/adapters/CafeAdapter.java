@@ -1,17 +1,61 @@
 package ua.lviv.iot.phoenix.noq.adapters;
 
-import android.app.Activity;
-import android.widget.ArrayAdapter;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
-import java.util.ArrayList;
+import java.util.List;
 
+import ua.lviv.iot.phoenix.noq.R;
 import ua.lviv.iot.phoenix.noq.models.Cafe;
 
-public class CafeAdapter extends ArrayAdapter<Cafe> {
 
-    public CafeAdapter(Activity context, ArrayList<Cafe> cafes) {
-        super(context, 0, cafes);
+public class CafeAdapter extends RecyclerView.Adapter<CafeAdapter.MyViewHolder> {
+
+    private List<Cafe> cafesList;
+
+    public CafeAdapter(List<Cafe> cafesList) {
+        this.cafesList = cafesList;
     }
+
+
+    public class MyViewHolder extends RecyclerView.ViewHolder {
+        public TextView cafeName;
+        public TextView cafeLocation;
+        public TextView cafeEmail;
+        public TextView temp_mDrawableId;
+        public int mDrawableId;
+
+        public MyViewHolder(View view) {
+            super(view);
+            cafeName = (TextView) view.findViewById(R.id.name_of_cafe);
+            cafeLocation = (TextView) view.findViewById(R.id.location_of_cafe);
+        }
+    }
+
+    @Override
+    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View itemView = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.cafe_list_item, parent, false);
+
+        return new MyViewHolder(itemView);
+    }
+
+
+    @Override
+    public void onBindViewHolder(CafeAdapter.MyViewHolder holder, int position) {
+        Cafe cafe = cafesList.get(position);
+        holder.cafeName.setText(cafe.getCafeName());
+        holder.cafeLocation.setText(cafe.getCafeLocation());
+    }
+
+    @Override
+    public int getItemCount() {
+        return cafesList.size();
+    }
+}
 
    /* @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -36,4 +80,3 @@ public class CafeAdapter extends ArrayAdapter<Cafe> {
         return listItemView;
 
     }*/
-}
