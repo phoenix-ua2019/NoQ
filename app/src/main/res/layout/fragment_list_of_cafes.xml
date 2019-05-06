@@ -55,7 +55,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="95dp"
-        android:onClick="b2" />
+        android:onClick="b1" />
 
 
 </RelativeLayout>

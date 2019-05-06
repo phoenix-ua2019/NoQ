@@ -7,23 +7,12 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context=".activities.MainActivity">
+    tools:context=".activities.MainActivity"
+    android:layout_marginTop="?attr/actionBarSize">
 
-    <LinearLayout
+    <ListView
+        android:id="@+id/cafe_list_item"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity=""
-            android:text="vewvwerv" />
-
-        <Button
-            android:id="@+id/b1"
-            android:layout_width="56dp"
-            android:layout_height="56dp"
-            android:onClick="b1" />
-    </LinearLayout>
+        android:layout_height="match_parent"></ListView>
 
 </android.support.v4.widget.DrawerLayout>
