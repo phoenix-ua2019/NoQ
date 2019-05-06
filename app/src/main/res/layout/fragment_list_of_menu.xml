@@ -4,6 +4,20 @@
     android:layout_height="match_parent"
     android:layout_marginTop="?attr/actionBarSize">
 
+    <Button
+        android:id="@+id/choose_time"
+        android:layout_width="160dp"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/button_style"
+        android:text="Обрати час"
+        android:textAllCaps="false"
+        android:textColor="#fff"
+        android:textSize="18sp" />
+
+
     <LinearLayout
         android:id="@+id/search"
         android:layout_width="match_parent"
@@ -29,6 +43,8 @@
                 android:text="Сортувати меню"
                 android:textColor="@color/gray"
                 android:textSize="14sp" />
+
+
 
         </RelativeLayout>
 
