@@ -1,21 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="?attr/actionBarSize"
+    android:orientation="vertical"
     tools:context=".fragments.TimeFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <TimePicker
+        android:id="@+id/clock"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Time" />
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="72dp"
+        android:fadeScrollbars="false"
+        android:theme="@style/TimePickerStyle"
+        android:timePickerMode="spinner" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="72dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/t1"
+                android:layout_width="232dp"
+                android:layout_height="28dp"
+                android:background="@color/colorPrimary"
+                android:gravity="center"
+                android:text="Мінімальний час пиготування"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/t1"
+                android:background="@color/colorPrimary" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="28dp"
+                android:layout_toRightOf="@+id/t1"
+                android:gravity="center" />
+
+        </RelativeLayout>
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/t2"
+                android:layout_width="156dp"
+                android:layout_height="28dp"
+                android:background="@color/colorPrimary"
+                android:gravity="center"
+                android:text="Обраний мною час"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/t2"
+                android:background="@color/colorPrimary" />
+
+            <TextView
+                android:id="@+id/Selected_time"
+                android:layout_width="match_parent"
+                android:layout_height="28dp"
+                android:gravity="center" />
+
+        </RelativeLayout>
+
+    </FrameLayout>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="b3"/>
+        android:layout_gravity="center"
+        android:layout_marginTop="56dp"
+        android:background="@drawable/button_style"
+        android:text="Далі"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
 
-</FrameLayout>
+</LinearLayout>
