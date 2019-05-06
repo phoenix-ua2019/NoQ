@@ -42,6 +42,7 @@
                 android:background="@color/colorPrimary" />
 
             <TextView
+                android:id="@+id/min_time_of_cook"
                 android:layout_width="match_parent"
                 android:layout_height="28dp"
                 android:layout_toRightOf="@+id/t1"
@@ -76,9 +77,12 @@
                 android:background="@color/colorPrimary" />
 
             <TextView
-                android:id="@+id/Selected_time"
+                android:id="@+id/selected_time"
                 android:layout_width="match_parent"
                 android:layout_height="28dp"
+                android:layout_toRightOf="@+id/t2"
+                android:textColor="#000"
+                android:textSize="18sp"
                 android:gravity="center" />
 
         </RelativeLayout>
@@ -86,6 +90,7 @@
     </FrameLayout>
 
     <Button
+        android:id="@+id/submit_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -94,6 +99,7 @@
         android:text="Далі"
         android:textAllCaps="false"
         android:textColor="@color/white"
-        android:textSize="16sp" />
+        android:textSize="18sp"
+        android:onClick="b3"/>
 
 </LinearLayout>

@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
 
-        Fragment fragment1 = new MainFragment();
+        Fragment fragment1 = new ListOfCafesFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.base_for_nv, fragment1).commit();
 
         //Fragment fragment2 = new ListOfCafesFragment();
@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         Fragment fragment = null;
 
         if (id == R.id.menu) {
-            fragment = new MainFragment();
+            fragment = new ListOfCafesFragment();
 
         } else if(id == R.id.user) {
             fragment = new UserFragment();
@@ -151,7 +151,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
 
     public void b1(View view)
     {
-        getSupportFragmentManager().beginTransaction().replace(R.id.base_for_nv, new ListOfCafesFragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.base_for_nv, new ListOfMealsFragment()).commit();
     }
 
     public void b2(View view)
@@ -162,5 +162,6 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
     public void b3(View view)
     {
         getSupportFragmentManager().beginTransaction().replace(R.id.base_for_nv, new OrderFragment()).commit();
+
     }
 }
