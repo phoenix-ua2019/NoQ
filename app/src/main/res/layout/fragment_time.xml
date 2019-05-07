@@ -99,7 +99,6 @@
         android:text="Далі"
         android:textAllCaps="false"
         android:textColor="@color/white"
-        android:textSize="18sp"
-        android:onClick="b3"/>
+        android:textSize="18sp" />
 
 </LinearLayout>

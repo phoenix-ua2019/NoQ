@@ -1,11 +1,14 @@
 package ua.lviv.iot.phoenix.noq.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.firebase.database.IgnoreExtraProperties;
 
 import java.util.HashMap;
 
 @IgnoreExtraProperties
-public class Meal {
+public class Meal implements Parcelable {
     private String preparationTime;
     private String mealPicture;
     private String description;
@@ -13,6 +16,18 @@ public class Meal {
     private double price;
     private double weight;
     private int selectedQuantity;
+    public static final Parcelable.Creator<Meal> CREATOR =
+            new Parcelable.Creator<Meal>() {
+        @Override
+        public Meal createFromParcel(Parcel source) {
+         return new Meal(source);
+        }
+
+        @Override
+        public Meal[] newArray(int size) {
+         return new Meal[size];
+        }
+     };
 
 
     public Meal() {
@@ -26,6 +41,27 @@ public class Meal {
         mealName = (String) map.get("name");
         price = (Long) map.get("price");
     }
+
+    public Meal (Parcel source) {
+        this(source.readString(), source.readDouble(), source.readString(),
+                source.readString(), source.readDouble(), source.readString());
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel out, int flags) {
+        out.writeString(mealName);
+        out.writeDouble(price);
+        out.writeString(preparationTime);
+        out.writeString(mealPicture);
+        out.writeDouble(weight);
+        out.writeString(description);
+    }
+
     public Meal(String mealName, double price, String preparationTime, String mealPicture, double weight, String description) {
         this.mealName = mealName;
         this.price = price;
@@ -111,18 +147,7 @@ public class Meal {
     private boolean IsChecked;
     private int mQuantity;
     public static int numberOfCheckedItems;
-    public static final Parcelable.Creator<Meal> CREATOR =
-            new Parcelable.Creator<Meal>() {
-        @Override
-        public Meal createFromParcel(Parcel source) {
-         return new Meal(source);
-        }
 
-        @Override
-        public Meal[] newArray(int size) {
-         return new Meal[size];
-        }
-     };
 
     Meal () {
         IsChecked = false;
@@ -141,9 +166,6 @@ public class Meal {
                 (map.get("quantity") != null) ? map.get("quantity") : 0);
     }
 
-    Meal (Parcel source) {
-        this(source.readString(), source.readInt(), source.readInt());
-    }
 
     Meal (String mealName, Object mealPrice, Object mealQuantity) {
         this();
@@ -162,17 +184,6 @@ public class Meal {
                 ", quantity=" + mQuantity + "}";
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel out, int flags) {
-        out.writeString(mealName);
-        out.writeInt(mealPrice);
-        out.writeInt(mQuantity);
-    }
 
     public int incrementQuantity() {
         mQuantity++;

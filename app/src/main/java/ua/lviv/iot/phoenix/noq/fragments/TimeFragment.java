@@ -54,16 +54,20 @@ public class TimeFragment extends Fragment {
             //startActivity(toMainActivity);
         }
 
-        floatTime.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
-            @Override
-            public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
-                if (isCafeOpen(hourOfDay, minute)) {
-                    if (isAllowableTime(hourOfDay, currentHour, minute, currentMinute)) {
-                        updateDisplay(hourOfDay, minute);
-                    }
+        floatTime.setOnTimeChangedListener((TimePicker view, int hourOfDay, int minute) -> {
+                if (isCafeOpen(hourOfDay, minute) &
+                        (isAllowableTime(hourOfDay, currentHour, minute, currentMinute))) {
+                    updateDisplay(hourOfDay, minute);
                 }
-            }
         });
+        view.findViewById(R.id.submit_time).setOnClickListener((View v) -> {
+            Bundle b = new Bundle();
+            b.putString("time", orderTime.getText().toString());
+            setArguments(b);
+            ((MainActivity) getActivity()).b3(view);
+        });
+
+
 
 
         return view;

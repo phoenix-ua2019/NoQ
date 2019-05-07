@@ -161,7 +161,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         fragment.setArguments(args);
         setFragment();
     }
-
+    
     public void b3(View view)
     {
         Bundle args = fragment.getArguments();

@@ -35,6 +35,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import ua.lviv.iot.phoenix.noq.R;
+import ua.lviv.iot.phoenix.noq.activities.MainActivity;
 import ua.lviv.iot.phoenix.noq.activities.Useful;
 import ua.lviv.iot.phoenix.noq.adapters.CafeAdapter;
 import ua.lviv.iot.phoenix.noq.adapters.MealAdapter;
@@ -50,7 +51,7 @@ public class ListOfCafesFragment extends Fragment implements ValueEventListener 
     private CafeAdapter cafesAdapter;
     private View view;
 
-    FragmentActivity currentActivity;
+    MainActivity currentActivity;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -68,7 +69,7 @@ public class ListOfCafesFragment extends Fragment implements ValueEventListener 
 
         Toolbar toolbar = view.findViewById(R.id.toolbar);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
-        currentActivity = getActivity();
+        currentActivity = (MainActivity) getActivity();
 
         cafesRecyclerView.setLayoutManager(new LinearLayoutManager(currentActivity));
         cafesRecyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -80,7 +81,7 @@ public class ListOfCafesFragment extends Fragment implements ValueEventListener 
             @Override
             public void onClick(View view, int position) {
                 //Cafe cafe = cafesList.get(position);
-                ((ListView) view.findViewById(R.id.list_of_cafe)).setOnItemClickListener(
+                ((ListView) view.findViewById(R.id.cafe_recycler_view)).setOnItemClickListener(
                         (AdapterView<?> adapter, View v, int p, long l) -> {
                             Bundle b = new Bundle();
                             b.putParcelable("cafe", cafesList.get(position));
