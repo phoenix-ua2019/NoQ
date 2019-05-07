@@ -4,35 +4,6 @@
     android:layout_height="match_parent"
     android:layout_marginTop="?attr/actionBarSize">
 
-    <LinearLayout
-        android:id="@+id/search"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <ImageButton
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
-                android:src="@drawable/google" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:text="Сортувати заклади"
-                android:textColor="#30000000"
-                android:textSize="14sp" />
-
-        </RelativeLayout>
-
-    </LinearLayout>
 
     <TextView
         android:id="@+id/line"
@@ -50,14 +21,6 @@
         android:layout_marginStart="3dp"
         android:layout_marginTop="91dp"
         android:scrollbars="vertical" />
-
-    <Button
-        android:id="@+id/submit_cafe"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="95dp"
-        android:onClick="b1" />
-
 
 </RelativeLayout>
 

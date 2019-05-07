@@ -74,9 +74,10 @@
 
     </FrameLayout>
 
-    <ListView
+    <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="324dp" />
+        android:layout_height="324dp"
+        android:scrollbars="vertical"/>
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -91,61 +92,60 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/t2"
-                android:layout_width="72dp"
-                android:layout_height="28dp"
-                android:background="@color/colorPrimary"
-                android:gravity="center"
-                android:text="Ціна"
-                android:textColor="@color/white" />
+                <TextView
+                    android:id="@+id/t2"
+                    android:layout_width="72dp"
+                    android:layout_height="28dp"
+                    android:background="@color/colorPrimary"
+                    android:gravity="center"
+                    android:text="Ціна"
+                    android:textColor="@color/white" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_below="@+id/t2"
-                android:background="@color/colorPrimary" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/t2"
+                    android:background="@color/colorPrimary" />
 
                 <TextView
                     android:id="@+id/selected_price"
                     android:layout_width="match_parent"
                     android:layout_height="28dp"
                     android:layout_toRightOf="@+id/t2"
+                    android:gravity="center"
                     android:textColor="#000"
-                    android:textSize="18sp"
-                    android:gravity="center" />
+                    android:textSize="18sp" />
 
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp">
 
-            <TextView
-                android:id="@+id/t3"
-                android:layout_width="164dp"
-                android:layout_height="28dp"
-                android:layout_marginTop="32dp"
-                android:background="@color/colorPrimary"
-                android:gravity="center"
-                android:text="Час замовлення"
-                android:textColor="@color/white" />
+                <TextView
+                    android:id="@+id/t3"
+                    android:layout_width="164dp"
+                    android:layout_height="28dp"
+                    android:background="@color/colorPrimary"
+                    android:gravity="center"
+                    android:text="Час замовлення"
+                    android:textColor="@color/white" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_below="@+id/t3"
-                android:background="@color/colorPrimary" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/t3"
+                    android:background="@color/colorPrimary" />
 
                 <TextView
                     android:id="@+id/selected_time_show"
                     android:layout_width="match_parent"
                     android:layout_height="28dp"
                     android:layout_toRightOf="@+id/t3"
-
+                    android:gravity="center"
                     android:textColor="#000"
-                    android:textSize="18sp"
-                    android:gravity="center" />
+                    android:textSize="18sp" />
             </RelativeLayout>
 
         </LinearLayout>

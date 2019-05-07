@@ -15,40 +15,9 @@
         android:text="Обрати час"
         android:textAllCaps="false"
         android:textColor="#fff"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:onClick="b2"/>
 
-
-    <LinearLayout
-        android:id="@+id/search"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <ImageButton
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
-                android:src="@drawable/google" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:text="Сортувати меню"
-                android:textColor="@color/gray"
-                android:textSize="14sp" />
-
-
-
-        </RelativeLayout>
-
-    </LinearLayout>
 
     <TextView
         android:id="@+id/line"
@@ -64,13 +33,6 @@
         android:layout_below="@+id/search"
         android:layout_alignParentStart="true"
         android:scrollbars="vertical" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/recycler_view"
-        android:layout_marginTop="134dp"
-        android:onClick="b2"/>
 
 
 </RelativeLayout>
