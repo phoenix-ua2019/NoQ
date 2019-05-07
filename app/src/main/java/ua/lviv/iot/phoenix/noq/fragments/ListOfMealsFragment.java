@@ -24,6 +24,7 @@ import java.util.List;
 
 import ua.lviv.iot.phoenix.noq.R;
 import ua.lviv.iot.phoenix.noq.activities.ListOfMeals;
+import ua.lviv.iot.phoenix.noq.activities.MainActivity;
 import ua.lviv.iot.phoenix.noq.adapters.MealAdapter;
 import ua.lviv.iot.phoenix.noq.listeners.MealRecyclerTouchListener;
 import ua.lviv.iot.phoenix.noq.models.Cafe;
@@ -32,7 +33,8 @@ import ua.lviv.iot.phoenix.noq.models.Meal;
 
 public class ListOfMealsFragment extends Fragment {
 
-    private List<Meal> mealList = new ArrayList<>();
+    private Cafe cafe;
+    private ArrayList<Meal> mealList = new ArrayList<>();
     private RecyclerView recyclerView;
     private MealAdapter mealAdapter;
     private View view;
@@ -40,7 +42,7 @@ public class ListOfMealsFragment extends Fragment {
     ImageView plus, minus;
     Button chooseTimeBtn;
     Dialog quantityDialog;
-    FragmentActivity currentActivity;
+    MainActivity currentActivity;
 
     int commonSelectedAmount = 0;
 
@@ -58,7 +60,7 @@ public class ListOfMealsFragment extends Fragment {
 
         Toolbar toolbar = view.findViewById(R.id.toolbar);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
-        currentActivity = getActivity();
+        currentActivity = (MainActivity) getActivity();
 
         recyclerView.setLayoutManager(new LinearLayoutManager(currentActivity));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -70,7 +72,10 @@ public class ListOfMealsFragment extends Fragment {
                 Meal meal = mealList.get(position);
                 //Toast.makeText(getApplicationContext(), meal.getMealName() + " is selected!", Toast.LENGTH_SHORT).show();
                 quantityDialogCaller(meal);
-
+                cafe.setCafeMeals(mealList);
+                Bundle b = getArguments();
+                b.putParcelable("cafe", cafe);
+                setArguments(b);
             }
             @Override
             public void onLongClick(View v, int position) {
@@ -78,9 +83,9 @@ public class ListOfMealsFragment extends Fragment {
         }));
         //mealList = ((Cafe) getIntent().getExtras().getParcelable("cafe")).getCafeMeals();
         System.out.println(getArguments());
-        mealList = ((Cafe) getArguments().getParcelable("cafe")).getCafeMeals();
+        cafe = getArguments().getParcelable("cafe");
+        mealList = cafe.getCafeMeals();
         mealAdapter.setList(mealList);
-
         mealAdapter.notifyDataSetChanged();
         chooseTimeBtn = view.findViewById(R.id.choose_time);
         chooseTimeBtn.setVisibility(View.INVISIBLE);
@@ -115,6 +120,7 @@ public class ListOfMealsFragment extends Fragment {
             commonSelectedAmount--;
             if (commonSelectedAmount == 0) { chooseTimeBtn.setVisibility(View.INVISIBLE); }
             meal.setSelectedQuantity(meal.getSelectedQuantity() - 1);
+            //////cafe.setCafeMeals();
             dialogQuantity.setText(meal.selectedQuantityToString());
             recyclerView.setAdapter(mealAdapter);
         });
