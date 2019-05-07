@@ -22,8 +22,8 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.MyViewHolder> 
 
         public MyViewHolder(View view) {
             super(view);
-            mealName = (TextView) view.findViewById(R.id.name_of_meal);
-            selectedQuantity = (TextView) view.findViewById(R.id.selected_quantity);
+            mealName = view.findViewById(R.id.name_of_meal);
+            selectedQuantity = view.findViewById(R.id.selected_quantity);
         }
     }
 
@@ -52,34 +52,9 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.MyViewHolder> 
     public int getItemCount() {
         return mealList.size();
     }
-}
 
-    /*MealAdapter(Activity context, ArrayList<Meal> meals) {
-        super(context, 0, meals);
+    public void setList(List<Meal> list) {
+        mealList = list;
     }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        View listItemView = convertView;
-        if (listItemView == null) {
-            listItemView = LayoutInflater.from(getContext()).inflate(
-                    R.layout.menu_list_item, parent, false);
-        }
-        final Meal currentMeal = getItem(position);
-
-
-        TextView mealNameTextView = listItemView.findViewById(R.id.meal_name_text_view);
-        mealNameTextView.setText(currentMeal.getMealName());
-
-        TextView priceTypeTextView = listItemView.findViewById(R.id.price_type_text_view);
-        priceTypeTextView.setText(currentMeal.getMealPrice() + " грн");
-
-        CheckBox mealCheckBox = listItemView.findViewById(R.id.meal_checkbox);
-        currentMeal.setChecked(mealCheckBox.isChecked());
-        mealCheckBox.setOnCheckedChangeListener(
-                (CompoundButton buttonView, boolean isChecked) ->
-                        currentMeal.setChecked(isChecked)
-        );
-        return listItemView;
-    }*/
+}
 
