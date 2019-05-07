@@ -15,8 +15,8 @@
     <TextView
         android:id="@+id/name_of_meal"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
+        android:layout_height="28dp"
+        android:layout_marginTop="8dp"
         android:gravity="top"
         android:textColor="#000"
         android:textSize="16sp"
@@ -36,12 +36,11 @@
     <TextView
         android:id="@+id/price_of_meal"
         android:layout_width="wrap_content"
-        android:layout_height="14dp"
-        android:textSize="12sp"
-        android:gravity="bottom"
-        android:textColor="@color/colorPrimary"
-        android:layout_marginTop="32dp"
+        android:layout_height="28dp"
         android:layout_below="@+id/name_of_meal"
+        android:gravity="center"
+        android:textColor="@color/colorPrimary"
+        android:textSize="12sp"
         tools:text="Ціна" />
 
     <ImageView
