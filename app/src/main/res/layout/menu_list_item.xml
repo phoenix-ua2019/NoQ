@@ -23,18 +23,6 @@
         tools:text="Pizza" />
 
     <TextView
-        android:id="@+id/location_of_cafe"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/name_of_meal"
-        android:layout_centerVertical="true"
-        android:layout_marginTop="18dp"
-        android:gravity="center"
-        android:textColor="#45000000"
-        android:textSize="7sp"
-        tools:text="вул умлумав" />
-
-    <TextView
         android:id="@+id/selected_quantity"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
@@ -50,7 +38,6 @@
         android:id="@+id/waiting_time"
         android:layout_width="wrap_content"
         android:layout_height="14dp"
-        android:layout_below="@+id/location_of_cafe"
         android:layout_centerVertical="true"
         android:gravity="bottom"
         android:paddingLeft="54dp"

@@ -81,13 +81,13 @@ public class ListOfCafesFragment extends Fragment implements ValueEventListener 
             @Override
             public void onClick(View view, int position) {
                 //Cafe cafe = cafesList.get(position);
-                ((ListView) view.findViewById(R.id.cafe_recycler_view)).setOnItemClickListener(
-                        (AdapterView<?> adapter, View v, int p, long l) -> {
-                            Bundle b = new Bundle();
-                            b.putParcelable("cafe", cafesList.get(position));
-                            setArguments(b);
-                            System.out.println("I put extra cafe there!!!!!!!!!!!!!!!");
-                        });
+                //((ListView) view.findViewById(R.id.cafe_recycler_view)).setOnItemClickListener(
+                        //(AdapterView<?> adapter, View v, int p, long l) -> {
+                Bundle b = new Bundle();
+                b.putParcelable("cafe", cafesList.get(position));
+                setArguments(b);
+                System.out.println("I put extra cafe there!!!!!!!!!!!!!!!");
+                currentActivity.b1(view);
                 //Toast.makeText(getApplicationContext(), meal.getMealName() + " is selected!", Toast.LENGTH_SHORT).show();
             }
             @Override
@@ -101,6 +101,7 @@ public class ListOfCafesFragment extends Fragment implements ValueEventListener 
         //ArrayList<HashMap> temp_cafes =;
         cafesList = (ArrayList<Cafe>) (new ArrayList(((HashMap<String, HashMap<String,?>>)
                 dataSnapshot.getValue()).values())).stream().map(Cafe::new).collect(Collectors.toList());
+        System.out.println(R.drawable.aroma_kava);
         System.out.println(cafesList);
         /*if (!isAdded()) {
             try {
@@ -140,9 +141,6 @@ public class ListOfCafesFragment extends Fragment implements ValueEventListener 
         cafesList = cafesList.stream()
                 .map((Cafe c) -> c.setDrawable(getResources(), currentActivity.getPackageName())
                 ).collect(Collectors.toList());
-        Bundle b = new Bundle();
-        b.putParcelable("cafe", cafesList.get(0));
-        setArguments(b);
         System.out.println(getArguments());
         cafesAdapter.notifyDataSetChanged();
     }

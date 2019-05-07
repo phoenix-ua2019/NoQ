@@ -78,7 +78,7 @@ public class ListOfMealsFragment extends Fragment {
         }));
         //mealList = ((Cafe) getIntent().getExtras().getParcelable("cafe")).getCafeMeals();
         System.out.println(getArguments());
-        mealList = ((Cafe) getArguments().getParcelable("cafe")).getCafeMeals();
+        //mealList = ((Cafe) getArguments().getParcelable("cafe")).getCafeMeals();
         mealAdapter.notifyDataSetChanged();
         chooseTimeBtn = view.findViewById(R.id.choose_time);
         chooseTimeBtn.setVisibility(View.INVISIBLE);

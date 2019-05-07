@@ -81,6 +81,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
 
         if (id == R.id.menu) {
             fragment = new ListOfCafesFragment();
+            fragment.setArguments(this.fragment.getArguments());
 
         } else if(id == R.id.user) {
             fragment = new UserFragment();
@@ -161,7 +162,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         fragment.setArguments(args);
         setFragment();
     }
-    
+
     public void b3(View view)
     {
         Bundle args = fragment.getArguments();

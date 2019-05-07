@@ -52,6 +52,7 @@
         android:scrollbars="vertical" />
 
     <Button
+        android:id="@+id/submit_cafe"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="95dp"
