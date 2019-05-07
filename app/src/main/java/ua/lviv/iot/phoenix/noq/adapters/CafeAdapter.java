@@ -1,5 +1,6 @@
 package ua.lviv.iot.phoenix.noq.adapters;
 
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,12 +33,13 @@ public class CafeAdapter extends RecyclerView.Adapter<CafeAdapter.MyViewHolder> 
             super(view);
             cafeName = view.findViewById(R.id.name_of_cafe);
             cafeLocation = view.findViewById(R.id.location_of_cafe);
-            mDrawable = view.findViewById(R.id.photo_of_cafe);
+            //mDrawable = view.findViewById(R.id.photo_of_cafe);
         }
     }
 
+    @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.cafe_list_item, parent, false);
 
@@ -46,17 +48,17 @@ public class CafeAdapter extends RecyclerView.Adapter<CafeAdapter.MyViewHolder> 
 
 
     @Override
-    public void onBindViewHolder(CafeAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CafeAdapter.MyViewHolder holder, int position) {
         Cafe cafe = cafesList.get(position);
         System.out.println("onBindViewHolder!!!!!!!!!!!!");
         System.out.println(cafe);
         holder.cafeName.setText(cafe.getCafeName());
         holder.cafeLocation.setText(cafe.getCafeLocation());
-        if (cafe.hasImage()) {
+        /*if (cafe.hasImage()) {
             holder.mDrawable.setImageResource(cafe.getDrawableId());
         } else {
             holder.mDrawable.setVisibility(View.GONE);
-        }
+        }*/
     }
 
     @Override
@@ -64,4 +66,7 @@ public class CafeAdapter extends RecyclerView.Adapter<CafeAdapter.MyViewHolder> 
         return cafesList.size();
     }
 
+    public void setList(List<Cafe> lst) {
+        cafesList = lst;
+    }
 }
