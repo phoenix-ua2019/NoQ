@@ -61,7 +61,7 @@ public class TimeFragment extends Fragment {
                 }
         });
         view.findViewById(R.id.submit_time).setOnClickListener((View v) -> {
-            Bundle b = new Bundle();
+            Bundle b = getArguments();
             b.putString("time", orderTime.getText().toString());
             setArguments(b);
             ((MainActivity) getActivity()).b3(view);
