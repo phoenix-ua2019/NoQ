@@ -37,7 +37,7 @@
         android:id="@+id/price_of_meal"
         android:layout_width="wrap_content"
         android:layout_height="14dp"
-        android:textSize="7sp"
+        android:textSize="12sp"
         android:gravity="bottom"
         android:textColor="@color/colorPrimary"
         android:layout_marginTop="32dp"

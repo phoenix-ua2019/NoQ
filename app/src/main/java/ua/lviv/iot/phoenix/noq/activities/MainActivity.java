@@ -101,9 +101,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
                     .commit();
         }
 
-
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+        closeDrawer();
         return true;
     }
 
