@@ -38,10 +38,11 @@ public class ListOfMealsFragment extends Fragment {
     private View view;
 
     ImageView plus, minus;
+    Button chooseTimeBtn;
     Dialog quantityDialog;
     FragmentActivity currentActivity;
 
-
+    int commonSelectedAmount = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -69,6 +70,7 @@ public class ListOfMealsFragment extends Fragment {
                 Meal meal = mealList.get(position);
                 //Toast.makeText(getApplicationContext(), meal.getMealName() + " is selected!", Toast.LENGTH_SHORT).show();
                 quantityDialogCaller(meal);
+
             }
             @Override
             public void onLongClick(View v, int position) {
@@ -78,6 +80,8 @@ public class ListOfMealsFragment extends Fragment {
         System.out.println(getArguments());
         mealList = ((Cafe) getArguments().getParcelable("cafe")).getCafeMeals();
         mealAdapter.notifyDataSetChanged();
+        chooseTimeBtn = view.findViewById(R.id.choose_time);
+        chooseTimeBtn.setVisibility(View.INVISIBLE);
 
         return view;
     }
@@ -97,15 +101,17 @@ public class ListOfMealsFragment extends Fragment {
         minus.setEnabled(true);
 
         plus.setOnClickListener((View v) -> {
+            chooseTimeBtn.setVisibility(View.VISIBLE);
+            commonSelectedAmount++;
             meal.setSelectedQuantity(meal.getSelectedQuantity() + 1);
             dialogQuantity.setText(meal.selectedQuantityToString());
             recyclerView.setAdapter(mealAdapter);
         });
 
         minus.setOnClickListener((View v) -> {
-            if  (meal.getSelectedQuantity() <= 0) {
-                return;
-            }
+            if  (meal.getSelectedQuantity() <= 0) { return; }
+            commonSelectedAmount--;
+            if (commonSelectedAmount == 0) { chooseTimeBtn.setVisibility(View.INVISIBLE); }
             meal.setSelectedQuantity(meal.getSelectedQuantity() - 1);
             dialogQuantity.setText(meal.selectedQuantityToString());
             recyclerView.setAdapter(mealAdapter);

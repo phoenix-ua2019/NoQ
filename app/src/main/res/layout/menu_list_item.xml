@@ -7,15 +7,16 @@
     android:clickable="true"
     android:focusable="true"
     android:orientation="vertical"
-    android:paddingBottom="@dimen/row_padding_vertical"
     android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/row_padding_vertical"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/row_padding_vertical">
+    android:paddingBottom="@dimen/row_padding_vertical">
 
     <TextView
         android:id="@+id/name_of_meal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
         android:gravity="top"
         android:textColor="#000"
         android:textSize="16sp"
@@ -36,10 +37,13 @@
     <TextView
         android:id="@+id/selected_quantity"
         android:layout_width="wrap_content"
-        android:layout_height="14dp"
-        android:layout_below="@+id/location_of_cafe"
-        android:gravity="bottom"
-        android:textSize="12sp"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/photo_of_meal"
+        android:gravity="center"
+        android:paddingRight="16dp"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18sp"
         tools:text="234r" />
 
     <TextView
@@ -47,6 +51,7 @@
         android:layout_width="wrap_content"
         android:layout_height="14dp"
         android:layout_below="@+id/location_of_cafe"
+        android:layout_centerVertical="true"
         android:gravity="bottom"
         android:paddingLeft="54dp"
         android:textSize="7sp"
@@ -57,6 +62,7 @@
         android:layout_width="56dp"
         android:layout_height="56dp"
         android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
         tools:src="@drawable/google" />
 
     <TextView
@@ -65,6 +71,6 @@
         android:layout_below="@+id/photo_of_meal"
         android:layout_marginTop="16dp"
         android:background="#12000000"
-        android:textSize="7sp" />
+        android:textSize="1sp" />
 
 </RelativeLayout>

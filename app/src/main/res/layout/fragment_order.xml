@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="?attr/actionBarSize"
     android:orientation="vertical"
     tools:context=".fragments.OrderFragment">
 
@@ -124,7 +123,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="104dp"
+        android:layout_height="132dp"
         android:layout_gravity="bottom">
 
         <Button

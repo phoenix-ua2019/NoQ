@@ -52,9 +52,6 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
 
-        //Fragment fragment1 = new MainFragment();
-        //getSupportFragmentManager().beginTransaction().replace(R.id.base_for_nv, fragment1).commit();
-
         fragment = new ListOfCafesFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.base_for_nv, fragment).commit();
 
@@ -83,7 +80,6 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         Fragment fragment = null;
 
         if (id == R.id.menu) {
-            //fragment = new MainFragment();
             fragment = new ListOfCafesFragment();
 
         } else if(id == R.id.user) {
