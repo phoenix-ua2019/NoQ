@@ -1,15 +1,10 @@
 package ua.lviv.iot.phoenix.noq.activities;
 
 import android.content.Intent;
-import android.os.Parcel;
-import android.os.Parcelable;
 import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.NavigationView.OnNavigationItemSelectedListener;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -18,27 +13,15 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.FrameLayout;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.HashMap;
 
 import ua.lviv.iot.phoenix.noq.R;
 import ua.lviv.iot.phoenix.noq.fragments.ListOfCafesFragment;
 import ua.lviv.iot.phoenix.noq.fragments.ListOfMealsFragment;
-import ua.lviv.iot.phoenix.noq.fragments.MainFragment;
 import ua.lviv.iot.phoenix.noq.fragments.OrderFragment;
 import ua.lviv.iot.phoenix.noq.fragments.TimeFragment;
 import ua.lviv.iot.phoenix.noq.fragments.UserFragment;
-import ua.lviv.iot.phoenix.noq.models.User;
 
 public class MainActivity extends AppCompatActivity implements OnNavigationItemSelectedListener {
 
@@ -47,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private Useful useful;
     private Fragment fragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,12 +67,12 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
             fragment = new ListOfCafesFragment();
             fragment.setArguments(this.fragment.getArguments());
 
-        } else if(id == R.id.user) {
+        } else if (id == R.id.user) {
             fragment = new UserFragment();
             Bundle b = new Bundle();
             b.putParcelable("user_icon", useful.getUser());
             fragment.setArguments(b);
-        } else if(id == R.id.star) {
+        } else if (id == R.id.star) {
 
             System.out.println("star");
 
@@ -111,12 +95,10 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         }
 
         if (fragment != null) {
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-            fragmentTransaction.replace(R.id.base_for_nv, fragment);
-
-            fragmentTransaction.commit();
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.base_for_nv, fragment)
+                    .commit();
         }
 
 
@@ -135,7 +117,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
 
     @Override
     public void onBackPressed() {
-        drawerLayout = findViewById(R.id.drawer_layout_main);
+        drawerLayout = findViewById(R.id.drawer_layout);
         try {
             if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
                 drawerLayout.closeDrawer(GravityCompat.START);
@@ -147,24 +129,21 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         }
     }
 
-    public void b1(View view)
-    {
+    public void b1(View view) {
         Bundle args = fragment.getArguments();
         fragment = new ListOfMealsFragment();
         fragment.setArguments(args);
         setFragment();
     }
 
-    public void b2(View view)
-    {
+    public void b2(View view) {
         Bundle args = fragment.getArguments();
         fragment = new TimeFragment();
         fragment.setArguments(args);
         setFragment();
     }
 
-    public void b3(View view)
-    {
+    public void b3(View view) {
         Bundle args = fragment.getArguments();
         fragment = new OrderFragment();
         fragment.setArguments(args);
@@ -172,6 +151,10 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
     }
 
     private void setFragment() {
-        getSupportFragmentManager().beginTransaction().replace(R.id.base_for_nv, fragment).commit();
+        getSupportFragmentManager()
+                .beginTransaction()
+                .setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left)
+                .replace(R.id.base_for_nv, fragment)
+                .commit();
     }
 }
