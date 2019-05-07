@@ -19,13 +19,23 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import ua.lviv.iot.phoenix.noq.R;
+import ua.lviv.iot.phoenix.noq.activities.Useful;
 import ua.lviv.iot.phoenix.noq.adapters.CafeAdapter;
 import ua.lviv.iot.phoenix.noq.adapters.MealAdapter;
 import ua.lviv.iot.phoenix.noq.listeners.MealRecyclerTouchListener;
@@ -33,7 +43,7 @@ import ua.lviv.iot.phoenix.noq.models.Cafe;
 import ua.lviv.iot.phoenix.noq.models.Meal;
 
 
-public class ListOfCafesFragment extends Fragment {
+public class ListOfCafesFragment extends Fragment implements ValueEventListener {
 
     private List<Cafe> cafesList = new ArrayList<>();
     private RecyclerView cafesRecyclerView;
@@ -48,7 +58,9 @@ public class ListOfCafesFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_list_of_cafes, container, false);
 
-        cafesRecyclerView = (RecyclerView) view.findViewById(R.id.cafe_recycler_view);
+        Useful.cafeRef.addValueEventListener(this);
+
+        cafesRecyclerView = view.findViewById(R.id.cafe_recycler_view);
         cafesAdapter = new CafeAdapter(cafesList);
         cafesRecyclerView.setAdapter(cafesAdapter);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
@@ -62,37 +74,75 @@ public class ListOfCafesFragment extends Fragment {
         cafesRecyclerView.setItemAnimator(new DefaultItemAnimator());
 
         // row click listener
-        cafesRecyclerView.addOnItemTouchListener(new MealRecyclerTouchListener(currentActivity.getApplicationContext(), cafesRecyclerView, new MealRecyclerTouchListener.ClickListener() {
+        cafesRecyclerView.addOnItemTouchListener( new MealRecyclerTouchListener(
+                currentActivity.getApplicationContext(), cafesRecyclerView,
+                new MealRecyclerTouchListener.ClickListener() {
             @Override
             public void onClick(View view, int position) {
-                Cafe cafe = cafesList.get(position);
+                //Cafe cafe = cafesList.get(position);
+                ((ListView) view.findViewById(R.id.list_of_cafe)).setOnItemClickListener(
+                        (AdapterView<?> adapter, View v, int p, long l) -> {
+                            Bundle b = new Bundle();
+                            b.putParcelable("cafe", cafesList.get(position));
+                            setArguments(b);
+                            System.out.println("I put extra cafe there!!!!!!!!!!!!!!!");
+                        });
                 //Toast.makeText(getApplicationContext(), meal.getMealName() + " is selected!", Toast.LENGTH_SHORT).show();
             }
             @Override
             public void onLongClick(View v, int position) {
             }
         }));
-        //mealList = ((Cafe) getIntent().getExtras().getParcelable("cafe")).getCafeMeals();
-        prepareCafeData();
-        cafesAdapter.notifyDataSetChanged();
-
         return view;
     }
+    @Override
+    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+        //ArrayList<HashMap> temp_cafes =;
+        cafesList = (ArrayList<Cafe>) (new ArrayList(((HashMap<String, HashMap<String,?>>)
+                dataSnapshot.getValue()).values())).stream().map(Cafe::new).collect(Collectors.toList());
+        System.out.println(cafesList);
+        /*if (!isAdded()) {
+            try {
+                Thread.sleep(4000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }*/
+        prepareCafeData();
+
+        System.out.println(cafesList);
+        cafesAdapter.notifyDataSetChanged();
+        /*ListView listView = view.findViewById(R.id.list_of_cafe);
+        ArrayAdapter<Cafe> arrayAdapter =new ArrayAdapter<>(currentActivity,
+                R.layout.fragment_list_of_cafes, cafesList);
+        listView.setAdapter(arrayAdapter);
+
+        listView.setOnItemClickListener(
+                (AdapterView<?> adapterView, View view, int index, long l) -> {
+                    //Object c = adapterView.getAdapter().getItem(index);
+                    Bundle b = new Bundle();
+                    b.putParcelable("cafe", cafesList.get(index));
+                    setArguments(b);
+        });*/
+        /*((ListView) view.findViewById(R.id.list_of_cafe)).setAdapter(new ArrayAdapter(getActivity(),
+            R.layout.fragment_list_of_cafes,
+            cafesList));*/
+    }
+
+    @Override
+    public void onCancelled(@NonNull DatabaseError databaseError) {
+        System.out.println("The read failed: " + databaseError.getCode());
+    }
+
 
     private void prepareCafeData() {
-
-        Cafe cafe_1 = new Cafe("Cafe_1","Location_1");
-        cafesList.add(cafe_1);
-
-        Cafe cafe_2 = new Cafe("Cafe_2","Location_2");
-        cafesList.add(cafe_2);
-
-        Cafe cafe_3 = new Cafe("Cafe_3","Location_3");
-        cafesList.add(cafe_3);
-
-        Cafe cafe_4 = new Cafe("Cafe_4","Location4");
-        cafesList.add(cafe_4);
-
+        cafesList = cafesList.stream()
+                .map((Cafe c) -> c.setDrawable(getResources(), currentActivity.getPackageName())
+                ).collect(Collectors.toList());
+        Bundle b = new Bundle();
+        b.putParcelable("cafe", cafesList.get(0));
+        setArguments(b);
+        System.out.println(getArguments());
         cafesAdapter.notifyDataSetChanged();
     }
 

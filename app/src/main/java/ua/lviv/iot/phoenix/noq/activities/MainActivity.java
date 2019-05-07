@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,18 +46,14 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
     private DrawerLayout drawerLayout;
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private Useful useful;
-    private User mUser;
+    private Fragment fragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
 
-        Fragment fragment1 = new ListOfCafesFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.base_for_nv, fragment1).commit();
-
-        //Fragment fragment2 = new ListOfCafesFragment();
-        //getSupportFragmentManager().beginTransaction().replace(R.id.base_for_bnv, fragment2).commit();
-
+        fragment = new ListOfCafesFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.base_for_nv, fragment).commit();
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -70,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
-      
+
         useful = new Useful(navigationView, this);
         useful.setUser();
     }
@@ -151,17 +148,29 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
 
     public void b1(View view)
     {
-        getSupportFragmentManager().beginTransaction().replace(R.id.base_for_nv, new ListOfMealsFragment()).commit();
+        Bundle args = fragment.getArguments();
+        fragment = new ListOfMealsFragment();
+        fragment.setArguments(args);
+        setFragment();
     }
 
     public void b2(View view)
     {
-        getSupportFragmentManager().beginTransaction().replace(R.id.base_for_nv, new TimeFragment()).commit();
+        Bundle args = fragment.getArguments();
+        fragment = new TimeFragment();
+        fragment.setArguments(args);
+        setFragment();
     }
 
     public void b3(View view)
     {
-        getSupportFragmentManager().beginTransaction().replace(R.id.base_for_nv, new OrderFragment()).commit();
+        Bundle args = fragment.getArguments();
+        fragment = new OrderFragment();
+        fragment.setArguments(args);
+        setFragment();
+    }
 
+    private void setFragment() {
+        getSupportFragmentManager().beginTransaction().replace(R.id.base_for_nv, fragment).commit();
     }
 }

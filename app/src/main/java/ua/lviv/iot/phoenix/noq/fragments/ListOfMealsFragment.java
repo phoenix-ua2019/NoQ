@@ -50,7 +50,7 @@ public class ListOfMealsFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_list_of_menu, container, false);
 
-        recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
+        recyclerView = view.findViewById(R.id.recycler_view);
         mealAdapter = new MealAdapter(mealList);
         recyclerView.setAdapter(mealAdapter);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
@@ -77,7 +77,8 @@ public class ListOfMealsFragment extends Fragment {
             }
         }));
         //mealList = ((Cafe) getIntent().getExtras().getParcelable("cafe")).getCafeMeals();
-        prepareMealData();
+        System.out.println(getArguments());
+        mealList = ((Cafe) getArguments().getParcelable("cafe")).getCafeMeals();
         mealAdapter.notifyDataSetChanged();
         chooseTimeBtn = view.findViewById(R.id.choose_time);
         chooseTimeBtn.setVisibility(View.INVISIBLE);

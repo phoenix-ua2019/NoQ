@@ -2,6 +2,8 @@ package ua.lviv.iot.phoenix.noq.models;
 
 import com.google.firebase.database.IgnoreExtraProperties;
 
+import java.util.HashMap;
+
 @IgnoreExtraProperties
 public class Meal {
     private String preparationTime;
@@ -16,6 +18,14 @@ public class Meal {
     public Meal() {
     }
 
+    public Meal (Object o) {
+        this((HashMap<String, ?>) o);
+    }
+
+    public Meal (HashMap<String, ?> map) {
+        mealName = (String) map.get("name");
+        price = (Long) map.get("price");
+    }
     public Meal(String mealName, double price, String preparationTime, String mealPicture, double weight, String description) {
         this.mealName = mealName;
         this.price = price;
