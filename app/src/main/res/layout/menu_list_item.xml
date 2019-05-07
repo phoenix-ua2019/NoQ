@@ -42,7 +42,7 @@
         android:textColor="@color/colorPrimary"
         android:layout_marginTop="32dp"
         android:layout_below="@+id/name_of_meal"
-        tools:text="час очікування" />
+        tools:text="Ціна" />
 
     <ImageView
         android:id="@+id/photo_of_meal"

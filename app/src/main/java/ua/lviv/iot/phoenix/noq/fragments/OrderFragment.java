@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 import ua.lviv.iot.phoenix.noq.R;
 import ua.lviv.iot.phoenix.noq.adapters.MealAdapter;
@@ -32,6 +33,8 @@ public class OrderFragment extends Fragment {
         ArrayList<Meal> meals = cafe.getCafeMeals();
 
         RecyclerView recyclerView = view.findViewById(R.id.recycler_order_meals);
+        meals = (ArrayList<Meal>) meals.stream()
+                .filter(meal -> meal.getSelectedQuantity()>0).collect(Collectors.toList());
         MealAdapter mealAdapter = new MealAdapter(meals);
         recyclerView.setAdapter(mealAdapter);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
@@ -39,7 +42,7 @@ public class OrderFragment extends Fragment {
 
         Double sumPrice = 0.0;
         for (Meal meal:meals) {
-            sumPrice += meal.getPrice();
+            sumPrice += meal.getPrice()*meal.getSelectedQuantity();
         }
 
         ((TextView) view.findViewById(R.id.selected_time_show)).setText(time);
