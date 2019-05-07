@@ -25,6 +25,7 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/name_of_order_cafe"
                         android:layout_width="match_parent"
                         android:layout_height="56dp"
                         android:gravity="center"
@@ -33,6 +34,7 @@
                         tools:text="Назва закладу" />
 
                     <TextView
+                        android:id="@+id/location_of_order_cafe"
                         android:layout_width="match_parent"
                         android:layout_height="28dp"
                         android:gravity="center"

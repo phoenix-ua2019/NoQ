@@ -45,6 +45,8 @@ public class OrderFragment extends Fragment {
             sumPrice += meal.getPrice()*meal.getSelectedQuantity();
         }
 
+        ((TextView) view.findViewById(R.id.name_of_order_cafe)).setText(cafe.getCafeName());
+        ((TextView) view.findViewById(R.id.location_of_order_cafe)).setText(cafe.getCafeLocation());
         ((TextView) view.findViewById(R.id.selected_time_show)).setText(time);
         ((TextView) view.findViewById(R.id.selected_price)).setText(sumPrice.toString());
 
