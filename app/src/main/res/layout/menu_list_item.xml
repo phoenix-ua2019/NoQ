@@ -25,23 +25,23 @@
     <TextView
         android:id="@+id/selected_quantity"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_toLeftOf="@+id/photo_of_meal"
-        android:gravity="center"
         android:paddingRight="16dp"
         android:textColor="@color/colorPrimary"
         android:textSize="18sp"
         tools:text="234r" />
 
     <TextView
-        android:id="@+id/waiting_time"
+        android:id="@+id/price_of_meal"
         android:layout_width="wrap_content"
         android:layout_height="14dp"
-        android:layout_centerVertical="true"
-        android:gravity="bottom"
-        android:paddingLeft="54dp"
         android:textSize="7sp"
+        android:gravity="bottom"
+        android:textColor="@color/colorPrimary"
+        android:layout_marginTop="32dp"
+        android:layout_below="@+id/name_of_meal"
         tools:text="час очікування" />
 
     <ImageView
