@@ -4,12 +4,10 @@
     android:layout_height="match_parent">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/cafe_recycler_view"
+        android:id="@+id/user_orders_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_alignParentStart="true"
         android:scrollbars="vertical" />
 
 </RelativeLayout>
-
-

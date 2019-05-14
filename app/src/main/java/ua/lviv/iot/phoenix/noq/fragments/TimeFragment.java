@@ -20,7 +20,6 @@ public class TimeFragment extends Fragment {
 
     private TimePicker floatTime;
     private TextView orderTime;
-    private Button submitTime;
     private View view;
 
     private final int closingHour = 22;

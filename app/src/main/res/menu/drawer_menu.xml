@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
- 
-  <group>
+
+    <group>
 
         <item
-            android:id="@+id/menu"
+            android:id="@+id/make_order"
             android:checkable="true"
             android:icon="@drawable/menu_icon"
-            android:title="Зробити замовлення"/>
+            android:title="Зробити замовлення" />
+
+        <item
+            android:id="@+id/my_orders"
+            android:checkable="true"
+            android:icon="@drawable/star"
+            android:title="Мої замовлення" />
 
         <item
             android:id="@+id/user"
             android:checkable="true"
             android:icon="@drawable/user_icon"
-            android:title="Мій кабінет"/>
-
-        <item
-            android:id="@+id/star"
-            android:checkable="true"
-            android:icon="@drawable/star"
-            android:title="Улюблене"/>
+            android:title="Мій кабінет" />
 
     </group>
 
@@ -29,13 +29,13 @@
             android:id="@+id/setting"
             android:checkable="true"
             android:icon="@drawable/setting"
-            android:title="Налаштування"/>
+            android:title="Налаштування" />
 
 
         <item
             android:id="@+id/exit"
             android:checkable="true"
             android:icon="@drawable/exit"
-            android:title="Вихід"/>
+            android:title="Вихід" />
     </group>
 </menu>

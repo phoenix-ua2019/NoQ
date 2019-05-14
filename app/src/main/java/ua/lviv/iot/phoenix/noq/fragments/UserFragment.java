@@ -5,14 +5,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.NavigationView;
 import android.support.design.widget.NavigationView.OnNavigationItemSelectedListener;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,16 +19,10 @@ import android.widget.TextView;
 
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.HashMap;
 
 import ua.lviv.iot.phoenix.noq.R;
 import ua.lviv.iot.phoenix.noq.activities.ChangePasswordActivity;
-import ua.lviv.iot.phoenix.noq.activities.MainActivity;
 import ua.lviv.iot.phoenix.noq.activities.SignInActivity;
-import ua.lviv.iot.phoenix.noq.activities.Useful;
 import ua.lviv.iot.phoenix.noq.models.User;
 
 public class UserFragment extends Fragment
@@ -73,11 +64,11 @@ public class UserFragment extends Fragment
         int id = menuItem.getItemId();
         if(id == R.id.user) {
             closeDrawer();
-        } else if(id == R.id.menu) {
+        } else if(id == R.id.make_order) {
             closeDrawer();
             activity.finish();
             activity.overridePendingTransition(R.anim.right_in, R.anim.rotate);
-        } else if(id == R.id.star) {
+        } else if(id == R.id.my_orders) {
             System.out.println("star");
         } else if(id == R.id.setting) {
             System.out.println("setting");

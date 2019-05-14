@@ -8,13 +8,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <ImageView
-            android:layout_width="110dp"
-            android:layout_height="110dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="32dp"
-            android:src="@drawable/google" />
-      
+
         <EditText
             android:id="@+id/enter_name"
             android:layout_width="match_parent"
@@ -24,10 +18,10 @@
             android:layout_marginRight="32dp"
             android:backgroundTint="@color/colorPrimary"
             android:hint="Ім'я прізвище"
-            android:paddingLeft="16dp"
-            android:textSize="18sp"
             android:inputType="textPersonName"
-            android:singleLine="true" />
+            android:paddingLeft="16dp"
+            android:singleLine="true"
+            android:textSize="18sp" />
 
 
         <EditText
@@ -39,10 +33,10 @@
             android:layout_marginRight="32dp"
             android:backgroundTint="@color/colorPrimary"
             android:hint="Телефон"
-            android:paddingLeft="16dp"
-            android:textSize="18sp"
             android:inputType="phone"
-            android:singleLine="true" />
+            android:paddingLeft="16dp"
+            android:singleLine="true"
+            android:textSize="18sp" />
 
 
         <EditText
@@ -54,10 +48,10 @@
             android:layout_marginRight="32dp"
             android:backgroundTint="@color/colorPrimary"
             android:hint="Email"
-            android:paddingLeft="16dp"
-            android:textSize="18sp"
             android:inputType="textEmailAddress"
-            android:singleLine="true" />
+            android:paddingLeft="16dp"
+            android:singleLine="true"
+            android:textSize="18sp" />
 
         <EditText
             android:id="@+id/enter_data"
@@ -68,10 +62,10 @@
             android:layout_marginRight="32dp"
             android:backgroundTint="@color/colorPrimary"
             android:hint="День народження"
-            android:paddingLeft="16dp"
-            android:textSize="18sp"
             android:inputType="date"
-            android:singleLine="true" />
+            android:paddingLeft="16dp"
+            android:singleLine="true"
+            android:textSize="18sp" />
 
         <EditText
             android:id="@+id/enter_password"
@@ -82,11 +76,11 @@
             android:layout_marginRight="32dp"
             android:backgroundTint="@color/colorPrimary"
             android:hint="Введіть пароль"
+            android:inputType="textAutoComplete"
             android:paddingLeft="16dp"
             android:password="true"
-            android:textSize="18sp"
-            android:inputType="textAutoComplete"
-            android:singleLine="true" />
+            android:singleLine="true"
+            android:textSize="18sp" />
 
 
         <EditText
@@ -98,12 +92,12 @@
             android:layout_marginRight="32dp"
             android:backgroundTint="@color/colorPrimary"
             android:hint="Повторіть пароль"
+            android:imeOptions="actionDone"
+            android:inputType="textAutoComplete"
             android:paddingLeft="16dp"
             android:password="true"
-            android:textSize="18sp"
-            android:inputType="textAutoComplete"
             android:singleLine="true"
-            android:imeOptions="actionDone" />
+            android:textSize="18sp" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -112,8 +106,8 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
                 android:layout_marginBottom="16dp"
                 android:orientation="vertical">
 
@@ -142,7 +136,6 @@
                     android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="16dp"
-                    android:layout_marginBottom="16dp"
                     android:background="@drawable/button_style"
                     android:text="Увійти"
                     android:textAllCaps="false"

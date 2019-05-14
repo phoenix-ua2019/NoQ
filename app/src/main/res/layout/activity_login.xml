@@ -6,10 +6,10 @@
     android:orientation="vertical">
 
     <FrameLayout
-        android:layout_weight="1"
         android:id="@+id/frame_picture"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
 
         <ImageView
             android:id="@+id/logo_sign_in"
@@ -53,11 +53,11 @@
                     android:autofillHints="login@example.com"
                     android:backgroundTint="@color/colorPrimary"
                     android:hint="Email"
-                    android:paddingLeft="16dp"
-                    android:textColor="@color/black"
-                    android:textSize="18sp"
                     android:inputType="textEmailAddress"
-                    android:singleLine="true" />
+                    android:paddingLeft="16dp"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
 
             </RelativeLayout>
 
@@ -86,13 +86,13 @@
                     android:autofillHints="password"
                     android:backgroundTint="@color/colorPrimary"
                     android:hint="Пароль"
+                    android:imeOptions="actionDone"
+                    android:inputType="textPassword"
                     android:paddingLeft="16dp"
                     android:password="true"
-                    android:textColor="@color/black"
-                    android:textSize="18sp"
-                    android:inputType="textPassword"
                     android:singleLine="true"
-                    android:imeOptions="actionDone" />
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
 
             </RelativeLayout>
 
@@ -101,9 +101,9 @@
     </FrameLayout>
 
     <FrameLayout
-        android:layout_weight="1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -116,6 +116,7 @@
                 android:layout_width="160dp"
                 android:layout_height="40dp"
                 android:layout_centerHorizontal="true"
+                android:layout_marginTop="16dp"
                 android:layout_marginBottom="64dp"
                 android:background="@drawable/button_style"
                 android:text="Увійти"

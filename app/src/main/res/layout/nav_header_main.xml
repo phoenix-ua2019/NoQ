@@ -28,7 +28,7 @@
             android:fontFamily="sans-serif-condensed"
             android:text="User Name"
             android:textColor="#fff"
-            android:textSize="28sp" />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/header_email"

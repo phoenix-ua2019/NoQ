@@ -21,6 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import ua.lviv.iot.phoenix.noq.R;
 import ua.lviv.iot.phoenix.noq.fragments.ListOfCafesFragment;
 import ua.lviv.iot.phoenix.noq.fragments.ListOfMealsFragment;
+import ua.lviv.iot.phoenix.noq.fragments.MyOrdersFragment;
 import ua.lviv.iot.phoenix.noq.fragments.OrderFragment;
 import ua.lviv.iot.phoenix.noq.fragments.TimeFragment;
 import ua.lviv.iot.phoenix.noq.fragments.UserFragment;
@@ -65,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
 
         Fragment fragment = null;
 
-        if (id == R.id.menu) {
+        if (id == R.id.make_order) {
             fragment = new ListOfCafesFragment();
             fragment.setArguments(this.fragment.getArguments());
 
@@ -74,9 +75,9 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
             Bundle b = new Bundle();
             b.putParcelable("user_icon", useful.getUser());
             fragment.setArguments(b);
-        } else if (id == R.id.star) {
+        } else if (id == R.id.my_orders) {
 
-            System.out.println("star");
+            fragment = new MyOrdersFragment();
 
         } else if (id == R.id.setting) {
 
