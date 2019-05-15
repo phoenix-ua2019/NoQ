@@ -15,14 +15,20 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.GenericTypeIndicator;
+import com.google.firebase.database.ValueEventListener;
 
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import ua.lviv.iot.phoenix.noq.R;
+import ua.lviv.iot.phoenix.noq.activities.MainActivity;
 import ua.lviv.iot.phoenix.noq.activities.Useful;
 import ua.lviv.iot.phoenix.noq.adapters.MealAdapter;
 import ua.lviv.iot.phoenix.noq.models.Cafe;
@@ -67,8 +73,27 @@ public class OrderFragment extends Fragment {
         Order finalOrder = new Order(time, sumPrice, Date.from(Instant.now()), cafe);
 
         DatabaseReference cafeReference = Useful.orderRef.child(cafe.getCafeLocation());
-        cafeReference.child(""+numOfOrders).setValue(finalOrder);
-        Useful.orderRef.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(""+numOfOrders).setValue(finalOrder);
+        cafeReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                cafeReference.child(""+dataSnapshot.getChildrenCount()).setValue(finalOrder);
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        DatabaseReference userReference = Useful.orderRef.child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        userReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                userReference.child(""+dataSnapshot.getChildrenCount()).setValue(finalOrder);
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
         numOfOrders += 1;
 
         return view;
