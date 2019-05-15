@@ -31,6 +31,7 @@ public class Useful implements ValueEventListener {
 
     public static final DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
     public static final DatabaseReference cafeRef = ref.child("cafes");
+    public static final DatabaseReference orderRef = ref.child("orders");
     public static final DatabaseReference userRef = ref.child("authentication").child("users");
     public static final String google_api_key =
             //"648378489334-138kgq7v5fiftdget7pp0vifahki0i2m.apps.googleusercontent.com";
