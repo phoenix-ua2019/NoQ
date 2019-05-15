@@ -1,5 +1,6 @@
 package ua.lviv.iot.phoenix.noq.activities;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -27,20 +28,21 @@ public class Useful implements ValueEventListener {
     User mUser;
     static FirebaseAuth mAuth = FirebaseAuth.getInstance();
     NavigationView nv;
-    AppCompatActivity that;
+    Activity that;
 
     public static final DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
     public static final DatabaseReference cafeRef = ref.child("cafes");
+    public static final DatabaseReference orderRef = ref.child("orders");
     public static final DatabaseReference userRef = ref.child("authentication").child("users");
     public static final String google_api_key =
             //"648378489334-138kgq7v5fiftdget7pp0vifahki0i2m.apps.googleusercontent.com";
             "648378489334-0kfava9v3evp4123h6bosi4ohojb3pkg.apps.googleusercontent.com";
-    Useful(NavigationView nv, AppCompatActivity that) {
+    public Useful(NavigationView nv, AppCompatActivity that) {
         this.nv = nv;
         this.that = that;
     }
 
-    Useful(AppCompatActivity that) {
+    public Useful(Activity that) {
         this.that = that;
     }
 
@@ -54,7 +56,7 @@ public class Useful implements ValueEventListener {
             that.startActivity(new Intent(that, MainActivity.class));
         }
     }
-    static void onAuthSuccess(AppCompatActivity that, FirebaseUser user) {
+    static void onAuthSuccess(Activity that, FirebaseUser user) {
         new Useful(that).onAuthSuccess(user);
     }
 
