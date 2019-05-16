@@ -18,7 +18,7 @@ public class Cafe implements Parcelable {
     private String cafeName;
     private String cafeLocation;
 
-    private String mDrawableId = null;// = -700119;
+    private String mDrawableId;// = -700119;
     private ArrayList<Meal> mCafeMeals;
 
 

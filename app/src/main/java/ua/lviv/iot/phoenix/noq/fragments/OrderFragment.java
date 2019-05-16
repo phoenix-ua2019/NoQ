@@ -38,7 +38,6 @@ import ua.lviv.iot.phoenix.noq.models.Order;
 public class OrderFragment extends Fragment {
 
     private View view;
-    private static int numOfOrders = 0;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -48,7 +47,7 @@ public class OrderFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_order, container, false);
 
         String time = getArguments().getString("time");
-        Cafe cafe = getArguments().getParcelable("cafe");
+        Cafe cafe = getArguments().getParcelable("order_cafe");
         ArrayList<Meal> meals = cafe.getCafeMeals();
 
         RecyclerView recyclerView = view.findViewById(R.id.recycler_order_meals);
@@ -72,29 +71,33 @@ public class OrderFragment extends Fragment {
 
         Order finalOrder = new Order(time, sumPrice, Date.from(Instant.now()), cafe);
 
+        final int count[] = {0};
         DatabaseReference cafeReference = Useful.orderRef.child(cafe.getCafeLocation());
+
         cafeReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                cafeReference.child(""+dataSnapshot.getChildrenCount()).setValue(finalOrder);
+                count[0] += dataSnapshot.getChildrenCount();
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
         });
+        cafeReference.child(""+count[0]).setValue(finalOrder);
+        count[0] = 0;
         DatabaseReference userReference = Useful.orderRef.child(FirebaseAuth.getInstance().getCurrentUser().getUid());
         userReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                userReference.child(""+dataSnapshot.getChildrenCount()).setValue(finalOrder);
+                count[0] += dataSnapshot.getChildrenCount();
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
         });
-        numOfOrders += 1;
+        userReference.child(""+count[0]).setValue(finalOrder);
 
         return view;
     }

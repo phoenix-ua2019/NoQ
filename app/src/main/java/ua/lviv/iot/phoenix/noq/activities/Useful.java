@@ -80,9 +80,7 @@ public class Useful implements ValueEventListener {
 
     @Override
     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-        System.out.println((HashMap<String, String>) dataSnapshot.getValue());
         mUser = new User((HashMap<String, String>) dataSnapshot.getValue());
-        //that.mUser = mUser;
         try {
             ((TextView) that.findViewById(R.id.header_name)).setText(mUser.getName());
             ((TextView) that.findViewById(R.id.header_email)).setText(mUser.getEmail());

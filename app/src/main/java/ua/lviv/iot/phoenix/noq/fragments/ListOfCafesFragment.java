@@ -1,29 +1,16 @@
 package ua.lviv.iot.phoenix.noq.fragments;
 
-import android.app.Dialog;
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -38,10 +25,8 @@ import ua.lviv.iot.phoenix.noq.R;
 import ua.lviv.iot.phoenix.noq.activities.MainActivity;
 import ua.lviv.iot.phoenix.noq.activities.Useful;
 import ua.lviv.iot.phoenix.noq.adapters.CafeAdapter;
-import ua.lviv.iot.phoenix.noq.adapters.MealAdapter;
-import ua.lviv.iot.phoenix.noq.listeners.MealRecyclerTouchListener;
+import ua.lviv.iot.phoenix.noq.listeners.RecyclerTouchListener;
 import ua.lviv.iot.phoenix.noq.models.Cafe;
-import ua.lviv.iot.phoenix.noq.models.Meal;
 
 
 public class ListOfCafesFragment extends Fragment implements ValueEventListener {
@@ -62,7 +47,7 @@ public class ListOfCafesFragment extends Fragment implements ValueEventListener 
         Useful.cafeRef.addValueEventListener(this);
 
         cafesRecyclerView = view.findViewById(R.id.cafe_recycler_view);
-        cafesAdapter = new CafeAdapter(cafesList);
+        cafesAdapter = new CafeAdapter(new ArrayList<>());
         cafesRecyclerView.setAdapter(cafesAdapter);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         cafesRecyclerView.setLayoutManager(mLayoutManager);
@@ -75,9 +60,9 @@ public class ListOfCafesFragment extends Fragment implements ValueEventListener 
         cafesRecyclerView.setItemAnimator(new DefaultItemAnimator());
 
         // row click listener
-        cafesRecyclerView.addOnItemTouchListener( new MealRecyclerTouchListener(
+        cafesRecyclerView.addOnItemTouchListener( new RecyclerTouchListener(
                 currentActivity.getApplicationContext(), cafesRecyclerView,
-                new MealRecyclerTouchListener.ClickListener() {
+                new RecyclerTouchListener.ClickListener() {
             @Override
             public void onClick(View view, int position) {
                 //Cafe cafe = cafesList.get(position);
