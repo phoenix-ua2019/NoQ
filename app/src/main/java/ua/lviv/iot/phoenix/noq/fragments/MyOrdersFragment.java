@@ -23,6 +23,8 @@ public class MyOrdersFragment extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_my_orders, container, false);
 
+        setArguments(new Bundle());
+
         return view;
     }
 

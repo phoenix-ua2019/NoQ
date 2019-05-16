@@ -5,8 +5,6 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.NavigationView.OnNavigationItemSelectedListener;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -19,12 +17,7 @@ import android.view.View;
 import com.google.firebase.auth.FirebaseAuth;
 
 import ua.lviv.iot.phoenix.noq.R;
-import ua.lviv.iot.phoenix.noq.fragments.ListOfCafesFragment;
-import ua.lviv.iot.phoenix.noq.fragments.ListOfMealsFragment;
-import ua.lviv.iot.phoenix.noq.fragments.MyOrdersFragment;
-import ua.lviv.iot.phoenix.noq.fragments.OrderFragment;
-import ua.lviv.iot.phoenix.noq.fragments.TimeFragment;
-import ua.lviv.iot.phoenix.noq.fragments.UserFragment;
+import ua.lviv.iot.phoenix.noq.fragments.*;
 
 public class MainActivity extends AppCompatActivity implements OnNavigationItemSelectedListener {
 
@@ -68,7 +61,8 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
 
         if (id == R.id.make_order) {
             fragment = new ListOfCafesFragment();
-            fragment.setArguments(this.fragment.getArguments());
+            fragment.setArguments(new Bundle());
+            //this.fragment.getArguments()
 
         } else if (id == R.id.user) {
             fragment = new UserFragment();
@@ -78,6 +72,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         } else if (id == R.id.my_orders) {
 
             fragment = new MyOrdersFragment();
+            fragment.setArguments(new Bundle());
 
         } else if (id == R.id.setting) {
 
@@ -98,12 +93,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         }
 
         if (fragment != null) {
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-            fragmentTransaction.replace(R.id.base_for_nv, fragment);
-
-            fragmentTransaction.commit();
+            setFragment(fragment);
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -136,27 +126,25 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
     }
 
     public void b1(View view) {
-        Bundle args = fragment.getArguments();
-        fragment = new ListOfMealsFragment();
-        fragment.setArguments(args);
-        setFragment();
+        setFragment(new ListOfMealsFragment());
     }
 
     public void b2(View view) {
-        Bundle args = fragment.getArguments();
-        fragment = new TimeFragment();
-        fragment.setArguments(args);
-        setFragment();
+        setFragment(new TimeFragment());
     }
 
     public void b3(View view) {
-        Bundle args = fragment.getArguments();
-        fragment = new OrderFragment();
-        fragment.setArguments(args);
-        setFragment();
+        setFragment(new OrderFragment());
     }
 
-    private void setFragment() {
+    public void b4(View view) {
+        setFragment(new MyOrdersFragment());
+    }
+
+    private void setFragment(Fragment new_fragment) {
+        Bundle args = fragment.getArguments();
+        fragment = new_fragment;
+        fragment.setArguments(args);
         getSupportFragmentManager()
                 .beginTransaction()
                 .setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left)

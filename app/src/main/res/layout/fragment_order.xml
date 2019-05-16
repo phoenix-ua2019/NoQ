@@ -170,7 +170,8 @@
             android:text="Підтвердити"
             android:textAllCaps="false"
             android:textColor="@color/white"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:onClick="b4" />
 
     </RelativeLayout>
 
