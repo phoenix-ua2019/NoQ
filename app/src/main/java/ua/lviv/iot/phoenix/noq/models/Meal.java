@@ -9,7 +9,7 @@ import java.util.HashMap;
 
 @IgnoreExtraProperties
 public class Meal implements Parcelable {
-    private String preparationTime;
+    private int preparationTime;
     private String mealPicture;
     private String description;
     private String mealName;
@@ -43,7 +43,7 @@ public class Meal implements Parcelable {
     }
 
     public Meal (Parcel source) {
-        this(source.readString(), source.readDouble(), source.readString(),
+        this(source.readString(), source.readDouble(), source.readInt(),
                 source.readString(), source.readDouble(), source.readString());
     }
 
@@ -56,13 +56,13 @@ public class Meal implements Parcelable {
     public void writeToParcel(Parcel out, int flags) {
         out.writeString(mealName);
         out.writeDouble(price);
-        out.writeString(preparationTime);
+        out.writeInt(preparationTime);
         out.writeString(mealPicture);
         out.writeDouble(weight);
         out.writeString(description);
     }
 
-    public Meal(String mealName, double price, String preparationTime, String mealPicture, double weight, String description) {
+    public Meal(String mealName, double price, int preparationTime, String mealPicture, double weight, String description) {
         this.mealName = mealName;
         this.price = price;
         this.preparationTime = preparationTime;
@@ -79,11 +79,11 @@ public class Meal implements Parcelable {
         this.mealName = mealName;
     }
 
-    public String getPreparationTime() {
+    public int getPreparationTime() {
         return preparationTime;
     }
 
-    public void setPreparationTime(String preparationTime) {
+    public void setPreparationTime(int preparationTime) {
         this.preparationTime = preparationTime;
     }
 

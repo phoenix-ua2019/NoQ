@@ -34,6 +34,17 @@
         tools:text="234r" />
 
     <TextView
+        android:id="@+id/time_to_prepare"
+        android:layout_width="wrap_content"
+        android:layout_height="28dp"
+        android:layout_below="@+id/name_of_meal"
+        android:layout_marginLeft="24dp"
+        android:layout_toRightOf="@+id/price_of_meal"
+        android:gravity="center"
+        android:textSize="12sp"
+        tools:text="12 хв" />
+
+    <TextView
         android:id="@+id/price_of_meal"
         android:layout_width="wrap_content"
         android:layout_height="28dp"

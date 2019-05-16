@@ -1,6 +1,7 @@
 package ua.lviv.iot.phoenix.noq.activities;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.NavigationView.OnNavigationItemSelectedListener;
@@ -12,9 +13,13 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.ActionProvider;
+import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.support.v7.widget.Toolbar;
+import android.view.SubMenu;
 import android.view.View;
+import android.widget.RelativeLayout;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -44,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setSubtitle("fff");
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -125,6 +131,8 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
     public void onBackPressed() {
         drawerLayout = findViewById(R.id.drawer_layout);
         try {
+
+
             if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
                 drawerLayout.closeDrawer(GravityCompat.START);
             } else {

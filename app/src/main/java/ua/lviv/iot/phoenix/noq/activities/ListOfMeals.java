@@ -91,7 +91,7 @@ public class ListOfMeals extends AppCompatActivity {
         });
         quantityDialog.show();
     }
-
+/*
     private void prepareMealData() {
         Meal meal_1 = new Meal("Meal_1", 100.0, "1 min", "Picture", 100.0, "fast making");
         mealList.add(meal_1);
@@ -110,6 +110,7 @@ public class ListOfMeals extends AppCompatActivity {
 
         mealAdapter.notifyDataSetChanged();
     }
+    */
 }
     /*ArrayList<Meal> meals;
 

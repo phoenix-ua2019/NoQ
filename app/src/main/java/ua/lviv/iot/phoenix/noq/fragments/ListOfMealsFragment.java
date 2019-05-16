@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.GravityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -45,6 +46,7 @@ public class ListOfMealsFragment extends Fragment {
     MainActivity currentActivity;
 
     int commonSelectedAmount = 0;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -126,7 +128,7 @@ public class ListOfMealsFragment extends Fragment {
         });
         quantityDialog.show();
     }
-
+/*
     private void prepareMealData() {
 
         Meal meal_1 = new Meal("Meal_1", 100.0, "1 min", "Picture", 100.0, "fast making");
@@ -164,5 +166,6 @@ public class ListOfMealsFragment extends Fragment {
 
         mealAdapter.notifyDataSetChanged();
     }
+    */
 
 }
