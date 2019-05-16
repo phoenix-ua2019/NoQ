@@ -59,9 +59,14 @@ public class OrderFragment extends Fragment {
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
 
-        double sumPrice = 0.0;
+        Double sumPrice = 0.0;
+        int minTimeToPrepare = 0;
         for (Meal meal:meals) {
             sumPrice += meal.getPrice()*meal.getSelectedQuantity();
+            int temp = meal.getTime()*meal.getSelectedQuantity();
+            if (minTimeToPrepare < temp) {
+                minTimeToPrepare = temp;
+            }
         }
 
         ((TextView) view.findViewById(R.id.name_of_order_cafe)).setText(cafe.getCafeName());

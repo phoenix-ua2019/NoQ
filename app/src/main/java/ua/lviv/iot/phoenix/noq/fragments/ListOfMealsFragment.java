@@ -40,6 +40,7 @@ public class ListOfMealsFragment extends Fragment {
 
     int commonSelectedAmount = 0;
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

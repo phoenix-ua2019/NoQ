@@ -18,10 +18,10 @@ public class TimeFragment extends Fragment {
     private TimePicker floatTime;
     private TextView orderTime;
     private View view;
+    private int preparationTime = 15;
 
-    private final int closingHour = 22;
-    private final int openingHour = 7;
-    private final int preparationTime = 15;
+    private final int closingHour = 25;
+    private final int openingHour = -1;
     private static final int minutesInHour = 60;
 
     boolean wasShownToastForPast = false;
@@ -70,6 +70,7 @@ public class TimeFragment extends Fragment {
         int orderMinute = minute;
         orderTime.setText(String.format("%02d:%02d", orderHour, orderMinute));
     }
+
 
     private boolean isAllowableTime(int orderHour, int orderMinute) {
         int currentHour = floatTime.getCurrentHour();

@@ -18,13 +18,14 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.MyViewHolder> 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public ImageView mealPicture;
-        public TextView mealName, selectedQuantity, mealPrice;
+        public TextView mealName, selectedQuantity, mealPrice, timeToPrepare;
 
         public MyViewHolder(View view) {
             super(view);
             mealName = view.findViewById(R.id.name_of_meal);
             mealPrice = view.findViewById(R.id.price_of_meal);
             selectedQuantity = view.findViewById(R.id.selected_quantity);
+            timeToPrepare = view.findViewById(R.id.time_to_prepare);
         }
     }
 
@@ -45,6 +46,7 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.MyViewHolder> 
         Meal meal = mealList.get(position);
         holder.mealName.setText(meal.getMealName());
         holder.mealPrice.setText(meal.getPrice()+" грн");
+        holder.timeToPrepare.setText(meal.getTime()+" хв");
         if (meal.getSelectedQuantity() > 0) {
             holder.selectedQuantity.setText(meal.selectedQuantityToString());
         }
