@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setSubtitle("fff");
+        getSupportActionBar().setSubtitle("Hello World");
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -99,7 +99,11 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         }
 
         if (fragment != null) {
-            setFragment(fragment);
+            getSupportFragmentManager()
+                .beginTransaction()
+                .setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left)
+                .replace(R.id.base_for_nv, fragment)
+                .commit();
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
