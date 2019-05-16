@@ -10,13 +10,19 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.stream.Collectors;
+
 import ua.lviv.iot.phoenix.noq.R;
 import ua.lviv.iot.phoenix.noq.activities.MainActivity;
+import ua.lviv.iot.phoenix.noq.models.Cafe;
+import ua.lviv.iot.phoenix.noq.models.Meal;
 
 public class TimeFragment extends Fragment {
 
     private TimePicker floatTime;
     private TextView orderTime;
+    private TextView minOrderTime;
     private View view;
     private int preparationTime = 15;
 
@@ -35,6 +41,7 @@ public class TimeFragment extends Fragment {
         Bundle b = getArguments();
         floatTime = view.findViewById(R.id.clock);
         orderTime = view.findViewById(R.id.selected_time);
+        minOrderTime = view.findViewById(R.id.min_time_of_cook);
 
         floatTime.setIs24HourView(true);
 
@@ -43,6 +50,24 @@ public class TimeFragment extends Fragment {
         if (isCafeOpen(currentHour, currentMinute)){
             updateDisplay(currentHour, currentMinute);
         }
+
+        Cafe cafe = getArguments().getParcelable("time_cafe");
+        ArrayList<Meal> meals = cafe.getCafeMeals();
+
+        meals = (ArrayList<Meal>) meals.stream()
+                .filter(meal -> meal.getSelectedQuantity()>0).collect(Collectors.toList());
+        cafe.setCafeMeals(meals);
+        b.putParcelable("order_cafe", cafe);
+
+        int minTimeToPrepare = 0;
+
+        for (Meal meal:meals) {
+            int temp = meal.getTime() * meal.getSelectedQuantity();
+            if (minTimeToPrepare < temp) {
+                minTimeToPrepare = temp;
+            }
+        }
+        minOrderTime.setText(minTimeToPrepare+" хв");
 
         floatTime.setOnTimeChangedListener((TimePicker view, int hourOfDay, int minute) -> {
                 if (isCafeOpen(hourOfDay, minute) & isAllowableTime(hourOfDay, minute)) {
