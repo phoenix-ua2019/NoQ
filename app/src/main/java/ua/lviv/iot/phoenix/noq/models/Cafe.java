@@ -15,18 +15,18 @@ import java.util.stream.Collectors;
 
 @IgnoreExtraProperties
 public class Cafe implements Parcelable {
-    private String cafeName;
-    private String cafeLocation;
+    private String name;
+    private String location;
 
-    private String mDrawableId;// = -700119;
-    private ArrayList<Meal> mCafeMeals;
+    private String icon;// = -700119;
+    private ArrayList<Meal> meals;
 
 
     public Cafe() { }
 
-    /*public Cafe(String cafeName, String cafeLocation) {
-        this.cafeName = cafeName;
-        this.cafeLocation = cafeLocation;
+    /*public Cafe(String name, String location) {
+        this.name = name;
+        this.location = location;
     }*/
 
     public static final Parcelable.Creator<Cafe> CREATOR =
@@ -48,7 +48,7 @@ public class Cafe implements Parcelable {
 
     public Cafe (Parcel source) {
         this(source.readString(), source.readString(), source.readString(), source.readString(), new ArrayList<Meal>());
-        source.readList(mCafeMeals, Meal.class.getClassLoader());
+        source.readList(meals, Meal.class.getClassLoader());
     }
 
     public Cafe (String str) {
@@ -56,27 +56,29 @@ public class Cafe implements Parcelable {
     }
 
     public Cafe (HashMap<String, ?> map) {
-        cafeName = (String) map.get("name");
-        cafeLocation = (String) map.get("location");
-        mDrawableId = (String) map.get("icon");
-        Object temp = map.get("meals");
-        List<?> tempCafeMeals = (ArrayList<HashMap>) temp;
-        mCafeMeals = (ArrayList<Meal>) tempCafeMeals.stream().map(Meal::new).collect(Collectors.toList());
+        name = (String) map.get("name");
+        location = (String) map.get("location");
+        icon = (String) map.get("icon");
+        List<?> tempCafeMeals = (ArrayList<HashMap>) map.get("meals");
+        System.out.println(map);
+        System.out.println(map.get("meals"));
+        System.out.println(tempCafeMeals);
+        meals = (ArrayList<Meal>) tempCafeMeals.stream().map(Meal::new).collect(Collectors.toList());
     }
 
     public Cafe (String name, String location, String email, String icon, ArrayList<Meal> meals) {
-        cafeName = name;
-        cafeLocation = location;
-        mDrawableId = icon;
-        mCafeMeals = meals;
+        this.name = name;
+        this.location = location;
+        this.icon = icon;
+        this.meals = meals;
     }
 
     @Override
     public String toString() {
-        return "name=[" + cafeName +
-                "], location=[" + cafeLocation +
-                "], icon=[" + mDrawableId +
-                "], meals=[" + mCafeMeals + "] ";
+        return "name=[" + name +
+                "], location=[" + location +
+                "], icon=[" + icon +
+                "], meals=[" + meals + "] ";
     }
 
     @Override
@@ -86,47 +88,47 @@ public class Cafe implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel out, int flags) {
-        out.writeString(cafeName);
-        out.writeString(cafeLocation);
-        out.writeString(mDrawableId);
-        out.writeList(mCafeMeals);
+        out.writeString(name);
+        out.writeString(location);
+        out.writeString(icon);
+        out.writeList(meals);
     }
 
 
     public String getCafeName() {
-        return cafeName;
+        return name;
     }
 
-    public void setCafeName(String cafeName) {
-        this.cafeName = cafeName;
+    public void setCafeName(String name) {
+        this.name = name;
     }
 
     public String getCafeLocation() {
-        return cafeLocation;
+        return location;
     }
 
-    public void setCafeLocation(String cafeLocation) {
-        this.cafeLocation = cafeLocation;
+    public void setCafeLocation(String location) {
+        this.location = location;
     }
 
-    public void setDrawableId(String id) {
-        mDrawableId = id;
+    public void setIcon(String id) {
+        icon = id;
     }
 
-    public String getDrawableId() {
-        return mDrawableId;
+    public String getIcon() {
+        return icon;
     }
 
     public boolean hasImage(){
-        return mDrawableId != null;
+        return icon != null;
     }
 
     public ArrayList<Meal> getCafeMeals() {
-        return mCafeMeals;
+        return meals;
     }
 
     public void setCafeMeals(ArrayList<Meal> meals) {
-        mCafeMeals = meals;
+        this.meals = meals;
     }
 
 }

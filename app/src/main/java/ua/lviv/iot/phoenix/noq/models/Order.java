@@ -8,16 +8,15 @@ import com.google.firebase.database.annotations.NotNull;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.Date;
+import java.util.Map;
 
-public class Order
-        //implements Parcelable
-        {
+public class Order implements Parcelable {
 
     private Date mDate;
     private String mTime;
     private Cafe mCafe;
     private double mSum;
-    /*public static final Parcelable.Creator<Order> CREATOR = new Parcelable.Creator<Order>() {
+    public static final Parcelable.Creator<Order> CREATOR = new Parcelable.Creator<Order>() {
         @Override
         public Order createFromParcel(Parcel source) {
             try {
@@ -32,11 +31,25 @@ public class Order
         public Order[] newArray(int size) {
          return new Order[size];
         }
-     };*/
+     };
 
-    /*Order() {
+    Order() {
 
-    }*/
+    }
+
+    public Order (Object o) {
+        this((Map<String, ?>) o);
+    }
+
+    public Order (Map<String, ?> map) {
+        mCafe = new Cafe(map.get("cafe"));
+        mTime = (String) map.get("time");
+        try {
+            mSum = (Double) map.get("sum");
+        } catch (Exception e){
+            mSum = (Long) map.get("sum");
+        }
+    }
 
     public Order(String time, double sum, Date date, Cafe cafe){
         mTime = time;
@@ -45,7 +58,7 @@ public class Order
         mCafe = cafe;
     }
 
-    /*Order(@NotNull Parcel source) throws ParseException {
+    Order(@NotNull Parcel source) throws ParseException {
         this(source.readString(), source.readInt(),
                 DateFormat.getDateInstance().parse(source.readString()),
                 source.readParcelable(Cafe.class.getClassLoader()));
@@ -59,10 +72,10 @@ public class Order
     @Override
     public void writeToParcel(Parcel out, int flags) {
         out.writeString(mTime);
-        out.writeInt(mSum);
+        out.writeDouble(mSum);
         out.writeString(mDate.toString());
         out.writeParcelable(mCafe,1);
-    }*/
+    }
 
     public double getSum() {
         return mSum;

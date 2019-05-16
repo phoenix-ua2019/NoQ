@@ -58,7 +58,7 @@ public class CafeAdapter extends RecyclerView.Adapter<CafeAdapter.MyViewHolder> 
         holder.cafeName.setText(cafe.getCafeName());
         holder.cafeLocation.setText(cafe.getCafeLocation());
         if (cafe.hasImage()) {
-            holder.mDrawable.setImageResource(r.getIdentifier(cafe.getDrawableId(),
+            holder.mDrawable.setImageResource(r.getIdentifier(cafe.getIcon(),
                     "drawable", "ua.lviv.iot.phoenix.noq"));
         } else {
             holder.mDrawable.setVisibility(View.GONE);

@@ -1,54 +1,75 @@
 package ua.lviv.iot.phoenix.noq.adapters;
 
-import android.app.Activity;
-import android.widget.ArrayAdapter;
+import android.content.res.Resources;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-import java.util.ArrayList;
+import java.util.List;
 
+import ua.lviv.iot.phoenix.noq.R;
+import ua.lviv.iot.phoenix.noq.models.Cafe;
 import ua.lviv.iot.phoenix.noq.models.Order;
 
-public class OrderAdapter extends ArrayAdapter<Order> {
+public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.MyViewHolder> {
 
-    OrderAdapter(Activity context, ArrayList<Order> orders) {
-        super(context, 0, orders);
+    private List<Order> orderList;
+
+    private Resources r;
+
+    public class MyViewHolder extends RecyclerView.ViewHolder {
+        public TextView name, time, location;
+        public ImageView icon;
+
+        public MyViewHolder(View view) {
+            super(view);
+            name = view.findViewById(R.id.name_of_cafe_for_UO);
+            time = view.findViewById(R.id.time_of_order);
+            location = view.findViewById(R.id.location_of_cafe_for_UO);
+            icon = view.findViewById(R.id.photo_of_cafe_for_UO);
+        }
     }
 
-    /**
-     * цей метод підставляє дані в форму замовлення.
-     * тобто він для кожної позиції в кожному елементі ListView підставляє те що потрібно.
-     *
-     * @param position
-     * @param convertView
-     * @param parent
-     * @return
-     */
-    /*@Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        View listItemView = convertView;
+    public OrderAdapter(List<Order> orderList) {
+        this.orderList = orderList;
+    }
 
-        if (listItemView == null) {
-            listItemView = LayoutInflater.from(getContext()).inflate(
-                    R.layout., parent, false);
+    @Override
+    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View itemView = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.my_orders_item, parent, false);
+
+        return new MyViewHolder(itemView);
+    }
+
+    @Override
+    public void onBindViewHolder(MyViewHolder holder, int position) {
+        Order order = orderList.get(position);
+        Cafe cafe = order.getCafe();
+        holder.name.setText(cafe.getCafeName());
+        holder.time.setText(order.getTime());
+        holder.location.setText(cafe.getCafeLocation());
+        if (cafe.hasImage()) {
+            holder.icon.setImageResource(r.getIdentifier(cafe.getIcon(),
+                    "drawable", "ua.lviv.iot.phoenix.noq_cashier"));
+        } else {
+            holder.icon.setVisibility(View.GONE);
         }
+    }
 
-        Order currentOrder = getItem(position);
+    @Override
+    public int getItemCount() {
+        return orderList.size();
+    }
 
-        TextView cafeTextView = listItemView.findViewById(R.id.cafe_text_view);
-        cafeTextView.setText(currentOrder.getCafe().getCafeName());
+    public void setList(List<Order> list) {
+        orderList = list;
+    }
 
-
-        TextView sumTextView = listItemView.findViewById(R.id.sum_text_view);
-        sumTextView.setText(currentOrder.getSum());
-
-        TextView timeTextView = listItemView.findViewById(R.id.time_text_view);
-        timeTextView.setText(currentOrder.getTime());
-
-        TextView dateTextView = listItemView.findViewById(R.id.date_text_view);
-        dateTextView.setText(currentOrder.getDate().toString());
-
-        return listItemView;
-
-    }*/
-
-
+    public void setR(Resources r) {
+        this.r = r;
+    }
 }
