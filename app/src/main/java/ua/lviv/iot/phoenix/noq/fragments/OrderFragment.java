@@ -38,7 +38,12 @@ import ua.lviv.iot.phoenix.noq.models.Order;
 public class OrderFragment extends Fragment {
 
     private View view;
+    private Cafe cafe;
+    private String time;
+    private Double sumPrice = 0.0;
     final long count[] = {0};
+    private boolean userUpdated = false;
+    private boolean cafeUpdated = false;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -46,55 +51,72 @@ public class OrderFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.fragment_order, container, false);
-
-        String time = getArguments().getString("time");
-        Cafe cafe = getArguments().getParcelable("order_cafe");
-        ArrayList<Meal> meals = cafe.getCafeMeals();
-
         RecyclerView recyclerView = view.findViewById(R.id.recycler_order_meals);
-        meals = (ArrayList<Meal>) meals.stream()
-                .filter(meal -> meal.getSelectedQuantity()>0).collect(Collectors.toList());
-        cafe.setCafeMeals(meals);
-        MealAdapter mealAdapter = new MealAdapter(meals);
-        recyclerView.setAdapter(mealAdapter);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(mLayoutManager);
 
-        Double sumPrice = 0.0;
-        int minTimeToPrepare = 0;
-        for (Meal meal:meals) {
-            sumPrice += meal.getPrice()*meal.getSelectedQuantity();
-            int temp = meal.getTime()*meal.getSelectedQuantity();
-            if (minTimeToPrepare < temp) {
-                minTimeToPrepare = temp;
+        try {
+            time = getArguments().getString("time");
+            cafe = getArguments().getParcelable("order_cafe");
+            ArrayList<Meal> meals = cafe.getCafeMeals();
+
+            meals = (ArrayList<Meal>) meals.stream()
+                    .filter(meal -> meal.getSelectedQuantity() > 0).collect(Collectors.toList());
+            cafe.setCafeMeals(meals);
+
+            for (Meal meal : meals) {
+                sumPrice += meal.getPrice() * meal.getSelectedQuantity();
             }
+
+            MealAdapter mealAdapter = new MealAdapter(meals);
+            recyclerView.setAdapter(mealAdapter);
+            RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+            recyclerView.setLayoutManager(mLayoutManager);
+
+            Order finalOrder = new Order(time, sumPrice, Date.from(Instant.now()), cafe);
+
+            DatabaseReference cafeReference = Useful.orderRef.child(cafe.getCafeLocation());
+
+            cafeReference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (!cafeUpdated) {
+                        cafeReference.child("" + dataSnapshot.getChildrenCount()).setValue(finalOrder);
+                        cafeUpdated = true;
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+
+            DatabaseReference userReference = Useful.orderRef
+                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+            userReference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (!userUpdated) {
+                        userReference.child("" + dataSnapshot.getChildrenCount()).setValue(finalOrder);
+                        userUpdated = true;
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+        } catch (NullPointerException e) {
+            Order order = getArguments().getParcelable("order");
+            cafe = order.getCafe();
+            time = order.getTime();
+            sumPrice = order.getSum();
         }
-        ValueEventListener listener = new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                count[0] = dataSnapshot.getChildrenCount();
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        };
 
         ((TextView) view.findViewById(R.id.name_of_order_cafe)).setText(cafe.getCafeName());
         ((TextView) view.findViewById(R.id.location_of_order_cafe)).setText(cafe.getCafeLocation());
         ((TextView) view.findViewById(R.id.selected_time_show)).setText(time);
         ((TextView) view.findViewById(R.id.selected_price)).setText(String.format("%s ₴", sumPrice));
-
-        Order finalOrder = new Order(time, sumPrice, Date.from(Instant.now()), cafe);
-
-        DatabaseReference cafeReference = Useful.orderRef.child(cafe.getCafeLocation());
-
-        cafeReference.addValueEventListener(listener);
-        cafeReference.child(""+count[0]).setValue(finalOrder);
-
-        DatabaseReference userReference = Useful.orderRef.child(FirebaseAuth.getInstance().getCurrentUser().getUid());
-        userReference.addValueEventListener(listener);
-        userReference.child(""+count[0]).setValue(finalOrder);
 
         return view;
     }
