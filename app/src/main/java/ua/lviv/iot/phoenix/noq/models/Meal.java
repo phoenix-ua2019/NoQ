@@ -9,7 +9,7 @@ import java.util.HashMap;
 
 @IgnoreExtraProperties
 public class Meal implements Parcelable {
-    private long time;
+    private int time;
     private String mealPicture;
     private String description;
     private String mealName;
@@ -40,11 +40,11 @@ public class Meal implements Parcelable {
     public Meal (HashMap<String, ?> map) {
         mealName = (String) map.get("name");
         price = (Long) map.get("price");
-        time = (Long) map.get("time");
+        time = ((Long) map.get("time")).intValue();
     }
 
     public Meal (Parcel source) {
-        this(source.readString(), source.readDouble(), source.readLong(),
+        this(source.readString(), source.readDouble(), source.readInt(),
                 source.readString(), source.readDouble(), source.readString());
     }
 
@@ -57,13 +57,13 @@ public class Meal implements Parcelable {
     public void writeToParcel(Parcel out, int flags) {
         out.writeString(mealName);
         out.writeDouble(price);
-        out.writeLong(time);
+        out.writeInt(time);
         out.writeString(mealPicture);
         out.writeDouble(weight);
         out.writeString(description);
     }
 
-    public Meal(String mealName, double price, long preparationTime, String mealPicture, double weight, String description) {
+    public Meal(String mealName, double price, int preparationTime, String mealPicture, double weight, String description) {
         this.mealName = mealName;
         this.price = price;
         this.time = preparationTime;
@@ -80,11 +80,11 @@ public class Meal implements Parcelable {
         this.mealName = mealName;
     }
 
-    public long getTime() {
+    public int getTime() {
         return time;
     }
 
-    public void setTime(long preparationTime) {
+    public void setTime(int preparationTime) {
         this.time = preparationTime;
     }
 

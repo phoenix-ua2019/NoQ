@@ -33,7 +33,7 @@ public class CafeAdapter extends RecyclerView.Adapter<CafeAdapter.MyViewHolder> 
             super(view);
             cafeName = view.findViewById(R.id.name_of_cafe);
             cafeLocation = view.findViewById(R.id.location_of_cafe);
-            //mDrawable = view.findViewById(R.id.photo_of_cafe);
+            mDrawable = view.findViewById(R.id.photo_of_cafe);
         }
     }
 
@@ -54,11 +54,11 @@ public class CafeAdapter extends RecyclerView.Adapter<CafeAdapter.MyViewHolder> 
         System.out.println(cafe);
         holder.cafeName.setText(cafe.getCafeName());
         holder.cafeLocation.setText(cafe.getCafeLocation());
-        /*if (cafe.hasImage()) {
+        if (cafe.hasImage()) {
             holder.mDrawable.setImageResource(cafe.getDrawableId());
         } else {
             holder.mDrawable.setVisibility(View.GONE);
-        }*/
+        }
     }
 
     @Override

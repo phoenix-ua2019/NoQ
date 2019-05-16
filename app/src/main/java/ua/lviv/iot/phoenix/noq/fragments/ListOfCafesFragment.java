@@ -138,9 +138,9 @@ public class ListOfCafesFragment extends Fragment implements ValueEventListener 
 
 
     private void prepareCafeData() {
-        cafesList = cafesList.stream()
+        /*cafesList = cafesList.stream()
                 .map((Cafe c) -> c.setDrawable(getResources(), currentActivity.getPackageName())
-                ).collect(Collectors.toList());
+                ).collect(Collectors.toList());*/
         System.out.println(getArguments());
         cafesAdapter.setList(cafesList);
         cafesAdapter.notifyDataSetChanged();

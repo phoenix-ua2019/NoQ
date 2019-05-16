@@ -18,10 +18,10 @@ public class TimeFragment extends Fragment {
     private TimePicker floatTime;
     private TextView orderTime;
     private View view;
+    private int preparationTime = 15;
 
-    private final int closingHour = 22;
-    private final int openingHour = 7;
-    private final int preparationTime = 15;
+    private final int closingHour = 25;
+    private final int openingHour = -1;
     private static final int minutesInHour = 60;
 
     boolean wasShownToastForPast = false;

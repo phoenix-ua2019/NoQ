@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import ua.lviv.iot.phoenix.noq.R;
@@ -41,9 +42,13 @@ public class OrderFragment extends Fragment {
         recyclerView.setLayoutManager(mLayoutManager);
 
         Double sumPrice = 0.0;
-        //List<>
+        int minTimeToPrepare = 0;
         for (Meal meal:meals) {
             sumPrice += meal.getPrice()*meal.getSelectedQuantity();
+            int temp = meal.getTime()*meal.getSelectedQuantity();
+            if (minTimeToPrepare < temp) {
+                minTimeToPrepare = temp;
+            }
         }
 
         ((TextView) view.findViewById(R.id.name_of_order_cafe)).setText(cafe.getCafeName());
