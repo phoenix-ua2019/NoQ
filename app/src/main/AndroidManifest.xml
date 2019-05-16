@@ -24,7 +24,6 @@
         <activity android:name=".activities.SignInActivity" />
         <activity android:name=".activities.MainActivity" />
         <activity android:name=".activities.ChangePasswordActivity" />
-        <activity android:name=".activities.ListOfMeals" />
     </application>
 
 </manifest>

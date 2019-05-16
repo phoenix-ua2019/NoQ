@@ -53,6 +53,7 @@ public class ListOfMeals extends AppCompatActivity {
                 //Toast.makeText(getApplicationContext(), meal.getMealName() + " is selected!", Toast.LENGTH_SHORT).show();
                 quantityDialogCaller(meal);
             }
+
             @Override
             public void onLongClick(View v, int position) {
             }
@@ -82,7 +83,7 @@ public class ListOfMeals extends AppCompatActivity {
         });
 
         minus.setOnClickListener((View v) -> {
-            if  (meal.getSelectedQuantity() <= 0) {
+            if (meal.getSelectedQuantity() <= 0) {
                 return;
             }
             meal.setSelectedQuantity(meal.getSelectedQuantity() - 1);
@@ -91,90 +92,5 @@ public class ListOfMeals extends AppCompatActivity {
         });
         quantityDialog.show();
     }
-/*
-    private void prepareMealData() {
-        Meal meal_1 = new Meal("Meal_1", 100.0, "1 min", "Picture", 100.0, "fast making");
-        mealList.add(meal_1);
-
-        Meal meal_2 = new Meal("Meal_2", 200.0, "2 min", "Picture", 200.0, "fast making");
-        mealList.add(meal_2);
-
-        Meal meal_3 = new Meal("Meal_3", 300.0, "3 min", "Picture", 300.0, "fast making");
-        mealList.add(meal_3);
-
-        Meal meal_4 = new Meal("Meal_4", 400.0, "4 min", "Picture", 400.0, "fast making");
-        mealList.add(meal_4);
-
-        Meal meal_5 = new Meal("Meal_5", 500.0, "5 min", "Picture", 500.0, "fast making");
-        mealList.add(meal_5);
-
-        mealAdapter.notifyDataSetChanged();
-    }
-    */
 }
-    /*ArrayList<Meal> meals;
-
-    boolean wasShownToast = false;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menu);
-
-        Bundle extras = getIntent().getExtras();
-        final String userName = extras.getString("UserName");
-        Cafe cafe = extras.getParcelable("cafe");
-
-
-        meals = new ArrayList<>();
-        meals.addAll(cafe.getCafeMeals());
-
-        ListView listView = findViewById(R.id.menu_list);
-        listView.setAdapter(new MealAdapter(this, meals));
-
-        final Button chooseDishes = findViewById(R.id.choose_dishes_button);
-        Meal.numberOfCheckedItems = 0;
-
-        listView.setOnItemClickListener( (adapter, v, _position, l) -> {
-            if (v != null) {
-                CheckBox checkBox = v.findViewById(R.id.meal_checkbox);
-                checkBox.setChecked(!checkBox.isChecked());
-            }
-        });
-
-        ImageView buttonToMain = findViewById(R.id.horse_icon_from_menu);
-
-        buttonToMain.setOnClickListener( (View v) -> {
-            Intent toMainActivity = new Intent(ListOfMeals.this, MainActivity.class);
-            startActivity(toMainActivity);
-            overridePendingTransition(R.anim.from_top_to_bottom_exit, R.anim.from_top_to_bottom);
-        });
-
-        ImageView backButton = findViewById(R.id.back_from_menu) ;
-
-        backButton.setOnClickListener((View v) -> finish());
-
-        chooseDishes.setOnClickListener( (View view) -> {
-            if (Meal.numberOfCheckedItems == 0) {
-                if (!wasShownToast) {
-                    Toast.makeText(getApplicationContext(), "Виберіть, будь ласка, страву",
-                            Toast.LENGTH_SHORT).show();
-                    wasShownToast = true;
-                }
-                return;
-            }
-            Intent OpenQuantityActivity = new Intent(ListOfMeals.this, QuantityActivity.class);
-            OpenQuantityActivity.putExtra("UserName", userName);
-            OpenQuantityActivity.putExtra("cafe", cafe);
-            startActivity(OpenQuantityActivity);
-            overridePendingTransition(R.anim.from_bottom_to_top, R.anim.from_bottom_to_top_exit);
-        });
-
-    }
-
-    @Override
-    public void finish() {
-        super.finish();
-        overridePendingTransition(R.anim.from_top_to_bottom_exit, R.anim.from_top_to_bottom);
-    }*/
 

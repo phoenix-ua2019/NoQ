@@ -1,5 +1,6 @@
 package ua.lviv.iot.phoenix.noq.adapters;
 
+import android.content.res.Resources;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,6 +18,8 @@ import ua.lviv.iot.phoenix.noq.models.Cafe;
 public class CafeAdapter extends RecyclerView.Adapter<CafeAdapter.MyViewHolder> {
 
     private List<Cafe> cafesList;
+
+    private Resources r;
 
     public CafeAdapter(List<Cafe> cafesList) {
         this.cafesList = cafesList;
@@ -55,7 +58,8 @@ public class CafeAdapter extends RecyclerView.Adapter<CafeAdapter.MyViewHolder> 
         holder.cafeName.setText(cafe.getCafeName());
         holder.cafeLocation.setText(cafe.getCafeLocation());
         if (cafe.hasImage()) {
-            holder.mDrawable.setImageResource(cafe.getDrawableId());
+            holder.mDrawable.setImageResource(r.getIdentifier(cafe.getDrawableId(),
+                    "drawable", "ua.lviv.iot.phoenix.noq"));
         } else {
             holder.mDrawable.setVisibility(View.GONE);
         }
@@ -68,5 +72,10 @@ public class CafeAdapter extends RecyclerView.Adapter<CafeAdapter.MyViewHolder> 
 
     public void setList(List<Cafe> lst) {
         cafesList = lst;
+    }
+
+
+    public void setR(Resources r) {
+        this.r = r;
     }
 }

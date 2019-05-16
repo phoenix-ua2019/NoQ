@@ -3,36 +3,52 @@ package ua.lviv.iot.phoenix.noq.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.firebase.database.annotations.NotNull;
+
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.util.Date;
 
-public class Order implements Parcelable {
+public class Order
+        //implements Parcelable
+        {
 
     private Date mDate;
     private String mTime;
     private Cafe mCafe;
-    private int mSum;
-    public static final Parcelable.Creator<Order> CREATOR =
-            new Parcelable.Creator<Order>() {
+    private double mSum;
+    /*public static final Parcelable.Creator<Order> CREATOR = new Parcelable.Creator<Order>() {
         @Override
         public Order createFromParcel(Parcel source) {
-         return new Order(source);
+            try {
+                return new Order(source);
+            } catch (ParseException e) {
+                e.printStackTrace();
+                return new Order();
+            }
         }
 
         @Override
         public Order[] newArray(int size) {
          return new Order[size];
         }
-     };
+     };*/
 
-    Order(String time, int sum, Date date, Cafe cafe){
+    /*Order() {
+
+    }*/
+
+    public Order(String time, double sum, Date date, Cafe cafe){
         mTime = time;
         mSum = sum;
         mDate = date;
         mCafe = cafe;
     }
 
-    Order(Parcel source) {
-        this(source.readString(), source.readInt(), new Date(source.readString()), source.readParcelable(Cafe.class.getClassLoader()));
+    /*Order(@NotNull Parcel source) throws ParseException {
+        this(source.readString(), source.readInt(),
+                DateFormat.getDateInstance().parse(source.readString()),
+                source.readParcelable(Cafe.class.getClassLoader()));
     }
 
     @Override
@@ -46,9 +62,9 @@ public class Order implements Parcelable {
         out.writeInt(mSum);
         out.writeString(mDate.toString());
         out.writeParcelable(mCafe,1);
-    }
+    }*/
 
-    public int getSum() {
+    public double getSum() {
         return mSum;
     }
     public Date getDate() {

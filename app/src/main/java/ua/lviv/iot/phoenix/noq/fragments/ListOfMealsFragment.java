@@ -1,13 +1,8 @@
 package ua.lviv.iot.phoenix.noq.fragments;
 
 import android.app.Dialog;
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.view.GravityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -21,10 +16,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import ua.lviv.iot.phoenix.noq.R;
-import ua.lviv.iot.phoenix.noq.activities.ListOfMeals;
 import ua.lviv.iot.phoenix.noq.activities.MainActivity;
 import ua.lviv.iot.phoenix.noq.adapters.MealAdapter;
 import ua.lviv.iot.phoenix.noq.listeners.MealRecyclerTouchListener;
@@ -128,44 +121,5 @@ public class ListOfMealsFragment extends Fragment {
         });
         quantityDialog.show();
     }
-/*
-    private void prepareMealData() {
-
-        Meal meal_1 = new Meal("Meal_1", 100.0, "1 min", "Picture", 100.0, "fast making");
-        mealList.add(meal_1);
-
-        Meal meal_2 = new Meal("Meal_2", 200.0, "2 min", "Picture", 200.0, "fast making");
-        mealList.add(meal_2);
-
-        Meal meal_3 = new Meal("Meal_3", 300.0, "3 min", "Picture", 300.0, "fast making");
-        mealList.add(meal_3);
-
-        Meal meal_4 = new Meal("Meal_4", 400.0, "4 min", "Picture", 400.0, "fast making");
-        mealList.add(meal_4);
-
-        Meal meal_5 = new Meal("Meal_5", 500.0, "5 min", "Picture", 500.0, "fast making");
-        mealList.add(meal_5);
-
-        Meal meal_6 = new Meal("Meal_1", 100.0, "1 min", "Picture", 100.0, "fast making");
-        mealList.add(meal_6);
-
-        Meal meal_7 = new Meal("Meal_1", 100.0, "1 min", "Picture", 100.0, "fast making");
-        mealList.add(meal_7);
-
-        Meal meal_8 = new Meal("Meal_1", 100.0, "1 min", "Picture", 100.0, "fast making");
-        mealList.add(meal_8);
-
-        Meal meal_9 = new Meal("Meal_1", 100.0, "1 min", "Picture", 100.0, "fast making");
-        mealList.add(meal_9);
-
-        Meal meal_10 = new Meal("Meal_1", 100.0, "1 min", "Picture", 100.0, "fast making");
-        mealList.add(meal_10);
-
-        Meal meal_11 = new Meal("Meal_1", 100.0, "1 min", "Picture", 100.0, "fast making");
-        mealList.add(meal_11);
-
-        mealAdapter.notifyDataSetChanged();
-    }
-    */
 
 }

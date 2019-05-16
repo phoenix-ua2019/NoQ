@@ -40,22 +40,20 @@ public class TimeFragment extends Fragment {
 
         final int currentHour = floatTime.getHour();
         final int currentMinute = floatTime.getMinute();
-        floatTime.setHour(currentHour+1);
-
         if (isCafeOpen(currentHour, currentMinute)){
             updateDisplay(currentHour, currentMinute);
         }
 
         floatTime.setOnTimeChangedListener((TimePicker view, int hourOfDay, int minute) -> {
-            if (isCafeOpen(hourOfDay, minute) & isAllowableTime(hourOfDay, currentHour, minute, currentMinute)) {
-                updateDisplay(hourOfDay, minute);
-            }
+                if (isCafeOpen(hourOfDay, minute) & isAllowableTime(hourOfDay, minute)) {
+                    updateDisplay(hourOfDay, minute);
+                }
         });
         view.findViewById(R.id.submit_time).setOnClickListener((View v) -> {
             //if (checkPreparationTime(floatTime.getHour(), floatTime.getMinute())) {
-            b.putString("time", orderTime.getText().toString());
-            setArguments(b);
-            ((MainActivity) getActivity()).b3(view);
+                b.putString("time", orderTime.getText().toString());
+                setArguments(b);
+                ((MainActivity) getActivity()).b3(view);
             /*} else {
                 Toast.makeText(getContext(), "Май совість, дай хоча б 15 хвилин на приготування", Toast.LENGTH_SHORT).show();
                 floatTime.setHour(floatTime.getCurrentHour()
@@ -67,15 +65,16 @@ public class TimeFragment extends Fragment {
         return view;
     }
 
-
-
     private void updateDisplay(int hour, int minute) {
         int orderHour = hour;
         int orderMinute = minute;
         orderTime.setText(String.format("%02d:%02d", orderHour, orderMinute));
     }
 
-    private boolean isAllowableTime(int orderHour, Integer currentHour, int orderMinute, Integer currentMinute) {
+
+    private boolean isAllowableTime(int orderHour, int orderMinute) {
+        int currentHour = floatTime.getCurrentHour();
+        int currentMinute = floatTime.getCurrentMinute();
 
         if (orderHour < currentHour ||
                 (orderHour == currentHour && orderMinute < currentMinute)
@@ -112,13 +111,13 @@ public class TimeFragment extends Fragment {
     }
 
     private boolean checkPreparationTime(int orderHour, int orderMinute) {
-        int currentHour = floatTime.getHour();
-        int currentMinute = floatTime.getMinute();
+        int currentHour = floatTime.getCurrentHour();
+        int currentMinute = floatTime.getCurrentMinute();
 
         if (
                 (isNearNewHour() && (orderHour == currentHour || ((orderHour == currentHour + 1) &&
-                        (orderMinute < ((currentMinute + preparationTime) % minutesInHour))) )) ||
-                        (orderHour == currentHour && (orderMinute < currentMinute + preparationTime))
+                (orderMinute < ((currentMinute + preparationTime) % minutesInHour))) )) ||
+                (orderHour == currentHour && (orderMinute < currentMinute + preparationTime))
         )
             return false;
         return true;
