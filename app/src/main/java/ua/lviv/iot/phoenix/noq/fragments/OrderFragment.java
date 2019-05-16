@@ -38,6 +38,7 @@ import ua.lviv.iot.phoenix.noq.models.Order;
 public class OrderFragment extends Fragment {
 
     private View view;
+    final long count[] = {0};
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -68,6 +69,16 @@ public class OrderFragment extends Fragment {
                 minTimeToPrepare = temp;
             }
         }
+        ValueEventListener listener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                count[0] = dataSnapshot.getChildrenCount();
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        };
 
         ((TextView) view.findViewById(R.id.name_of_order_cafe)).setText(cafe.getCafeName());
         ((TextView) view.findViewById(R.id.location_of_order_cafe)).setText(cafe.getCafeLocation());
@@ -76,32 +87,13 @@ public class OrderFragment extends Fragment {
 
         Order finalOrder = new Order(time, sumPrice, Date.from(Instant.now()), cafe);
 
-        final int count[] = {0};
         DatabaseReference cafeReference = Useful.orderRef.child(cafe.getCafeLocation());
 
-        cafeReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                count[0] += dataSnapshot.getChildrenCount();
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
+        cafeReference.addValueEventListener(listener);
         cafeReference.child(""+count[0]).setValue(finalOrder);
-        count[0] = 0;
-        DatabaseReference userReference = Useful.orderRef.child(FirebaseAuth.getInstance().getCurrentUser().getUid());
-        userReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                count[0] += dataSnapshot.getChildrenCount();
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            }
-        });
+        DatabaseReference userReference = Useful.orderRef.child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        userReference.addValueEventListener(listener);
         userReference.child(""+count[0]).setValue(finalOrder);
 
         return view;

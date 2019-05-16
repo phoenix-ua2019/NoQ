@@ -88,6 +88,7 @@ public class ListOfCafesFragment extends Fragment implements ValueEventListener 
                 dataSnapshot.getValue()).values())).stream().map(Cafe::new).collect(Collectors.toList());
         System.out.println(R.drawable.aroma_kava);
         System.out.println(cafesList);
+        cafesAdapter.setR(getResources());
         /*if (!isAdded()) {
             try {
                 Thread.sleep(4000);

@@ -71,7 +71,7 @@ public class ListOfMealsFragment extends Fragment {
                 quantityDialogCaller(meal);
                 cafe.setCafeMeals(mealList);
                 Bundle b = getArguments();
-                b.putParcelable("order_cafe", cafe);
+                b.putParcelable("time_cafe", cafe);
                 setArguments(b);
             }
             @Override
