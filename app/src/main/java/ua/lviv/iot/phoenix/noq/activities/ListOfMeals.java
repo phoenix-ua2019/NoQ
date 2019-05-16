@@ -16,7 +16,7 @@ import java.util.List;
 
 import ua.lviv.iot.phoenix.noq.R;
 import ua.lviv.iot.phoenix.noq.adapters.MealAdapter;
-import ua.lviv.iot.phoenix.noq.listeners.MealRecyclerTouchListener;
+import ua.lviv.iot.phoenix.noq.listeners.RecyclerTouchListener;
 import ua.lviv.iot.phoenix.noq.models.Cafe;
 import ua.lviv.iot.phoenix.noq.models.Meal;
 
@@ -46,7 +46,7 @@ public class ListOfMeals extends AppCompatActivity {
         recyclerView.setAdapter(mealAdapter);
 
         // row click listener
-        recyclerView.addOnItemTouchListener(new MealRecyclerTouchListener(getApplicationContext(), recyclerView, new MealRecyclerTouchListener.ClickListener() {
+        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), recyclerView, new RecyclerTouchListener.ClickListener() {
             @Override
             public void onClick(View view, int position) {
                 Meal meal = mealList.get(position);
