@@ -41,6 +41,7 @@ public class OrderFragment extends Fragment {
         recyclerView.setLayoutManager(mLayoutManager);
 
         Double sumPrice = 0.0;
+        //List<>
         for (Meal meal:meals) {
             sumPrice += meal.getPrice()*meal.getSelectedQuantity();
         }

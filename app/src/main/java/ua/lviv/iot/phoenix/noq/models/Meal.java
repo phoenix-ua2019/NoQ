@@ -9,7 +9,7 @@ import java.util.HashMap;
 
 @IgnoreExtraProperties
 public class Meal implements Parcelable {
-    private int preparationTime;
+    private long time;
     private String mealPicture;
     private String description;
     private String mealName;
@@ -40,10 +40,11 @@ public class Meal implements Parcelable {
     public Meal (HashMap<String, ?> map) {
         mealName = (String) map.get("name");
         price = (Long) map.get("price");
+        time = (Long) map.get("time");
     }
 
     public Meal (Parcel source) {
-        this(source.readString(), source.readDouble(), source.readInt(),
+        this(source.readString(), source.readDouble(), source.readLong(),
                 source.readString(), source.readDouble(), source.readString());
     }
 
@@ -56,16 +57,16 @@ public class Meal implements Parcelable {
     public void writeToParcel(Parcel out, int flags) {
         out.writeString(mealName);
         out.writeDouble(price);
-        out.writeInt(preparationTime);
+        out.writeLong(time);
         out.writeString(mealPicture);
         out.writeDouble(weight);
         out.writeString(description);
     }
 
-    public Meal(String mealName, double price, int preparationTime, String mealPicture, double weight, String description) {
+    public Meal(String mealName, double price, long preparationTime, String mealPicture, double weight, String description) {
         this.mealName = mealName;
         this.price = price;
-        this.preparationTime = preparationTime;
+        this.time = preparationTime;
         this.mealPicture = mealPicture;
         this.weight = weight;
         this.description = description;
@@ -79,12 +80,12 @@ public class Meal implements Parcelable {
         this.mealName = mealName;
     }
 
-    public int getPreparationTime() {
-        return preparationTime;
+    public long getTime() {
+        return time;
     }
 
-    public void setPreparationTime(int preparationTime) {
-        this.preparationTime = preparationTime;
+    public void setTime(long preparationTime) {
+        this.time = preparationTime;
     }
 
     public String getMealPicture() {
@@ -119,10 +120,6 @@ public class Meal implements Parcelable {
         return price;
     }
 
-    public String priceToString() {
-        return Double.toString(price);
-    }
-
     public void setPrice(double price) {
         this.price = price;
     }
@@ -139,85 +136,3 @@ public class Meal implements Parcelable {
         return Integer.toString(selectedQuantity);
     }
 }
-
-    /*
-    private String mealName;
-    private int mealPrice;
-    private String mealPicture;
-    private boolean IsChecked;
-    private int mQuantity;
-    public static int numberOfCheckedItems;
-
-
-    Meal () {
-        IsChecked = false;
-    }
-
-    Meal (Object o) {
-        this((HashMap<String, ?>) o);
-    }
-
-    Meal (String str) {
-        this((HashMap<String, String>) Splitter.on(",").withKeyValueSeparator("=").split(str));
-    }
-
-    Meal (HashMap<String, ?> map) {
-        this((String) map.get("name"), map.get("price"),
-                (map.get("quantity") != null) ? map.get("quantity") : 0);
-    }
-
-
-    Meal (String mealName, Object mealPrice, Object mealQuantity) {
-        this();
-        mealName = mealName;
-        mealPrice = Integer.parseInt(mealPrice.toString());
-        mQuantity = Integer.parseInt(mealQuantity.toString());
-    }
-
-    Meal (String mealName, long mealPrice) {
-        this(mealName, mealPrice, 0L);
-    }
-
-    public String toString() {
-        return "{name=" + mealName +
-                ", price=" + mealPrice +
-                ", quantity=" + mQuantity + "}";
-    }
-
-
-    public int incrementQuantity() {
-        mQuantity++;
-        return getQuantity();
-    }
-
-    public int decrementQuantity() {
-        mQuantity--;
-        return getQuantity();
-    }
-
-    public int getQuantity() {
-        return (mQuantity < 0 ? (mQuantity = 0) : mQuantity);
-    }
-
-    public void setChecked(boolean isChecked){
-        numberOfCheckedItems += isChecked ? 1 : -1;
-        IsChecked = isChecked;
-    }
-
-    public String getMealName(){
-        return mealName;
-    }
-
-    public int getMealPrice(){
-        return mealPrice;
-    }
-
-    public String getMealPicture() {
-        return mealPicture;
-    }
-
-    public void setMealPicture(String mealPicture) {
-        this.mealPicture = mealPicture;
-    }
-    */
-

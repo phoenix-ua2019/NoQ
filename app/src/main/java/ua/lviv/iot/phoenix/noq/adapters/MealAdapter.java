@@ -46,7 +46,7 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.MyViewHolder> 
         Meal meal = mealList.get(position);
         holder.mealName.setText(meal.getMealName());
         holder.mealPrice.setText(meal.getPrice()+" грн");
-        holder.timeToPrepare.setText(meal.getPreparationTime()+" хв");
+        holder.timeToPrepare.setText(meal.getTime()+" хв");
         if (meal.getSelectedQuantity() > 0) {
             holder.selectedQuantity.setText(meal.selectedQuantityToString());
         }
