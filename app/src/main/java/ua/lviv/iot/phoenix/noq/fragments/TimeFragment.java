@@ -108,7 +108,7 @@ public class TimeFragment extends Fragment {
         int minTimeToPrepare = 0;
 
         for (Meal meal : meals) {
-            int temp = meal.getTime() * meal.getSelectedQuantity();
+            int temp = meal.getTime();
             if (minTimeToPrepare < temp) {
                 minTimeToPrepare = temp;
             }
