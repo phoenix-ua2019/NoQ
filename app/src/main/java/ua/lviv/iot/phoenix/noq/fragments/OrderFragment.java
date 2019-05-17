@@ -56,11 +56,11 @@ public class OrderFragment extends Fragment {
         try {
             time = getArguments().getString("time");
             cafe = getArguments().getParcelable("order_cafe");
-            ArrayList<Meal> meals = cafe.getCafeMeals();
+            ArrayList<Meal> meals = cafe.getMeals();
 
             meals = (ArrayList<Meal>) meals.stream()
                     .filter(meal -> meal.getSelectedQuantity() > 0).collect(Collectors.toList());
-            cafe.setCafeMeals(meals);
+            cafe.setMeals(meals);
 
             for (Meal meal : meals) {
                 sumPrice += meal.getPrice() * meal.getSelectedQuantity();
@@ -73,7 +73,7 @@ public class OrderFragment extends Fragment {
 
             Order finalOrder = new Order(time, sumPrice, Date.from(Instant.now()), cafe);
 
-            DatabaseReference cafeReference = Useful.orderRef.child(cafe.getCafeLocation());
+            DatabaseReference cafeReference = Useful.orderRef.child(cafe.getLocation());
 
             cafeReference.addValueEventListener(new ValueEventListener() {
                 @Override
@@ -113,8 +113,8 @@ public class OrderFragment extends Fragment {
             sumPrice = order.getSum();
         }
 
-        ((TextView) view.findViewById(R.id.name_of_order_cafe)).setText(cafe.getCafeName());
-        ((TextView) view.findViewById(R.id.location_of_order_cafe)).setText(cafe.getCafeLocation());
+        ((TextView) view.findViewById(R.id.name_of_order_cafe)).setText(cafe.getName());
+        ((TextView) view.findViewById(R.id.location_of_order_cafe)).setText(cafe.getLocation());
         ((TextView) view.findViewById(R.id.selected_time_show)).setText(time);
         ((TextView) view.findViewById(R.id.selected_price)).setText(String.format("%s ₴", sumPrice));
 

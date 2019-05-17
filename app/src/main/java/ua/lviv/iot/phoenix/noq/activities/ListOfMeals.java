@@ -58,7 +58,7 @@ public class ListOfMeals extends AppCompatActivity {
             public void onLongClick(View v, int position) {
             }
         }));
-        mealList = ((Cafe) getIntent().getExtras().getParcelable("cafe")).getCafeMeals();
+        mealList = ((Cafe) getIntent().getExtras().getParcelable("cafe")).getMeals();
         mealAdapter.notifyDataSetChanged();
     }
 

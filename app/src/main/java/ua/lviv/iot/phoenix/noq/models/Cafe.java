@@ -95,19 +95,19 @@ public class Cafe implements Parcelable {
     }
 
 
-    public String getCafeName() {
+    public String getName() {
         return name;
     }
 
-    public void setCafeName(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public String getCafeLocation() {
+    public String getLocation() {
         return location;
     }
 
-    public void setCafeLocation(String location) {
+    public void setLocation(String location) {
         this.location = location;
     }
 
@@ -123,11 +123,11 @@ public class Cafe implements Parcelable {
         return icon != null;
     }
 
-    public ArrayList<Meal> getCafeMeals() {
+    public ArrayList<Meal> getMeals() {
         return meals;
     }
 
-    public void setCafeMeals(ArrayList<Meal> meals) {
+    public void setMeals(ArrayList<Meal> meals) {
         this.meals = meals;
     }
 
