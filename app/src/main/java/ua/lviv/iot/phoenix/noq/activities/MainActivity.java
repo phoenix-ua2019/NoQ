@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
 
 
     private DrawerLayout drawerLayout;
+    private Toolbar toolbar;
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private Useful useful;
     private Fragment fragment;
@@ -40,9 +41,9 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         fragment = new ListOfCafesFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.base_for_nv, fragment).commit();
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("Оберіть кафе");
         setSupportActionBar(toolbar);
-        getSupportActionBar().setSubtitle("Hello World");
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -68,6 +69,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         if (id == R.id.make_order) {
             fragment = new ListOfCafesFragment();
             fragment.setArguments(new Bundle());
+            getSupportActionBar().setTitle("Оберіть кафе");
             //this.fragment.getArguments()
 
         } else if (id == R.id.user) {
@@ -75,6 +77,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
             Bundle b = new Bundle();
             b.putParcelable("user_icon", useful.getUser());
             fragment.setArguments(b);
+            getSupportActionBar().setTitle("Профіль");
         } else if (id == R.id.my_orders) {
 
             fragment = new MyOrdersFragment();
@@ -140,18 +143,22 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
 
     public void b1(View view) {
         setFragment(new ListOfMealsFragment());
+        toolbar.setTitle("Оберіть страви");
     }
 
     public void b2(View view) {
         setFragment(new TimeFragment());
+        toolbar.setTitle("Оберіть час");
     }
 
     public void b3(View view) {
         setFragment(new OrderFragment());
+        toolbar.setTitle("Ваше замовлення");
     }
 
     public void b4(View view) {
         setFragment(new MyOrdersFragment());
+        toolbar.setTitle("Ваші замовлення");
     }
 
     private void setFragment(Fragment new_fragment) {
