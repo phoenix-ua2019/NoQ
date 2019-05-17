@@ -3,6 +3,7 @@ package ua.lviv.iot.phoenix.noq.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.firebase.database.PropertyName;
 import com.google.firebase.database.annotations.NotNull;
 
 import java.text.DateFormat;
@@ -77,15 +78,19 @@ public class Order implements Parcelable {
         out.writeParcelable(mCafe,1);
     }
 
+    @PropertyName("sum")
     public double getSum() {
         return mSum;
     }
+    @PropertyName("date")
     public Date getDate() {
         return mDate;
     }
+    @PropertyName("cafe")
     public Cafe getCafe() {
         return mCafe;
     }
+    @PropertyName("time")
     public String getTime() {
         return mTime;
     }

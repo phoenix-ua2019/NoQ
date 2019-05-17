@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         if (id == R.id.make_order) {
             fragment = new ListOfCafesFragment();
             fragment.setArguments(new Bundle());
-            getSupportActionBar().setTitle("Оберіть кафе");
+            toolbar.setTitle("Оберіть кафе");
             //this.fragment.getArguments()
 
         } else if (id == R.id.user) {
@@ -77,11 +77,12 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
             Bundle b = new Bundle();
             b.putParcelable("user_icon", useful.getUser());
             fragment.setArguments(b);
-            getSupportActionBar().setTitle("Профіль");
+            toolbar.setTitle("Профіль");
         } else if (id == R.id.my_orders) {
 
             fragment = new MyOrdersFragment();
             fragment.setArguments(new Bundle());
+            toolbar.setTitle("Мої замовлення");
 
         } else if (id == R.id.setting) {
 
@@ -157,15 +158,22 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
     }
 
     public void b4(View view) {
-        fragment = new MyOrdersFragment();
         Bundle args = fragment.getArguments();
+        fragment = new MyOrdersFragment();
         fragment.setArguments(args);
+        toolbar.setTitle("Ваші замовлення");
         getSupportFragmentManager()
                 .beginTransaction()
                 .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right)
                 .replace(R.id.base_for_nv, fragment)
                 .commit();
     }
+
+    public void b5(View view) {
+        setFragment(new SeeMyOrderFragment());
+        toolbar.setTitle("Ваше замовлення");
+    }
+
 
     private void setFragment(Fragment new_fragment) {
         Bundle args = fragment.getArguments();
