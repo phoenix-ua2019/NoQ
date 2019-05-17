@@ -79,7 +79,7 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_order_meals"
         android:layout_width="match_parent"
-        android:layout_height="324dp"
+        android:layout_height="286dp"
         android:scrollbars="vertical"/>
 
     <FrameLayout
@@ -164,8 +164,8 @@
             android:id="@+id/make_order"
             android:layout_width="160dp"
             android:layout_height="40dp"
+            android:layout_marginTop="32dp"
             android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
             android:background="@drawable/button_style"
             android:text="Підтвердити"
             android:textAllCaps="false"
