@@ -157,7 +157,12 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
     }
 
     public void b4(View view) {
-        fragment = new MyOrdersFragment();
+        setFragment(new MyOrdersFragment());
+        toolbar.setTitle("Ваші замовлення");
+    }
+
+    public void b5(View view) {
+        fragment = new SeeMyOrderFragment();
         Bundle args = fragment.getArguments();
         fragment.setArguments(args);
         getSupportFragmentManager()
@@ -165,7 +170,9 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
                 .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right)
                 .replace(R.id.base_for_nv, fragment)
                 .commit();
+        toolbar.setTitle("Ваше замовлення");
     }
+
 
     private void setFragment(Fragment new_fragment) {
         Bundle args = fragment.getArguments();

@@ -74,7 +74,7 @@ public class MyOrdersFragment extends Fragment {
                         Bundle b = new Bundle();
                         b.putParcelable("order", orderList.get(position));
                         setArguments(b);
-                        currentActivity.b3(view);
+                        currentActivity.b5(view);
                     }
 
             @Override
