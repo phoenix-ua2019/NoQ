@@ -55,8 +55,8 @@ public class CafeAdapter extends RecyclerView.Adapter<CafeAdapter.MyViewHolder> 
         Cafe cafe = cafesList.get(position);
         System.out.println("onBindViewHolder!!!!!!!!!!!!");
         System.out.println(cafe);
-        holder.cafeName.setText(cafe.getCafeName());
-        holder.cafeLocation.setText(cafe.getCafeLocation());
+        holder.cafeName.setText(cafe.getName());
+        holder.cafeLocation.setText(cafe.getLocation());
         if (cafe.hasImage()) {
             holder.mDrawable.setImageResource(r.getIdentifier(cafe.getIcon(),
                     "drawable", "ua.lviv.iot.phoenix.noq"));
