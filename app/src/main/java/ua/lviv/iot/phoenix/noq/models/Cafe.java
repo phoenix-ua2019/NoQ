@@ -95,6 +95,7 @@ public class Cafe implements Parcelable {
         out.writeList(meals);
     }
 
+    @PropertyName("name")
     public String getName() {
         return name;
     }
@@ -103,6 +104,7 @@ public class Cafe implements Parcelable {
         this.name = name;
     }
 
+    @PropertyName("location")
     public String getLocation() {
         return location;
     }
@@ -115,6 +117,7 @@ public class Cafe implements Parcelable {
         icon = id;
     }
 
+    @PropertyName("icon")
     public String getIcon() {
         return icon;
     }
@@ -123,6 +126,7 @@ public class Cafe implements Parcelable {
         return icon != null;
     }
 
+    @PropertyName("meals")
     public ArrayList<Meal> getMeals() {
         return meals;
     }
