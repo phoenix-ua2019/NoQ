@@ -44,17 +44,15 @@ public class Meal implements Parcelable {
         time = ((Long) map.get("time")).intValue();
         try {
             Object temp = map.get("selectedQuantity");
-            selectedQuantity = (Integer) temp;
+            selectedQuantity = ((Long) temp).intValue();
         } catch (NullPointerException e) {
-
-        } catch (ClassCastException e) {
-
+            e.printStackTrace();
         }
     }
 
     public Meal (Parcel source) {
         this(source.readString(), source.readDouble(), source.readInt(),
-                source.readString(), source.readDouble(), source.readString());
+                source.readString(), source.readDouble(), source.readString(), source.readInt());
     }
 
     @Override
@@ -70,15 +68,22 @@ public class Meal implements Parcelable {
         out.writeString(mealPicture);
         out.writeDouble(weight);
         out.writeString(description);
+        out.writeInt(selectedQuantity);
     }
 
-    public Meal(String mealName, double price, int preparationTime, String mealPicture, double weight, String description) {
+    public Meal(String mealName, double price, int preparationTime, String mealPicture,
+                double weight, String description) {
         this.mealName = mealName;
         this.price = price;
         this.time = preparationTime;
         this.mealPicture = mealPicture;
         this.weight = weight;
         this.description = description;
+    }
+    public Meal(String mealName, double price, int preparationTime, String mealPicture,
+                double weight, String description, int selectedQuantity) {
+        this(mealName, price, preparationTime, mealPicture, weight, description);
+        this.selectedQuantity = selectedQuantity;
     }
 
     @PropertyName("name")
