@@ -49,9 +49,9 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.MyViewHolder
     public void onBindViewHolder(MyViewHolder holder, int position) {
         Order order = orderList.get(position);
         Cafe cafe = order.getCafe();
-        holder.name.setText(cafe.getCafeName());
+        holder.name.setText(cafe.getName());
         holder.time.setText(order.getTime());
-        holder.location.setText(cafe.getCafeLocation());
+        holder.location.setText(cafe.getLocation());
         if (cafe.hasImage()) {
             holder.icon.setImageResource(r.getIdentifier(cafe.getIcon(),
                     "drawable", "ua.lviv.iot.phoenix.noq_cashier"));

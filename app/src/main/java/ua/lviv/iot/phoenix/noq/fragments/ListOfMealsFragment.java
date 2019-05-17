@@ -69,7 +69,7 @@ public class ListOfMealsFragment extends Fragment {
                 Meal meal = mealList.get(position);
                 //Toast.makeText(getApplicationContext(), meal.getMealName() + " is selected!", Toast.LENGTH_SHORT).show();
                 quantityDialogCaller(meal);
-                cafe.setCafeMeals(mealList);
+                cafe.setMeals(mealList);
                 Bundle b = getArguments();
                 b.putParcelable("time_cafe", cafe);
                 setArguments(b);
@@ -80,7 +80,7 @@ public class ListOfMealsFragment extends Fragment {
         }));
         System.out.println(getArguments());
         cafe = getArguments().getParcelable("cafe");
-        mealList = cafe.getCafeMeals();
+        mealList = cafe.getMeals();
         mealAdapter.setList(mealList);
         mealAdapter.notifyDataSetChanged();
         chooseTimeBtn = view.findViewById(R.id.choose_time);
