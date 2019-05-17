@@ -150,7 +150,14 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
     }
 
     public void b4(View view) {
-        setFragment(new MyOrdersFragment());
+        fragment = new MyOrdersFragment();
+        Bundle args = fragment.getArguments();
+        fragment.setArguments(args);
+        getSupportFragmentManager()
+                .beginTransaction()
+                .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right)
+                .replace(R.id.base_for_nv, fragment)
+                .commit();
     }
 
     private void setFragment(Fragment new_fragment) {

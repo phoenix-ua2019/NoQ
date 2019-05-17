@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".fragments.OrderFragment">
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/name_of_order_cafe"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:gravity="center"
+                        android:textColor="#000"
+                        android:textSize="18sp"
+                        tools:text="Назва закладу" />
+
+                    <TextView
+                        android:id="@+id/location_of_order_cafe"
+                        android:layout_width="match_parent"
+                        android:layout_height="28dp"
+                        android:gravity="center"
+                        tools:text="вул. Вивви" />
+
+                </LinearLayout>
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/t1"
+                        android:layout_width="150dp"
+                        android:layout_height="28dp"
+                        android:background="@color/colorPrimary"
+                        android:gravity="center"
+                        android:text="Моє замовлення"
+                        android:textColor="@color/white" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_below="@+id/t1"
+                        android:background="@color/colorPrimary" />
+
+                </RelativeLayout>
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_order_meals"
+        android:layout_width="match_parent"
+        android:layout_height="286dp"
+        android:scrollbars="vertical"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/t2"
+                    android:layout_width="72dp"
+                    android:layout_height="28dp"
+                    android:background="@color/colorPrimary"
+                    android:gravity="center"
+                    android:text="Ціна"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/t2"
+                    android:background="@color/colorPrimary" />
+
+                <TextView
+                    android:id="@+id/selected_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="28dp"
+                    android:layout_toRightOf="@+id/t2"
+                    android:gravity="center"
+                    android:textColor="#000"
+                    android:textSize="18sp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp">
+
+                <TextView
+                    android:id="@+id/t3"
+                    android:layout_width="164dp"
+                    android:layout_height="28dp"
+                    android:background="@color/colorPrimary"
+                    android:gravity="center"
+                    android:text="Час замовлення"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/t3"
+                    android:background="@color/colorPrimary" />
+
+                <TextView
+                    android:id="@+id/selected_time_show"
+                    android:layout_width="match_parent"
+                    android:layout_height="28dp"
+                    android:layout_toRightOf="@+id/t3"
+                    android:gravity="center"
+                    android:textColor="#000"
+                    android:textSize="18sp" />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="132dp"
+        android:layout_gravity="bottom">
+
+        <Button
+            android:id="@+id/make_order"
+            android:layout_width="160dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="32dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/button_style"
+            android:text="Назад"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:onClick="b4" />
+
+    </RelativeLayout>
+
+
+</LinearLayout>
