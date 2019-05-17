@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.google.firebase.database.IgnoreExtraProperties;
+import com.google.firebase.database.PropertyName;
 
 import java.util.HashMap;
 
@@ -41,6 +42,14 @@ public class Meal implements Parcelable {
         mealName = (String) map.get("name");
         price = (Long) map.get("price");
         time = ((Long) map.get("time")).intValue();
+        try {
+            Object temp = map.get("selectedQuantity");
+            selectedQuantity = (Integer) temp;
+        } catch (NullPointerException e) {
+
+        } catch (ClassCastException e) {
+
+        }
     }
 
     public Meal (Parcel source) {
@@ -72,6 +81,7 @@ public class Meal implements Parcelable {
         this.description = description;
     }
 
+    @PropertyName("name")
     public String getMealName() {
         return mealName;
     }
@@ -101,7 +111,7 @@ public class Meal implements Parcelable {
     }
 
     public String weightToString() {
-        return ((Double.toString(weight)) + "г");
+        return weight + "г";
     }
 
     public void setWeight(double weight) {
@@ -124,6 +134,7 @@ public class Meal implements Parcelable {
         this.price = price;
     }
 
+    @PropertyName("selectedQuantity")
     public int getSelectedQuantity() {
         return selectedQuantity;
     }
