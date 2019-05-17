@@ -6,6 +6,7 @@ import android.os.Parcelable;
 
 import com.google.common.base.Splitter;
 import com.google.firebase.database.IgnoreExtraProperties;
+import com.google.firebase.database.PropertyName;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -93,7 +94,6 @@ public class Cafe implements Parcelable {
         out.writeString(icon);
         out.writeList(meals);
     }
-
 
     public String getName() {
         return name;

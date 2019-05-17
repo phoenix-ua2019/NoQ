@@ -68,11 +68,11 @@ public class TimeFragment extends Fragment {
         }
 
         cafe = getArguments().getParcelable("time_cafe");
-        meals = cafe.getCafeMeals();
+        meals = cafe.getMeals();
 
         meals = (ArrayList<Meal>) meals.stream()
                 .filter(meal -> meal.getSelectedQuantity() > 0).collect(Collectors.toList());
-        cafe.setCafeMeals(meals);
+        cafe.setMeals(meals);
         b.putParcelable("order_cafe", cafe);
 
 
@@ -102,7 +102,7 @@ public class TimeFragment extends Fragment {
     private Integer calculateTimeToPrepare() {
 
         cafe = getArguments().getParcelable("time_cafe");
-        meals = cafe.getCafeMeals();
+        meals = cafe.getMeals();
         meals = (ArrayList<Meal>) meals.stream()
                 .filter(meal -> meal.getSelectedQuantity() > 0).collect(Collectors.toList());
         int minTimeToPrepare = 0;
