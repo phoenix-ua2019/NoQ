@@ -79,7 +79,7 @@ public class TimeFragment extends Fragment {
         minOrderTime.setText(calculateTimeToPrepare() + " хв");
 
         floatTime.setOnTimeChangedListener((TimePicker view, int hourOfDay, int minute) -> {
-            if (isCafeOpen(hourOfDay, minute) & isAllowableTime(hourOfDay, minute)) {
+            if (isCafeOpen(hourOfDay, minute) & isAllowableTime(hourOfDay, currentHour, minute, currentMinute)) {
                 updateDisplay(hourOfDay, minute);
             }
         });
@@ -143,9 +143,7 @@ public class TimeFragment extends Fragment {
     }
 
 
-    private boolean isAllowableTime(int orderHour, int orderMinute) {
-        int currentHour = floatTime.getCurrentHour();
-        int currentMinute = floatTime.getCurrentMinute();
+    private boolean isAllowableTime(int orderHour, Integer currentHour, int orderMinute, Integer currentMinute) {
 
         if (orderHour < currentHour ||
                 (orderHour == currentHour && orderMinute < currentMinute)
