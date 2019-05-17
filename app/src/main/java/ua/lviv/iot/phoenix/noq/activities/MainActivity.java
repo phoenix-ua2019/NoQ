@@ -102,8 +102,9 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
             getSupportFragmentManager()
                 .beginTransaction()
                 .setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left)
-                .replace(R.id.base_for_nv, fragment)
+                .replace(this.fragment.getId(), fragment)
                 .commit();
+            this.fragment = fragment;
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
