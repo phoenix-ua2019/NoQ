@@ -52,6 +52,8 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.MyViewHolder
         holder.name.setText(cafe.getName());
         holder.time.setText(order.getTime());
         holder.location.setText(cafe.getLocation());
+        System.out.println(cafe.hasImage());
+        System.out.println(cafe.getIcon());
         if (cafe.hasImage()) {
             holder.icon.setImageResource(r.getIdentifier(cafe.getIcon(),
                     "drawable", "ua.lviv.iot.phoenix.noq_cashier"));

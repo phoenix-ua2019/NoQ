@@ -40,6 +40,7 @@ public class SeeMyOrderFragment extends Fragment {
     private View view;
     private Cafe cafe;
     private String time;
+    private ArrayList<Meal> meals;
     private Double sumPrice = 0.0;
     final long count[] = {0};
     private boolean userUpdated = false;
@@ -56,7 +57,7 @@ public class SeeMyOrderFragment extends Fragment {
         try {
             time = getArguments().getString("time");
             cafe = getArguments().getParcelable("order_cafe");
-            ArrayList<Meal> meals = cafe.getMeals();
+            meals = cafe.getMeals();
 
             meals = (ArrayList<Meal>) meals.stream()
                     .filter(meal -> meal.getSelectedQuantity() > 0).collect(Collectors.toList());
@@ -66,52 +67,18 @@ public class SeeMyOrderFragment extends Fragment {
                 sumPrice += meal.getPrice() * meal.getSelectedQuantity();
             }
 
-            MealAdapter mealAdapter = new MealAdapter(meals);
-            recyclerView.setAdapter(mealAdapter);
-            RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
-            recyclerView.setLayoutManager(mLayoutManager);
-
-            Order finalOrder = new Order(time, sumPrice, Date.from(Instant.now()), cafe);
-
-            DatabaseReference cafeReference = Useful.orderRef.child(cafe.getLocation());
-
-            cafeReference.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    if (!cafeUpdated) {
-                        cafeReference.child("" + dataSnapshot.getChildrenCount()).setValue(finalOrder);
-                        cafeUpdated = true;
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                }
-            });
-
-            DatabaseReference userReference = Useful.orderRef
-                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid());
-            userReference.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    if (!userUpdated) {
-                        userReference.child("" + dataSnapshot.getChildrenCount()).setValue(finalOrder);
-                        userUpdated = true;
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                }
-            });
         } catch (NullPointerException e) {
             Order order = getArguments().getParcelable("order");
             cafe = order.getCafe();
             time = order.getTime();
             sumPrice = order.getSum();
+            meals = cafe.getMeals();
         }
+
+        MealAdapter mealAdapter = new MealAdapter(meals);
+        recyclerView.setAdapter(mealAdapter);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(mLayoutManager);
 
         ((TextView) view.findViewById(R.id.name_of_see_my_order_cafe)).setText(cafe.getName());
         ((TextView) view.findViewById(R.id.location_of_see_my_order_cafe)).setText(cafe.getLocation());
