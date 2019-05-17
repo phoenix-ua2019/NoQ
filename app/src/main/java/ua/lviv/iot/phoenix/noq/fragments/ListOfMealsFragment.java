@@ -46,6 +46,7 @@ public class ListOfMealsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_list_of_menu, container, false);
+        currentActivity = (MainActivity) getActivity();
 
         recyclerView = view.findViewById(R.id.recycler_view);
         mealAdapter = new MealAdapter(new ArrayList<>());
@@ -55,7 +56,6 @@ public class ListOfMealsFragment extends Fragment {
 
         Toolbar toolbar = view.findViewById(R.id.toolbar);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
-        currentActivity = (MainActivity) getActivity();
 
         recyclerView.setLayoutManager(new LinearLayoutManager(currentActivity));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
