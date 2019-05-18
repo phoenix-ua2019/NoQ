@@ -174,6 +174,12 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         toolbar.setTitle("Ваше замовлення");
     }
 
+    public void b6(View view) {
+        setFragment(new ListOfCafesFragment());
+        toolbar.setTitle("Ваше замовлення");
+    }
+
+
 
     private void setFragment(Fragment new_fragment) {
         Bundle args = fragment.getArguments();
