@@ -49,7 +49,7 @@ public class SignInActivity extends AppCompatActivity implements OnClickListener
         super.onCreate(savedInstanceState);
         FirebaseApp.initializeApp(this);
         setContentView(R.layout.activity_login);
-        
+
 
         Button mSignInButton = findViewById(R.id.sign_in);
         mSignInButton.setOnClickListener(this);

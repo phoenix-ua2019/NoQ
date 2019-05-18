@@ -83,6 +83,7 @@ public class MyOrdersFragment extends Fragment {
                 }
             });
         } catch (Exception e) {
+            e.printStackTrace();
 
         }
 
@@ -122,8 +123,8 @@ public class MyOrdersFragment extends Fragment {
         userReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (Object o:dataSnapshot.getChildren())
-                    orderList.add(new Order((Map<String,Map>) o));
+                for (DataSnapshot o:dataSnapshot.getChildren())
+                    orderList.add(new Order((Map<String,Map>) o.getValue()));
                 orderAdapter.setList(orderList);
                 orderAdapter.notifyDataSetChanged();
             }

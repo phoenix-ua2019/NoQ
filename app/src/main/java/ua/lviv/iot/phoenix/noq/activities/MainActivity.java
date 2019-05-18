@@ -162,6 +162,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
 
     public void b4(View view) {
         Bundle args = fragment.getArguments();
+        System.out.println(args);
         fragment = new MyOrdersFragment();
         fragment.setArguments(args);
         toolbar.setTitle("Ваші замовлення");

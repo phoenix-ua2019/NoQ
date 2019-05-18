@@ -53,31 +53,27 @@ public class OrderFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_order, container, false);
         RecyclerView recyclerView = view.findViewById(R.id.recycler_order_meals);
 
-        try {
-            time = getArguments().getString("time");
-            cafe = getArguments().getParcelable("order_cafe");
-            ArrayList<Meal> meals = cafe.getMeals();
+        time = getArguments().getString("time");
+        cafe = getArguments().getParcelable("order_cafe");
+        ArrayList<Meal> meals = cafe.getMeals();
 
-            meals = (ArrayList<Meal>) meals.stream()
-                    .filter(meal -> meal.getSelectedQuantity() > 0).collect(Collectors.toList());
-            cafe.setMeals(meals);
+        meals = (ArrayList<Meal>) meals.stream()
+                .filter(meal -> meal.getSelectedQuantity() > 0).collect(Collectors.toList());
+        cafe.setMeals(meals);
 
-            for (Meal meal : meals) {
-                sumPrice += meal.getPrice() * meal.getSelectedQuantity();
-            }
-
-            MealAdapter mealAdapter = new MealAdapter(meals);
-            recyclerView.setAdapter(mealAdapter);
-            RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
-            recyclerView.setLayoutManager(mLayoutManager);
-
-            Order finalOrder = new Order(time, sumPrice, Date.from(Instant.now()), cafe);
-        } catch (NullPointerException e) {
-            Order order = getArguments().getParcelable("order");
-            cafe = order.getCafe();
-            time = order.getTime();
-            sumPrice = order.getSum();
+        for (Meal meal : meals) {
+            sumPrice += meal.getPrice() * meal.getSelectedQuantity();
         }
+
+        MealAdapter mealAdapter = new MealAdapter(meals);
+        recyclerView.setAdapter(mealAdapter);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(mLayoutManager);
+
+        Order finalOrder = new Order(time, sumPrice, Date.from(Instant.now()), cafe);
+        Bundle args = getArguments();
+        args.putParcelable("order", finalOrder);
+        setArguments(args);
 
         ((TextView) view.findViewById(R.id.name_of_order_cafe)).setText(cafe.getName());
         ((TextView) view.findViewById(R.id.location_of_order_cafe)).setText(cafe.getLocation());
