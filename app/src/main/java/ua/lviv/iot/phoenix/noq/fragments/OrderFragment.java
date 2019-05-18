@@ -72,40 +72,6 @@ public class OrderFragment extends Fragment {
             recyclerView.setLayoutManager(mLayoutManager);
 
             Order finalOrder = new Order(time, sumPrice, Date.from(Instant.now()), cafe);
-
-            DatabaseReference cafeReference = Useful.orderRef.child(cafe.getLocation());
-
-            cafeReference.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    if (!cafeUpdated) {
-                        cafeReference.child("" + dataSnapshot.getChildrenCount()).setValue(finalOrder);
-                        cafeUpdated = true;
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                }
-            });
-
-            DatabaseReference userReference = Useful.orderRef
-                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid());
-            userReference.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    if (!userUpdated) {
-                        userReference.child("" + dataSnapshot.getChildrenCount()).setValue(finalOrder);
-                        userUpdated = true;
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                }
-            });
         } catch (NullPointerException e) {
             Order order = getArguments().getParcelable("order");
             cafe = order.getCafe();

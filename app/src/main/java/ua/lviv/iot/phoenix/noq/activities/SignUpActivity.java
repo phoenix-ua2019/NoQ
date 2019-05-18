@@ -1,5 +1,6 @@
 package ua.lviv.iot.phoenix.noq.activities;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,6 +19,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -83,8 +87,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 emailEdit.getText().toString(), passwordEdit.getText().toString());
         res.addOnCompleteListener(SignUpActivity.this, (@NonNull Task<AuthResult> task) -> {
             Log.d(TAG, "createUser:onComplete:" + task.isSuccessful());
-            System.out.println(task);
-            System.out.println(task.getResult());
             if (!task.isSuccessful()) {
                 Toast.makeText(SignUpActivity.this, "Sign Up Failed",
                         Toast.LENGTH_SHORT).show();
@@ -145,8 +147,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onClick(View v) {
         int i = v.getId();
-        System.out.println(i);
-        System.out.println(R.id.sign_in);
         if (i == R.id.sign_up) {
             signUp();
         } else if (i == R.id.sign_in) {

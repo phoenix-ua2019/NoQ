@@ -13,10 +13,12 @@ import java.util.Map;
 
 public class Order implements Parcelable {
 
-    private Date mDate;
+    private Date mDate = new Date();
     private String mTime;
     private Cafe mCafe;
     private double mSum;
+    private int status;
+    private int pos;
     public static final Parcelable.Creator<Order> CREATOR = new Parcelable.Creator<Order>() {
         @Override
         public Order createFromParcel(Parcel source) {
@@ -27,14 +29,13 @@ public class Order implements Parcelable {
                 return new Order();
             }
         }
-
         @Override
         public Order[] newArray(int size) {
-         return new Order[size];
+            return new Order[size];
         }
-     };
+    };
 
-    Order() {
+    public Order() {
 
     }
 
@@ -49,6 +50,11 @@ public class Order implements Parcelable {
             mSum = (Double) map.get("sum");
         } catch (Exception e){
             mSum = (Long) map.get("sum");
+        }
+        try {
+            status = ((Long) map.get("status")).intValue();
+        } catch (NullPointerException e) {
+
         }
     }
 
@@ -78,20 +84,32 @@ public class Order implements Parcelable {
         out.writeParcelable(mCafe,1);
     }
 
-    @PropertyName("sum")
     public double getSum() {
         return mSum;
     }
-    @PropertyName("date")
     public Date getDate() {
         return mDate;
     }
-    @PropertyName("cafe")
     public Cafe getCafe() {
         return mCafe;
     }
-    @PropertyName("time")
     public String getTime() {
         return mTime;
+    }
+    public int getStatus() {
+        return status;
+    }
+    public boolean isDone() {
+        return status == 1;
+    }
+    public void setStatus(int status) {
+        this.status = status;
+    }
+    public int getPos() {
+        return pos;
+    }
+    public Order setPos(int pos) {
+        this.pos = pos;
+        return this;
     }
 }

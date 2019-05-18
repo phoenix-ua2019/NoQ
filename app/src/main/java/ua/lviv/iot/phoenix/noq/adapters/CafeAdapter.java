@@ -53,8 +53,6 @@ public class CafeAdapter extends RecyclerView.Adapter<CafeAdapter.MyViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull CafeAdapter.MyViewHolder holder, int position) {
         Cafe cafe = cafesList.get(position);
-        System.out.println("onBindViewHolder!!!!!!!!!!!!");
-        System.out.println(cafe);
         holder.cafeName.setText(cafe.getName());
         holder.cafeLocation.setText(cafe.getLocation());
         if (cafe.hasImage()) {

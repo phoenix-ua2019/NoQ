@@ -20,9 +20,14 @@ import android.view.View;
 import android.widget.RelativeLayout;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 
 import ua.lviv.iot.phoenix.noq.R;
 import ua.lviv.iot.phoenix.noq.fragments.*;
+import ua.lviv.iot.phoenix.noq.models.Order;
 
 public class MainActivity extends AppCompatActivity implements OnNavigationItemSelectedListener {
 
@@ -31,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
     private Toolbar toolbar;
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private Useful useful;
-    private Fragment fragment;
+    private Fragment fragment;Boolean cafeUpdated = false, userUpdated = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,8 +135,6 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
     public void onBackPressed() {
         drawerLayout = findViewById(R.id.drawer_layout);
         try {
-
-
             if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
                 drawerLayout.closeDrawer(GravityCompat.START);
             } else {
@@ -174,7 +177,6 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         toolbar.setTitle("Ваше замовлення");
     }
 
-
     private void setFragment(Fragment new_fragment) {
         Bundle args = fragment.getArguments();
         fragment = new_fragment;
@@ -185,4 +187,5 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
                 .replace(R.id.base_for_nv, fragment)
                 .commit();
     }
+
 }
