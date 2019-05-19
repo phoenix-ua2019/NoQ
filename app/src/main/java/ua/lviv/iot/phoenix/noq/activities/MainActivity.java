@@ -52,7 +52,11 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         setContentView(R.layout.activity_base);
 
         fragment = new ListOfCafesFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.base_for_nv, fragment).commit();
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.base_for_nv, fragment)
+                .setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left)
+                .commit();
 
         toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("Оберіть кафе");
@@ -83,7 +87,6 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
             fragment = new ListOfCafesFragment();
             fragment.setArguments(new Bundle());
             toolbar.setTitle("Оберіть кафе");
-            //this.fragment.getArguments()
 
         } else if (id == R.id.user) {
             fragment = new UserFragment();

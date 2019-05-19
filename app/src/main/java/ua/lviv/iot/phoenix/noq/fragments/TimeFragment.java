@@ -145,13 +145,8 @@ public class TimeFragment extends Fragment {
 
     private Integer calculateTimeToPrepare() {
 
-        try{
-            cafe = getArguments().getParcelable("time_cafe");
-            meals = cafe.getMeals();
-        } catch (Exception e){
-            System.out.println("Хуйня з часом");
-        }
-
+        cafe = getArguments().getParcelable("time_cafe");
+        meals = cafe.getMeals();
         meals = (ArrayList<Meal>) meals.stream()
                 .filter(meal -> meal.getSelectedQuantity() > 0).collect(Collectors.toList());
         int minTimeToPrepare = 0;
@@ -213,7 +208,8 @@ public class TimeFragment extends Fragment {
                     if (!wasShownToastForPast) {
                         Toast.makeText(getActivity(), "Вибач, але ми не встигнемо зробити замовлення за такий час, дай нам хоча б " + calculateTimeToPrepare() + " хв", Toast.LENGTH_SHORT).show();
                         wasShownToastForPast = true;
-                    }                    floatTime.setHour(currentHour + 1);
+                    }
+                    floatTime.setHour(currentHour + 1);
                     floatTime.setMinute(currentMinute + calculateTimeToPrepare() - minutesInHour);
                 }
                 break;
@@ -223,14 +219,16 @@ public class TimeFragment extends Fragment {
                     if (!wasShownToastForPast) {
                         Toast.makeText(getActivity(), "Вибач, але ми не встигнемо зробити замовлення за такий час, дай нам хоча б " + calculateTimeToPrepare() + " хв", Toast.LENGTH_SHORT).show();
                         wasShownToastForPast = true;
-                    }                    floatTime.setHour(currentHour + 1);
+                    }
+                    floatTime.setHour(currentHour + 1);
                     floatTime.setMinute(orderMinute);
 
                 } else if (orderHour < currentHour + 1 && orderMinute != 0) {
                     if (!wasShownToastForPast) {
                         Toast.makeText(getActivity(), "Вибач, але ми не встигнемо зробити замовлення за такий час, дай нам хоча б " + calculateTimeToPrepare() + " хв", Toast.LENGTH_SHORT).show();
                         wasShownToastForPast = true;
-                    }                    floatTime.setHour(currentHour + 1);
+                    }
+                    floatTime.setHour(currentHour + 1);
                     floatTime.setMinute(0);
 
                 } else if (orderHour > currentHour + 1) {
@@ -244,14 +242,16 @@ public class TimeFragment extends Fragment {
                     if (!wasShownToastForPast) {
                         Toast.makeText(getActivity(), "Вибач, але ми не встигнемо зробити замовлення за такий час, дай нам хоча б " + calculateTimeToPrepare() + " хв", Toast.LENGTH_SHORT).show();
                         wasShownToastForPast = true;
-                    }                    floatTime.setHour(currentHour);
+                    }
+                    floatTime.setHour(currentHour);
                     floatTime.setMinute(currentMinute + calculateTimeToPrepare());
 
                 } else if (orderHour == currentHour && orderMinute < currentMinute + calculateTimeToPrepare()) {
                     if (!wasShownToastForPast) {
                         Toast.makeText(getActivity(), "Вибач, але ми не встигнемо зробити замовлення за такий час, дай нам хоча б " + calculateTimeToPrepare() + " хв", Toast.LENGTH_SHORT).show();
                         wasShownToastForPast = true;
-                    }                    floatTime.setHour(orderHour);
+                    }
+                    floatTime.setHour(orderHour);
                     floatTime.setMinute(currentMinute + calculateTimeToPrepare());
                 }
                 break;
