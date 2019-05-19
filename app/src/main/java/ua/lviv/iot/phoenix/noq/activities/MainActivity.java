@@ -44,9 +44,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
     private Useful useful;
     private Fragment fragment;
     Boolean cafeUpdated = false, userUpdated = false;
-    private List listOfFragment = new ArrayList();
     private int counter;
-    private String tag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +52,6 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         setContentView(R.layout.activity_base);
 
         fragment = new ListOfCafesFragment();
-        System.out.println("11111!!!!!!!!!!counter = " + counter);
-        listOfFragment.add(new ListOfCafesFragment());
         getSupportFragmentManager().beginTransaction().replace(R.id.base_for_nv, fragment).commit();
 
         toolbar = findViewById(R.id.toolbar);
@@ -145,9 +141,6 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
 
     @Override
     public void onBackPressed() {
-
-        System.out.println("frag = " + fragment + " tag = " + tag + " list = " + listOfFragment + " counter = " + counter);
-
         switch (counter) {
             case 0: {
                 if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
@@ -191,56 +184,38 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
     }
 
     public void b1(View view) {
-        tag = "ListOfCafesFragment";
-        setFragment(new ListOfMealsFragment(), tag);
+        setFragment(new ListOfMealsFragment());
         counter = 1;
-        System.out.println("!!!!!!!!!!!!!!!!counter = " + counter);
-        listOfFragment.add(new ListOfMealsFragment());
         toolbar.setTitle("Оберіть страви");
     }
 
     public void b1Reverse() {
-        tag = "ListOfCafesFragment";
-        setFragmentReverse(new ListOfCafesFragment(), tag);
+        setFragmentReverse(new ListOfCafesFragment());
         counter = 0;
-        System.out.println("!!!!!!!!!!!!!!!!counter = " + counter);
-        listOfFragment.add(new ListOfMealsFragment());
         toolbar.setTitle("Оберіть Кафе");
     }
 
     public void b2(View view) {
-        tag = "TimeFragment";
-        setFragment(new TimeFragment(), tag);
+        setFragment(new TimeFragment());
         counter = 2;
-        System.out.println("!!!!!!!!!!!!!!!!counter = " + counter);
-        listOfFragment.add(new TimeFragment());
         toolbar.setTitle("Оберіть час");
     }
 
     public void b2Reverse() {
-        tag = "TimeFragment";
-        setFragmentReverse(new ListOfMealsFragment(), tag);
+        setFragmentReverse(new ListOfMealsFragment());
         counter = 1;
-        System.out.println("!!!!!!!!!!!!!!!!counter = " + counter);
-        listOfFragment.add(new TimeFragment());
         toolbar.setTitle("Оберіть Страви");
     }
 
     public void b3(View view) {
-        tag = "OrderFragment";
-        setFragment(new OrderFragment(), tag);
+        setFragment(new OrderFragment());
         counter = 3;
-        System.out.println("!!!!!!!!!!!!!!!!counter = " + counter);
-        listOfFragment.add(new OrderFragment());
         toolbar.setTitle("Ваше замовлення");
     }
 
     public void b3Reverse() {
-        tag = "OrderFragment";
-        setFragmentReverse(new TimeFragment(), tag);
+        setFragmentReverse(new TimeFragment());
         counter = 2;
-        System.out.println("!!!!!!!!!!!!!!!!counter = " + counter);
-        listOfFragment.add(new OrderFragment());
         toolbar.setTitle("Оберіть час");
     }
 
@@ -258,40 +233,37 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
     }
 
     public void b5(View view) {
-        tag = "SeeMyOrderFragment";
-        setFragment(new SeeMyOrderFragment(), tag);
+        setFragment(new SeeMyOrderFragment());
         toolbar.setTitle("Ваше замовлення");
     }
 
     public void b6(View view) {
-        tag = "ListOfCafesFragment";
-        setFragment(new ListOfCafesFragment(), tag);
+        setFragment(new ListOfCafesFragment());
         counter = 0;
-        System.out.println("!!!!!!!!!!!!!!!!counter = " + counter);
         toolbar.setTitle("Ваше замовлення");
     }
 
 
-    private void setFragment(Fragment new_fragment, String tag) {
+    private void setFragment(Fragment new_fragment) {
         Bundle args = fragment.getArguments();
         fragment = new_fragment;
         fragment.setArguments(args);
         getSupportFragmentManager()
                 .beginTransaction()
                 .setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left)
-                .replace(R.id.base_for_nv, fragment, tag)
+                .replace(R.id.base_for_nv, fragment)
                 .addToBackStack(null)
                 .commit();
     }
 
-    private void setFragmentReverse(Fragment new_fragment, String tag) {
+    private void setFragmentReverse(Fragment new_fragment) {
         Bundle args = fragment.getArguments();
         fragment = new_fragment;
         fragment.setArguments(args);
         getSupportFragmentManager()
                 .beginTransaction()
                 .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right)
-                .replace(R.id.base_for_nv, fragment, tag)
+                .replace(R.id.base_for_nv, fragment)
                 .addToBackStack(null)
                 .commit();
     }
