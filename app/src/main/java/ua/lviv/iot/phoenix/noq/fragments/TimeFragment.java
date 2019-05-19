@@ -145,8 +145,13 @@ public class TimeFragment extends Fragment {
 
     private Integer calculateTimeToPrepare() {
 
-        cafe = getArguments().getParcelable("time_cafe");
-        meals = cafe.getMeals();
+        try{
+            cafe = getArguments().getParcelable("time_cafe");
+            meals = cafe.getMeals();
+        } catch (Exception e){
+            System.out.println("Хуйня з часом");
+        }
+
         meals = (ArrayList<Meal>) meals.stream()
                 .filter(meal -> meal.getSelectedQuantity() > 0).collect(Collectors.toList());
         int minTimeToPrepare = 0;
