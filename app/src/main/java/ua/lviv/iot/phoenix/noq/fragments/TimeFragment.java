@@ -2,6 +2,7 @@ package ua.lviv.iot.phoenix.noq.fragments;
 
 
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -27,14 +28,15 @@ public class TimeFragment extends Fragment {
     private View view;
     private int preparationTime = 15;
 
-    private final int closingHour = 25;
-    private final int openingHour = -1;
+    private final int closingHour = 23;
+    private final int openingHour = 6;
     private static final int minutesInHour = 60;
     private Bundle b;
     private Cafe cafe;
     private ArrayList<Meal> meals;
 
     boolean wasShownToastForPast = false;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -62,8 +64,8 @@ public class TimeFragment extends Fragment {
             floatTime.setMinute(currentMinute + calculateTimeToPrepare());
         }
 
-
         if (isCafeOpen(currentHour, currentMinute)) {
+            System.out.println("Перишй раз updateDisplayAtFirst");
             updateDisplayAtFirst(currentHour, currentMinute);
         }
 
@@ -75,12 +77,54 @@ public class TimeFragment extends Fragment {
         cafe.setMeals(meals);
         b.putParcelable("order_cafe", cafe);
 
-
         minOrderTime.setText(calculateTimeToPrepare() + " хв");
 
-        floatTime.setOnTimeChangedListener((TimePicker view, int hourOfDay, int minute) -> {
-            if (isCafeOpen(hourOfDay, minute) & isAllowableTime(hourOfDay, minute)) {
-                updateDisplay(hourOfDay, minute);
+        floatTime.setOnTimeChangedListener((TimePicker view, int orderHour, int orderMinute) -> {
+            if (isCafeOpen(orderHour, orderMinute) && isAllowableTime(orderHour, currentHour, orderMinute, currentMinute)) {
+
+                int temp;
+                if ((currentMinute + calculateTimeToPrepare()) > minutesInHour) {
+                    temp = 1;
+                } else if ((currentMinute + calculateTimeToPrepare()) == minutesInHour) {
+                    temp = 2;
+                } else {
+                    temp = 3;
+                }
+                switch (temp) {
+                    case 1: {
+                        if (orderHour < currentHour + 1) {
+                            updateDisplay(currentHour + 1, orderMinute);
+
+                        } else if (orderHour == currentHour + 1 && orderMinute < currentMinute + calculateTimeToPrepare() - minutesInHour) {
+                            updateDisplay(orderHour, currentMinute + calculateTimeToPrepare() - minutesInHour);
+                        } else {
+                            updateDisplay(orderHour, orderMinute);
+                        }
+                        break;
+                    }
+                    case 2: {
+                        if (orderHour < currentHour + 1) {
+                            updateDisplay(currentHour + 1, 0);
+
+                        } else if (orderHour == currentHour + 1 && orderMinute != 0) {
+                            updateDisplay(currentHour + 1, orderMinute);
+
+                        } else {
+                            updateDisplay(orderHour, orderMinute);
+                        }
+                        break;
+                    }
+                    case 3: {
+                        if (orderHour < currentHour) {
+                            updateDisplay(currentHour, orderMinute);
+                        } else if (orderHour == currentHour && orderMinute < currentMinute + calculateTimeToPrepare()) {
+                            updateDisplay(orderHour, currentMinute + calculateTimeToPrepare());
+                        } else {
+                            updateDisplay(orderHour, orderMinute);
+                        }
+                        break;
+                    }
+                }
             }
         });
         view.findViewById(R.id.submit_time).setOnClickListener((View v) -> {
@@ -113,13 +157,10 @@ public class TimeFragment extends Fragment {
                 minTimeToPrepare = temp;
             }
         }
-
         return minTimeToPrepare;
     }
 
-    private void updateDisplayAtFirst(int hour, int minute) {
-        int orderHour = hour;
-        int orderMinute = minute;
+    private void updateDisplayAtFirst(int orderHour, int orderMinute) {
 
         if ((orderMinute + calculateTimeToPrepare()) > minutesInHour) {
 
@@ -136,39 +177,91 @@ public class TimeFragment extends Fragment {
         }
     }
 
-    private void updateDisplay(int hour, int minute) {
-        int orderHour = hour;
-        int orderMinute = minute;
+    private void updateDisplay(int orderHour, int orderMinute) {
+        System.out.println("updateDisplay   orderHour = " + orderHour + " orderMinute = " + orderMinute);
         orderTime.setText(String.format("%02d:%02d", orderHour, orderMinute));
     }
 
 
-    private boolean isAllowableTime(int orderHour, int orderMinute) {
-        int currentHour = floatTime.getCurrentHour();
-        int currentMinute = floatTime.getCurrentMinute();
+    private boolean isAllowableTime(int orderHour, Integer currentHour, int orderMinute, Integer currentMinute) {
 
-        if (orderHour < currentHour ||
-                (orderHour == currentHour && orderMinute < currentMinute)
-        ) {
-            if (!wasShownToastForPast) {
-                Toast.makeText(getActivity(), "Ей, не можна робити замовлення в минулому часі", Toast.LENGTH_SHORT).show();
-                wasShownToastForPast = true;
+        int temp;
+        if ((currentMinute + calculateTimeToPrepare()) > minutesInHour) {
+            temp = 1;
+        } else if ((currentMinute + calculateTimeToPrepare()) == minutesInHour) {
+            temp = 2;
+        } else {
+            temp = 3;
+        }
+
+        switch (temp) {
+            case 1: {
+                if (orderHour < currentHour + 1) {
+                    if (!wasShownToastForPast) {
+                        Toast.makeText(getActivity(), "Вибач, але ми не встигнемо зробити замовлення за такий час, дай нам хоча б " + calculateTimeToPrepare() + " хв", Toast.LENGTH_SHORT).show();
+                        wasShownToastForPast = true;
+                    }
+                    floatTime.setHour(currentHour + 1);
+                    floatTime.setMinute(orderMinute);
+
+                } else if (orderHour == currentHour + 1 && orderMinute < currentMinute + calculateTimeToPrepare() - minutesInHour) {
+                    if (!wasShownToastForPast) {
+                        Toast.makeText(getActivity(), "Вибач, але ми не встигнемо зробити замовлення за такий час, дай нам хоча б " + calculateTimeToPrepare() + " хв", Toast.LENGTH_SHORT).show();
+                        wasShownToastForPast = true;
+                    }                    floatTime.setHour(currentHour + 1);
+                    floatTime.setMinute(currentMinute + calculateTimeToPrepare() - minutesInHour);
+                }
+                break;
             }
-            floatTime.setHour(currentHour);
-            floatTime.setMinute(currentMinute);
-            return false;
+            case 2: {
+                if (orderHour < currentHour + 1 && orderMinute == 0) {
+                    if (!wasShownToastForPast) {
+                        Toast.makeText(getActivity(), "Вибач, але ми не встигнемо зробити замовлення за такий час, дай нам хоча б " + calculateTimeToPrepare() + " хв", Toast.LENGTH_SHORT).show();
+                        wasShownToastForPast = true;
+                    }                    floatTime.setHour(currentHour + 1);
+                    floatTime.setMinute(orderMinute);
+
+                } else if (orderHour < currentHour + 1 && orderMinute != 0) {
+                    if (!wasShownToastForPast) {
+                        Toast.makeText(getActivity(), "Вибач, але ми не встигнемо зробити замовлення за такий час, дай нам хоча б " + calculateTimeToPrepare() + " хв", Toast.LENGTH_SHORT).show();
+                        wasShownToastForPast = true;
+                    }                    floatTime.setHour(currentHour + 1);
+                    floatTime.setMinute(0);
+
+                } else if (orderHour > currentHour + 1) {
+                    floatTime.setHour(orderHour);
+                    floatTime.setMinute(orderMinute);
+                }
+                break;
+            }
+            case 3: {
+                if (orderHour < currentHour) {
+                    if (!wasShownToastForPast) {
+                        Toast.makeText(getActivity(), "Вибач, але ми не встигнемо зробити замовлення за такий час, дай нам хоча б " + calculateTimeToPrepare() + " хв", Toast.LENGTH_SHORT).show();
+                        wasShownToastForPast = true;
+                    }                    floatTime.setHour(currentHour);
+                    floatTime.setMinute(currentMinute + calculateTimeToPrepare());
+
+                } else if (orderHour == currentHour && orderMinute < currentMinute + calculateTimeToPrepare()) {
+                    if (!wasShownToastForPast) {
+                        Toast.makeText(getActivity(), "Вибач, але ми не встигнемо зробити замовлення за такий час, дай нам хоча б " + calculateTimeToPrepare() + " хв", Toast.LENGTH_SHORT).show();
+                        wasShownToastForPast = true;
+                    }                    floatTime.setHour(orderHour);
+                    floatTime.setMinute(currentMinute + calculateTimeToPrepare());
+                }
+                break;
+            }
+            default: {
+                return false;
+            }
         }
         return true;
     }
 
-    private boolean isNearNewHour() {
-        return minutesInHour - preparationTime <= floatTime.getCurrentMinute();
-    }
-
     private boolean isCafeOpen(int orderHour, int orderMinute) {
-        if (orderHour > closingHour || (orderHour == closingHour && orderMinute > 0)) {
+        if (orderHour > closingHour || (orderHour == closingHour && orderMinute >= 0)) {
             Toast.makeText(getActivity(), "Вибач, але кафе вже зачинено", Toast.LENGTH_SHORT).show();
-            floatTime.setHour(closingHour % 24);
+            floatTime.setHour(closingHour - 1);
             floatTime.setMinute(0);
             return false;
         }
@@ -178,19 +271,6 @@ public class TimeFragment extends Fragment {
             floatTime.setMinute(0);
             return false;
         }
-        return true;
-    }
-
-    private boolean checkPreparationTime(int orderHour, int orderMinute) {
-        int currentHour = floatTime.getCurrentHour();
-        int currentMinute = floatTime.getCurrentMinute();
-
-        if (
-                (isNearNewHour() && (orderHour == currentHour || ((orderHour == currentHour + 1) &&
-                        (orderMinute < ((currentMinute + preparationTime) % minutesInHour))))) ||
-                        (orderHour == currentHour && (orderMinute < currentMinute + preparationTime))
-        )
-            return false;
         return true;
     }
 }
