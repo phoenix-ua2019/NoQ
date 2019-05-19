@@ -130,7 +130,7 @@ public class SignInActivity extends AppCompatActivity implements OnClickListener
         }
     }
 
-    private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
+    void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
         Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
 
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
@@ -152,7 +152,7 @@ public class SignInActivity extends AppCompatActivity implements OnClickListener
                 });
     }
 
-    private void googleSignIn() {
+    void googleSignIn() {
         Log.d(TAG, "googleSignUp");
         startActivityForResult(mGoogleSignInClient.getSignInIntent(), RC_SIGN_IN);
     }

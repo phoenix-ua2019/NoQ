@@ -78,7 +78,6 @@ public class ListOfMealsFragment extends Fragment {
             public void onLongClick(View v, int position) {
             }
         }));
-        System.out.println(getArguments());
         cafe = getArguments().getParcelable("cafe");
         mealList = cafe.getMeals();
         mealAdapter.setList(mealList);

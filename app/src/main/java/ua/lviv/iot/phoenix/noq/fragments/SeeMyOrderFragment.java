@@ -75,6 +75,7 @@ public class SeeMyOrderFragment extends Fragment {
             meals = cafe.getMeals();
         }
 
+        setArguments(new Bundle());
         MealAdapter mealAdapter = new MealAdapter(meals);
         recyclerView.setAdapter(mealAdapter);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
