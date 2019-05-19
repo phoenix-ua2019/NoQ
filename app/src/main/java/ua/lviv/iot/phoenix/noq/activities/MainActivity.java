@@ -92,14 +92,13 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
             fragment.setArguments(b);
             toolbar.setTitle("Профіль");
         } else if (id == R.id.my_orders) {
-
             fragment = new MyOrdersFragment();
             fragment.setArguments(new Bundle());
             toolbar.setTitle("Мої замовлення");
 
         } else if (id == R.id.setting) {
-
-            System.out.println("setting");
+            fragment = new SettingsFragment();
+            toolbar.setTitle("Налаштування");
 
         } else if (id == R.id.exit) {
 
