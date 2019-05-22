@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
             toolbar.setTitle("Мої замовлення");
 
         } else if (id == R.id.setting) {
-            fragment = new SettingsFragment();
+            //fragment = new SettingsFragment();
             toolbar.setTitle("Налаштування");
 
         } else if (id == R.id.exit) {
@@ -234,7 +234,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
     }
 
     public void b5(View view) {
-        setFragment(new SeeMyOrderFragment());
+        setFragment(new OrderFragment());
         toolbar.setTitle("Ваше замовлення");
     }
 
