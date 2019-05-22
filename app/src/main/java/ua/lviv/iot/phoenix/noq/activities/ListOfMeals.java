@@ -38,6 +38,7 @@ public class ListOfMeals extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         mealAdapter = new MealAdapter(mealList);
+
         recyclerView = findViewById(R.id.recycler_view);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
@@ -59,6 +60,7 @@ public class ListOfMeals extends AppCompatActivity {
             }
         }));
         mealList = ((Cafe) getIntent().getExtras().getParcelable("cafe")).getMeals();
+        mealAdapter.setR(getResources());
         mealAdapter.notifyDataSetChanged();
     }
 

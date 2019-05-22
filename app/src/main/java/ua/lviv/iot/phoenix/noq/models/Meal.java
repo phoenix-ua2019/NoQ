@@ -42,6 +42,8 @@ public class Meal implements Parcelable {
         mealName = (String) map.get("name");
         price = (Long) map.get("price");
         time = ((Long) map.get("time")).intValue();
+        description = (String) map.get("description");
+        mealPicture = (String) map.get("icon_of_food");
         try {
             Object temp = map.get("selectedQuantity");
             selectedQuantity = ((Long) temp).intValue();
@@ -146,6 +148,10 @@ public class Meal implements Parcelable {
 
     public void setSelectedQuantity(int selectedQuantity) {
         this.selectedQuantity = selectedQuantity;
+    }
+
+    public boolean hasImage(){
+        return mealPicture != null;
     }
 
     public String selectedQuantityToString() {
