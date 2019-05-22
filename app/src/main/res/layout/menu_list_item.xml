@@ -8,24 +8,72 @@
     android:focusable="true"
     android:orientation="vertical"
     android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/row_padding_vertical"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingBottom="@dimen/row_padding_vertical">
+    android:paddingTop="16dp"
+    android:paddingRight="@dimen/activity_horizontal_margin">
 
-    <TextView
-        android:id="@+id/name_of_meal"
-        android:layout_width="wrap_content"
-        android:layout_height="28dp"
-        android:layout_marginTop="8dp"
-        android:gravity="top"
-        android:textColor="#000"
-        android:textSize="16sp"
-        tools:text="Pizza" />
+    <LinearLayout
+        android:id="@+id/all"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_toLeftOf="@+id/selected_quantity"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/name_of_meal"
+            android:layout_width="match_parent"
+            android:layout_height="28dp"
+            android:layout_marginRight="16dp"
+            android:gravity="left"
+            android:textColor="#000"
+            android:textSize="18sp"
+            tools:text="Pizza" />
+
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:text="ipdvhevvouqvuqiovioqvio"
+            android:textSize="12sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <TextView
+                android:id="@+id/price_of_meal"
+                android:layout_width="wrap_content"
+                android:layout_height="24dp"
+                android:layout_below="@+id/description"
+                android:gravity="bottom"
+                android:textColor="@color/colorPrimary"
+                android:textSize="12sp"
+                tools:text="Ціна" />
+
+            <TextView
+                android:id="@+id/time_to_prepare"
+                android:layout_width="wrap_content"
+                android:layout_height="24dp"
+                android:layout_marginLeft="24dp"
+                android:gravity="bottom"
+                android:textSize="12sp"
+                tools:text="12 хв" />
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
 
     <TextView
         android:id="@+id/selected_quantity"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="32dp"
         android:layout_centerVertical="true"
         android:layout_toLeftOf="@+id/photo_of_meal"
         android:paddingRight="16dp"
@@ -33,40 +81,20 @@
         android:textSize="18sp"
         tools:text="234r" />
 
-    <TextView
-        android:id="@+id/time_to_prepare"
-        android:layout_width="wrap_content"
-        android:layout_height="28dp"
-        android:layout_below="@+id/name_of_meal"
-        android:layout_marginLeft="24dp"
-        android:layout_toRightOf="@+id/price_of_meal"
-        android:gravity="center"
-        android:textSize="12sp"
-        tools:text="12 хв" />
-
-    <TextView
-        android:id="@+id/price_of_meal"
-        android:layout_width="wrap_content"
-        android:layout_height="28dp"
-        android:layout_below="@+id/name_of_meal"
-        android:gravity="center"
-        android:textColor="@color/colorPrimary"
-        android:textSize="12sp"
-        tools:text="Ціна" />
 
     <ImageView
         android:id="@+id/photo_of_meal"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
+        android:layout_width="84dp"
+        android:layout_height="84dp"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
+        android:layout_marginRight="16dp"
         tools:src="@drawable/google" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_below="@+id/photo_of_meal"
-        android:layout_marginTop="16dp"
+        android:layout_below="@+id/all"
         android:background="#12000000"
         android:textSize="1sp" />
 
