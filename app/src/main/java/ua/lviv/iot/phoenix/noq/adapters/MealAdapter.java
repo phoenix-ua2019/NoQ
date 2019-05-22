@@ -8,8 +8,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.List;
 
 import ua.lviv.iot.phoenix.noq.R;

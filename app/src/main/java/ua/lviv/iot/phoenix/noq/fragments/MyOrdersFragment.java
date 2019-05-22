@@ -1,7 +1,5 @@
 package ua.lviv.iot.phoenix.noq.fragments;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -13,17 +11,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -123,8 +118,11 @@ public class MyOrdersFragment extends Fragment {
         userReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot o:dataSnapshot.getChildren())
-                    orderList.add(new Order((Map<String,Map>) o.getValue()));
+                orderList = new ArrayList<>();
+                for (DataSnapshot o:dataSnapshot.getChildren()) {
+                    orderList.add(new Order((Map<String, Map>) o.getValue()));
+                    System.out.println(orderList);
+                }
                 orderAdapter.setList(orderList);
                 orderAdapter.notifyDataSetChanged();
             }

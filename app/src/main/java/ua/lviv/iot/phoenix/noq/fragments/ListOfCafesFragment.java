@@ -79,7 +79,6 @@ public class ListOfCafesFragment extends Fragment implements ValueEventListener 
     }
     @Override
     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-        //ArrayList<HashMap> temp_cafes =;
         cafesList = (ArrayList<Cafe>) (new ArrayList(((HashMap<String, HashMap<String,?>>)
                 dataSnapshot.getValue()).values())).stream().map(Cafe::new).collect(Collectors.toList());
         cafesAdapter.setR(getResources());

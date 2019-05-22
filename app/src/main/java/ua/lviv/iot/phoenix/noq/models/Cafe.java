@@ -18,17 +18,8 @@ import java.util.stream.Collectors;
 public class Cafe implements Parcelable {
     private String name;
     private String location;
-
-    private String icon;// = -700119;
+    private String icon;
     private ArrayList<Meal> meals;
-
-
-    public Cafe() { }
-
-    /*public Cafe(String name, String location) {
-        this.name = name;
-        this.location = location;
-    }*/
 
     public static final Parcelable.Creator<Cafe> CREATOR =
             new Parcelable.Creator<Cafe>() {
@@ -42,6 +33,9 @@ public class Cafe implements Parcelable {
                     return new Cafe[size];
                 }
             };
+    public Cafe() {
+
+    }
 
     public Cafe (Object o) {
         this((HashMap<String, ?>) o);

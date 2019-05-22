@@ -67,7 +67,6 @@ public class ListOfMealsFragment extends Fragment {
             @Override
             public void onClick(View view, int position) {
                 Meal meal = mealList.get(position);
-                //Toast.makeText(getApplicationContext(), meal.getMealName() + " is selected!", Toast.LENGTH_SHORT).show();
                 quantityDialogCaller(meal);
                 cafe.setMeals(mealList);
                 Bundle b = getArguments();
@@ -82,6 +81,7 @@ public class ListOfMealsFragment extends Fragment {
         mealList = cafe.getMeals();
         mealAdapter.setList(mealList);
         mealAdapter.notifyDataSetChanged();
+        mealAdapter.setR(getResources());
         chooseTimeBtn = view.findViewById(R.id.choose_time);
         chooseTimeBtn.setVisibility(View.INVISIBLE);
 
