@@ -82,8 +82,6 @@ public class Useful implements ValueEventListener {
         } catch (NullPointerException e) {
             e.printStackTrace();
         }
-        System.out.println("M_USER");
-        System.out.println(mUser);
         setUserInfoIntoNavDrawer();
     }
 

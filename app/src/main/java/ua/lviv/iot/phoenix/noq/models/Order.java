@@ -3,12 +3,16 @@ package ua.lviv.iot.phoenix.noq.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.PropertyName;
 import com.google.firebase.database.annotations.NotNull;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.Map;
+
+import ua.lviv.iot.phoenix.noq.activities.Useful;
 
 public class Order implements Parcelable {
 
@@ -18,6 +22,7 @@ public class Order implements Parcelable {
     private double mSum;
     private int status;
     private int pos;
+    private String Uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
     public static final Parcelable.Creator<Order> CREATOR = new Parcelable.Creator<Order>() {
         @Override
         public Order createFromParcel(Parcel source) {
@@ -64,8 +69,13 @@ public class Order implements Parcelable {
         mCafe = cafe;
     }
 
+    Order(String time, double sum, String id, Date date, Cafe cafe) {
+        this(time, sum, date, cafe);
+        Uid = id;
+    }
+
     Order(@NotNull Parcel source) throws ParseException {
-        this(source.readString(), source.readInt(),
+        this(source.readString(), source.readInt(), source.readString(),
                 DateFormat.getDateInstance().parse(source.readString()),
                 source.readParcelable(Cafe.class.getClassLoader()));
     }
@@ -79,6 +89,7 @@ public class Order implements Parcelable {
     public void writeToParcel(Parcel out, int flags) {
         out.writeString(mTime);
         out.writeDouble(mSum);
+        out.writeString(Uid);
         out.writeString(mDate.toString());
         out.writeParcelable(mCafe,1);
     }
@@ -110,5 +121,8 @@ public class Order implements Parcelable {
     public Order setPos(int pos) {
         this.pos = pos;
         return this;
+    }we
+    public String getUid() {
+        return Uid;
     }
 }
