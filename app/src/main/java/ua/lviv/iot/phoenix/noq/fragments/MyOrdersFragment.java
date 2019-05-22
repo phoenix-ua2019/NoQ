@@ -1,7 +1,5 @@
 package ua.lviv.iot.phoenix.noq.fragments;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -13,22 +11,20 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import ua.lviv.iot.phoenix.noq.R;
 import ua.lviv.iot.phoenix.noq.activities.MainActivity;
+import ua.lviv.iot.phoenix.noq.activities.Useful;
 import ua.lviv.iot.phoenix.noq.adapters.OrderAdapter;
 import ua.lviv.iot.phoenix.noq.listeners.RecyclerTouchListener;
 import ua.lviv.iot.phoenix.noq.models.Order;
@@ -39,6 +35,7 @@ public class MyOrdersFragment extends Fragment {
     private List<Order> orderList = new ArrayList<>();
     private RecyclerView recyclerView;
     private OrderAdapter orderAdapter;
+    private boolean cafeUpdated = false, userUpdated = false;
     private View view;
 
     MainActivity currentActivity;
@@ -48,6 +45,42 @@ public class MyOrdersFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.fragment_my_orders, container, false);
+        DatabaseReference userReference = Useful.orderRef
+                .child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+
+        try {
+            Order finalOrder = getArguments().getParcelable("order");
+            DatabaseReference cafeReference = Useful.orderRef.child(finalOrder.getCafe().getLocation());
+            cafeReference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (!cafeUpdated) {
+                        cafeReference.child("" + dataSnapshot.getChildrenCount()).setValue(finalOrder);
+                        cafeUpdated = true;
+                    }
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+            userReference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (!userUpdated) {
+                        userReference.child("" + dataSnapshot.getChildrenCount()).setValue(finalOrder);
+                        userUpdated = true;
+                    }
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
 
         setArguments(new Bundle());
 
@@ -74,7 +107,7 @@ public class MyOrdersFragment extends Fragment {
                         Bundle b = new Bundle();
                         b.putParcelable("order", orderList.get(position));
                         setArguments(b);
-                        currentActivity.b3(view);
+                        currentActivity.b5(view);
                     }
 
             @Override
@@ -82,21 +115,16 @@ public class MyOrdersFragment extends Fragment {
             }
         }));
 
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("orders")
-                .child(FirebaseAuth.getInstance().getCurrentUser().getUid());
-        ref.addValueEventListener(new ValueEventListener() {
+        userReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (int i=0; i<dataSnapshot.getChildrenCount(); i++)
-                    orderList.add(new Order(((List<Map<String,Map>>) dataSnapshot.getValue()).get(i)));
-                System.out.println(orderList);
-                System.out.println(1000000);
+                orderList = new ArrayList<>();
+                for (DataSnapshot o:dataSnapshot.getChildren()) {
+                    orderList.add(new Order((Map<String, Map>) o.getValue()));
+                    System.out.println(orderList);
+                }
                 orderAdapter.setList(orderList);
                 orderAdapter.notifyDataSetChanged();
-               /* for (int i=0; i<dataSnapshot.getChildrenCount(); i++)
-                    orderList.add(((List<Order>)((List<Map<String,Map>>) dataSnapshot.getValue()).get(i).get("cafe").get("cafeOrders")).get(0));
-                orderAdapter.setList(orderList);
-                orderAdapter.notifyDataSetChanged();*/
             }
 
             @Override

@@ -2,8 +2,6 @@ package ua.lviv.iot.phoenix.noq.fragments;
 
 
 import android.os.Bundle;
-import android.provider.Settings;
-import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,7 +24,6 @@ public class TimeFragment extends Fragment {
     private TextView orderTime;
     private TextView minOrderTime;
     private View view;
-    private int preparationTime = 15;
 
     private final int closingHour = 23;
     private final int openingHour = 6;
@@ -65,6 +62,7 @@ public class TimeFragment extends Fragment {
         }
 
         if (isCafeOpen(currentHour, currentMinute)) {
+            System.out.println("Перишй раз updateDisplayAtFirst");
             updateDisplayAtFirst(currentHour, currentMinute);
         }
 
@@ -127,16 +125,9 @@ public class TimeFragment extends Fragment {
             }
         });
         view.findViewById(R.id.submit_time).setOnClickListener((View v) -> {
-            //if (checkPreparationTime(floatTime.getHour(), floatTime.getMinute())) {
             b.putString("time", orderTime.getText().toString());
             setArguments(b);
             ((MainActivity) getActivity()).b3(view);
-            /*} else {
-                Toast.makeText(getContext(), "Май совість, дай хоча б 15 хвилин на приготування", Toast.LENGTH_SHORT).show();
-                floatTime.setHour(floatTime.getCurrentHour()
-                        +((floatTime.getCurrentMinute() + preparationTime<minutesInHour) ? 1 : 0));
-                floatTime.setMinute((floatTime.getCurrentMinute()+preparationTime) % minutesInHour);
-            }*/
         });
 
         return view;

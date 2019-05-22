@@ -25,16 +25,16 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/name_of_order_cafe"
+                        android:id="@+id/name_of_see_my_order_cafe"
                         android:layout_width="match_parent"
                         android:layout_height="56dp"
                         android:gravity="center"
                         android:textColor="#000"
-                        android:textSize="24sp"
+                        android:textSize="18sp"
                         tools:text="Назва закладу" />
 
                     <TextView
-                        android:id="@+id/location_of_order_cafe"
+                        android:id="@+id/location_of_see_my_order_cafe"
                         android:layout_width="match_parent"
                         android:layout_height="28dp"
                         android:gravity="center"
@@ -77,9 +77,9 @@
     </FrameLayout>
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_order_meals"
+        android:id="@+id/recycler_see_my_order_meals"
         android:layout_width="match_parent"
-        android:layout_height="256dp"
+        android:layout_height="286dp"
         android:scrollbars="vertical"/>
 
     <FrameLayout
@@ -111,7 +111,7 @@
                     android:background="@color/colorPrimary" />
 
                 <TextView
-                    android:id="@+id/selected_price"
+                    android:id="@+id/selected_see_my_price"
                     android:layout_width="match_parent"
                     android:layout_height="28dp"
                     android:layout_toRightOf="@+id/t2"
@@ -142,7 +142,7 @@
                     android:background="@color/colorPrimary" />
 
                 <TextView
-                    android:id="@+id/selected_time_show"
+                    android:id="@+id/selected_see_my_time_show"
                     android:layout_width="match_parent"
                     android:layout_height="28dp"
                     android:layout_toRightOf="@+id/t3"
@@ -157,36 +157,21 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="256dp"
-        android:layout_gravity="bottom"
-        android:layout_marginBottom="32dp">
+        android:layout_height="132dp"
+        android:layout_gravity="bottom">
 
         <Button
-            android:id="@+id/make_order"
+            android:id="@+id/back_see_my_order"
             android:layout_width="160dp"
             android:layout_height="40dp"
             android:layout_marginTop="32dp"
             android:layout_centerHorizontal="true"
-            android:background="@drawable/button_yes_style"
-            android:text="Підтвердити"
+            android:background="@drawable/button_style"
+            android:text="Назад"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="18sp"
             android:onClick="b4" />
-        <Button
-            android:id="@+id/delete"
-            android:layout_width="160dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginBottom="16dp"
-            android:layout_centerHorizontal="true"
-            android:background="@drawable/button_style"
-            android:text="Видалити"
-            android:layout_below="@+id/make_order"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            android:onClick="b6" />
 
     </RelativeLayout>
 

@@ -6,6 +6,7 @@ import android.os.Parcelable;
 
 import com.google.common.base.Splitter;
 import com.google.firebase.database.IgnoreExtraProperties;
+import com.google.firebase.database.PropertyName;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,17 +18,8 @@ import java.util.stream.Collectors;
 public class Cafe implements Parcelable {
     private String name;
     private String location;
-
-    private String icon;// = -700119;
+    private String icon;
     private ArrayList<Meal> meals;
-
-
-    public Cafe() { }
-
-    /*public Cafe(String name, String location) {
-        this.name = name;
-        this.location = location;
-    }*/
 
     public static final Parcelable.Creator<Cafe> CREATOR =
             new Parcelable.Creator<Cafe>() {
@@ -41,6 +33,9 @@ public class Cafe implements Parcelable {
                     return new Cafe[size];
                 }
             };
+    public Cafe() {
+
+    }
 
     public Cafe (Object o) {
         this((HashMap<String, ?>) o);
@@ -60,9 +55,6 @@ public class Cafe implements Parcelable {
         location = (String) map.get("location");
         icon = (String) map.get("icon");
         List<?> tempCafeMeals = (ArrayList<HashMap>) map.get("meals");
-        System.out.println(map);
-        System.out.println(map.get("meals"));
-        System.out.println(tempCafeMeals);
         meals = (ArrayList<Meal>) tempCafeMeals.stream().map(Meal::new).collect(Collectors.toList());
     }
 
@@ -94,7 +86,7 @@ public class Cafe implements Parcelable {
         out.writeList(meals);
     }
 
-
+    @PropertyName("name")
     public String getName() {
         return name;
     }
@@ -103,6 +95,7 @@ public class Cafe implements Parcelable {
         this.name = name;
     }
 
+    @PropertyName("location")
     public String getLocation() {
         return location;
     }
@@ -115,6 +108,7 @@ public class Cafe implements Parcelable {
         icon = id;
     }
 
+    @PropertyName("icon")
     public String getIcon() {
         return icon;
     }
@@ -123,6 +117,7 @@ public class Cafe implements Parcelable {
         return icon != null;
     }
 
+    @PropertyName("meals")
     public ArrayList<Meal> getMeals() {
         return meals;
     }

@@ -65,13 +65,9 @@ public class ListOfCafesFragment extends Fragment implements ValueEventListener 
                 new RecyclerTouchListener.ClickListener() {
             @Override
             public void onClick(View view, int position) {
-                //Cafe cafe = cafesList.get(position);
-                //((ListView) view.findViewById(R.id.cafe_recycler_view)).setOnItemClickListener(
-                        //(AdapterView<?> adapter, View v, int p, long l) -> {
                 Bundle b = new Bundle();
                 b.putParcelable("cafe", cafesList.get(position));
                 setArguments(b);
-                System.out.println("I put extra cafe there!!!!!!!!!!!!!!!");
                 currentActivity.b1(view);
                 //Toast.makeText(getApplicationContext(), meal.getMealName() + " is selected!", Toast.LENGTH_SHORT).show();
             }
@@ -83,38 +79,12 @@ public class ListOfCafesFragment extends Fragment implements ValueEventListener 
     }
     @Override
     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-        //ArrayList<HashMap> temp_cafes =;
         cafesList = (ArrayList<Cafe>) (new ArrayList(((HashMap<String, HashMap<String,?>>)
                 dataSnapshot.getValue()).values())).stream().map(Cafe::new).collect(Collectors.toList());
-        System.out.println(R.drawable.aroma_kava);
-        System.out.println(cafesList);
         cafesAdapter.setR(getResources());
-        /*if (!isAdded()) {
-            try {
-                Thread.sleep(4000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }*/
         prepareCafeData();
 
-        System.out.println(cafesList);
         cafesAdapter.notifyDataSetChanged();
-        /*ListView listView = view.findViewById(R.id.list_of_cafe);
-        ArrayAdapter<Cafe> arrayAdapter =new ArrayAdapter<>(currentActivity,
-                R.layout.fragment_list_of_cafes, cafesList);
-        listView.setAdapter(arrayAdapter);
-
-        listView.setOnItemClickListener(
-                (AdapterView<?> adapterView, View view, int index, long l) -> {
-                    //Object c = adapterView.getAdapter().getItem(index);
-                    Bundle b = new Bundle();
-                    b.putParcelable("cafe", cafesList.get(index));
-                    setArguments(b);
-        });*/
-        /*((ListView) view.findViewById(R.id.list_of_cafe)).setAdapter(new ArrayAdapter(getActivity(),
-            R.layout.fragment_list_of_cafes,
-            cafesList));*/
     }
 
     @Override
@@ -124,10 +94,6 @@ public class ListOfCafesFragment extends Fragment implements ValueEventListener 
 
 
     private void prepareCafeData() {
-        /*cafesList = cafesList.stream()
-                .map((Cafe c) -> c.setDrawable(getResources(), currentActivity.getPackageName())
-                ).collect(Collectors.toList());*/
-        System.out.println(getArguments());
         cafesAdapter.setList(cafesList);
         cafesAdapter.notifyDataSetChanged();
     }

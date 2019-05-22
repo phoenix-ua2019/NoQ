@@ -46,6 +46,7 @@ public class ListOfMealsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_list_of_menu, container, false);
+        currentActivity = (MainActivity) getActivity();
 
         recyclerView = view.findViewById(R.id.recycler_view);
         mealAdapter = new MealAdapter(new ArrayList<>());
@@ -55,7 +56,6 @@ public class ListOfMealsFragment extends Fragment {
 
         Toolbar toolbar = view.findViewById(R.id.toolbar);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
-        currentActivity = (MainActivity) getActivity();
 
         recyclerView.setLayoutManager(new LinearLayoutManager(currentActivity));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -67,7 +67,6 @@ public class ListOfMealsFragment extends Fragment {
             @Override
             public void onClick(View view, int position) {
                 Meal meal = mealList.get(position);
-                //Toast.makeText(getApplicationContext(), meal.getMealName() + " is selected!", Toast.LENGTH_SHORT).show();
                 quantityDialogCaller(meal);
                 cafe.setMeals(mealList);
                 Bundle b = getArguments();
@@ -78,11 +77,11 @@ public class ListOfMealsFragment extends Fragment {
             public void onLongClick(View v, int position) {
             }
         }));
-        System.out.println(getArguments());
         cafe = getArguments().getParcelable("cafe");
         mealList = cafe.getMeals();
         mealAdapter.setList(mealList);
         mealAdapter.notifyDataSetChanged();
+        mealAdapter.setR(getResources());
         chooseTimeBtn = view.findViewById(R.id.choose_time);
         chooseTimeBtn.setVisibility(View.INVISIBLE);
 

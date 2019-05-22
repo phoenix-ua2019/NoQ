@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -125,12 +124,11 @@ public class SignInActivity extends AppCompatActivity implements OnClickListener
                 firebaseAuthWithGoogle(account);
             } catch (ApiException e) {
                 Log.w(TAG, "Google sign in failed", e);
-                //updateUI(null);
             }
         }
     }
 
-    private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
+    void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
         Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
 
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
@@ -141,18 +139,16 @@ public class SignInActivity extends AppCompatActivity implements OnClickListener
                         FirebaseUser user = mAuth.getCurrentUser();
                         Useful.onAuthSuccess(this, user);
                         finish();
-                        //updateUI(user);
                     } else {
                         Log.w(TAG, "signInWithCredential:failure", task.getException());
                         Snackbar.make(findViewById(R.id.logo_sign_in),
 
                                 "Authentication Failed.", Snackbar.LENGTH_SHORT).show();
-                        //updateUI(null);
                     }
                 });
     }
 
-    private void googleSignIn() {
+    void googleSignIn() {
         Log.d(TAG, "googleSignUp");
         startActivityForResult(mGoogleSignInClient.getSignInIntent(), RC_SIGN_IN);
     }

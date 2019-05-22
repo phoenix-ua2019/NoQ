@@ -3,7 +3,6 @@ package ua.lviv.iot.phoenix.noq.fragments;
 
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,23 +12,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.GenericTypeIndicator;
-import com.google.firebase.database.ValueEventListener;
-
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.stream.Collectors;
 
 import ua.lviv.iot.phoenix.noq.R;
-import ua.lviv.iot.phoenix.noq.activities.MainActivity;
-import ua.lviv.iot.phoenix.noq.activities.Useful;
 import ua.lviv.iot.phoenix.noq.adapters.MealAdapter;
 import ua.lviv.iot.phoenix.noq.models.Cafe;
 import ua.lviv.iot.phoenix.noq.models.Meal;
@@ -42,8 +30,6 @@ public class OrderFragment extends Fragment {
     private String time;
     private Double sumPrice = 0.0;
     final long count[] = {0};
-    private boolean userUpdated = false;
-    private boolean cafeUpdated = false;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -53,65 +39,28 @@ public class OrderFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_order, container, false);
         RecyclerView recyclerView = view.findViewById(R.id.recycler_order_meals);
 
-        try {
-            time = getArguments().getString("time");
-            cafe = getArguments().getParcelable("order_cafe");
-            ArrayList<Meal> meals = cafe.getMeals();
+        time = getArguments().getString("time");
+        cafe = getArguments().getParcelable("order_cafe");
+        ArrayList<Meal> meals = cafe.getMeals();
 
-            meals = (ArrayList<Meal>) meals.stream()
-                    .filter(meal -> meal.getSelectedQuantity() > 0).collect(Collectors.toList());
-            cafe.setMeals(meals);
+        meals = (ArrayList<Meal>) meals.stream()
+                .filter(meal -> meal.getSelectedQuantity() > 0).collect(Collectors.toList());
+        cafe.setMeals(meals);
 
-            for (Meal meal : meals) {
-                sumPrice += meal.getPrice() * meal.getSelectedQuantity();
-            }
-
-            MealAdapter mealAdapter = new MealAdapter(meals);
-            recyclerView.setAdapter(mealAdapter);
-            RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
-            recyclerView.setLayoutManager(mLayoutManager);
-
-            Order finalOrder = new Order(time, sumPrice, Date.from(Instant.now()), cafe);
-
-            DatabaseReference cafeReference = Useful.orderRef.child(cafe.getLocation());
-
-            cafeReference.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    if (!cafeUpdated) {
-                        cafeReference.child("" + dataSnapshot.getChildrenCount()).setValue(finalOrder);
-                        cafeUpdated = true;
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                }
-            });
-
-            DatabaseReference userReference = Useful.orderRef
-                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid());
-            userReference.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    if (!userUpdated) {
-                        userReference.child("" + dataSnapshot.getChildrenCount()).setValue(finalOrder);
-                        userUpdated = true;
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                }
-            });
-        } catch (NullPointerException e) {
-            Order order = getArguments().getParcelable("order");
-            cafe = order.getCafe();
-            time = order.getTime();
-            sumPrice = order.getSum();
+        for (Meal meal : meals) {
+            sumPrice += meal.getPrice() * meal.getSelectedQuantity();
         }
+
+        MealAdapter mealAdapter = new MealAdapter(meals);
+        mealAdapter.setR(getResources());
+        recyclerView.setAdapter(mealAdapter);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(mLayoutManager);
+
+        Order finalOrder = new Order(time, sumPrice, Date.from(Instant.now()), cafe);
+        Bundle args = getArguments();
+        args.putParcelable("order", finalOrder);
+        setArguments(args);
 
         ((TextView) view.findViewById(R.id.name_of_order_cafe)).setText(cafe.getName());
         ((TextView) view.findViewById(R.id.location_of_order_cafe)).setText(cafe.getLocation());

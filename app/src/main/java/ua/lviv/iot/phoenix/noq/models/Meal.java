@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.google.firebase.database.IgnoreExtraProperties;
+import com.google.firebase.database.PropertyName;
 
 import java.util.HashMap;
 
@@ -41,11 +42,19 @@ public class Meal implements Parcelable {
         mealName = (String) map.get("name");
         price = (Long) map.get("price");
         time = ((Long) map.get("time")).intValue();
+        description = (String) map.get("description");
+        mealPicture = (String) map.get("icon_of_food");
+        try {
+            Object temp = map.get("selectedQuantity");
+            selectedQuantity = ((Long) temp).intValue();
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
     }
 
     public Meal (Parcel source) {
         this(source.readString(), source.readDouble(), source.readInt(),
-                source.readString(), source.readDouble(), source.readString());
+                source.readString(), source.readDouble(), source.readString(), source.readInt());
     }
 
     @Override
@@ -61,9 +70,11 @@ public class Meal implements Parcelable {
         out.writeString(mealPicture);
         out.writeDouble(weight);
         out.writeString(description);
+        out.writeInt(selectedQuantity);
     }
 
-    public Meal(String mealName, double price, int preparationTime, String mealPicture, double weight, String description) {
+    public Meal(String mealName, double price, int preparationTime, String mealPicture,
+                double weight, String description) {
         this.mealName = mealName;
         this.price = price;
         this.time = preparationTime;
@@ -71,7 +82,13 @@ public class Meal implements Parcelable {
         this.weight = weight;
         this.description = description;
     }
+    public Meal(String mealName, double price, int preparationTime, String mealPicture,
+                double weight, String description, int selectedQuantity) {
+        this(mealName, price, preparationTime, mealPicture, weight, description);
+        this.selectedQuantity = selectedQuantity;
+    }
 
+    @PropertyName("name")
     public String getMealName() {
         return mealName;
     }
@@ -101,7 +118,7 @@ public class Meal implements Parcelable {
     }
 
     public String weightToString() {
-        return ((Double.toString(weight)) + "г");
+        return weight + "г";
     }
 
     public void setWeight(double weight) {
@@ -130,6 +147,10 @@ public class Meal implements Parcelable {
 
     public void setSelectedQuantity(int selectedQuantity) {
         this.selectedQuantity = selectedQuantity;
+    }
+
+    public boolean hasImage(){
+        return mealPicture != null;
     }
 
     public String selectedQuantityToString() {

@@ -121,7 +121,7 @@ public class Order implements Parcelable {
     public Order setPos(int pos) {
         this.pos = pos;
         return this;
-    }
+    }we
     public String getUid() {
         return Uid;
     }
