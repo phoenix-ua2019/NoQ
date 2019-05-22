@@ -141,7 +141,6 @@ public class Meal implements Parcelable {
         this.price = price;
     }
 
-    @PropertyName("selectedQuantity")
     public int getSelectedQuantity() {
         return selectedQuantity;
     }

@@ -3,7 +3,6 @@ package ua.lviv.iot.phoenix.noq.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.google.firebase.database.PropertyName;
 import com.google.firebase.database.annotations.NotNull;
 
 import java.text.DateFormat;

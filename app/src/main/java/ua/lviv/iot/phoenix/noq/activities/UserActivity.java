@@ -35,10 +35,10 @@ public class UserActivity extends AppCompatActivity implements OnNavigationItemS
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_user);
 
-
         if (mAuth.getCurrentUser() != null)
             Useful.userRef.child(mAuth.getCurrentUser().getUid()).addValueEventListener(this);
 
+        drawerLayout = findViewById(R.id.drawer_layout);
 
         mUser = getIntent().getExtras().getParcelable("user_icon");
         ((TextView) findViewById(R.id.user_name)).setText(mUser.getName());
