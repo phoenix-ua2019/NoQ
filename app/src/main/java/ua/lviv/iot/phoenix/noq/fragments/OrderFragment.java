@@ -67,6 +67,9 @@ public class OrderFragment extends Fragment {
         ((TextView) view.findViewById(R.id.selected_time_show)).setText(time);
         ((TextView) view.findViewById(R.id.selected_price)).setText(String.format("%s ₴", sumPrice));
 
+        mealAdapter.setR(getResources());
+
+
         return view;
     }
 
