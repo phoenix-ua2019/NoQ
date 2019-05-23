@@ -8,15 +8,15 @@
     android:focusable="true"
     android:orientation="vertical"
     android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingTop="16dp"
-    android:paddingRight="@dimen/activity_horizontal_margin">
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/row_padding_vertical">
 
     <LinearLayout
         android:id="@+id/all"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="16dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="16dp"
         android:layout_toLeftOf="@+id/selected_quantity"
@@ -88,7 +88,7 @@
         android:layout_height="84dp"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:layout_marginRight="16dp"
+        android:layout_marginRight="8dp"
         tools:src="@drawable/google" />
 
     <TextView
