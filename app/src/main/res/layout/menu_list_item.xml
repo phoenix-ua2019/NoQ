@@ -26,10 +26,9 @@
             android:id="@+id/name_of_meal"
             android:layout_width="match_parent"
             android:layout_height="28dp"
-            android:layout_marginRight="16dp"
             android:gravity="left"
             android:textColor="#000"
-            android:textSize="18sp"
+            android:textSize="16sp"
             tools:text="Pizza" />
 
         <TextView
