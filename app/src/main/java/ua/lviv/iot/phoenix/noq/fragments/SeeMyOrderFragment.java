@@ -42,9 +42,6 @@ public class SeeMyOrderFragment extends Fragment {
     private String time;
     private ArrayList<Meal> meals;
     private Double sumPrice = 0.0;
-    final long count[] = {0};
-    private boolean userUpdated = false;
-    private boolean cafeUpdated = false;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
