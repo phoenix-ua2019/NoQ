@@ -230,6 +230,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
                 .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right)
                 .replace(R.id.base_for_nv, fragment)
                 .commit();
+        pointer = "MyOrdersFragment";
     }
 
     public void b5(View view) {
