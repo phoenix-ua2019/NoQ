@@ -59,6 +59,8 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.MyViewHolder> 
         holder.description.setText(meal.getDescription());
         if (meal.getSelectedQuantity() > 0) {
             holder.selectedQuantity.setText(meal.selectedQuantityToString());
+        } else {
+            holder.selectedQuantity.setText("");
         }
         if (meal.hasImage()) {
             holder.mealPicture.setImageResource(r.getIdentifier(meal.getMealPicture(),
