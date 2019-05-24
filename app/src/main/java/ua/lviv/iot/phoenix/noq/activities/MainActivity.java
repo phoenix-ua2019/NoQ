@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
                 .replace(R.id.base_for_nv, fragment)
                 .setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left)
                 .commit();
+        pointer = "ListOfCafesFragment";
 
         toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("Оберіть кафе");
