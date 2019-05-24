@@ -65,32 +65,39 @@ public class ListOfMealsFragment extends Fragment {
 
         FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.choose_time);
         fab.attachToRecyclerView(recyclerView);
-
         // row click listener
         recyclerView.addOnItemTouchListener(
                 new RecyclerTouchListener(currentActivity.getApplicationContext(),
                         recyclerView, new RecyclerTouchListener.ClickListener() {
-            @Override
-            public void onClick(View view, int position) {
-                Meal meal = mealList.get(position);
-                //int itemPosition = recyclerView.getChildLayoutPosition(view);
-                quantityDialogCaller(meal);
-                cafe.setMeals(mealList);
-                Bundle b = getArguments();
-                b.putParcelable("time_cafe", cafe);
-                setArguments(b);
-            }
-            @Override
-            public void onLongClick(View v, int position) {
-            }
-        }));
+                    @Override
+                    public void onClick(View view, int position) {
+                        Meal meal = mealList.get(position);
+                        //int itemPosition = recyclerView.getChildLayoutPosition(view);
+                        quantityDialogCaller(meal);
+                        cafe.setMeals(mealList);
+                        Bundle b = getArguments();
+                        b.putParcelable("time_cafe", cafe);
+                        setArguments(b);
+                    }
+
+                    @Override
+                    public void onLongClick(View v, int position) {
+                    }
+                }));
         cafe = getArguments().getParcelable("cafe");
         mealList = cafe.getMeals();
+        for (Meal meal : mealList) {
+            commonSelectedAmount += meal.getSelectedQuantity();
+        }
+        System.out.println(commonSelectedAmount);
         mealAdapter.setList(mealList);
         mealAdapter.notifyDataSetChanged();
         mealAdapter.setR(getResources());
         chooseTimeBtn = view.findViewById(R.id.choose_time);
-        chooseTimeBtn.setVisibility(View.INVISIBLE);
+
+        if (commonSelectedAmount > 0) {
+            chooseTimeBtn.setVisibility(View.VISIBLE);
+        }
 
         mealAdapter.setR(getResources());
 
@@ -111,6 +118,7 @@ public class ListOfMealsFragment extends Fragment {
         plus.setEnabled(true);
         minus.setEnabled(true);
 
+
         plus.setOnClickListener((View v) -> {
             chooseTimeBtn.setVisibility(View.VISIBLE);
             commonSelectedAmount++;
@@ -124,9 +132,8 @@ public class ListOfMealsFragment extends Fragment {
                 return;
             }
             commonSelectedAmount--;
-            if (commonSelectedAmount == 0) {
+            if (commonSelectedAmount < 1) {
                 chooseTimeBtn.setVisibility(View.INVISIBLE);
-                return;
             }
             meal.setSelectedQuantity(meal.getSelectedQuantity() - 1);
             dialogQuantity.setText(meal.selectedQuantityToString());
