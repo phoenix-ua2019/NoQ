@@ -250,7 +250,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         Bundle args = fragment.getArguments();
         fragment = new MyOrdersFragment();
         fragment.setArguments(args);
-        toolbar.setTitle("Ваші замовлення");
+        toolbar.setTitle("Мої замовлення");
         getSupportFragmentManager()
                 .beginTransaction()
                 .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right)

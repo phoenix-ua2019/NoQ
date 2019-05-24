@@ -50,30 +50,15 @@ public class SeeMyOrderFragment extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_see_my_order, container, false);
         RecyclerView recyclerView = view.findViewById(R.id.recycler_see_my_order_meals);
-
-        try {
-            time = getArguments().getString("time");
-            cafe = getArguments().getParcelable("order_cafe");
-            meals = cafe.getMeals();
-
-            meals = (ArrayList<Meal>) meals.stream()
-                    .filter(meal -> meal.getSelectedQuantity() > 0).collect(Collectors.toList());
-            cafe.setMeals(meals);
-
-            for (Meal meal : meals) {
-                sumPrice += meal.getPrice() * meal.getSelectedQuantity();
-            }
-
-        } catch (NullPointerException e) {
-            Order order = getArguments().getParcelable("order");
-            cafe = order.getCafe();
-            time = order.getTime();
-            sumPrice = order.getSum();
-            meals = cafe.getMeals();
-        }
+        Order order = getArguments().getParcelable("see_order");
+        cafe = order.getCafe();
+        time = order.getTime();
+        sumPrice = order.getSum();
+        meals = cafe.getMeals();
 
         setArguments(new Bundle());
         MealAdapter mealAdapter = new MealAdapter(meals);
+        mealAdapter.setR(getResources());
         recyclerView.setAdapter(mealAdapter);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);

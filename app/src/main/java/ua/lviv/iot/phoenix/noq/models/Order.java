@@ -22,7 +22,7 @@ public class Order implements Parcelable {
     private double mSum;
     private int status;
     private int pos;
-    private String Uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+    private String Uid;
     public static final Parcelable.Creator<Order> CREATOR = new Parcelable.Creator<Order>() {
         @Override
         public Order createFromParcel(Parcel source) {
@@ -40,7 +40,7 @@ public class Order implements Parcelable {
     };
 
     public Order() {
-
+        Uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
     }
 
     public Order (Object o) {
@@ -48,6 +48,7 @@ public class Order implements Parcelable {
     }
 
     public Order (Map<String, ?> map) {
+        this();
         mCafe = new Cafe(map.get("cafe"));
         mTime = (String) map.get("time");
         try {
@@ -63,6 +64,7 @@ public class Order implements Parcelable {
     }
 
     public Order(String time, double sum, Date date, Cafe cafe){
+        this();
         mTime = time;
         mSum = sum;
         mDate = date;
@@ -124,5 +126,10 @@ public class Order implements Parcelable {
     }
     public String getUid() {
         return Uid;
+    }
+
+    @Override
+    public String toString() {
+        return "time:"+mTime+", sum:"+mSum+", cafe:"+mCafe+", pos's:"+pos+" .";
     }
 }

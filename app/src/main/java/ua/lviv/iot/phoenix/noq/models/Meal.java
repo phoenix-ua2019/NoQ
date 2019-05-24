@@ -50,6 +50,11 @@ public class Meal implements Parcelable {
         } catch (NullPointerException e) {
             e.printStackTrace();
         }
+        /*try {
+            mealPicture = (String) map.get("mealPicture");
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }*/
     }
 
     public Meal (Parcel source) {
@@ -105,6 +110,7 @@ public class Meal implements Parcelable {
         this.time = preparationTime;
     }
 
+    @PropertyName("icon_of_food")
     public String getMealPicture() {
         return mealPicture;
     }
@@ -155,5 +161,18 @@ public class Meal implements Parcelable {
 
     public String selectedQuantityToString() {
         return Integer.toString(selectedQuantity);
+    }
+
+    @Override
+    public String toString() {
+        return "Meal{" +
+                "time=" + time +
+                ", mealPicture='" + mealPicture + '\'' +
+                ", description='" + description + '\'' +
+                ", mealName='" + mealName + '\'' +
+                ", price=" + price +
+                ", weight=" + weight +
+                ", selectedQuantity=" + selectedQuantity +
+                '}';
     }
 }

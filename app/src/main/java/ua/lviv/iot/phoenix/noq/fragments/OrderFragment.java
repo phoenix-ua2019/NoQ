@@ -40,7 +40,7 @@ public class OrderFragment extends Fragment {
         RecyclerView recyclerView = view.findViewById(R.id.recycler_order_meals);
 
         time = getArguments().getString("time");
-        cafe = getArguments().getParcelable("order_cafe");
+        cafe = getArguments().getParcelable("cafe");
         ArrayList<Meal> meals = cafe.getMeals();
 
         meals = (ArrayList<Meal>) meals.stream()
