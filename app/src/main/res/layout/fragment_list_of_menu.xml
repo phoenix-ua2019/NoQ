@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:fab="http://schemas.android.com/tools">
 
-    <Button
+    <com.melnykov.fab.FloatingActionButton
         android:id="@+id/choose_time"
         android:layout_width="160dp"
         android:layout_height="40dp"
@@ -15,6 +16,9 @@
         android:textAllCaps="false"
         android:textColor="#fff"
         android:textSize="18sp"
+        fab:fab_colorNormal="@color/primary"
+        fab:fab_colorPressed="@color/primary_pressed"
+        fab:fab_colorRipple="@color/ripple"
         android:onClick="b2"/>
 
     <android.support.v7.widget.RecyclerView

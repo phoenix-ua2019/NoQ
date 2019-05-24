@@ -15,6 +15,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.melnykov.fab.FloatingActionButton;
+
 import java.util.ArrayList;
 
 import ua.lviv.iot.phoenix.noq.R;
@@ -34,7 +36,7 @@ public class ListOfMealsFragment extends Fragment {
     private View view;
 
     ImageView plus, minus;
-    Button chooseTimeBtn;
+    FloatingActionButton chooseTimeBtn;
     Dialog quantityDialog;
     MainActivity currentActivity;
 
@@ -50,6 +52,7 @@ public class ListOfMealsFragment extends Fragment {
 
         recyclerView = view.findViewById(R.id.recycler_view);
         mealAdapter = new MealAdapter(new ArrayList<>());
+        mealAdapter.setR(getResources());
         recyclerView.setAdapter(mealAdapter);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
@@ -60,6 +63,9 @@ public class ListOfMealsFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(currentActivity));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
+        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.choose_time);
+        fab.attachToRecyclerView(recyclerView);
+
         // row click listener
         recyclerView.addOnItemTouchListener(
                 new RecyclerTouchListener(currentActivity.getApplicationContext(),
@@ -67,6 +73,7 @@ public class ListOfMealsFragment extends Fragment {
             @Override
             public void onClick(View view, int position) {
                 Meal meal = mealList.get(position);
+                //int itemPosition = recyclerView.getChildLayoutPosition(view);
                 quantityDialogCaller(meal);
                 cafe.setMeals(mealList);
                 Bundle b = getArguments();
@@ -113,9 +120,14 @@ public class ListOfMealsFragment extends Fragment {
         });
 
         minus.setOnClickListener((View v) -> {
-            if  (meal.getSelectedQuantity() <= 0) { return; }
+            if (commonSelectedAmount < 1) {
+                return;
+            }
             commonSelectedAmount--;
-            if (commonSelectedAmount == 0) { chooseTimeBtn.setVisibility(View.INVISIBLE); }
+            if (commonSelectedAmount == 0) {
+                chooseTimeBtn.setVisibility(View.INVISIBLE);
+                return;
+            }
             meal.setSelectedQuantity(meal.getSelectedQuantity() - 1);
             dialogQuantity.setText(meal.selectedQuantityToString());
             recyclerView.setAdapter(mealAdapter);
