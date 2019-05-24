@@ -7,35 +7,43 @@
     android:clickable="true"
     android:focusable="true"
     android:orientation="vertical"
-    android:paddingBottom="@dimen/row_padding_vertical"
     android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/row_padding_vertical">
+    android:paddingTop="@dimen/row_padding_vertical"
+    android:paddingRight="@dimen/activity_horizontal_margin">
 
-    <TextView
-        android:id="@+id/name_of_cafe"
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="24dp"
-        android:textColor="#000"
-        android:textSize="20sp"
-        tools:text="NiceCoffee" />
-
-    <TextView
-        android:id="@+id/location_of_cafe"
-        android:layout_width="wrap_content"
-        android:layout_height="24dp"
-        android:layout_below="@+id/name_of_cafe"
+        android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:gravity="center"
-        android:textColor="#45000000"
-        android:textSize="12sp"
-        tools:text="вул умлумав" />
+        android:layout_marginLeft="8dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/name_of_cafe"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:textColor="#000"
+            android:textSize="20sp"
+            tools:text="NiceCoffee" />
+
+        <TextView
+            android:id="@+id/location_of_cafe"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:gravity="left"
+            android:textColor="#45000000"
+            android:textSize="12sp"
+            tools:text="вул умлумав" />
+
+    </LinearLayout>
 
     <ImageView
         android:id="@+id/photo_of_cafe"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
         android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="8dp"
         tools:src="@drawable/google" />
 
     <TextView

@@ -38,7 +38,8 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private Useful useful;
     private Fragment fragment;
-    private int counter;
+    Boolean cafeUpdated = false, userUpdated = false;
+    private String pointer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +81,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
             fragment = new ListOfCafesFragment();
             fragment.setArguments(new Bundle());
             toolbar.setTitle("Оберіть кафе");
+            pointer = "ListOfCafesFragment";
 
         } else if (id == R.id.user) {
             fragment = new UserFragment();
@@ -87,14 +89,17 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
             b.putParcelable("user_icon", useful.getUser());
             fragment.setArguments(b);
             toolbar.setTitle("Профіль");
+            pointer = "UserFragment";
         } else if (id == R.id.my_orders) {
             fragment = new MyOrdersFragment();
             fragment.setArguments(new Bundle());
             toolbar.setTitle("Мої замовлення");
+            pointer = "MyOrdersFragment";
 
         } else if (id == R.id.setting) {
             fragment = new SettingsFragment();
             toolbar.setTitle("Налаштування");
+            pointer = "SettingsFragment";
 
         } else if (id == R.id.exit) {
 
@@ -136,14 +141,14 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
 
     @Override
     public void onBackPressed() {
-        switch (counter) {
-            case 0: {
+        switch (pointer) {
+            case "ListOfCafesFragment": {
                 if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
                     closeDrawer();
                 }
                 break;
             }
-            case 1: {
+            case "ListOfMealsFragment": {
                 if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
                     closeDrawer();
                 } else {
@@ -151,7 +156,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
                 }
                 break;
             }
-            case 2: {
+            case "TimeFragment": {
                 if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
                     closeDrawer();
                     break;
@@ -160,12 +165,39 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
                 }
                 break;
             }
-            case 3: {
+            case "OrderFragment": {
                 if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
                     closeDrawer();
                     break;
                 } else {
                     b3Reverse();
+                }
+                break;
+            }
+            case "UserFragment": {
+                if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                    closeDrawer();
+                    break;
+                } else {
+                    b1Reverse();
+                }
+                break;
+            }
+            case "MyOrdersFragment": {
+                if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                    closeDrawer();
+                    break;
+                } else {
+                    b1Reverse();
+                }
+                break;
+            }
+            case "SettingsFragment": {
+                if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                    closeDrawer();
+                    break;
+                } else {
+                    b1Reverse();
                 }
                 break;
             }
@@ -180,37 +212,37 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
 
     public void b1(View view) {
         setFragment(new ListOfMealsFragment());
-        counter = 1;
+        pointer = "ListOfMealsFragment";
         toolbar.setTitle("Оберіть страви");
     }
 
     public void b1Reverse() {
         setFragmentReverse(new ListOfCafesFragment());
-        counter = 0;
+        pointer = "ListOfCafesFragment";
         toolbar.setTitle("Оберіть Кафе");
     }
 
     public void b2(View view) {
         setFragment(new TimeFragment());
-        counter = 2;
+        pointer = "TimeFragment";
         toolbar.setTitle("Оберіть час");
     }
 
     public void b2Reverse() {
         setFragmentReverse(new ListOfMealsFragment());
-        counter = 1;
+        pointer = "ListOfMealsFragment";
         toolbar.setTitle("Оберіть Страви");
     }
 
     public void b3(View view) {
         setFragment(new OrderFragment());
-        counter = 3;
+        pointer = "OrderFragment";
         toolbar.setTitle("Ваше замовлення");
     }
 
     public void b3Reverse() {
         setFragmentReverse(new TimeFragment());
-        counter = 2;
+        pointer = "TimeFragment";
         toolbar.setTitle("Оберіть час");
     }
 
@@ -233,7 +265,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
 
     public void b6(View view) {
         setFragment(new ListOfCafesFragment());
-        counter = 0;
+        pointer = "ListOfCafesFragment";
         toolbar.setTitle("Ваше замовлення");
     }
 

@@ -9,45 +9,91 @@
     android:orientation="vertical"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/row_padding_vertical"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingBottom="@dimen/row_padding_vertical">
+    android:paddingRight="@dimen/activity_horizontal_margin">
 
-    <TextView
-        android:id="@+id/name_of_cafe_for_UO"
-        android:layout_width="156dp"
-        android:layout_height="24dp"
-        android:textColor="#000"
-        android:textSize="20sp"
-        tools:text="NiceCoffee" />
+    <LinearLayout
+        android:id="@+id/block_of_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="8dp"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/time_of_order"
+
+        <TextView
+            android:id="@+id/name_of_cafe_for_UO"
+            android:layout_width="136dp"
+            android:layout_height="24dp"
+            android:textColor="#000"
+            android:textSize="20sp"
+            tools:text="NiceCoffee" />
+
+        <TextView
+            android:id="@+id/location_of_cafe_for_UO"
+            android:layout_width="match_parent"
+            android:layout_height="24dp"
+            android:layout_below="@+id/name_of_cafe_for_UO"
+            android:layout_centerVertical="true"
+            android:gravity="bottom"
+            android:textColor="#45000000"
+            android:textSize="12sp"
+            tools:text="вул умлумав" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:layout_toLeftOf="@+id/photo_of_cafe_for_UO"
-        android:layout_toRightOf="@+id/name_of_cafe_for_UO"
-        android:gravity="center"
-        android:textColor="@color/colorPrimary"
-        android:textSize="20sp"
-        tools:text="14:45" />
-
-    <TextView
-        android:id="@+id/location_of_cafe_for_UO"
-        android:layout_width="wrap_content"
-        android:layout_height="24dp"
-        android:layout_below="@+id/name_of_cafe_for_UO"
         android:layout_centerVertical="true"
-        android:gravity="center"
-        android:textColor="#45000000"
-        android:textSize="12sp"
-        tools:text="вул умлумав" />
+        android:layout_toLeftOf="@+id/photo_of_cafe_for_UO"
+        android:layout_toRightOf="@+id/block_of_name"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/text_state_of_order"
+                android:layout_width="wrap_content"
+                android:layout_height="24dp"
+                android:layout_toRightOf="@id/block_of_name"
+                android:text="Cтан : "
+                android:textColor="@color/colorPrimary" />
+
+            <TextView
+                android:id="@+id/state_of_order"
+                android:layout_width="match_parent"
+                android:layout_height="24dp"
+                android:layout_toLeftOf="@+id/photo_of_cafe_for_UO"
+                android:layout_toRightOf="@id/text_state_of_order"
+                android:textColor="@color/colorPrimary"
+                tools:text="прийнято" />
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/time_of_order"
+            android:layout_width="match_parent"
+            android:layout_height="24dp"
+            android:layout_below="@+id/text_state_of_order"
+            android:layout_toLeftOf="@+id/photo_of_cafe_for_UO"
+            android:gravity="center"
+            android:textColor="@color/colorPrimary"
+            android:textSize="20sp"
+            tools:text="14:45" />
+
+    </LinearLayout>
+
 
     <ImageView
         android:id="@+id/photo_of_cafe_for_UO"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
         android:layout_alignParentRight="true"
+        android:layout_marginRight="8dp"
         tools:src="@drawable/google" />
 
     <TextView

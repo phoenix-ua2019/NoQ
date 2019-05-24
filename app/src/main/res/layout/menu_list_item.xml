@@ -8,15 +8,15 @@
     android:focusable="true"
     android:orientation="vertical"
     android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingTop="16dp"
-    android:paddingRight="@dimen/activity_horizontal_margin">
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/row_padding_vertical">
 
     <LinearLayout
         android:id="@+id/all"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="16dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="16dp"
         android:layout_toLeftOf="@+id/selected_quantity"
@@ -26,10 +26,9 @@
             android:id="@+id/name_of_meal"
             android:layout_width="match_parent"
             android:layout_height="28dp"
-            android:layout_marginRight="16dp"
             android:gravity="left"
             android:textColor="#000"
-            android:textSize="18sp"
+            android:textSize="16sp"
             tools:text="Pizza" />
 
         <TextView
@@ -75,6 +74,7 @@
         android:layout_width="wrap_content"
         android:layout_height="32dp"
         android:layout_centerVertical="true"
+        android:gravity="center"
         android:layout_toLeftOf="@+id/photo_of_meal"
         android:paddingRight="16dp"
         android:textColor="@color/colorPrimary"
@@ -88,7 +88,7 @@
         android:layout_height="84dp"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:layout_marginRight="16dp"
+        android:layout_marginRight="8dp"
         tools:src="@drawable/google" />
 
     <TextView
