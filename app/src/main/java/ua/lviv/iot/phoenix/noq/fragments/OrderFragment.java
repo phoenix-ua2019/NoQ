@@ -1,6 +1,7 @@
 package ua.lviv.iot.phoenix.noq.fragments;
 
 
+import android.app.Dialog;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -10,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.time.Instant;
@@ -18,6 +20,8 @@ import java.util.Date;
 import java.util.stream.Collectors;
 
 import ua.lviv.iot.phoenix.noq.R;
+import ua.lviv.iot.phoenix.noq.activities.MainActivity;
+import ua.lviv.iot.phoenix.noq.activities.Useful;
 import ua.lviv.iot.phoenix.noq.adapters.MealAdapter;
 import ua.lviv.iot.phoenix.noq.models.Cafe;
 import ua.lviv.iot.phoenix.noq.models.Meal;
@@ -30,6 +34,18 @@ public class OrderFragment extends Fragment {
     private String time;
     private Double sumPrice = 0.0;
     final long count[] = {0};
+
+    Button acceptOrder;
+    Button rejectOrder;
+    Button confirm;
+    Button decline;
+
+    Dialog confirmationDialog;
+
+    MainActivity currentActivity;
+
+    Order order;
+
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -57,9 +73,9 @@ public class OrderFragment extends Fragment {
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
 
-        Order finalOrder = new Order(time, sumPrice, Date.from(Instant.now()), cafe);
+        order = new Order(time, sumPrice, Date.from(Instant.now()), cafe);
         Bundle args = getArguments();
-        args.putParcelable("order", finalOrder);
+        args.putParcelable("order", order);
         setArguments(args);
 
         ((TextView) view.findViewById(R.id.name_of_order_cafe)).setText(cafe.getName());
@@ -71,6 +87,41 @@ public class OrderFragment extends Fragment {
 
 
         return view;
+    }
+
+    public void confirmationDialogCaller(boolean status) {
+        confirmationDialog = new Dialog(currentActivity);
+        confirmationDialog.setContentView(R.layout.confirmation_dialog);
+
+        confirm = confirmationDialog.findViewById(R.id.confirm_button);
+        decline = confirmationDialog.findViewById(R.id.decline_button);
+        TextView confirmationMassage = confirmationDialog.findViewById(R.id.confirmation_message);
+
+        confirm.setEnabled(true);
+        decline.setEnabled(true);
+
+        if (status) {
+            confirmationMassage.setText("Ви впевнені, що хочете підтвердити замовлення?");
+            confirm.setOnClickListener((View v) -> {
+                setStatus(1);
+                currentActivity.b4(view);
+            });
+        } else {
+            confirmationMassage.setText("Ви впевнені, що хочете відхилити замовлення?");
+            confirm.setOnClickListener((View v) -> {
+                confirmationDialog.cancel();
+            });
+        }
+        decline.setOnClickListener((View v) -> confirmationDialog.cancel());
+
+        confirmationDialog.show();
+    }
+
+    private void setStatus(int status) {
+        order.setStatus(status);
+        Useful.orderRef.child(order.getUid()).child(""+order.getPos()).setValue(order);
+        Useful.orderRef.child("Bikini Bottom").child(""+order.getPos()).setValue(order);
+        confirmationDialog.cancel();
     }
 
 }
