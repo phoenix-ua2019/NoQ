@@ -98,6 +98,8 @@ public class ListOfMealsFragment extends Fragment {
 
         if (commonSelectedAmount > 0) {
             chooseTimeBtn.setVisibility(View.VISIBLE);
+        } else {
+            chooseTimeBtn.setVisibility(View.INVISIBLE);
         }
 
         mealAdapter.setR(getResources());
