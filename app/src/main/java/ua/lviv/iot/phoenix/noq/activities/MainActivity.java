@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private Useful useful;
     private Fragment fragment;
+    private NavigationView navigationView;
     Boolean cafeUpdated = false, userUpdated = false;
     private String pointer;
 
@@ -58,7 +59,8 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         setSupportActionBar(toolbar);
 
         drawerLayout = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView = findViewById(R.id.nav_view);
+        navigationView.setCheckedItem(R.id.make_order);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close);
@@ -74,6 +76,8 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
         int id = menuItem.getItemId();
+
+        navigationView.setCheckedItem(menuItem);
 
         Fragment fragment = null;
 
@@ -141,71 +145,40 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
 
     @Override
     public void onBackPressed() {
-        switch (pointer) {
-            case "ListOfCafesFragment": {
-                if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-                    closeDrawer();
-                }
-                break;
-            }
-            case "ListOfMealsFragment": {
-                if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-                    closeDrawer();
-                } else {
-                    b1Reverse();
-                }
-                break;
-            }
-            case "TimeFragment": {
-                if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-                    closeDrawer();
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            closeDrawer();
+        } else {
+            switch (pointer) {
+                case "ListOfCafesFragment": {
                     break;
-                } else {
+                }
+                case "ListOfMealsFragment": {
+                    b1Reverse();
+                    break;
+                }
+                case "TimeFragment": {
                     b2Reverse();
-                }
-                break;
-            }
-            case "OrderFragment": {
-                if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-                    closeDrawer();
                     break;
-                } else {
+                }
+                case "OrderFragment": {
                     b3Reverse();
-                }
-                break;
-            }
-            case "UserFragment": {
-                if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-                    closeDrawer();
                     break;
-                } else {
-                    b1Reverse();
                 }
-                break;
-            }
-            case "MyOrdersFragment": {
-                if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-                    closeDrawer();
+                case "UserFragment": {
+                    b1Reverse();
                     break;
-                } else {
-                    b1Reverse();
                 }
-                break;
-            }
-            case "SettingsFragment": {
-                if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-                    closeDrawer();
+                case "MyOrdersFragment": {
+                    b1Reverse();
                     break;
-                } else {
+                }
+                case "SettingsFragment": {
                     b1Reverse();
+                    break;
                 }
-                break;
-            }
-            default: {
-                if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-                    closeDrawer();
+                default: {
+                    super.onBackPressed();
                 }
-                super.onBackPressed();
             }
         }
     }
@@ -261,12 +234,15 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
     public void b5(View view) {
         setFragment(new SeeMyOrderFragment());
         toolbar.setTitle("Ваше замовлення");
+        navigationView.setCheckedItem(R.id.my_orders);
     }
 
     public void b6(View view) {
         setFragment(new ListOfCafesFragment());
         pointer = "ListOfCafesFragment";
         toolbar.setTitle("Ваше замовлення");
+        navigationView.setCheckedItem(R.id.make_order);
+
     }
 
 
