@@ -65,6 +65,10 @@ public class ListOfMealsFragment extends Fragment {
 
         FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.choose_time);
         fab.attachToRecyclerView(recyclerView);
+        //mealList form db
+        cafe = getArguments().getParcelable("cafe");
+        mealList = cafe.getMeals();
+
         // row click listener
         recyclerView.addOnItemTouchListener(
                 new RecyclerTouchListener(currentActivity.getApplicationContext(),
@@ -73,7 +77,7 @@ public class ListOfMealsFragment extends Fragment {
                     public void onClick(View view, int position) {
                         Meal meal = mealList.get(position);
                         //int itemPosition = recyclerView.getChildLayoutPosition(view);
-                        quantityDialogCaller(meal);
+                        quantityDialogCaller(meal, mealList);
                         cafe.setMeals(mealList);
                         Bundle b = getArguments();
                         b.putParcelable("time_cafe", cafe);
@@ -84,12 +88,9 @@ public class ListOfMealsFragment extends Fragment {
                     public void onLongClick(View v, int position) {
                     }
                 }));
-        cafe = getArguments().getParcelable("cafe");
-        mealList = cafe.getMeals();
         for (Meal meal : mealList) {
             commonSelectedAmount += meal.getSelectedQuantity();
         }
-        System.out.println(commonSelectedAmount);
         mealAdapter.setList(mealList);
         mealAdapter.notifyDataSetChanged();
         mealAdapter.setR(getResources());
@@ -104,7 +105,7 @@ public class ListOfMealsFragment extends Fragment {
         return view;
     }
 
-    public void quantityDialogCaller(Meal meal) {
+    public void quantityDialogCaller(Meal meal, ArrayList<Meal> mealList) {
         quantityDialog = new Dialog(currentActivity);
         quantityDialog.setContentView(R.layout.quantity_item);
 
@@ -124,20 +125,26 @@ public class ListOfMealsFragment extends Fragment {
             commonSelectedAmount++;
             meal.setSelectedQuantity(meal.getSelectedQuantity() + 1);
             dialogQuantity.setText(meal.selectedQuantityToString());
-            recyclerView.setAdapter(mealAdapter);
+            //recyclerView.setAdapter(mealAdapter);
+            //System.out.println(mealList.indexOf(meal));
+            /*mealAdapter.notifyItemChanged(mealList.indexOf(meal));
+            for (Meal mealItem : mealList) {
+                System.out.println(mealItem.getSelectedQuantity());
+            }
+            System.out.println("_______");
+            */
+            mealAdapter.notifyItemChanged(mealList.indexOf(meal));
         });
 
         minus.setOnClickListener((View v) -> {
-            if (commonSelectedAmount < 1) {
-                return;
-            }
+            if  (meal.getSelectedQuantity() <= 0) { return; }
             commonSelectedAmount--;
-            if (commonSelectedAmount < 1) {
-                chooseTimeBtn.setVisibility(View.INVISIBLE);
-            }
+            if (commonSelectedAmount == 0) { chooseTimeBtn.setVisibility(View.INVISIBLE); }
             meal.setSelectedQuantity(meal.getSelectedQuantity() - 1);
             dialogQuantity.setText(meal.selectedQuantityToString());
-            recyclerView.setAdapter(mealAdapter);
+            //recyclerView.setAdapter(mealAdapter);
+            //System.out.println(mealList.indexOf(meal));
+            mealAdapter.notifyItemChanged(mealList.indexOf(meal));
         });
         quantityDialog.show();
     }
