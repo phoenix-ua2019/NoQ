@@ -96,8 +96,11 @@ public class ListOfMealsFragment extends Fragment {
         mealAdapter.setR(getResources());
         chooseTimeBtn = view.findViewById(R.id.choose_time);
 
+        //TODO: romka pomenyay eto!!!
         if (commonSelectedAmount > 0) {
             chooseTimeBtn.setVisibility(View.VISIBLE);
+        } else {
+            chooseTimeBtn.setVisibility(View.INVISIBLE);
         }
 
         mealAdapter.setR(getResources());
