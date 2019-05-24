@@ -79,7 +79,7 @@
         android:paddingRight="16dp"
         android:textColor="@color/colorPrimary"
         android:textSize="18sp"
-        tools:text="234r" />
+        tools:text="23" />
 
 
     <ImageView

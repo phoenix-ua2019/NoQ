@@ -21,7 +21,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.MyViewHolder
     private Resources r;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView name, time, location;
+        public TextView name, time, location, status;
         public ImageView icon;
 
         public MyViewHolder(View view) {
@@ -30,6 +30,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.MyViewHolder
             time = view.findViewById(R.id.time_of_order);
             location = view.findViewById(R.id.location_of_cafe_for_UO);
             icon = view.findViewById(R.id.photo_of_cafe_for_UO);
+            status = view.findViewById(R.id.state_of_order);
         }
     }
 
@@ -58,6 +59,8 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.MyViewHolder
         } else {
             holder.icon.setVisibility(View.GONE);
         }
+        int s = order.getStatus();
+        holder.status.setText(s == 1 ? "Прийнято" : s == -1 ? "Відхилено" : "Розглядається");
     }
 
     @Override

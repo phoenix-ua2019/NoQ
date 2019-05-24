@@ -105,7 +105,7 @@ public class MyOrdersFragment extends Fragment {
                     @Override
                     public void onClick(View view, int position) {
                         Bundle b = new Bundle();
-                        b.putParcelable("order", orderList.get(position));
+                        b.putParcelable("see_order", orderList.get(position));
                         setArguments(b);
                         currentActivity.b5(view);
                     }
@@ -121,7 +121,7 @@ public class MyOrdersFragment extends Fragment {
                 orderList = new ArrayList<>();
                 for (DataSnapshot o:dataSnapshot.getChildren()) {
                     orderList.add(new Order((Map<String, Map>) o.getValue()));
-                    System.out.println(orderList);
+                    System.out.println(orderList.get(0).getCafe().getMeals());
                 }
                 orderAdapter.setList(orderList);
                 orderAdapter.notifyDataSetChanged();

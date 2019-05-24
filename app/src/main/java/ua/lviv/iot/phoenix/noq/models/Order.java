@@ -127,4 +127,9 @@ public class Order implements Parcelable {
     public String getUid() {
         return Uid;
     }
+
+    @Override
+    public String toString() {
+        return "time:"+mTime+", sum:"+mSum+", cafe:"+mCafe+", pos's:"+pos+" .";
+    }
 }
