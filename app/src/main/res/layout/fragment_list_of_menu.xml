@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:fab="http://schemas.android.com/tools">
+    xmlns:fab="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.melnykov.fab.FloatingActionButton
         android:id="@+id/choose_time"
@@ -11,14 +12,10 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="20dp"
-        android:background="@drawable/button_style"
-        android:text="Обрати час"
-        android:textAllCaps="false"
-        android:textColor="#fff"
-        android:textSize="18sp"
-        fab:fab_colorNormal="@color/primary"
-        fab:fab_colorPressed="@color/primary_pressed"
-        fab:fab_colorRipple="@color/ripple"
+        android:background="@color/colorPrimary"
+        android:src="@drawable/ic_local_grocery_store_black_24dp"
+        app:rippleColor="@color/colorPrimary"
+        app:fab_colorNormal="@color/colorPrimary"
         android:onClick="b2"/>
 
     <android.support.v7.widget.RecyclerView
