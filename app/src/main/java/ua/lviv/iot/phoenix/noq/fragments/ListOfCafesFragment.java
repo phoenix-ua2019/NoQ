@@ -81,7 +81,7 @@ public class ListOfCafesFragment extends Fragment implements ValueEventListener 
     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
         cafesList = (ArrayList<Cafe>) (new ArrayList(((HashMap<String, HashMap<String,?>>)
                 dataSnapshot.getValue()).values())).stream().map(Cafe::new).collect(Collectors.toList());
-        cafesAdapter.setR(getResources());
+        cafesAdapter.setFragment(this);
         prepareCafeData();
 
         cafesAdapter.notifyDataSetChanged();

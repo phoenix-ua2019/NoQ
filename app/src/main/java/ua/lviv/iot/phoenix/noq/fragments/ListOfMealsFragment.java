@@ -93,7 +93,7 @@ public class ListOfMealsFragment extends Fragment {
         }
         mealAdapter.setList(mealList);
         mealAdapter.notifyDataSetChanged();
-        mealAdapter.setR(getResources());
+        mealAdapter.setFragment(this);
         chooseTimeBtn = view.findViewById(R.id.choose_time);
 
         if (commonSelectedAmount > 0) {
@@ -101,8 +101,6 @@ public class ListOfMealsFragment extends Fragment {
         } else {
             chooseTimeBtn.setVisibility(View.INVISIBLE);
         }
-
-        mealAdapter.setR(getResources());
 
         return view;
     }
