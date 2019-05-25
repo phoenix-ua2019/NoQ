@@ -4,10 +4,13 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.NavigationView.OnNavigationItemSelectedListener;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.ListFragment;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -47,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
 
-        fragment = new ListOfCafesFragment();
+        fragment = new TabFragment();
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.base_for_nv, fragment)
@@ -83,8 +86,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         Fragment fragment = null;
 
         if (id == R.id.make_order) {
-            fragment = new ListOfCafesFragment();
-            fragment.setArguments(new Bundle());
+            fragment = new TabFragment();
             toolbar.setTitle("Оберіть кафе");
             pointer = "ListOfCafesFragment";
 
@@ -124,7 +126,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
             getSupportFragmentManager()
                     .beginTransaction()
                     .setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left)
-                    .replace(this.fragment.getId(), fragment)
+                    .replace(R.id.base_for_nv, fragment)
                     .commit();
             this.fragment = fragment;
         }
