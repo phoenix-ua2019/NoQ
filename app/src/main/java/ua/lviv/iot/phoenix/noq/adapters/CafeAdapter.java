@@ -2,6 +2,7 @@ package ua.lviv.iot.phoenix.noq.adapters;
 
 import android.content.res.Resources;
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,10 +10,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+
 import java.util.List;
 
 import ua.lviv.iot.phoenix.noq.R;
+import ua.lviv.iot.phoenix.noq.activities.Useful;
 import ua.lviv.iot.phoenix.noq.models.Cafe;
+import ua.lviv.iot.phoenix.noq.models.GlideApp;
 
 
 public class CafeAdapter extends RecyclerView.Adapter<CafeAdapter.MyViewHolder> {
@@ -20,6 +25,8 @@ public class CafeAdapter extends RecyclerView.Adapter<CafeAdapter.MyViewHolder> 
     private List<Cafe> cafesList;
 
     private Resources r;
+    private Fragment f;
+    private View v;
 
     public CafeAdapter(List<Cafe> cafesList) {
         this.cafesList = cafesList;
@@ -56,8 +63,14 @@ public class CafeAdapter extends RecyclerView.Adapter<CafeAdapter.MyViewHolder> 
         holder.cafeName.setText(cafe.getName());
         holder.cafeLocation.setText(cafe.getLocation());
         if (cafe.hasImage()) {
-            holder.mDrawable.setImageResource(r.getIdentifier(cafe.getIcon(),
-                    "drawable", "ua.lviv.iot.phoenix.noq"));
+            Useful.iconsRef.child(cafe.getIcon()+".png").getDownloadUrl().addOnSuccessListener(uri -> {
+                System.out.println(uri);
+                GlideApp.with(f)
+                    .load(uri)
+                    .centerCrop()
+                    .transition(DrawableTransitionOptions.withCrossFade())
+                    .into(holder.mDrawable);
+            }).addOnFailureListener(Exception::printStackTrace);
         } else {
             holder.mDrawable.setVisibility(View.GONE);
         }
@@ -72,8 +85,7 @@ public class CafeAdapter extends RecyclerView.Adapter<CafeAdapter.MyViewHolder> 
         cafesList = lst;
     }
 
-
-    public void setR(Resources r) {
-        this.r = r;
+    public void setFragment(Fragment f) {
+        this.f = f;
     }
 }

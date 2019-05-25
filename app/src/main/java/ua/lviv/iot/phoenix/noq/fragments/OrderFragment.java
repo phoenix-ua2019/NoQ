@@ -52,7 +52,7 @@ public class OrderFragment extends Fragment {
         }
 
         MealAdapter mealAdapter = new MealAdapter(meals);
-        mealAdapter.setR(getResources());
+        mealAdapter.setFragment(this);
         recyclerView.setAdapter(mealAdapter);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
@@ -66,8 +66,6 @@ public class OrderFragment extends Fragment {
         ((TextView) view.findViewById(R.id.location_of_order_cafe)).setText(cafe.getLocation());
         ((TextView) view.findViewById(R.id.selected_time_show)).setText(time);
         ((TextView) view.findViewById(R.id.selected_price)).setText(String.format("%s ₴", sumPrice));
-
-        mealAdapter.setR(getResources());
 
 
         return view;

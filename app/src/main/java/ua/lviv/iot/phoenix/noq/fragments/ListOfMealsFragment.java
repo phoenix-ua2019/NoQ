@@ -81,11 +81,9 @@ public class ListOfMealsFragment extends Fragment {
         mealList = cafe.getMeals();
         mealAdapter.setList(mealList);
         mealAdapter.notifyDataSetChanged();
-        mealAdapter.setR(getResources());
+        mealAdapter.setFragment(this);
         chooseTimeBtn = view.findViewById(R.id.choose_time);
         chooseTimeBtn.setVisibility(View.INVISIBLE);
-
-        mealAdapter.setR(getResources());
 
         return view;
     }

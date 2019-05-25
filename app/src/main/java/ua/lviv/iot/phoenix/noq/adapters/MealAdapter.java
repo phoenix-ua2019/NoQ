@@ -1,6 +1,9 @@
 package ua.lviv.iot.phoenix.noq.adapters;
 
 import android.content.res.Resources;
+import android.graphics.BitmapFactory;
+import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,20 +11,21 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+
 import java.util.List;
 
 import ua.lviv.iot.phoenix.noq.R;
+import ua.lviv.iot.phoenix.noq.activities.Useful;
+import ua.lviv.iot.phoenix.noq.models.GlideApp;
 import ua.lviv.iot.phoenix.noq.models.Meal;
 
 public class MealAdapter extends RecyclerView.Adapter<MealAdapter.MyViewHolder> {
 
     private List<Meal> mealList;
-    private Resources r;
-
-
-    public Resources getR() {
-        return r;
-    }
+    private Fragment f;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public ImageView mealPicture;
@@ -61,8 +65,14 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.MyViewHolder> 
             holder.selectedQuantity.setText(meal.selectedQuantityToString());
         }
         if (meal.hasImage()) {
-            holder.mealPicture.setImageResource(r.getIdentifier(meal.getMealPicture(),
-                    "drawable", "ua.lviv.iot.phoenix.noq"));
+            Useful.iconsRef.child(meal.getMealPicture()+".png").getDownloadUrl().addOnSuccessListener(uri -> {
+                System.out.println(uri);
+                GlideApp.with(f)
+                    .load(uri)
+                    .centerCrop()
+                    .transition(DrawableTransitionOptions.withCrossFade())
+                    .into(holder.mealPicture);
+            }).addOnFailureListener(Exception::printStackTrace);
         } else {
             holder.mealPicture.setVisibility(View.GONE);
         }
@@ -77,8 +87,8 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.MyViewHolder> 
         mealList = list;
     }
 
-    public void setR(Resources r) {
-        this.r = r;
+    public void setFragment(Fragment f) {
+        this.f = f;
     }
 
 }
