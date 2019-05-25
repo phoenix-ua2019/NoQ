@@ -84,7 +84,6 @@ public class CafeAdapter extends RecyclerView.Adapter<CafeAdapter.MyViewHolder> 
     public void setList(List<Cafe> lst) {
         cafesList = lst;
     }
-
     public void setFragment(Fragment f) {
         this.f = f;
     }
