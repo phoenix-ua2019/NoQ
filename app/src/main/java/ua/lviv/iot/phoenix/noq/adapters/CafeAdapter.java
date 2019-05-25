@@ -67,7 +67,6 @@ public class CafeAdapter extends RecyclerView.Adapter<CafeAdapter.MyViewHolder> 
                 System.out.println(uri);
                 GlideApp.with(f)
                     .load(uri)
-                    .centerCrop()
                     .transition(DrawableTransitionOptions.withCrossFade())
                     .into(holder.mDrawable);
             }).addOnFailureListener(Exception::printStackTrace);

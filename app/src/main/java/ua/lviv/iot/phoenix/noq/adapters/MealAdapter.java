@@ -67,7 +67,6 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.MyViewHolder> 
                 System.out.println(uri);
                 GlideApp.with(f)
                     .load(uri)
-                    .centerCrop()
                     .transition(DrawableTransitionOptions.withCrossFade())
                     .into(holder.mealPicture);
             }).addOnFailureListener(Exception::printStackTrace);
