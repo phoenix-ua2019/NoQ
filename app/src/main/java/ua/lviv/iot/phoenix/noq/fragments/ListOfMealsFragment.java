@@ -52,7 +52,7 @@ public class ListOfMealsFragment extends Fragment {
 
         recyclerView = view.findViewById(R.id.recycler_view);
         mealAdapter = new MealAdapter(new ArrayList<>());
-        mealAdapter.setR(getResources());
+        mealAdapter.setFragment(this);
         recyclerView.setAdapter(mealAdapter);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
@@ -63,7 +63,7 @@ public class ListOfMealsFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(currentActivity));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.choose_time);
+        FloatingActionButton fab = view.findViewById(R.id.choose_time);
         fab.attachToRecyclerView(recyclerView);
         //mealList form db
         cafe = getArguments().getParcelable("cafe");

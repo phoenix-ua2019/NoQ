@@ -84,8 +84,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         res.addOnCompleteListener(SignUpActivity.this, (@NonNull Task<AuthResult> task) -> {
             Log.d(TAG, "createUser:onComplete:" + task.isSuccessful());
             if (!task.isSuccessful()) {
-                Toast.makeText(SignUpActivity.this, "Sign Up Failed",
-                        Toast.LENGTH_SHORT).show();
+                Toast.makeText(SignUpActivity.this, "Sign Up Failed:"
+                        +task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                 return;
             }
             user = task.getResult().getUser();

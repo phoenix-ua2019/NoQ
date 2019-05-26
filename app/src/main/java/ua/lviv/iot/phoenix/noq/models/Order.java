@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.Exclude;
 import com.google.firebase.database.PropertyName;
 import com.google.firebase.database.annotations.NotNull;
 
@@ -22,6 +23,7 @@ public class Order implements Parcelable {
     private double mSum;
     private int status;
     private int pos;
+    private long userPos;
     private String Uid;
     public static final Parcelable.Creator<Order> CREATOR = new Parcelable.Creator<Order>() {
         @Override
@@ -56,11 +58,7 @@ public class Order implements Parcelable {
         } catch (Exception e){
             mSum = (Long) map.get("sum");
         }
-        try {
-            status = ((Long) map.get("status")).intValue();
-        } catch (NullPointerException e) {
-
-        }
+        status = map.containsKey("status") ? ((Long) map.get("status")).intValue() : 0;
     }
 
     public Order(String time, double sum, Date date, Cafe cafe){
@@ -117,12 +115,15 @@ public class Order implements Parcelable {
     public void setStatus(int status) {
         this.status = status;
     }
+    @Exclude
     public int getPos() {
         return pos;
     }
-    public Order setPos(int pos) {
-        this.pos = pos;
-        return this;
+    public void setUserPos(long up) {
+        this.userPos = up;
+    }
+    public long getUserPos() {
+        return userPos;
     }
     public String getUid() {
         return Uid;

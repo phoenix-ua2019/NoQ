@@ -51,25 +51,25 @@ public class MyOrdersFragment extends Fragment {
         try {
             Order finalOrder = getArguments().getParcelable("order");
             DatabaseReference cafeReference = Useful.orderRef.child(finalOrder.getCafe().getLocation());
-            cafeReference.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    if (!cafeUpdated) {
-                        cafeReference.child("" + dataSnapshot.getChildrenCount()).setValue(finalOrder);
-                        cafeUpdated = true;
-                    }
-                }
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                }
-            });
             userReference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if (!userUpdated) {
-                        userReference.child("" + dataSnapshot.getChildrenCount()).setValue(finalOrder);
+                        long count = dataSnapshot.getChildrenCount();
+                        finalOrder.setUserPos(count);
+                        userReference.child("" + count).setValue(finalOrder);
                         userUpdated = true;
+                        cafeReference.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                if (!cafeUpdated) {
+                                    cafeReference.child("" + dataSnapshot.getChildrenCount()).setValue(finalOrder);
+                                    cafeUpdated = true;
+                                }
+                            }
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) { }
+                        });
                     }
                 }
                 @Override

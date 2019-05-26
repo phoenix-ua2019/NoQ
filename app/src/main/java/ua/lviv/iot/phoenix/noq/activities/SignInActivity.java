@@ -30,6 +30,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
 import ua.lviv.iot.phoenix.noq.R;
+import ua.lviv.iot.phoenix.noq.models.User;
 
 public class SignInActivity extends AppCompatActivity implements OnClickListener {
 
@@ -93,8 +94,8 @@ public class SignInActivity extends AppCompatActivity implements OnClickListener
                         finish();
                         return;
                     }
-                    Toast.makeText(SignInActivity.this, "Sign In Failed",
-                            Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignInActivity.this, "Sign In Failed:"
+                            +task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                 });
     }
 
@@ -136,14 +137,14 @@ public class SignInActivity extends AppCompatActivity implements OnClickListener
                 (@NonNull Task<AuthResult> task) -> {
                     if (task.isSuccessful()) {
                         Log.d(TAG, "signInWithCredential:success");
+                        User mUser = new User(acct.getDisplayName(), acct.getEmail());
                         FirebaseUser user = mAuth.getCurrentUser();
-                        Useful.onAuthSuccess(this, user);
+                        new Useful(this).onAuthSuccess(user, mUser);
                         finish();
                     } else {
                         Log.w(TAG, "signInWithCredential:failure", task.getException());
-                        Snackbar.make(findViewById(R.id.logo_sign_in),
-
-                                "Authentication Failed.", Snackbar.LENGTH_SHORT).show();
+                        Snackbar.make(findViewById(R.id.logo_sign_in), "Authentication Failed:"
+                                +task.getException().getMessage(), Snackbar.LENGTH_SHORT).show();
                     }
                 });
     }
