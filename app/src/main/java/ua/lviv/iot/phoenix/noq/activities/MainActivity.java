@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
             getSupportFragmentManager()
                     .beginTransaction()
                     .setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left)
-                    .replace(this.fragment.getId(), fragment)
+                    .replace(R.id.base_for_nv, fragment)
                     .commit();
             this.fragment = fragment;
         }
@@ -139,12 +139,30 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         } else {
             switch (pointer) {
                 case "ListOfCafesFragment": break;
-                case "ListOfMealsFragment": b1Reverse();
-                case "TimeFragment": b2Reverse();
-                case "OrderFragment": b3Reverse();
-                case "UserFragment": b1Reverse();
-                case "MyOrdersFragment": b1Reverse();
-                case "SettingsFragment": b1Reverse();
+                case "ListOfMealsFragment": {
+                    b1Reverse();
+                    break;
+                }
+                case "TimeFragment": {
+                    b2Reverse();
+                    break;
+                }
+                case "OrderFragment": {
+                    b3Reverse();
+                    break;
+                }
+                case "UserFragment": {
+                    b1Reverse();
+                    break;
+                }
+                case "MyOrdersFragment": {
+                    b1Reverse();
+                    break;
+                }
+                case "SettingsFragment": {
+                    b1Reverse();
+                    break;
+                }
                 default: super.onBackPressed();
             }
         }

@@ -67,7 +67,6 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.MyViewHolder> 
         }
         if (meal.hasImage()) {
             Useful.iconsRef.child(meal.getMealPicture()+".png").getDownloadUrl().addOnSuccessListener(uri -> {
-                System.out.println(uri);
                 GlideApp.with(f)
                         .load(uri)
                         .diskCacheStrategy(DiskCacheStrategy.DATA)

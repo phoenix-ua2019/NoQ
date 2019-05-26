@@ -33,6 +33,11 @@ public class User implements Parcelable {
         this.email = email;
     }
 
+    public User(String name, String email) {
+        this.name = name;
+        this.email = email;
+    }
+
     public User(String name, String email, String date, String phone) {
         this.name = name;
         this.email = email;

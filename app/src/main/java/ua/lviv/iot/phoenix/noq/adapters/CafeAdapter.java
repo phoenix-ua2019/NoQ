@@ -65,7 +65,6 @@ public class CafeAdapter extends RecyclerView.Adapter<CafeAdapter.MyViewHolder> 
         holder.cafeLocation.setText(cafe.getLocation());
         if (cafe.hasImage()) {
             Useful.iconsRef.child(cafe.getIcon()+".png").getDownloadUrl().addOnSuccessListener(uri -> {
-                System.out.println(uri);
                 GlideApp.with(f)
                         .load(uri)
                         .diskCacheStrategy(DiskCacheStrategy.DATA)
