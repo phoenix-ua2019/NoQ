@@ -66,13 +66,13 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.MyViewHolder> 
             holder.selectedQuantity.setText("");
         }
         if (meal.hasImage()) {
-            Useful.iconsRef.child(meal.getMealPicture()+".png").getDownloadUrl().addOnSuccessListener(uri -> {
+            Useful.iconsRef.child(meal.getMealPicture()+".png").getDownloadUrl().addOnSuccessListener(uri ->
                 GlideApp.with(f)
                         .load(uri)
                         .diskCacheStrategy(DiskCacheStrategy.DATA)
                         .transition(DrawableTransitionOptions.withCrossFade())
-                        .into(holder.mealPicture);
-            }).addOnFailureListener(Exception::printStackTrace);
+                        .into(holder.mealPicture)
+            ).addOnFailureListener(Exception::printStackTrace);
         } else {
             holder.mealPicture.setVisibility(View.GONE);
         }

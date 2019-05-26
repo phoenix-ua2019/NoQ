@@ -109,6 +109,7 @@ public class Order implements Parcelable {
     public int getStatus() {
         return status;
     }
+    @Exclude
     public boolean isDone() {
         return status == 1;
     }
