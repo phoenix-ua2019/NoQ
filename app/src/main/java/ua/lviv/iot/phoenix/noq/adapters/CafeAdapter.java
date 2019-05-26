@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 
 import java.util.List;
@@ -66,9 +67,10 @@ public class CafeAdapter extends RecyclerView.Adapter<CafeAdapter.MyViewHolder> 
             Useful.iconsRef.child(cafe.getIcon()+".png").getDownloadUrl().addOnSuccessListener(uri -> {
                 System.out.println(uri);
                 GlideApp.with(f)
-                    .load(uri)
-                    .transition(DrawableTransitionOptions.withCrossFade())
-                    .into(holder.mDrawable);
+                        .load(uri)
+                        .diskCacheStrategy(DiskCacheStrategy.DATA)
+                        .transition(DrawableTransitionOptions.withCrossFade())
+                        .into(holder.mDrawable);
             }).addOnFailureListener(Exception::printStackTrace);
         } else {
             holder.mDrawable.setVisibility(View.GONE);
