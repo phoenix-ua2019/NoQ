@@ -64,13 +64,13 @@ public class CafeAdapter extends RecyclerView.Adapter<CafeAdapter.MyViewHolder> 
         holder.cafeName.setText(cafe.getName());
         holder.cafeLocation.setText(cafe.getLocation());
         if (cafe.hasImage()) {
-            Useful.iconsRef.child(cafe.getIcon()+".png").getDownloadUrl().addOnSuccessListener(uri -> {
+            Useful.iconsRef.child(cafe.getIcon()+".png").getDownloadUrl().addOnSuccessListener(uri ->
                 GlideApp.with(f)
                         .load(uri)
                         .diskCacheStrategy(DiskCacheStrategy.DATA)
                         .transition(DrawableTransitionOptions.withCrossFade())
-                        .into(holder.mDrawable);
-            }).addOnFailureListener(Exception::printStackTrace);
+                        .into(holder.mDrawable)
+            ).addOnFailureListener(Exception::printStackTrace);
         } else {
             holder.mDrawable.setVisibility(View.GONE);
         }

@@ -59,8 +59,10 @@ public class OrderFragment extends Fragment {
         cafe = getArguments().getParcelable("cafe");
         ArrayList<Meal> meals = cafe.getMeals();
 
-        meals = (ArrayList<Meal>) meals.stream()
-                .filter(meal -> meal.getSelectedQuantity() > 0).collect(Collectors.toList());
+        meals = (ArrayList<Meal>) meals
+                .stream()
+                .filter(meal -> meal.getSelectedQuantity() > 0)
+                .collect(Collectors.toList());
         cafe.setMeals(meals);
 
         for (Meal meal : meals) {

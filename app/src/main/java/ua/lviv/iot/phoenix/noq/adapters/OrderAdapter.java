@@ -1,6 +1,7 @@
 package ua.lviv.iot.phoenix.noq.adapters;
 
 import android.content.res.Resources;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,17 +9,22 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+
 import java.util.List;
 
 import ua.lviv.iot.phoenix.noq.R;
+import ua.lviv.iot.phoenix.noq.activities.Useful;
 import ua.lviv.iot.phoenix.noq.models.Cafe;
+import ua.lviv.iot.phoenix.noq.models.GlideApp;
 import ua.lviv.iot.phoenix.noq.models.Order;
 
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.MyViewHolder> {
 
     private List<Order> orderList;
 
-    private Resources r;
+    private Fragment f;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView name, time, location, status;
@@ -54,8 +60,13 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.MyViewHolder
         holder.time.setText(order.getTime());
         holder.location.setText(cafe.getLocation());
         if (cafe.hasImage()) {
-            holder.icon.setImageResource(r.getIdentifier(cafe.getIcon(),
-                    "drawable", "ua.lviv.iot.phoenix.noq"));
+            Useful.iconsRef.child(cafe.getIcon()+".png").getDownloadUrl().addOnSuccessListener(uri ->
+                GlideApp.with(f)
+                        .load(uri)
+                        .diskCacheStrategy(DiskCacheStrategy.DATA)
+                        .transition(DrawableTransitionOptions.withCrossFade())
+                        .into(holder.icon)
+            ).addOnFailureListener(Exception::printStackTrace);
         } else {
             holder.icon.setVisibility(View.GONE);
         }
@@ -68,11 +79,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.MyViewHolder
         return orderList.size();
     }
 
-    public void setList(List<Order> list) {
-        orderList = list;
-    }
-
-    public void setR(Resources r) {
-        this.r = r;
+    public void setFragment(Fragment f) {
+        this.f = f;
     }
 }
