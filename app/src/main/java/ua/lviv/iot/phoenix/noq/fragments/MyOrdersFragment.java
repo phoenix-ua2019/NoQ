@@ -120,29 +120,23 @@ public class MyOrdersFragment extends Fragment {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 int size = orderList.size();
-                Order order = new Order(dataSnapshot.getValue());
-                if (order.isDone()) {
-                    orderList.add(order);
-                    orderAdapter.notifyItemChanged(size + 1);
-                }
+                orderList.add(new Order(dataSnapshot.getValue()));
+                orderAdapter.notifyItemChanged(size);
             }
             @Override
             public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 Order order = new Order(dataSnapshot.getValue());
-                int pos = orderList.indexOf(order);
-                if (!order.isDone()) {
-                    orderList.remove(order);
-                    orderAdapter.notifyItemChanged(pos);
-                }
+                System.out.println(dataSnapshot.getValue());
+                System.out.println(s);
+                int pos = Integer.parseInt(s)+1;
+                orderList.set(pos,order);
+                orderAdapter.notifyItemChanged(pos);
             }
             @Override
             public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-                Order order = new Order(dataSnapshot.getValue());
-                int pos = orderList.indexOf(order);
-                if (order.isDone()) {
-                    orderList.remove(order);
-                    orderAdapter.notifyItemChanged(pos);
-                }
+                int pos = Integer.parseInt(dataSnapshot.getKey())+1;
+                orderList.remove(pos);
+                orderAdapter.notifyItemChanged(pos);
             }
             @Override
             public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
