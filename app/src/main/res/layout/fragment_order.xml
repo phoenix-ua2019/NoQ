@@ -59,7 +59,7 @@
                         android:layout_height="28dp"
                         android:background="@color/colorPrimary"
                         android:gravity="center"
-                        android:text="Номер замовлення"
+                        android:text="Моє замовлення"
                         android:textColor="@color/white" />
 
                     <TextView

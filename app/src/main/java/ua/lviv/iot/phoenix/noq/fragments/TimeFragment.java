@@ -33,6 +33,7 @@ public class TimeFragment extends Fragment {
     private ArrayList<Meal> meals;
 
     boolean wasShownToastForPast = false;
+    boolean wasShownToastForClosedCafe = false;
 
 
     @Override
@@ -250,7 +251,10 @@ public class TimeFragment extends Fragment {
 
     private boolean isCafeOpen(int orderHour, int orderMinute) {
         if (orderHour > closingHour || (orderHour == closingHour && orderMinute >= 0)) {
-            Toast.makeText(getActivity(), "Вибач, але кафе вже зачинено", Toast.LENGTH_SHORT).show();
+            if (wasShownToastForClosedCafe == false){
+                Toast.makeText(getActivity(), "Вибач, але кафе вже зачинено", Toast.LENGTH_SHORT).show();
+                wasShownToastForClosedCafe = true;
+            }
             floatTime.setHour(closingHour - 1);
             floatTime.setMinute(0);
             return false;
