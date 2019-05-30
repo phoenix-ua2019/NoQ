@@ -32,16 +32,15 @@ public class Useful implements ValueEventListener {
     NavigationView nv;
     Activity that;
 
+    public static final DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+    public static final DatabaseReference authRef = ref.child("authentication");
     public static final DatabaseReference
-            ref = FirebaseDatabase.getInstance().getReference(),
-            authRef = ref.child("authentication"),
             cafeRef = ref.child("cafes"),
             orderRef = ref.child("orders"),
             userRef = authRef.child("users");
 
-    public static final StorageReference
-            storageRef = mStorage.getReference(),
-            iconsRef = storageRef.child("icons");
+    public static final StorageReference storageRef = mStorage.getReference();
+    public static final StorageReference iconsRef = storageRef.child("icons");
 
     public static final String google_api_key =
             //"648378489334-138kgq7v5fiftdget7pp0vifahki0i2m.apps.googleusercontent.com";
@@ -56,19 +55,6 @@ public class Useful implements ValueEventListener {
         this.that = that;
     }
 
-    /*void onAuthSuccess(FirebaseUser user) {
-        // Write new user_icon
-        try {
-            //userRef.child(user.getUid()).setValue(new User(user.getEmail()));
-        } finally {
-            // Go to MainActivity
-            that.startActivity(new Intent(that, MainActivity.class));
-        }
-    }
-    static void onAuthSuccess(Activity that, FirebaseUser user) {
-        new Useful(that).onAuthSuccess(user);
-    }*/
-
     void onAuthSuccess(FirebaseUser user, User mUser) {
         // Write new user_icon
         userRef.child(user.getUid()).setValue(mUser);
@@ -77,7 +63,7 @@ public class Useful implements ValueEventListener {
     }
 
     public void setUser() {
-        System.out.println(mAuth.getCurrentUser());
+        System.out.println(mAuth.getCurrentUser().getDisplayName());
         if (mAuth.getCurrentUser() != null) {
             userRef.child(mAuth.getCurrentUser().getUid()).addValueEventListener(this);
         }
