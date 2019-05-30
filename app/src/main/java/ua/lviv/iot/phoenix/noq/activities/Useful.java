@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -33,17 +32,21 @@ public class Useful implements ValueEventListener {
     NavigationView nv;
     Activity that;
 
-    public static final DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-    public static final DatabaseReference cafeRef = ref.child("cafes");
-    public static final DatabaseReference orderRef = ref.child("orders");
-    public static final DatabaseReference userRef = ref.child("authentication").child("users");
+    public static final DatabaseReference
+            ref = FirebaseDatabase.getInstance().getReference(),
+            authRef = ref.child("authentication"),
+            cafeRef = ref.child("cafes"),
+            orderRef = ref.child("orders"),
+            userRef = authRef.child("users");
 
-    public static final StorageReference storageRef = mStorage.getReference();
-    public static final StorageReference iconsRef = storageRef.child("icons");
+    public static final StorageReference
+            storageRef = mStorage.getReference(),
+            iconsRef = storageRef.child("icons");
 
     public static final String google_api_key =
             //"648378489334-138kgq7v5fiftdget7pp0vifahki0i2m.apps.googleusercontent.com";
             "648378489334-0kfava9v3evp4123h6bosi4ohojb3pkg.apps.googleusercontent.com";
+
     public Useful(NavigationView nv, AppCompatActivity that) {
         this.nv = nv;
         this.that = that;
@@ -53,7 +56,7 @@ public class Useful implements ValueEventListener {
         this.that = that;
     }
 
-    void onAuthSuccess(FirebaseUser user) {
+    /*void onAuthSuccess(FirebaseUser user) {
         // Write new user_icon
         try {
             //userRef.child(user.getUid()).setValue(new User(user.getEmail()));
@@ -64,7 +67,7 @@ public class Useful implements ValueEventListener {
     }
     static void onAuthSuccess(Activity that, FirebaseUser user) {
         new Useful(that).onAuthSuccess(user);
-    }
+    }*/
 
     void onAuthSuccess(FirebaseUser user, User mUser) {
         // Write new user_icon
@@ -74,6 +77,7 @@ public class Useful implements ValueEventListener {
     }
 
     public void setUser() {
+        System.out.println(mAuth.getCurrentUser());
         if (mAuth.getCurrentUser() != null) {
             userRef.child(mAuth.getCurrentUser().getUid()).addValueEventListener(this);
         }
