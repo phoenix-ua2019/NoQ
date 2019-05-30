@@ -67,6 +67,7 @@ public class SeeMyOrderFragment extends Fragment {
         ((TextView) view.findViewById(R.id.location_of_see_my_order_cafe)).setText(cafe.getLocation());
         ((TextView) view.findViewById(R.id.selected_see_my_time_show)).setText(time);
         ((TextView) view.findViewById(R.id.selected_see_my_price)).setText(String.format("%s ₴", sumPrice));
+        ((TextView) view.findViewById(R.id.order_number_in_SMO)).setText(String.format("№%06d",order.getPos()));
 
         return view;
     }
