@@ -5,6 +5,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.google.common.base.Splitter;
+import com.google.firebase.database.Exclude;
 import com.google.firebase.database.IgnoreExtraProperties;
 import com.google.firebase.database.PropertyName;
 
@@ -18,7 +19,9 @@ import java.util.stream.Collectors;
 public class Cafe implements Parcelable {
     private String name;
     private String location;
+    private String email;
     private String icon;
+    private String Cid;
     private ArrayList<Meal> meals;
 
     public static final Parcelable.Creator<Cafe> CREATOR =
@@ -42,7 +45,8 @@ public class Cafe implements Parcelable {
     }
 
     public Cafe (Parcel source) {
-        this(source.readString(), source.readString(), source.readString(), source.readString(), new ArrayList<Meal>());
+        this(source.readString(), source.readString(), source.readString(), source.readString(),
+                source.readString(), new ArrayList<Meal>());
         source.readList(meals, Meal.class.getClassLoader());
     }
 
@@ -53,7 +57,9 @@ public class Cafe implements Parcelable {
     public Cafe (HashMap<String, ?> map) {
         name = (String) map.get("name");
         location = (String) map.get("location");
+        email = (String) map.get("email");
         icon = (String) map.get("icon");
+        Cid = (String) map.get("cid");
         List<?> tempCafeMeals = (ArrayList<HashMap>) map.get("meals");
         meals = (ArrayList<Meal>) tempCafeMeals.stream().map(Meal::new).collect(Collectors.toList());
     }
@@ -61,8 +67,14 @@ public class Cafe implements Parcelable {
     public Cafe (String name, String location, String email, String icon, ArrayList<Meal> meals) {
         this.name = name;
         this.location = location;
+        this.email = email;
         this.icon = icon;
         this.meals = meals;
+    }
+
+    public Cafe (String name, String location, String email, String icon, String id, ArrayList<Meal> meals) {
+        this(name, location, email, icon, meals);
+        Cid = id;
     }
 
     @Override
@@ -82,11 +94,12 @@ public class Cafe implements Parcelable {
     public void writeToParcel(Parcel out, int flags) {
         out.writeString(name);
         out.writeString(location);
+        out.writeString(email);
         out.writeString(icon);
+        out.writeString(Cid);
         out.writeList(meals);
     }
 
-    @PropertyName("name")
     public String getName() {
         return name;
     }
@@ -95,7 +108,6 @@ public class Cafe implements Parcelable {
         this.name = name;
     }
 
-    @PropertyName("location")
     public String getLocation() {
         return location;
     }
@@ -108,7 +120,6 @@ public class Cafe implements Parcelable {
         icon = id;
     }
 
-    @PropertyName("icon")
     public String getIcon() {
         return icon;
     }
@@ -117,13 +128,17 @@ public class Cafe implements Parcelable {
         return icon != null;
     }
 
-    @PropertyName("meals")
     public ArrayList<Meal> getMeals() {
         return meals;
     }
 
     public void setMeals(ArrayList<Meal> meals) {
         this.meals = meals;
+    }
+
+    @Exclude
+    public String getCid() {
+        return Cid;
     }
 
 }

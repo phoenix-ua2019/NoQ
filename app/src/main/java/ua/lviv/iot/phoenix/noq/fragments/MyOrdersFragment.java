@@ -52,7 +52,7 @@ public class MyOrdersFragment extends Fragment {
 
         try {
             Order finalOrder = getArguments().getParcelable("order");
-            DatabaseReference cafeReference = Useful.orderRef.child(finalOrder.getCafe().getLocation());
+            DatabaseReference cafeReference = Useful.orderRef.child(finalOrder.getCafe().getCid());
             userReference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

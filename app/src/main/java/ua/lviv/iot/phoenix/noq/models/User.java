@@ -29,10 +29,6 @@ public class User implements Parcelable {
     public User() {
     }
 
-    public User(String email) {
-        this.email = email;
-    }
-
     public User(String name, String email) {
         this.name = name;
         this.email = email;
