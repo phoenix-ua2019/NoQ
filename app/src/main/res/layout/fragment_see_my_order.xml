@@ -54,20 +54,28 @@
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:id="@+id/t1"
-                        android:layout_width="150dp"
+                        android:id="@+id/t4"
+                        android:layout_width="164dp"
                         android:layout_height="28dp"
                         android:background="@color/colorPrimary"
                         android:gravity="center"
-                        android:text="Моє замовлення"
+                        android:text="Номер замовлення"
                         android:textColor="@color/white" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:layout_below="@+id/t1"
+                        android:layout_below="@+id/t4"
                         android:background="@color/colorPrimary" />
 
+                    <TextView
+                        android:id="@+id/order_number_in_SMO"
+                        android:layout_width="match_parent"
+                        android:layout_height="28dp"
+                        android:layout_toRightOf="@+id/t4"
+                        android:gravity="center"
+                        android:textColor="#000"
+                        android:textSize="18sp" />
                 </RelativeLayout>
 
             </FrameLayout>
