@@ -90,7 +90,8 @@ public class SignInActivity extends AppCompatActivity implements OnClickListener
                     Log.d(TAG, "signIn:onComplete:" + task.isSuccessful());
 
                     if (task.isSuccessful()) {
-                        Useful.onAuthSuccess(this, task.getResult().getUser());
+                        startActivity(new Intent(this, MainActivity.class));
+                        //Useful.onAuthSuccess(this, task.getResult().getUser());
                         finish();
                         return;
                     }
