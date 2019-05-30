@@ -178,6 +178,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         setFragmentReverse(new ListOfCafesFragment());
         pointer = "ListOfCafesFragment";
         toolbar.setTitle("Оберіть Кафе");
+        navigationView.setCheckedItem(R.id.make_order);
     }
 
     public void b2(View view) {
