@@ -120,7 +120,7 @@
                     android:text="Зареєструватися"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
-                    android:textSize="14sp" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -140,7 +140,7 @@
                     android:text="Увійти"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
-                    android:textSize="14sp" />
+                    android:textSize="18sp" />
             </LinearLayout>
 
         </RelativeLayout>
