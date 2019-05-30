@@ -65,10 +65,6 @@ public class SignInActivity extends AppCompatActivity implements OnClickListener
             return false;
         });
 
-        findViewById(R.id.back).setOnClickListener((View v) -> {
-                startActivity(new Intent(this, SignUpActivity.class));
-                finish();
-        });
         findViewById(R.id.logo_sign_in).setOnClickListener(this);
 
         mGoogleSignInClient = GoogleSignIn.getClient(this, new GoogleSignInOptions
@@ -162,6 +158,9 @@ public class SignInActivity extends AppCompatActivity implements OnClickListener
             googleSignIn();
         } else if (i == R.id.sign_in) {
             signIn();
+        } else if (i == R.id.sign_up) {
+            startActivity(new Intent(this, SignUpActivity.class));
+            finish();
         }
     }
 }

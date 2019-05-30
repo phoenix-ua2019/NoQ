@@ -57,15 +57,17 @@ public class MyOrdersFragment extends Fragment {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if (!userUpdated) {
-                        long count = dataSnapshot.getChildrenCount();
-                        finalOrder.setUserPos(count);
-                        userReference.child("" + count).setValue(finalOrder);
+                        long countUser = dataSnapshot.getChildrenCount();
+                        finalOrder.setUserPos(countUser);
                         userUpdated = true;
                         cafeReference.addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 if (!cafeUpdated) {
-                                    cafeReference.child("" + dataSnapshot.getChildrenCount()).setValue(finalOrder);
+                                    long countCafe = dataSnapshot.getChildrenCount();
+                                    finalOrder.setPos(countCafe);
+                                    userReference.child("" + countUser).setValue(finalOrder);
+                                    cafeReference.child("" + countCafe).setValue(finalOrder);
                                     cafeUpdated = true;
                                 }
                             }

@@ -148,7 +148,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         if (i == R.id.sign_up) {
             signUp();
         } else if (i == R.id.sign_in) {
-            startActivity(new Intent(SignUpActivity.this, SignInActivity.class));
             finish();
         }
     }

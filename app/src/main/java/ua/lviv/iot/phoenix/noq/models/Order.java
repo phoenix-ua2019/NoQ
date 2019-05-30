@@ -22,7 +22,7 @@ public class Order implements Parcelable {
     private Cafe mCafe;
     private double mSum;
     private int status;
-    private int pos;
+    private long pos;
     private long userPos;
     private String Uid;
     public static final Parcelable.Creator<Order> CREATOR = new Parcelable.Creator<Order>() {
@@ -53,6 +53,7 @@ public class Order implements Parcelable {
         this();
         mCafe = new Cafe(map.get("cafe"));
         mTime = (String) map.get("time");
+        pos = (Long) map.get("pos");
         try {
             mSum = (Double) map.get("sum");
         } catch (Exception e){
@@ -116,8 +117,10 @@ public class Order implements Parcelable {
     public void setStatus(int status) {
         this.status = status;
     }
-    @Exclude
-    public int getPos() {
+    public void setPos(long pos) {
+        this.pos = pos;
+    }
+    public long getPos() {
         return pos;
     }
     public void setUserPos(long up) {
