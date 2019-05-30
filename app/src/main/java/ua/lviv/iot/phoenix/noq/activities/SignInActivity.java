@@ -45,6 +45,18 @@ public class SignInActivity extends AppCompatActivity implements OnClickListener
     private GoogleSignInClient mGoogleSignInClient;
 
     @Override
+    public void onStart() {
+        super.onStart();
+        // Check auth on Activity start
+        System.out.println(mAuth.getCurrentUser().getDisplayName());
+        if (mAuth.getCurrentUser() != null) {
+            startActivity(new Intent(this, MainActivity.class));
+            //Useful.onAuthSuccess(this, mAuth.getCurrentUser());
+            finish();
+        }
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FirebaseApp.initializeApp(this);
