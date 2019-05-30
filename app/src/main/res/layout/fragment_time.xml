@@ -32,7 +32,7 @@
                 android:layout_height="28dp"
                 android:background="@color/colorPrimary"
                 android:gravity="center"
-                android:text="Мінімальний час пиготування"
+                android:text="Мінімальний час приготування"
                 android:textColor="@color/white" />
 
             <TextView
