@@ -48,7 +48,6 @@ public class SignInActivity extends AppCompatActivity implements OnClickListener
     public void onStart() {
         super.onStart();
         // Check auth on Activity start
-        System.out.println(mAuth.getCurrentUser().getDisplayName());
         if (mAuth.getCurrentUser() != null) {
             startActivity(new Intent(this, MainActivity.class));
             //Useful.onAuthSuccess(this, mAuth.getCurrentUser());
@@ -172,7 +171,6 @@ public class SignInActivity extends AppCompatActivity implements OnClickListener
             signIn();
         } else if (i == R.id.sign_up) {
             startActivity(new Intent(this, SignUpActivity.class));
-            finish();
         }
     }
 }
