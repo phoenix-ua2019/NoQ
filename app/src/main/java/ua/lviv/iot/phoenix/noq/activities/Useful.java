@@ -56,7 +56,7 @@ public class Useful implements ValueEventListener {
     void onAuthSuccess(FirebaseUser user) {
         // Write new user_icon
         try {
-            userRef.child(user.getUid()).setValue(new User(user.getEmail()));
+            //userRef.child(user.getUid()).setValue(new User(user.getEmail()));
         } finally {
             // Go to MainActivity
             that.startActivity(new Intent(that, MainActivity.class));

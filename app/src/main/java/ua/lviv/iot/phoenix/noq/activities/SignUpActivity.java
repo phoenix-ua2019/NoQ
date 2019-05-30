@@ -44,8 +44,10 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     public void onStart() {
         super.onStart();
         // Check auth on Activity start
+        System.out.println(mAuth.getCurrentUser().getDisplayName());
         if (mAuth.getCurrentUser() != null) {
-            Useful.onAuthSuccess(this, mAuth.getCurrentUser());
+            startActivity(new Intent(this, MainActivity.class));
+            //Useful.onAuthSuccess(this, mAuth.getCurrentUser());
             finish();
         }
     }
@@ -89,7 +91,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 return;
             }
             user = task.getResult().getUser();
-            user = (user != null) ? user : FirebaseAuth.getInstance().getCurrentUser();
+            user = (user != null) ? user : mAuth.getCurrentUser();
             User mUser = new User(
                     nameEdit.getText().toString(), emailEdit.getText().toString(),
                     dateEdit.getText().toString(), phoneEdit.getText().toString());
