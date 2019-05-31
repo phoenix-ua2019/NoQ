@@ -163,6 +163,10 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
                     b1Reverse();
                     break;
                 }
+                case "SeeMyOrderFragment": {
+                    b5Reverse();
+                    break;
+                }
                 default: super.onBackPressed();
             }
         }
@@ -222,6 +226,14 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         setFragment(new SeeMyOrderFragment());
         toolbar.setTitle("Ваше замовлення");
         navigationView.setCheckedItem(R.id.my_orders);
+        pointer = "SeeMyOrderFragment";
+    }
+
+    public void b5Reverse() {
+        setFragmentReverse(new MyOrdersFragment());
+        toolbar.setTitle("Мої замовлення");
+        navigationView.setCheckedItem(R.id.my_orders);
+        pointer = "MyOrdersFragment";
     }
 
     public void b6(View view) {
