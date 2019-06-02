@@ -130,13 +130,20 @@ public class MyOrdersFragment extends Fragment {
                 Order order = new Order(dataSnapshot.getValue());
                 System.out.println(dataSnapshot.getValue());
                 System.out.println(s);
-                int pos = Integer.parseInt(s)+1;
+                int pos;
+                if (s==null) {
+                    pos = 0;
+                } else {
+                    pos = Integer.parseInt(s)+1;
+                }
+                //int pos = (s == null ? 0 : Integer.parseInt(s))+1;
                 orderList.set(pos,order);
                 orderAdapter.notifyItemChanged(pos);
             }
             @Override
             public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-                int pos = Integer.parseInt(dataSnapshot.getKey())+1;
+                System.out.println(dataSnapshot);
+                int pos = Integer.parseInt(dataSnapshot.getKey());
                 orderList.remove(pos);
                 orderAdapter.notifyItemChanged(pos);
             }
@@ -145,6 +152,7 @@ public class MyOrdersFragment extends Fragment {
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
+                System.out.println(databaseError.getMessage());
             }
         });
 

@@ -25,8 +25,8 @@ public class TimeFragment extends Fragment {
     private TextView minOrderTime;
     private View view;
 
-    private final int closingHour = 23;
-    private final int openingHour = 6;
+    private final int closingHour = 25;
+    private final int openingHour = -1;
     private static final int minutesInHour = 60;
     private Bundle b;
     private Cafe cafe;
